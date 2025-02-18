@@ -1,5 +1,5 @@
-from instructions.default.base import Instruction
 from base import Point
+from instructions.default.base import Instruction
 from key_codes.mouse_keys import RightClick, LeftClick
 
 

@@ -1,14 +1,18 @@
-from dataclasses import dataclass
-
-from instructions.default.base import Instruction
 from base import Point
+from instructions.default.base import Instruction
 
 
-@dataclass
 class MoveTo(Instruction):
-    cords: Point
+    def __init__(self, coordinates: Point):
+        self.__coordinates = coordinates
+
+    def perform(self, ui):
+        pass
 
 
-@dataclass
 class MoveOn(Instruction):
-    cords: Point
+    def __init__(self, coordinates: Point):
+        self.__coordinates = coordinates
+
+    def perform(self, ui):
+        pass
