@@ -1,3 +1,5 @@
 mss==10.0.0
 paddleocr==2.9.1
-pyautogui==0.9.54
+numpy==1.26.4
+keyboard==0.13.5
+mouse==0.7.1
