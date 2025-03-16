@@ -1,5 +1,5 @@
-from ai import AiReader
-from default import Performer
+from performers.ai import AiPerformer
+from performers.default import Performer
 
 __all__ = ["Performer",
-           "AiReader"]
+           "AiPerformer"]

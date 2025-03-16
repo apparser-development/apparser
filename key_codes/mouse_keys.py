@@ -4,16 +4,16 @@ from key_codes.base import KeyCode
 class RightClick(KeyCode):
     @property
     def key(self) -> str:
-        return "r1"
+        return "RIGHT"
 
 
 class LeftClick(KeyCode):
     @property
     def key(self) -> str:
-        return "r1"
+        return "LEFT"
 
 
 class ScrollClick(KeyCode):
     @property
     def key(self) -> str:
-        return "r1"
+        return "SCROLL"

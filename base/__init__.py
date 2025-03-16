@@ -1,3 +1,7 @@
-from app import App
-from cords import Point
-from ui import Ui
+from base.app import App
+from base.cords import Point
+from base.ui import Ui
+
+__all__ = ["App",
+           "Point",
+           "Ui"]

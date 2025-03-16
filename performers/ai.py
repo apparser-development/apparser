@@ -1,3 +1,5 @@
+from functools import singledispatchmethod
+
 from ai_readers.base import AiReader
 from base.app import App
 from instructions.ai.base import AiInstruction
@@ -10,10 +12,14 @@ class AiPerformer(BasePerformer):
         super().__init__(app)
         self.__ai_reader = ai_reader
 
+    @singledispatchmethod
     def perform(self, command: Instruction | AiInstruction):
-        if command is Instruction:
-            command.perform(self.app.ui)
-        elif command is AiInstruction:
-            command.perform(self.app.ui, self.__ai_reader)
-        else:
-            raise ValueError
+        raise NotImplementedError()
+
+    @perform.register(Instruction)
+    def _(self, command: Instruction):
+        command(self.app.ui)
+
+    @perform.register(AiInstruction)
+    def _(self, command: AiInstruction):
+        command(self.app.ui, self.__ai_reader)

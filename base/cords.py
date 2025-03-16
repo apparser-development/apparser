@@ -6,10 +6,10 @@ class Point:
         if y is None:
             raise ValueError('y cannot be None')
 
-        if x is not int:
+        if not isinstance(x, int):
             raise ValueError('x must be an integer')
 
-        if y is not int:
+        if not isinstance(y, int):
             raise ValueError('y must be an integer')
 
         self.__x = x
@@ -17,8 +17,8 @@ class Point:
 
     @property
     def x(self) -> int:
-        return self.x
+        return self.__x
 
     @property
     def y(self) -> int:
-        return self.y
+        return self.__y

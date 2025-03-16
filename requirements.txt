@@ -3,3 +3,7 @@ paddleocr==2.9.1
 numpy==1.26.4
 keyboard==0.13.5
 mouse==0.7.1
+PyGetWindow==0.0.9
+pillow==11.1.0
+PyAutoGUI==0.9.54
+easyocr==1.7.2

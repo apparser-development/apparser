@@ -7,6 +7,7 @@ from instructions.default.base import Instruction
 class BasePerformer(abc.ABC):
     def __init__(self, app: App):
         self.__app = app
+        self.__app.start_app()
 
     @abc.abstractmethod
     def perform(self, command: Instruction):
