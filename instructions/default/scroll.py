@@ -7,7 +7,7 @@ from instructions.default.base import Instruction
 class ScrollOn(Instruction):
     def __init__(self, deviation: int):
         if isinstance(deviation, int):
-            raise TypeError('deviation must be an integer')
+            raise ValueError('deviation must be an integer')
 
         self.__deviation = deviation
 

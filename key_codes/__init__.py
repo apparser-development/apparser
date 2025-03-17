@@ -1,5 +1,5 @@
 from key_codes.key_code import KeyboardKeyCode
-from key_codes.keyboard_keys import Enter, Control
+from key_codes.keyboard_keys import Enter, Control, Alt, Delete
 from key_codes.mouse_keys import RightClick, ScrollClick, LeftClick
 
 __all__ = ["KeyboardKeyCode",
@@ -7,4 +7,6 @@ __all__ = ["KeyboardKeyCode",
            "Control",
            "RightClick",
            "ScrollClick",
-           "LeftClick"]
+           "LeftClick",
+           "Alt",
+           "Delete"]

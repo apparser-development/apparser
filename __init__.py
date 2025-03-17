@@ -1,7 +1,7 @@
 import ai_readers
 import instructions
 import key_codes
-from performers import Performer
+from performers import Performer, AiPerformer
 from base import App, Point
 
 __all__ = ["instructions",
@@ -9,4 +9,6 @@ __all__ = ["instructions",
            "performers",
            "ai_readers",
            "App",
-           "Point"]
+           "Point",
+           "AiPerformer",
+           "Performer"]

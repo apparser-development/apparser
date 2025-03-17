@@ -22,3 +22,6 @@ class Point:
     @property
     def y(self) -> int:
         return self.__y
+
+    def __str__(self):
+        return f'(x: {self.x}, y: {self.y})'

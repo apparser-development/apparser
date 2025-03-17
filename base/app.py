@@ -17,7 +17,7 @@ class App:
         if not window_title_name:
             window = [i for i in pygetwindow.getAllWindows() if i not in all_windows][0]
         else:
-            window = pygetwindow.getWindowsWithTitle(window_title_name)
+            window = pygetwindow.getWindowsWithTitle(window_title_name)[0]
         self.__ui = Ui(window)
 
     def start_app(self):

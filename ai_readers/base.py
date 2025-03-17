@@ -1,5 +1,8 @@
 import abc
+
 import numpy
+
+from ai_readers.text_data import TextData
 
 
 class AiReader(abc.ABC):
@@ -7,5 +10,5 @@ class AiReader(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def read_image(self, image: numpy.ndarray) -> list:
+    def read_image(self, image: numpy.ndarray) -> list[TextData]:
         pass
