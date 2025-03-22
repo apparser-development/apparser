@@ -1,0 +1,9 @@
+from dataclasses import dataclass
+
+from apparser.base import Point
+
+
+@dataclass(frozen=True)
+class TextData:
+    text: str
+    coordinates: list[Point]
