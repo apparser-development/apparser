@@ -25,3 +25,12 @@ class Point:
 
     def __str__(self):
         return f'(x: {self.x}, y: {self.y})'
+
+    def __add__(self, other: 'Point') -> 'Point':
+        return Point(self.__x + other.x, self.__y + other.y)
+
+    def __sub__(self, other: 'Point') -> 'Point':
+        return Point(self.__x - other.x, self.__y - other.y)
+
+    def __eq__(self, other: 'Point') -> bool:
+        return self.__x == other.x and self.__y == other.y

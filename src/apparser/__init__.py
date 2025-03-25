@@ -1,6 +1,7 @@
 from apparser import ai_readers, instructions, key_codes
 from apparser.performers import Performer, AiPerformer
 from apparser.base import App, Point
+from apparser.ai_readers import EasyOcrReader, PaddleOcrReader
 
 __all__ = ["instructions",
            "key_codes",
@@ -8,4 +9,6 @@ __all__ = ["instructions",
            "App",
            "Point",
            "AiPerformer",
-           "Performer"]
+           "Performer",
+           "EasyOcrReader",
+           "PaddleOcrReader",]

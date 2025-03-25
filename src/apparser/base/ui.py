@@ -9,12 +9,10 @@ class Ui:
         self.__window = window
 
     def coordinates_to_global(self, coordinates: Point) -> Point:
-        self.__window.activate()
         returned_point = Point(coordinates.x + self.__window.left, coordinates.y + self.__window.top)
         return returned_point
 
     def coordinates_to_local(self, coordinates: Point) -> Point:
-        self.__window.activate()
         returned_point = Point(coordinates.x - self.__window.left, coordinates.y - self.__window.top)
         return returned_point
 

@@ -11,4 +11,5 @@ class Performer(BasePerformer):
         if not isinstance(command, Instruction):
             raise ValueError()
 
+        self.app.ui.to_main()
         command(self.app.ui)

@@ -4,7 +4,6 @@ import numpy
 
 from apparser.ai_readers.text_data import TextData
 
-
 class AiReader(abc.ABC):
     def __init__(self):
         pass
