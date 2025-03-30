@@ -10,9 +10,4 @@ class AiInstructionsAlgorithm(AiInstruction):
 
     def __call__(self, ui: Ui, ai_reader: AiReader):
         for instruction in self.__instructions:
-            if isinstance(instruction, AiInstruction):
                 instruction(ui, ai_reader)
-            elif isinstance(instruction, Instruction):
-                instruction(ui)
-            else:
-                raise ValueError(f'Unexpected instruction type: {type(instruction)}')

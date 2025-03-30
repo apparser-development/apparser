@@ -1,4 +1,4 @@
-from apparser.base.app import App
+from apparser.base import App
 from apparser.instructions.default.base import Instruction
 from apparser.performers.base import BasePerformer
 
@@ -11,5 +11,5 @@ class Performer(BasePerformer):
         if not isinstance(command, Instruction):
             raise ValueError()
 
-        self.app.ui.to_main()
+        self.app.ui.window.to_main()
         command(self.app.ui)

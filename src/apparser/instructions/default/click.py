@@ -1,6 +1,6 @@
 import mouse
 
-from apparser.base import Point, Ui
+from apparser.base import Point, Ui, RelativelyPoint
 from apparser.instructions.default.base import Instruction
 from apparser.key_codes.mouse_keys import RightClick, LeftClick
 
@@ -21,14 +21,14 @@ class MouseClick(Instruction):
 
 
 class MouseClickTo(Instruction):
-    def __init__(self, coordinates: Point, click_type: RightClick | LeftClick):
+    def __init__(self, coordinates: Point | RelativelyPoint, click_type: RightClick | LeftClick):
         if not isinstance(coordinates, Point):
             raise ValueError('coordinates must be Point')
 
         self.__click = MouseClick(click_type)
         self.__coordinates = coordinates
 
-    def __call__(self, ui: Ui):
-        coordinates = ui.coordinates_to_global(self.__coordinates)
+    def __call__(self, ui: Ui, *args, **kwargs):
+        coordinates = ui.point_to_global(self.__coordinates)
         mouse.move(coordinates.x, coordinates.y)
         self.__click()

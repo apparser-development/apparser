@@ -1,11 +1,10 @@
-import os
-import signal
 import subprocess
 import time
 
 import pygetwindow
 
 from apparser.base.ui import Ui
+from apparser.base.window import Window
 
 
 class App:
@@ -18,8 +17,9 @@ class App:
             window = [i for i in pygetwindow.getAllWindows() if i not in all_windows][0]
         else:
             window = pygetwindow.getWindowsWithTitle(window_title_name)[0]
+        window = Window(window)
         self.__ui = Ui(window)
-        self.__ui.set_window_size(*window_size)
+        self.__ui.window.set_window_size(*window_size)
 
     def start_app(self):
         self.__process = subprocess.Popen([self.__path])
@@ -27,7 +27,7 @@ class App:
 
     def stop_app(self):
         self.__process.kill()
-        self.ui.close_window()
+        self.ui.window.close_window()
 
     @property
     def ui(self):

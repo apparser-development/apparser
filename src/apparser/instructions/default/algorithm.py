@@ -6,6 +6,6 @@ class InstructionsAlgorithm(Instruction):
     def __init__(self, instructions: list[Instruction]):
         self.__instructions = instructions
 
-    def __call__(self, ui: Ui):
+    def __call__(self, ui: Ui, *args, **kwargs):
         for instruction in self.__instructions:
             instruction(ui)

@@ -1,5 +1,5 @@
 from apparser.ai_readers.base import AiReader
-from apparser.base import Ui, Point
+from apparser.base import Ui, Point, RelativelyPoint
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.ai.data_scrapers.text_getter import GetText
 from apparser.instructions.default import MouseClickTo
@@ -9,7 +9,7 @@ from apparser.key_codes import RightClick, LeftClick
 class ClickOnText(AiInstruction):
     def __init__(self, text: str,
                  click_type: RightClick | LeftClick = LeftClick(),
-                 offset: Point = Point(0, 0),
+                 offset: Point | RelativelyPoint = Point(0, 0),
                  text_getter=GetText()):
         self.__text = text
         self.__click_type = click_type

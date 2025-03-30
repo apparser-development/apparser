@@ -1,6 +1,6 @@
 import abc
 
-from apparser.base.app import App
+from apparser.base import App
 from apparser.instructions.default.base import Instruction
 
 
