@@ -11,7 +11,7 @@ class MoveTo(Instruction):
 
         self.__coordinates = coordinates
 
-    def __call__(self, ui: Ui, *args, **kwargs):
+    def perform(self, ui: Ui, *args, **kwargs):
         coordinates = ui.point_to_global(self.__coordinates)
         mouse.move(coordinates.x, coordinates.y)
 
@@ -23,5 +23,5 @@ class MoveOn(Instruction):
 
         self.__coordinates = coordinates
 
-    def __call__(self, ui: Ui, *args, **kwargs):
+    def perform(self, ui: Ui, *args, **kwargs):
         mouse.move(self.__coordinates.x, self.__coordinates.y, absolute=False)

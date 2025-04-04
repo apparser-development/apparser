@@ -6,7 +6,7 @@ from apparser.key_codes.mouse_keys import RightClick, LeftClick
 
 
 class MouseClick(Instruction):
-    def __init__(self, click_type: RightClick | LeftClick):
+    def __init__(self, click_type: RightClick | LeftClick = LeftClick()):
         if isinstance(click_type, RightClick):
             self.__press_function = mouse.right_click
         elif isinstance(click_type, LeftClick):
@@ -16,19 +16,19 @@ class MouseClick(Instruction):
 
         self.__click_type = click_type
 
-    def __call__(self, *args, **kwargs):
+    def perform(self, *args, **kwargs):
         self.__press_function()
 
 
 class MouseClickTo(Instruction):
-    def __init__(self, coordinates: Point | RelativelyPoint, click_type: RightClick | LeftClick):
+    def __init__(self, coordinates: Point | RelativelyPoint, click_type: RightClick | LeftClick = LeftClick()):
         if not isinstance(coordinates, Point):
             raise ValueError('coordinates must be Point')
 
         self.__click = MouseClick(click_type)
         self.__coordinates = coordinates
 
-    def __call__(self, ui: Ui, *args, **kwargs):
+    def perform(self, ui: Ui, *args, **kwargs):
         coordinates = ui.point_to_global(self.__coordinates)
         mouse.move(coordinates.x, coordinates.y)
-        self.__click()
+        self.__click.perform()

@@ -8,7 +8,9 @@ from apparser.base.window import Window
 
 
 class App:
-    def __init__(self, path_to_exe: str, window_title_name: str | None = None, window_size: tuple[int, int] = (900, 900)):
+    def __init__(self, path_to_exe: str,
+                 window_size: tuple[int, int] = (900, 900),
+                 window_title_name: str | None = None):
         self.__process: subprocess.Popen | None = None
         self.__path = path_to_exe
         all_windows = pygetwindow.getAllWindows()
@@ -30,5 +32,5 @@ class App:
         self.ui.window.close_window()
 
     @property
-    def ui(self):
+    def ui(self) -> Ui:
         return self.__ui
