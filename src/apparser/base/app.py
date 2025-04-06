@@ -10,11 +10,13 @@ from apparser.base.window import Window
 class App:
     def __init__(self, path_to_exe: str,
                  window_size: tuple[int, int] = (900, 900),
-                 window_title_name: str | None = None):
+                 window_title_name: str | None = None,
+                 timeout: float = 0.1):
         self.__process: subprocess.Popen | None = None
         self.__path = path_to_exe
         all_windows = pygetwindow.getAllWindows()
         self.start_app()
+        time.sleep(timeout)
         if not window_title_name:
             window = [i for i in pygetwindow.getAllWindows() if i not in all_windows][0]
         else:
