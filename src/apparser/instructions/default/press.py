@@ -12,7 +12,7 @@ class PressKey(Instruction):
 
         self.__key_code = key_code
 
-    def __call__(self, ui: Ui):
+    def perform(self, ui: Ui, *args, **kwargs):
         keyboard.send(self.__key_code.key)
 
 
@@ -20,7 +20,7 @@ class PressKeysCombination(Instruction):
     def __init__(self, keys: list[KeyCode]):
         self.__keys = keys
 
-    def __call__(self, ui: Ui):
+    def perform(self, ui: Ui, *args, **kwargs):
         for key in self.__keys:
             keyboard.press(key.key)
 

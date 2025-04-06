@@ -5,7 +5,7 @@ from apparser.ai_readers.base import AiReader
 
 class PaddleOcrReader(AiReader):
     def __init__(self):
-        super().__init__()
+        pass
 
     def read_image(self, image: numpy.ndarray) -> list:
         pass

@@ -10,5 +10,5 @@ class Sleep(Instruction):
 
         self.sleep_time = sleep_time
 
-    def __call__(self, *args, **kwargs):
+    def perform(self, *args, **kwargs):
         time.sleep(self.sleep_time)
