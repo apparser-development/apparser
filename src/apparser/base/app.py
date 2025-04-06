@@ -21,15 +21,15 @@ class App:
             window = pygetwindow.getWindowsWithTitle(window_title_name)[0]
         window = Window(window)
         self.__ui = Ui(window)
-        self.__ui.window.set_window_size(*window_size)
+        self.__ui.window.size = window_size
 
     def start_app(self):
         self.__process = subprocess.Popen([self.__path])
         time.sleep(2)
 
     def stop_app(self):
+        self.ui.window.close()
         self.__process.kill()
-        self.ui.window.close_window()
 
     @property
     def ui(self) -> Ui:

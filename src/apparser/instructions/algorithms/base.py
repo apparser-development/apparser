@@ -4,7 +4,7 @@ from apparser.instructions.default.base import Instruction
 
 
 class Algorithm(Instruction, abc.ABC):
-    @abc.abstractmethod
     @property
+    @abc.abstractmethod
     def instructions(self):
         pass

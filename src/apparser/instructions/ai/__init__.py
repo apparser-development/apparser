@@ -4,5 +4,4 @@ from apparser.instructions.ai.read_text import PrintAllText
 
 __all__ = ["PrintAllText",
            "ClickOnText",
-           "AiInstructionsAlgorithm",
            "GetText"]

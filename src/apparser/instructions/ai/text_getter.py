@@ -15,11 +15,12 @@ class GetText:
         self.__right_bottom_point = right_bottom_point
         self.__reload_every_try = reload_every_try
         self.__answer = []
+        self.__left_top_point_global = left_top_point
 
     def __text_coordinates_to_local(self, text: TextData) -> TextData:
         new_coordinates = []
         for point in text.coordinates:
-            new_coordinates.append(point + self.__left_top_point)
+            new_coordinates.append(point + self.__left_top_point_global)
         return TextData(text.text, new_coordinates)
 
     def __texts_coordinates_to_local(self, texts: list[TextData]) -> list[TextData]:
@@ -28,16 +29,14 @@ class GetText:
             returned_data.append(self.__text_coordinates_to_local(text))
         return returned_data
 
-    def __resize_image(self, image: Image, ui: Ui) -> Image:
-        right_bottom_point = ui.point_to_local(ui.point_to_global(self.__right_bottom_point))
-        left_top_point = ui.point_to_local(ui.point_to_global(self.__left_top_point))
-        return image.crop((left_top_point.x, left_top_point.y, right_bottom_point.x, right_bottom_point.y))
-
     def perform(self, ui: Ui, ai: AiReader):
         if len(self.__answer) != 0 and not self.__reload_every_try:
             return
+        right_bottom_point = ui.point_to_local(ui.point_to_global(self.__right_bottom_point))
+        self.__left_top_point_global  = ui.point_to_local(ui.point_to_global(self.__left_top_point))
         screen = ui.get_screenshot()
-        screen = numpy.array(self.__resize_image(screen, ui))
+        screen = screen.crop((self.__left_top_point_global.x, self.__left_top_point_global.y, right_bottom_point.x, right_bottom_point.y))
+        screen = numpy.array(screen)
         ai_answer = ai.read_image(screen)
         ai_answer = self.__texts_coordinates_to_local(ai_answer)
         self.__answer = ai_answer

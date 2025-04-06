@@ -11,5 +11,4 @@ __all__ = ["PressKey",
            "ScrollOn",
            "MouseClickTo",
            "Sleep",
-           "InstructionsAlgorithm",
            "MouseClick"]
