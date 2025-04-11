@@ -1,0 +1,25 @@
+[build-system]
+requires = ["mss==10.0.0",
+            "paddleocr==2.9.1",
+            "numpy==1.26.4",
+            "keyboard==0.13.5",
+            "mouse==0.7.1",
+            "PyGetWindow==0.0.9",
+            "pillow==11.1.0",
+            "PyAutoGUI==0.9.54",
+            "easyocr==1.7.2"]
+
+[project]
+name = "apparser"
+version = "0.1.1"
+authors = [
+ { name="lexter0705", email="lexter0705@gmail.com" },
+]
+description = ""
+readme = "README.md"
+requires-python = ">=3.12.0"
+classifiers = [
+   "Programming Language :: Python :: 3",
+   "License :: OSI Approved :: MIT License",
+   "Operating System :: OS Independent",
+]
