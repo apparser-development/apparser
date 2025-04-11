@@ -1,12 +1,11 @@
 import numpy
-from PIL.Image import Image
-
 from apparser.ai_readers.base import AiReader
 from apparser.ai_readers.text_data import TextData
 from apparser.base import Ui, Point, RelativelyPoint
+from apparser.instructions.ai.base import AiInstruction
 
 
-class GetText:
+class GetText(AiInstruction):
     def __init__(self,
                  left_top_point: Point | RelativelyPoint = RelativelyPoint(0, 0),
                  right_bottom_point: Point | RelativelyPoint =  RelativelyPoint(1, 1),

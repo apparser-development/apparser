@@ -10,7 +10,7 @@ from apparser.base.window import Window
 class Ui:
     def __init__(self, window: Window):
         self.__window = window
-
+    
     @singledispatchmethod
     def point_to_global(self, coordinates: Point | RelativelyPoint) -> Point:
         raise NotImplementedError()
