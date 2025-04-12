@@ -6,8 +6,8 @@ from apparser.instructions.default.base import Instruction
 
 class MoveTo(Instruction):
     def __init__(self, coordinates: Point | RelativelyPoint):
-        if not isinstance(coordinates, Point):
-            raise ValueError('coordinates must be Point')
+        if not isinstance(coordinates, Point) and not isinstance(coordinates, RelativelyPoint):
+            raise ValueError('coordinates must be Point or RelativelyPoint')
 
         self.__coordinates = coordinates
 
@@ -18,8 +18,8 @@ class MoveTo(Instruction):
 
 class MoveOn(Instruction):
     def __init__(self, coordinates: Point):
-        if not isinstance(coordinates, Point):
-            raise ValueError('coordinates must be Point')
+        if not isinstance(coordinates, Point) and not isinstance(coordinates, RelativelyPoint):
+            raise ValueError('coordinates must be Point or RelativelyPoint')
 
         self.__coordinates = coordinates
 

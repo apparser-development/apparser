@@ -22,8 +22,8 @@ class MouseClick(Instruction):
 
 class MouseClickTo(Instruction):
     def __init__(self, coordinates: Point | RelativelyPoint, click_type: RightClick | LeftClick = LeftClick()):
-        if not isinstance(coordinates, Point):
-            raise ValueError('coordinates must be Point')
+        if not isinstance(coordinates, Point) and not isinstance(coordinates, RelativelyPoint):
+            raise ValueError('coordinates must be Point or RelativelyPoint')
 
         self.__click = MouseClick(click_type)
         self.__coordinates = coordinates
