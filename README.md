@@ -4,6 +4,10 @@
 The apparser library solves the problem of parsing computer programs. 
 It can be used for testing programs and automating processes.
 
+# Install
+```pip install apparser``` - on windows<br>
+```pip3 install apparser``` - on linux
+
 # Docs
 All documentation <a href="#">here</a>
 
@@ -13,7 +17,7 @@ All documentation <a href="#">here</a>
 | Parameter          | Apparser | PyAutoGui |
 |--------------------|----------|-----------|
 | Adaptive           | Yes      | No        |
-| AI integrated   | Yes      | No        | 
+| AI integrated      | Yes      | No        | 
 | Working with apps  | Yes      | No        |
 | Working in Desktop | No       | Yes       |       
 
