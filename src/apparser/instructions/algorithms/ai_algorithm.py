@@ -1,6 +1,6 @@
 from apparser.ai_readers.base import AiReader
 from apparser.ai_readers.readers.easy_ocr import EasyOcrReader
-from apparser.base import Ui, App
+from apparser.base import Ui
 from apparser.instructions.ai.base import AiInstruction
 from apparser.ai_readers.readers.screens_controller import ScreensController
 from apparser.instructions.algorithms.base import Algorithm
@@ -18,6 +18,12 @@ class AiAlgorithm(Algorithm):
         ui.window.to_main()
         for instruction in self.__instructions:
             instruction.perform(ui, self.__ai_reader)
+
+    def add_instruction(self, instruction: Instruction | AiInstruction):
+        if not isinstance(instruction, Instruction) and not isinstance(instruction, AiInstruction):
+            raise TypeError(f"{instruction} must be Instruction or AiInstruction")
+
+        self.__instructions.append(instruction)
 
     @property
     def instructions(self) -> list[AiInstruction | Instruction]:

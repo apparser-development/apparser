@@ -1,4 +1,4 @@
-from apparser.base import Ui, App
+from apparser.base import Ui
 from apparser.instructions.algorithms.base import Algorithm
 from apparser.instructions.default.base import Instruction
 
@@ -11,6 +11,12 @@ class DefaultAlgorithm(Algorithm):
         ui.window.to_main()
         for instruction in self.__instructions:
             instruction.perform(ui)
+
+    def add_instruction(self, instruction: Instruction):
+        if not isinstance(instruction, Instruction):
+            raise TypeError(f"{instruction} must be Instruction")
+
+        self.__instructions.append(instruction)
 
     @property
     def instructions(self) -> list[Instruction]:

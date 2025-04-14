@@ -4,4 +4,5 @@ from apparser.ai_readers.readers.screens_controller import ScreensController
 
 
 __all__ = ["EasyOcrReader",
-           "PaddleOcrReader"]
+           "PaddleOcrReader",
+           "ScreensController"]
