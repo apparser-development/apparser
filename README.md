@@ -1,1 +1,18 @@
-lib for parse apps
+<img src="apparser.svg" alt="">
+
+# Apparser
+The apparser library solves the problem of parsing computer programs. 
+It can be used for testing programs and automating processes.
+
+# Docs
+All documentation <a href="#">here</a>
+
+# For Developers
+
+1) If something doesn't work - email.
+2) If you want something fixed - email.
+3) If you need help with the library - email.
+
+apparser@gmail.com
+
+Any help in development is welcome)!
