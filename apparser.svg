@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="docGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#2B5B84;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#3CA9C6;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+
+    <rect x="100" y="100" width="300" height="200" rx="15" fill="url(#docGradient)"/>
+
+    <path d="M200 150 Q220 130 240 150 Q260 170 240 190 Q220 210 200 190"
+          fill="none"
+          stroke="#FFD43B"
+          stroke-width="4"/>
+
+    <path d="M300 150 Q320 130 340 150 Q360 170 340 190 Q320 210 300 190"
+          fill="none"
+          stroke="#FFD43B"
+          stroke-width="4"/>
+
+    <path d="M120 280 Q140 300 160 280 Q180 260 200 280"
+          fill="none"
+          stroke="#F0F0F0"
+          stroke-width="4"/>
+
+    <!-- Text -->
+    <text x="450" y="200"
+          font-family="Fira Code, monospace"
+          font-size="48"
+          fill="#2B5B84"
+          font-weight="bold">
+        apparser
+    </text>
+
+    <text x="450" y="250"
+          font-family="Fira Code, monospace"
+          font-size="24"
+          fill="#3CA9C6">
+        Automation - Life
+    </text>
+</svg>
