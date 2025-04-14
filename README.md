@@ -7,6 +7,16 @@ It can be used for testing programs and automating processes.
 # Docs
 All documentation <a href="#">here</a>
 
+# Apparser and Pyautogui
+`Warning! This comparison has no purpose to belittle the pyautogui library`
+
+| Parameter          | Apparser | PyAutoGui |
+|--------------------|----------|-----------|
+| Adaptive           | Yes      | No        |
+| AI integrated   | Yes      | No        | 
+| Working with apps  | Yes      | No        |
+| Working in Desktop | No       | Yes       |       
+
 # For Developers
 
 1) If something doesn't work - email.
