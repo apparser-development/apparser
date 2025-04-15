@@ -26,7 +26,7 @@ All documentation <a href="#">here</a>
 1) If something doesn't work - email.
 2) If you want something fixed - email.
 3) If you need help with the library - email.
-
-apparser@gmail.com
+   
+apparser.development@gmail.com
 
 Any help in development is welcome)!
