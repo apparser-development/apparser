@@ -9,4 +9,5 @@ __all__ = ["ai",
            "MoveOn",
            "ScrollOn",
            "Sleep",
-           "MouseClick"]
+           "MouseClick",
+           "Instruction"]
