@@ -1,6 +1,6 @@
 from apparser.ai_readers.base import AiReader
 from apparser.base import Ui, Point, RelativelyPoint
-from apparser.instructions import MouseClick
+from apparser.instructions.default import MouseClick
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.ai.move_to_text import MoveToText
 from apparser.instructions.ai.text_getter import GetText

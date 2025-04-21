@@ -1,17 +1,15 @@
 from apparser.ai_readers.base import AiReader
 from apparser.ai_readers.text_data import TextData
 from apparser.base import Ui, Point, RelativelyPoint
-from apparser.instructions import MoveTo
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.ai.text_getter import GetText
-from apparser.instructions.default import MouseClickTo
-from apparser.key_codes import RightClick, LeftClick
+from apparser.instructions.default import MoveTo
 
 
 class MoveToText(AiInstruction):
     def __init__(self, text: str,
                  offset: Point | RelativelyPoint = Point(0, 0),
-                 text_getter = GetText()):
+                 text_getter=GetText()):
         self.__text = text
         self.__offset = offset
         self.__text_getter = text_getter
