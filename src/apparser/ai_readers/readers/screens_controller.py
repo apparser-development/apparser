@@ -12,7 +12,7 @@ class ScreensController(AiReader):
 
     def __find_every_checked_screen(self, image: numpy.ndarray) -> int:
         for i in range(len(self.__screens)):
-            if numpy.allclose(image, self.__screens[i], atol=1):
+            if numpy.array_equal(image, self.__screens[i]):
                 return i
         return -1
 

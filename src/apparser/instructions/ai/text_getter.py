@@ -14,7 +14,9 @@ class GetText(AiInstruction):
         self.__right_bottom_point = right_bottom_point
         self.__reload_every_try = reload_every_try
         self.__answer = []
+        self.__local_answer = []
         self.__left_top_point_global = left_top_point
+        self.__screenshot = None
 
     def __text_coordinates_to_local(self, text: TextData) -> TextData:
         new_coordinates = []
@@ -35,11 +37,21 @@ class GetText(AiInstruction):
         self.__left_top_point_global  = ui.point_to_local(ui.point_to_global(self.__left_top_point))
         screen = ui.get_screenshot()
         screen = screen.crop((self.__left_top_point_global.x, self.__left_top_point_global.y, right_bottom_point.x, right_bottom_point.y))
+        self.__screenshot = screen
         screen = numpy.array(screen)
         ai_answer = ai.read_image(screen)
+        self.__local_answer = ai_answer.copy()
         ai_answer = self.__texts_coordinates_to_local(ai_answer)
         self.__answer = ai_answer
 
     @property
     def answer(self) -> list:
         return self.__answer
+
+    @property
+    def local_answer(self) -> list:
+        return self.__local_answer
+
+    @property
+    def screenshot(self):
+        return self.__screenshot

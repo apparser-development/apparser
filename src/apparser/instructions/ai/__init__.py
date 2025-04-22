@@ -3,9 +3,11 @@ from apparser.instructions.ai.move_to_text import MoveToText
 from apparser.instructions.ai.text_getter import GetText
 from apparser.instructions.ai.read_text import PrintAllText
 from apparser.instructions.ai.base import AiInstruction
+from apparser.instructions.ai.plot_text import PlotAllText
 
 __all__ = ["PrintAllText",
            "ClickOnText",
            "GetText",
            "MoveToText",
-           "AiInstruction"]
+           "AiInstruction",
+           "PlotAllText"]
