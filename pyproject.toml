@@ -9,7 +9,7 @@ dependencies = ["mss==10.0.0",
             "PyAutoGUI==0.9.54",
             "easyocr==1.7.2"]
 name = "apparser"
-version = "0.2.1"
+version = "0.3.0"
 authors = [
  { name="lexter0705", email="lexter0705@gmail.com" },
 ]
