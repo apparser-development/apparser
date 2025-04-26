@@ -17,6 +17,7 @@ Requires-Dist: PyGetWindow==0.0.9
 Requires-Dist: pillow==11.1.0
 Requires-Dist: PyAutoGUI==0.9.54
 Requires-Dist: easyocr==1.7.2
+Requires-Dist: thefuzz>=0.22.1
 Dynamic: license-file
 
 <img src="apparser.svg" alt="">

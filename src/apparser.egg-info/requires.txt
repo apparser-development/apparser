@@ -7,3 +7,4 @@ PyGetWindow==0.0.9
 pillow==11.1.0
 PyAutoGUI==0.9.54
 easyocr==1.7.2
+thefuzz>=0.22.1
