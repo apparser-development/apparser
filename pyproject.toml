@@ -7,7 +7,8 @@ dependencies = ["mss==10.0.0",
             "PyGetWindow==0.0.9",
             "pillow==11.1.0",
             "PyAutoGUI==0.9.54",
-            "easyocr==1.7.2"]
+            "easyocr==1.7.2",
+            "thefuzz>=0.22.1"]
 name = "apparser"
 version = "0.3.0"
 authors = [
