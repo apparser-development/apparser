@@ -41,6 +41,7 @@ src/apparser/instructions/default/move.py
 src/apparser/instructions/default/press.py
 src/apparser/instructions/default/scroll.py
 src/apparser/instructions/default/sleep.py
+src/apparser/instructions/default/write_text.py
 src/apparser/key_codes/__init__.py
 src/apparser/key_codes/base.py
 src/apparser/key_codes/key_code.py
