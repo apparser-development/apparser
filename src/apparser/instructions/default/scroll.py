@@ -11,5 +11,5 @@ class ScrollOn(Instruction):
 
         self.__deviation = deviation
 
-    def perform(self, ui: Ui, *args, **kwargs):
+    def perform(self, *args, **kwargs):
         scroll(self.__deviation)

@@ -4,6 +4,7 @@ from apparser.instructions.default.press import PressKey, PressKeysCombination
 from apparser.instructions.default.scroll import ScrollOn
 from apparser.instructions.default.sleep import Sleep
 from apparser.instructions.default.base import Instruction
+from apparser.instructions.default.write_text import WriteText
 
 __all__ = ["PressKey",
            "PressKeysCombination",
@@ -13,4 +14,5 @@ __all__ = ["PressKey",
            "MouseClickTo",
            "Sleep",
            "MouseClick",
-           "Instruction"]
+           "Instruction",
+           "WriteText",]
