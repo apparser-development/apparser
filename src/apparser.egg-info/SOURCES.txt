@@ -13,6 +13,7 @@ src/apparser/ai_readers/text_data.py
 src/apparser/ai_readers/readers/easy_ocr.py
 src/apparser/ai_readers/readers/paddle_ocr.py
 src/apparser/ai_readers/readers/screens_controller.py
+src/apparser/ai_readers/readers/white_black_reader.py
 src/apparser/base/__init__.py
 src/apparser/base/app.py
 src/apparser/base/ui.py

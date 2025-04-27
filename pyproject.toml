@@ -10,7 +10,7 @@ dependencies = ["mss==10.0.0",
             "easyocr==1.7.2",
             "thefuzz>=0.22.1"]
 name = "apparser"
-version = "0.3.1"
+version = "0.3.2"
 authors = [
  { name="lexter0705", email="lexter0705@gmail.com" },
 ]
