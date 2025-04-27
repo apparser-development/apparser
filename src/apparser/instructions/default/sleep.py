@@ -4,9 +4,9 @@ from apparser.instructions.default.base import Instruction
 
 
 class Sleep(Instruction):
-    def __init__(self, sleep_time: int):
-        if not isinstance(sleep_time, int):
-            raise ValueError("sleep_time must be an integer")
+    def __init__(self, sleep_time: float):
+        if sleep_time <= 0:
+            raise ValueError("sleep_time must be >= 0")
 
         self.sleep_time = sleep_time
 
