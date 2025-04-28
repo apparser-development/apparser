@@ -13,5 +13,4 @@ class WhiteBlackReader(AiReader):
     def read_image(self, image: numpy.ndarray) -> list[TextData]:
         image = Image.fromarray(image)
         image = image.convert('L')
-        image.show()
         return self.__reader.read_image(numpy.array(image))
