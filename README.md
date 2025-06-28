@@ -13,8 +13,8 @@ All documentation <a href="#">here</a>
 
 # For Developers
 
-1) If something doesn't work - open ticket.
-2) If you want something fixed - open ticket.
+1) If something doesn't work - open issue.
+2) If you want something fixed - open issue.
 3) If you need help with the library - email.
    
 apparser.development@gmail.com
