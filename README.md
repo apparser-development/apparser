@@ -1,4 +1,4 @@
-<img src="apparser.svg" alt="">
+<img src="apparser.svg" alt="" width="40%">
 
 # Apparser
 The apparser library solves the problem of parsing computer programs. 
