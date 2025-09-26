@@ -1,9 +1,10 @@
 import easyocr
 import numpy
 
-from apparser.ai_readers.base import AiReader
-from apparser.ai_readers.text_data import TextData
-from apparser.base import Point
+from apparser.text_readers.base import AiReader
+from apparser.text_readers.text_data import TextData
+
+from apparser.geometry import Point
 
 
 class EasyOcrReader(AiReader):

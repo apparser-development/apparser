@@ -1,5 +1,5 @@
-from apparser.ai_readers.base import AiReader
-from apparser.base import Ui
+from apparser.text_readers.base import AiReader
+from apparser.core import Ui
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.ai.text_getter import GetText
 

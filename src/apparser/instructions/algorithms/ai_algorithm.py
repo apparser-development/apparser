@@ -1,10 +1,10 @@
-from apparser.ai_readers.base import AiReader
-from apparser.ai_readers.readers.easy_ocr import EasyOcrReader
-from apparser.base import Ui
+from apparser.core import Ui
 from apparser.instructions.ai.base import AiInstruction
-from apparser.ai_readers.readers.screens_controller import ScreensController
 from apparser.instructions.algorithms.base import Algorithm
 from apparser.instructions.default.base import Instruction
+from apparser.text_readers.base import AiReader
+from apparser.text_readers.readers.easy_ocr import EasyOcrReader
+from apparser.text_readers.readers.screens_controller import ScreensController
 
 
 class AiAlgorithm(Algorithm):
@@ -15,8 +15,10 @@ class AiAlgorithm(Algorithm):
         self.__ai_reader = ai_reader
 
     def perform(self, ui: Ui, *args, **kwargs):
-        ui.window.to_main()
+        ui.window.to_foreground()
         for instruction in self.__instructions:
+            if not isinstance(instruction, Instruction) and not isinstance(instruction, AiInstruction):
+                raise TypeError(f"{instruction} must be Instruction or AiInstruction")
             instruction.perform(ui, self.__ai_reader)
 
     def add_instruction(self, instruction: Instruction | AiInstruction):

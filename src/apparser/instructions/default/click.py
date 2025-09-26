@@ -1,6 +1,7 @@
 import mouse
 
-from apparser.base import Point, Ui, RelativelyPoint
+from apparser.core import Ui
+from apparser.geometry import Point, RelativelyPoint
 from apparser.instructions.default.base import Instruction
 from apparser.key_codes.mouse_keys import RightClick, LeftClick
 
@@ -12,7 +13,7 @@ class MouseClick(Instruction):
         elif isinstance(click_type, LeftClick):
             self.__press_function = mouse.click
         else:
-            raise ValueError('click_type must be RightClick or LeftClick')
+            raise TypeError('click_type must be RightClick or LeftClick')
 
         self.__click_type = click_type
 

@@ -2,9 +2,9 @@ from typing import Tuple
 
 from PIL import ImageDraw
 
-from apparser.ai_readers.base import AiReader
-from apparser.ai_readers.text_data import TextData
-from apparser.base import Ui
+from apparser.text_readers.base import AiReader
+from apparser.text_readers.text_data import TextData
+from apparser.core import Ui
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.ai.text_getter import GetText
 

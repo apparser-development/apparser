@@ -1,14 +1,15 @@
 import numpy
-from apparser.ai_readers.base import AiReader
-from apparser.ai_readers.text_data import TextData
-from apparser.base import Ui, Point, RelativelyPoint
+
+from apparser.core import Ui
+from apparser.geometry import Point, RelativelyPoint
 from apparser.instructions.ai.base import AiInstruction
+from apparser.text_readers import AiReader, TextData
 
 
 class GetText(AiInstruction):
     def __init__(self,
                  left_top_point: Point | RelativelyPoint = RelativelyPoint(0, 0),
-                 right_bottom_point: Point | RelativelyPoint =  RelativelyPoint(1, 1),
+                 right_bottom_point: Point | RelativelyPoint = RelativelyPoint(1, 1),
                  reload_every_try: bool = True):
         self.__left_top_point = left_top_point
         self.__right_bottom_point = right_bottom_point
@@ -34,9 +35,10 @@ class GetText(AiInstruction):
         if len(self.__answer) != 0 and not self.__reload_every_try:
             return
         right_bottom_point = ui.point_to_local(ui.point_to_global(self.__right_bottom_point))
-        self.__left_top_point_global  = ui.point_to_local(ui.point_to_global(self.__left_top_point))
+        self.__left_top_point_global = ui.point_to_local(ui.point_to_global(self.__left_top_point))
         screen = ui.get_screenshot()
-        screen = screen.crop((self.__left_top_point_global.x, self.__left_top_point_global.y, right_bottom_point.x, right_bottom_point.y))
+        screen = screen.crop((self.__left_top_point_global.x, self.__left_top_point_global.y, right_bottom_point.x,
+                              right_bottom_point.y))
         self.__screenshot = screen
         screen = numpy.array(screen)
         ai_answer = ai.read_image(screen)

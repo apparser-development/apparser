@@ -1,24 +1,29 @@
 [project]
-dependencies = ["mss==10.0.0",
-            "paddleocr==2.9.1",
-            "numpy==1.26.4",
-            "keyboard==0.13.5",
-            "mouse==0.7.1",
-            "PyGetWindow==0.0.9",
-            "pillow==11.1.0",
-            "PyAutoGUI==0.9.54",
-            "easyocr==1.7.2",
-            "thefuzz>=0.22.1"]
+dependencies = ["appwindows >= 1.0.6",
+            "numpy~=1.26.4",
+            "pillow~=11.1.0",
+            "mouse >= 0.7.1",
+            "keyboard >= 0.13.2",
+            "easyocr~=1.7.2",
+            "thefuzz~=0.22.1"]
 name = "apparser"
-version = "0.3.2"
+version = "1.0.0"
 authors = [
- { name="lexter0705", email="lexter0705@gmail.com" },
+ {name="Terochkin A.S", email="apparser.development@gmail.com" },
 ]
-description = ""
+description = "The apparser library is designed for testing and managing computer programs."
 readme = "README.md"
 requires-python = ">=3.12.0"
 classifiers = [
-   "Programming Language :: Python :: 3",
-   "License :: OSI Approved :: MIT License",
-   "Operating System :: Windows, MacOS",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: Microsoft :: Windows :: Windows 10",
+    "Operating System :: Microsoft :: Windows :: Windows 11",
+    "Operating System :: POSIX :: Linux",
+    "Environment :: X11 Applications",
+    "Environment :: Win32 (MS Windows)"
 ]
+
+[project.urls]
+Repository = "https://github.com/lexter0705/apparser"
+Issues = "https://github.com/lexter0705/apparser/issues"

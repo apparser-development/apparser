@@ -2,7 +2,6 @@ import abc
 
 
 class KeyCode(abc.ABC):
-    @property
     @abc.abstractmethod
-    def key(self) -> str:
+    def __str__(self) -> str:
         pass

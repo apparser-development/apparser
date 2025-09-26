@@ -1,4 +1,3 @@
-from apparser.instructions import ai
 from apparser.instructions.default import *
 
 __all__ = ["ai",
@@ -7,7 +6,6 @@ __all__ = ["ai",
            "MouseClickTo",
            "MoveTo",
            "MoveOn",
-           "ScrollOn",
            "Sleep",
            "MouseClick",
            "Instruction",

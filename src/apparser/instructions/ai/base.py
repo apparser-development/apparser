@@ -1,6 +1,6 @@
 import abc
-from apparser.ai_readers.base import AiReader
-from apparser.base import Ui
+from apparser.text_readers.base import AiReader
+from apparser.core import Ui
 
 
 class AiInstruction(abc.ABC):

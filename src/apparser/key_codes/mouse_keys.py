@@ -2,12 +2,10 @@ from apparser.key_codes.base import KeyCode
 
 
 class RightClick(KeyCode):
-    @property
-    def key(self) -> str:
+    def __str__(self) -> str:
         return "RIGHT"
 
 
 class LeftClick(KeyCode):
-    @property
-    def key(self) -> str:
+    def __str__(self) -> str:
         return "LEFT"

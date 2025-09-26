@@ -2,7 +2,8 @@ import abc
 
 import numpy
 
-from apparser.ai_readers.text_data import TextData
+from apparser.text_readers.text_data import TextData
+
 
 class AiReader(abc.ABC):
     @abc.abstractmethod

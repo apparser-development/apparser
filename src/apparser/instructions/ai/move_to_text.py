@@ -1,23 +1,28 @@
-from apparser.ai_readers.base import AiReader
-from apparser.ai_readers.text_data import TextData
-from apparser.base import Ui, Point, RelativelyPoint
+from thefuzz import fuzz
+
+from apparser.core import Ui
+from apparser.geometry import Point, RelativelyPoint
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.ai.text_getter import GetText
 from apparser.instructions.default import MoveTo
-import abc
+from apparser.text_readers.base import AiReader
+from apparser.text_readers.text_data import TextData
 
 
-class TextMover(AiInstruction, abc.ABC):
+class MoveToText(AiInstruction):
     def __init__(self, text: str,
+                 min_similarity: float = 0.9,
                  offset: Point | RelativelyPoint = Point(0, 0),
                  text_getter=GetText()):
         self.__text = text
         self.__offset = offset
         self.__text_getter = text_getter
+        self.__min_similarity = min_similarity
 
-    @abc.abstractmethod
-    def find_text(self, texts: list[TextData]) -> TextData:
-        pass
+    def find_text(self, texts: list[TextData]) -> tuple[TextData, float]:
+        similar_ratings = [fuzz.token_sort_ratio(self.text, i.text) for i in texts]
+        max_rating = max(similar_ratings)
+        return texts[similar_ratings.index(max_rating)], max_rating
 
     def __get_local_offset(self, ui: Ui) -> Point:
         if isinstance(self.__offset, RelativelyPoint):
@@ -26,7 +31,9 @@ class TextMover(AiInstruction, abc.ABC):
 
     def perform(self, ui: Ui, ai: AiReader):
         self.__text_getter.perform(ui, ai)
-        needed_data = self.find_text(self.__text_getter.answer)
+        needed_data, rating = self.find_text(self.__text_getter.answer)
+        if self.__min_similarity > rating:
+            raise Exception(f"Text with similarity {self.__min_similarity} is not exist.")
         y_cords = list(set([i.y for i in needed_data.coordinates]))
         x_cords = list(set([i.x for i in needed_data.coordinates]))
         offset_point = self.__get_local_offset(ui)

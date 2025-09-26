@@ -1,10 +1,7 @@
-mss==10.0.0
-paddleocr==2.9.1
-numpy==1.26.4
-keyboard==0.13.5
-mouse==0.7.1
-PyGetWindow==0.0.9
-pillow==11.1.0
-PyAutoGUI==0.9.54
-easyocr==1.7.2
-thefuzz>=0.22.1
+appwindows>=1.0
+keyboard >= 0.13.2
+mouse >= 0.7.1
+numpy>=1.20
+pillow>=11.0
+easyocr>=1.7.2
+thefuzz>=0.20.0
