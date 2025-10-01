@@ -10,7 +10,7 @@ class PrintAllText(AiInstruction):
 
     def perform(self, ui: Ui, ai: AiReader):
         self.__text_getter.perform(ui, ai)
-        for i in self.__text_getter.answer:
+        for i in self.__text_getter.global_answer:
             points_stroke = ""
             for j in i.coordinates:
                 points_stroke += str(j) + " "

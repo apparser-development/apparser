@@ -9,6 +9,9 @@ from apparser.geometry.relatively_point import RelativelyPoint
 
 class Ui:
     def __init__(self, window: Window):
+        if not isinstance(window, Window):
+            raise TypeError('window must be Window')
+
         self.__window = window
 
     @singledispatchmethod

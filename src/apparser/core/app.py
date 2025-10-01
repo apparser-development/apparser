@@ -12,6 +12,18 @@ class App:
                  window_title: str,
                  window_size: Size = Size(900, 900),
                  timeout: float = 1):
+        if not isinstance(path_to_exe, str):
+            raise TypeError('path_to_exe must be a string')
+
+        if not isinstance(window_title, str):
+            raise TypeError('window_title must be a string')
+
+        if not isinstance(window_size, Size):
+            raise TypeError('window_size must be a Size')
+
+        if not (isinstance(timeout, float) or isinstance(timeout, int)):
+            raise TypeError('timeout must be a number')
+
         self.__window_finder = get_finder()
         self.__process: subprocess.Popen | None = None
         self.__path = path_to_exe

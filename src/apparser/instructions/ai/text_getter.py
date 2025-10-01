@@ -47,7 +47,7 @@ class GetText(AiInstruction):
         self.__answer = ai_answer
 
     @property
-    def answer(self) -> list:
+    def global_answer(self) -> list:
         return self.__answer
 
     @property

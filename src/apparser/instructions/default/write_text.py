@@ -8,8 +8,8 @@ class WriteText(Instruction):
         if not isinstance(text, str):
             raise TypeError('text must be a string')
 
-        if not isinstance(pause_time, float):
-            raise TypeError('pause_time must be a float')
+        if not (isinstance(pause_time, int) or isinstance(pause_time, float)):
+            raise TypeError('pause_time must be a number')
 
         if len(text) < 1:
             raise ValueError('text cannot be empty')

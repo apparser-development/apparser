@@ -6,7 +6,7 @@ from apparser.key_codes.base import KeyCode
 
 class PressKey(Instruction):
     def __init__(self, key_code: KeyCode | str):
-        if not isinstance(key_code, KeyCode) or not isinstance(key_code, str):
+        if not (isinstance(key_code, KeyCode) or isinstance(key_code, str)):
             raise TypeError('key_code must be KeyCode or str')
 
         self.__key_code = key_code
@@ -21,7 +21,7 @@ class PressKeysCombination(Instruction):
 
     def perform(self, *args, **kwargs):
         for key in self.__keys:
-            if not isinstance(key, KeyCode) or not isinstance(key, str):
+            if not (isinstance(key, KeyCode) or isinstance(key, str)):
                 raise TypeError('key_code must be KeyCode or str')
             keyboard.press(str(key))
 

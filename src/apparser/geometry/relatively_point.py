@@ -1,10 +1,10 @@
 class RelativelyPoint:
     def __init__(self, x_percent: float, y_percent: float):
-        if x_percent is None:
-            raise ValueError('x_percent cannot be None')
+        if not (isinstance(x_percent, float) or isinstance(x_percent, int)):
+            raise TypeError('x_percent must be number')
 
-        if y_percent is None:
-            raise ValueError('y_percent cannot be None')
+        if  not (isinstance(y_percent, float) or isinstance(y_percent, int)):
+            raise TypeError('y_percent must be number')
 
         if x_percent < -1 or x_percent > 1:
             raise ValueError('x must be between -1 and 1')

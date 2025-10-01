@@ -1,12 +1,15 @@
 from apparser.instructions.default import *
 
-__all__ = ["ai",
-           "PressKey",
+__all__ = ["PressKey",
            "PressKeysCombination",
+           "MouseMove",
            "MouseClickTo",
-           "MoveTo",
-           "MoveOn",
            "Sleep",
            "MouseClick",
            "Instruction",
-           "WriteText"]
+           "WriteText",
+           "MoveWindow",
+           "ResizeWindow",
+           "ToForegroundWindow",
+           "ToBackgroundWindow",
+           "Algorithm"]

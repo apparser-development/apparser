@@ -1,14 +1,14 @@
 from apparser.core import Ui
-from apparser.instructions.algorithms.base import Algorithm
+from apparser.instructions.algorithm import BaseAlgorithm
 from apparser.instructions.default.base import Instruction
 
 
-class DefaultAlgorithm(Algorithm):
+class Algorithm(BaseAlgorithm):
     def __init__(self, instructions: list[Instruction]):
         self.__instructions = instructions
 
     def perform(self, ui: Ui, *args, **kwargs):
-        ui.window.to_main()
+        ui.window.to_foreground()
         for instruction in self.__instructions:
             if not isinstance(instruction, Instruction):
                 raise TypeError(f"{instruction} must be Instruction")
