@@ -1,6 +1,6 @@
 [project]
-dependencies = ["appwindows >= 1.0.6",
-            "numpy~=1.26.4",
+dependencies = ["appwindows >= 1.2.0",
+            "numpy>=2.0",
             "pillow~=11.1.0",
             "mouse >= 0.7.1",
             "keyboard >= 0.13.2",

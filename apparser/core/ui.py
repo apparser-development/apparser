@@ -20,7 +20,7 @@ class Ui:
 
     @point_to_global.register(Point)
     def _(self, coordinates: Point):
-        return coordinates + self.__window.get_points()[0]
+        return coordinates + self.__window.get_points().left_top
 
     @point_to_global.register(RelativelyPoint)
     def _(self, coordinates: RelativelyPoint):
