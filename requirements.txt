@@ -1,4 +1,4 @@
-appwindows>=1.0
+appwindows>=1.2.0
 keyboard >= 0.13.2
 mouse >= 0.7.1
 numpy>=1.20

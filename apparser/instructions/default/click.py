@@ -34,7 +34,6 @@ class MouseClickTo(Instruction):
 
         self.__click = MouseClick(click_type)
         self.__move = MouseMove(coordinates, mover=mover)
-        self.__coordinates = coordinates
 
     def perform(self, ui: Ui, *args, **kwargs):
         self.__move.perform(ui)
