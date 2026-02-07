@@ -1,5 +1,5 @@
 from apparser.core import Ui
-from apparser.geometry import Point, RelativelyPoint
+from apparser.core.geometry import Point, RelativelyPoint
 from apparser.instructions import Sleep
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.ai.move_to_text import MoveToText

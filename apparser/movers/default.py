@@ -1,6 +1,6 @@
 import mouse
 
-from apparser.geometry import Point
+from apparser.core.geometry import Point
 from apparser.movers.base import Mover
 
 

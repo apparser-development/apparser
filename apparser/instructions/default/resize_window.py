@@ -1,5 +1,5 @@
 from apparser import Ui
-from apparser.geometry import Size
+from apparser.core.geometry import Size
 from apparser.instructions.default.base import Instruction
 
 

@@ -1,7 +1,7 @@
 import numpy
 
 from apparser.core import Ui
-from apparser.geometry import Point, RelativelyPoint
+from apparser.core.geometry import Point, RelativelyPoint
 from apparser.instructions.ai.base import AiInstruction
 from apparser.text_readers import AiReader, TextData
 

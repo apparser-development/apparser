@@ -1,8 +1,8 @@
 from thefuzz import fuzz
 
 from apparser.core import Ui
-from apparser.exceptions import TextNotFoundException
-from apparser.geometry import Point, RelativelyPoint
+from apparser.core.exceptions import TextNotFoundException
+from apparser.core.geometry import Point, RelativelyPoint
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.ai.text_getter import GetText
 from apparser.instructions.default import MouseMove

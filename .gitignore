@@ -2,3 +2,4 @@
 .idea
 apparser.egg-info
 dist
+__pycache__

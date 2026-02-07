@@ -1,6 +1,6 @@
 import abc
 
-from appwindows.geometry import Point
+from apparser.core.geometry import Point
 
 
 class Mover(abc.ABC):

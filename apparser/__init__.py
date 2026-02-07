@@ -1,3 +1,6 @@
-from apparser.core import App, Ui
+from apparser.core import App, Ui, geometry, exceptions
 
-__all__ = ["App", "Ui"]
+__all__ = ["App",
+           "Ui",
+           "geometry", 
+           "exceptions"]
