@@ -19,7 +19,7 @@ pip install apparser
 
 # Examples
 
-1) Open terminal and click write command
+1) Open terminal and write "Hello World!"
 ```python
 from apparser import App
 from apparser.geometry import RelativelyPoint
