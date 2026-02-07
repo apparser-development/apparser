@@ -26,9 +26,9 @@ from apparser.geometry import RelativelyPoint
 from apparser.instructions import Algorithm, MouseClickTo, WriteText, Sleep
 
 algorithm = Algorithm([
-        Sleep(1),
-        MouseClickTo(RelativelyPoint(0.5, 0.5)),
-        WriteText("Hello World")
+        Sleep(1), # Wait for the application to open.
+        MouseClickTo(RelativelyPoint(0.5, 0.5)), # Click to window center for start writing
+        WriteText("Hello World") # Write text
 ])
 
 app = App("cmd.exe")
