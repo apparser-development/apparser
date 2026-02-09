@@ -2,4 +2,6 @@ import abc
 
 
 class CvEvent(abc.ABC):
-    pass
+    @abc.abstractmethod
+    def __str__(self):
+        pass

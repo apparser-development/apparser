@@ -4,7 +4,7 @@ import numpy
 from apparser.text_readers.base import AiReader
 from apparser.text_readers.text_data import TextData
 
-from apparser.core.geometry import Point
+from apparser.geometry import Point
 
 
 class EasyOcrReader(AiReader):

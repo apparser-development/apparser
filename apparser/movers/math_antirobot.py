@@ -3,7 +3,7 @@ from typing import Generator, Callable
 import mouse
 from appwindows.geometry import Point
 
-from apparser.core.geometry import distance
+from apparser.geometry import distance
 from apparser.movers.base import Mover
 
 

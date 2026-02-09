@@ -31,7 +31,7 @@ class Ui:
         return self.point_to_global(local_point)
 
     def point_to_local(self, coordinates: Point) -> Point:
-        return coordinates - self.__window.get_points()[0]
+        return coordinates - self.__window.get_points().left_top
 
     def get_screenshot(self) -> Image:
         return Image.fromarray(self.__window.get_screenshot())

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from apparser.core.geometry import Point
+from apparser.geometry import Point
 
 
 @dataclass(frozen=True)
