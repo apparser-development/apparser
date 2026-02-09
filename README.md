@@ -37,7 +37,7 @@ algorithm.perform(app.ui)
 ```
 
 # Docs
-All documentation <a href="#">here</a>
+All documentation <a href="#">here</a> <br>
 Link to <a href="https://pypi.org/project/appwindows/">PyPi</a>
 
 # For Developers
