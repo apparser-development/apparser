@@ -1,10 +1,14 @@
 import abc
 
 from apparser.cv.events import CvEvent
+from apparser.cv.models import CvData
 
 
 class CvHandler(abc.ABC):
     @abc.abstractmethod
-    @property
-    def register_event(event: CvEvent):
+    def register_event(self, event: CvEvent):
+        pass
+
+    @abc.abstractmethod
+    def call(self, event: CvEvent, data: CvData):
         pass
