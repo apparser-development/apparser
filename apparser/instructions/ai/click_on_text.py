@@ -1,12 +1,12 @@
 from apparser.core import Ui
 from apparser.geometry import Point, RelativelyPoint
-from apparser.instructions import Sleep
+from apparser.instructions.default import MouseClick, Sleep
+from apparser.key_codes import RightClick, LeftClick
+from apparser.text_readers import AiReader
+
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.ai.move_to_text import MoveToText
 from apparser.instructions.ai.text_getter import GetText
-from apparser.instructions.default import MouseClick
-from apparser.key_codes import RightClick, LeftClick
-from apparser.text_readers.base import AiReader
 
 
 class ClickOnText(AiInstruction):

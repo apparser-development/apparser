@@ -2,9 +2,7 @@ from apparser.core import Ui
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.algorithm import BaseAlgorithm
 from apparser.instructions.default.base import Instruction
-from apparser.text_readers.base import AiReader
-from apparser.text_readers.easy_ocr import EasyOcrReader
-from apparser.text_readers.screens_controller import ScreensController
+from apparser.text_readers import AiReader, EasyOcrReader, ScreensController
 
 
 class AiAlgorithm(BaseAlgorithm):

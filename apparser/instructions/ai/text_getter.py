@@ -47,13 +47,13 @@ class GetText(AiInstruction):
         self.__answer = ai_answer
 
     @property
-    def global_answer(self) -> list:
+    def global_answer(self) -> list[TextData]:
         return self.__answer
 
     @property
-    def local_answer(self) -> list:
+    def local_answer(self) -> list[TextData]:
         return self.__local_answer
 
     @property
-    def screenshot(self):
+    def screenshot(self) -> numpy.ndarray:
         return self.__screenshot

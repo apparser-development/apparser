@@ -1,5 +1,5 @@
 import abc
-from apparser.text_readers.base import AiReader
+from apparser.text_readers import AiReader
 from apparser.core import Ui
 
 
