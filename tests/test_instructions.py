@@ -1,20 +1,18 @@
-from apparser import App
-from apparser.geometry import Size
-from apparser.text_readers import EasyOcrReader, WhiteBlackReader
+from appwindows import get_finder
+from PIL import Image
 
-from apparser.instructions import Sleep, WriteText
-from apparser.instructions.ai import AiAlgorithm, ClickOnText
+from apparser.core import Ui
 
+from apparser.cv.handlers import DefaultHandlers
+from apparser.cv.events import Detected
+from apparser.cv.models import CvAllData, CvClassData, CvHandler
 
-reader = WhiteBlackReader(reader=EasyOcrReader(["ru"]))
+handlers = DefaultHandlers()
 
-algotithm = AiAlgorithm([
-    Sleep(1),
-    ClickOnText("Поиск в", min_similarity=0.7),
-    Sleep(0.1),
-    WriteText("Some text")
-], ai_reader=reader)
+@handlers.register_handler(Detected)
+def detected_handler(all_data: CvAllData):
+    print(all_data.some)
 
-app = App("explorer.exe", "проводник", window_size=Size(800, 800))
+window = get_finder().get_window_by_title("apparser")
 
-algotithm.perform(app.ui)
+handlers.call(Detected, CvAllData("se", "some2"))

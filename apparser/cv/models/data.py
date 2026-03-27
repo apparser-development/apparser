@@ -2,5 +2,10 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
-class CvData:
-    pass 
+class CvClassData:
+    pass
+
+
+@dataclass(frozen=True)
+class CvAllData:
+    pass

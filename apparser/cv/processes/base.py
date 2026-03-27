@@ -1,6 +1,6 @@
 import abc
 
-from apparser.cv.handlers import CvHandler
+from apparser.cv.handlers import CvHandlers
 
 
 class CvProcess(abc.ABC):
@@ -13,5 +13,5 @@ class CvProcess(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def add_handler(self, handler: CvHandler):
+    def add_handler(self, handler: CvHandlers):
         pass
