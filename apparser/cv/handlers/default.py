@@ -4,16 +4,16 @@ import inspect
 from apparser.core import Ui
 from apparser.cv.handlers.base import CvHandlers
 from apparser.cv.events import CvEvent
-from apparser.cv.models import CvAllData, CvHandler, CvClassData
+from apparser.cv.models import CvAllData, CvHandler, CvChangeData
 
 
 def _form_args(function: Callable, *args) -> dict[str, Any]:
     result = {}
     function_signature = inspect.signature(function)
     for arg in function_signature.parameters.values():
-        for kwarg in args:
-            if arg.annotation is type(kwarg):
-                result[arg.name] = kwarg
+        for a in args:
+            if arg.annotation is type(a):
+                result[arg.name] = a
     return result
 
 
@@ -21,16 +21,19 @@ class DefaultHandlers(CvHandlers):
     def __init__(self):
         self.__events: list[CvHandler] = []
 
-    def register_handler(self, event: Type[CvEvent]):
+    def register_handler(self, event: Type[CvEvent], *args, class_name: str = None):
         if event is CvEvent:
             raise TypeError("event must be a apparser.cv.events.CvEvent")
-        def decorator(function: Callable[[Optional[CvAllData], Optional[Ui], Optional[CvClassData]], None]):
-            self.__events.append(CvHandler(event, function))
+
+        def decorator(function: Callable[[Optional[CvAllData], Optional[Ui], Optional[CvChangeData]], None]):
+            self.__events.append(CvHandler(event, function, class_name))
             return function
+
         return decorator
 
-    def call(self, event: Type[CvEvent], *args):
+    def call(self, event: Type[CvEvent], changed_data: CvChangeData, *args):
         for handler in self.__events:
-            if handler.event is event:
-                function_args = _form_args(handler.function, *args)
+            if handler.event is event and (handler.class_name is None
+                                           or changed_data.box.class_name == handler.class_name):
+                function_args = _form_args(handler.function, changed_data, *args)
                 handler.function(**function_args)

@@ -1,9 +1,8 @@
 import abc
 from typing import Type
 
-from apparser.core import Ui
 from apparser.cv.events import CvEvent
-from apparser.cv.models import CvAllData, CvClassData
+from apparser.cv.models import CvChangeData
 
 
 class CvHandlers(abc.ABC):
@@ -12,5 +11,5 @@ class CvHandlers(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def call(self, event: Type[CvEvent], all_data: CvAllData, ui: Ui, class_data: CvClassData):
+    def call(self, event: Type[CvEvent], changed_data: CvChangeData, *args):
         pass
