@@ -1,13 +1,15 @@
 from functools import singledispatchmethod
 
-from PIL import Image
+import numpy
+
 from appwindows import Window
 from appwindows.geometry import Point, Size
 
+from apparser.core.ui.base import Ui
 from apparser.geometry.relatively_point import RelativelyPoint
 
 
-class Ui:
+class WindowUi(Ui):
     def __init__(self, window: Window):
         if not isinstance(window, Window):
             raise TypeError('window must be Window')
@@ -33,8 +35,8 @@ class Ui:
     def point_to_local(self, coordinates: Point) -> Point:
         return coordinates - self.__window.get_points().left_top
 
-    def get_screenshot(self) -> Image:
-        return Image.fromarray(self.__window.get_screenshot())
+    def get_screenshot(self) -> numpy.ndarray:
+        return self.__window.get_screenshot()
 
     @property
     def window(self):

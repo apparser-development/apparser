@@ -1,6 +1,6 @@
 import mouse
 
-from apparser.core import Ui
+from apparser.core import WindowUi
 from apparser.geometry import Point, RelativelyPoint
 from apparser.instructions.default.base import Instruction
 from apparser.instructions.default.mouse_move import MouseMove
@@ -35,6 +35,6 @@ class MouseClickTo(Instruction):
         self.__click = MouseClick(click_type)
         self.__move = MouseMove(coordinates, mover=mover)
 
-    def perform(self, ui: Ui, *args, **kwargs):
+    def perform(self, ui: WindowUi, *args, **kwargs):
         self.__move.perform(ui)
         self.__click.perform()

@@ -1,6 +1,6 @@
 import numpy
 
-from apparser.core import Ui
+from apparser.core import WindowUi
 from apparser.geometry import Point, RelativelyPoint
 from apparser.instructions.ai.base import AiInstruction
 from apparser.text_readers import AiReader, TextData
@@ -31,7 +31,7 @@ class GetText(AiInstruction):
             returned_data.append(self.__text_coordinates_to_local(text))
         return returned_data
 
-    def perform(self, ui: Ui, ai: AiReader):
+    def perform(self, ui: WindowUi, ai: AiReader):
         if len(self.__answer) != 0 and not self.__reload_every_try:
             return
         right_bottom_point = ui.point_to_local(ui.point_to_global(self.__right_bottom_point))

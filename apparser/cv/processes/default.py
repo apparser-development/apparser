@@ -1,4 +1,4 @@
-from apparser.core import Ui
+from apparser.core import WindowUi
 
 from apparser.cv.handlers import CvHandlers
 from apparser.cv.processes.base import CvProcess
@@ -15,14 +15,14 @@ class DefaultCvProcess(CvProcess):
         self.__handlers_list: list[CvHandlers] = []
         self.__checker = changes_checker
 
-    def start(self, ui: Ui):
+    def start(self, ui: WindowUi):
         self.__is_working = True
         while self.__is_working:
             image = ui.window.get_screenshot()
             cv_data = self.__reader.read(image)
             for class_data in self.__checker.check(cv_data):
                 for handler in self.__handlers_list:
-                    handler.call(class_data.event, class_data, cv_data, self.__ui)
+                    handler.call(class_data.event, class_data, cv_data, ui)
 
     def stop(self):
         self.__is_working = False

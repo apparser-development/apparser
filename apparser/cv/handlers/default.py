@@ -1,7 +1,7 @@
 from typing import Callable, Type, Optional, Any
 import inspect
 
-from apparser.core import Ui
+from apparser.core import WindowUi
 from apparser.cv.handlers.base import CvHandlers
 from apparser.cv.events import CvEvent
 from apparser.cv.models import CvAllData, CvHandler, CvChangeData
@@ -25,7 +25,7 @@ class DefaultHandlers(CvHandlers):
         if event is CvEvent:
             raise TypeError("event must be a apparser.cv.events.CvEvent")
 
-        def decorator(function: Callable[[Optional[CvAllData], Optional[Ui], Optional[CvChangeData]], None]):
+        def decorator(function: Callable[[Optional[CvAllData], Optional[WindowUi], Optional[CvChangeData]], None]):
             self.__events.append(CvHandler(event, function, class_name))
             return function
 

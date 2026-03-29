@@ -1,4 +1,4 @@
-from apparser import Ui
+from apparser import WindowUi
 from apparser.geometry import Point
 from apparser.instructions.default.base import Instruction
 
@@ -10,5 +10,5 @@ class MoveWindow(Instruction):
 
         self.__position = position
 
-    def perform(self, ui: Ui, *args, **kwargs):
+    def perform(self, ui: WindowUi, *args, **kwargs):
         ui.window.move(self.__position)

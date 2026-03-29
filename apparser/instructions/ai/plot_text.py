@@ -4,7 +4,7 @@ from PIL import ImageDraw
 
 from apparser.text_readers.base import AiReader
 from apparser.text_readers.text_data import TextData
-from apparser.core import Ui
+from apparser.core import WindowUi
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.ai.text_getter import GetText
 
@@ -39,7 +39,7 @@ class PlotAllText(AiInstruction):
         self.__text_getter = text_getter
         self.__color = color_rgba
 
-    def perform(self, ui: Ui, ai: AiReader):
+    def perform(self, ui: WindowUi, ai: AiReader):
         self.__text_getter.perform(ui, ai)
         texts = self.__text_getter.local_answer
         image = self.__text_getter.screenshot
