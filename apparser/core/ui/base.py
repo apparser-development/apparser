@@ -19,7 +19,7 @@ class Ui(abc.ABC):
     def get_screenshot(self) -> numpy.ndarray:
         raise NotImplementedError()
 
-    @abc.abstractmethod
     @property
+    @abc.abstractmethod
     def window(self) -> Window:
         raise NotImplementedError()

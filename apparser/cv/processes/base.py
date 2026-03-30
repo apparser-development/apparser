@@ -1,12 +1,12 @@
 import abc
 
-from apparser.core import WindowUi
+from apparser.core import Ui
 from apparser.cv.handlers import CvHandlers
 
 
 class CvProcess(abc.ABC):
     @abc.abstractmethod
-    def start(self, ui: WindowUi):
+    def start(self, ui: Ui):
         pass
 
     @abc.abstractmethod

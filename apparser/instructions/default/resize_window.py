@@ -1,4 +1,4 @@
-from apparser import WindowUi
+from apparser import Ui
 from apparser.geometry import Size
 from apparser.instructions.default.base import Instruction
 
@@ -10,5 +10,5 @@ class ResizeWindow(Instruction):
 
         self.__size = size
 
-    def perform(self, ui: WindowUi, *args, **kwargs):
+    def perform(self, ui: Ui, *args, **kwargs):
         ui.window.resize(self.__size)

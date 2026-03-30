@@ -1,4 +1,4 @@
-from apparser.core import WindowUi
+from apparser.core import Ui
 from apparser.instructions.algorithm import BaseAlgorithm
 from apparser.instructions.default.base import Instruction
 
@@ -7,7 +7,7 @@ class Algorithm(BaseAlgorithm):
     def __init__(self, instructions: list[Instruction]):
         self.__instructions = instructions
 
-    def perform(self, ui: WindowUi, *args, **kwargs):
+    def perform(self, ui: Ui, *args, **kwargs):
         ui.window.to_foreground()
         for instruction in self.__instructions:
             if not isinstance(instruction, Instruction):

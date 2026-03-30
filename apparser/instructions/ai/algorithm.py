@@ -1,4 +1,4 @@
-from apparser.core import WindowUi
+from apparser.core import Ui
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.algorithm import BaseAlgorithm
 from apparser.instructions.default.base import Instruction
@@ -12,7 +12,7 @@ class AiAlgorithm(BaseAlgorithm):
         self.__instructions = instructions
         self.__ai_reader = ai_reader
 
-    def perform(self, ui: WindowUi, *args, **kwargs):
+    def perform(self, ui: Ui, *args, **kwargs):
         ui.window.to_foreground()
         for instruction in self.__instructions:
             if not (isinstance(instruction, Instruction) or isinstance(instruction, AiInstruction)):
