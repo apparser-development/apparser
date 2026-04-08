@@ -1,8 +1,64 @@
-from apparser import DesktopUi
-from apparser.instructions import MouseMove
-from apparser.geometry import RelativelyPoint
+from apparser import App, CoordinatesUi, DesktopUi, Ui
+from apparser.core import WindowUi
+from apparser.cv import DefaultCvProcess, DefaultHandlers, YoloReader
+from apparser.exceptions import TextNotFoundException, WindowActionWithDesktopException
+from apparser.geometry import Point, RelativelyPoint, Size, distance
+from apparser.instructions import Algorithm, Instruction, MouseClick, MouseClickTo, MouseMove, MoveWindow, PressKey
+from apparser.instructions import PressKeysCombination, ResizeWindow, Sleep, ToBackgroundWindow, ToForegroundWindow
+from apparser.instructions import WriteText
+from apparser.instructions.ai import AiAlgorithm, AiInstruction, ClickOnText, GetText, MoveToText, PlotAllText
+from apparser.instructions.ai import PrintAllText
+from apparser.key_codes import Alt, Control, Delete, Enter, KeyboardKeyCode, LeftClick, RightClick
+from apparser.movers import AntiRobotMover, DefaultMover
+from apparser.text_readers import AiReader, EasyOcrReader, ScreensController, TextData, WhiteBlackReader
 
 
-ui = DesktopUi()
-
-MouseMove(RelativelyPoint(0.5, 0.5)).perform(ui)
+def test_public_imports_are_available():
+    assert App is not None
+    assert Ui is not None
+    assert DesktopUi is not None
+    assert CoordinatesUi is not None
+    assert WindowUi is not None
+    assert Point is not None
+    assert Size is not None
+    assert RelativelyPoint is not None
+    assert distance is not None
+    assert TextNotFoundException is not None
+    assert WindowActionWithDesktopException is not None
+    assert KeyboardKeyCode is not None
+    assert Enter is not None
+    assert Control is not None
+    assert Alt is not None
+    assert Delete is not None
+    assert RightClick is not None
+    assert LeftClick is not None
+    assert DefaultMover is not None
+    assert AntiRobotMover is not None
+    assert Instruction is not None
+    assert Algorithm is not None
+    assert MouseMove is not None
+    assert MouseClickTo is not None
+    assert MouseClick is not None
+    assert MoveWindow is not None
+    assert PressKey is not None
+    assert PressKeysCombination is not None
+    assert ResizeWindow is not None
+    assert Sleep is not None
+    assert ToForegroundWindow is not None
+    assert ToBackgroundWindow is not None
+    assert WriteText is not None
+    assert AiInstruction is not None
+    assert AiAlgorithm is not None
+    assert ClickOnText is not None
+    assert GetText is not None
+    assert MoveToText is not None
+    assert PlotAllText is not None
+    assert PrintAllText is not None
+    assert AiReader is not None
+    assert EasyOcrReader is not None
+    assert ScreensController is not None
+    assert TextData is not None
+    assert WhiteBlackReader is not None
+    assert DefaultHandlers is not None
+    assert DefaultCvProcess is not None
+    assert YoloReader is not None

@@ -1,3 +1,4 @@
+import random
 from typing import Generator, Callable
 
 import mouse
@@ -36,10 +37,23 @@ class DefaultMoveGenerator:
         self.__max_shift = max_shift
 
     def __get_random_time(self) -> float:
-        pass
+        return random.uniform(self.__min_time, self.__max_time)
 
     def __get_random_position(self, current_position: Point, end_position: Point) -> Point:
-        pass
+        current_distance = distance(current_position, end_position)
+        random_shift = min(random.uniform(self.__min_shift, self.__max_shift), current_distance)
+
+        x_shift = end_position.x - current_position.x
+        y_shift = end_position.y - current_position.y
+
+        x_sign = 1 if x_shift >= 0 else -1
+        y_sign = 1 if y_shift >= 0 else -1
+
+        x_part = abs(x_shift) / current_distance
+        y_part = abs(y_shift) / current_distance
+
+        return Point(round(random_shift * x_part) * x_sign,
+                     round(random_shift * y_part) * y_sign)
 
     def __call__(self, start_position: Point, end_position: Point) -> Generator[tuple[Point, float], None, None]:
         if not isinstance(start_position, Point):
@@ -48,11 +62,11 @@ class DefaultMoveGenerator:
         if not isinstance(end_position, Point):
             raise TypeError('end_position must be Point')
 
-        while start_position.x <= end_position.x and start_position.y <= end_position.y:
-            added_point = self.__get_random_position(start_position, end_position)
+        while start_position != end_position:
             if distance(start_position, end_position) <= self.__max_shift:
                 yield end_position, self.__get_random_time()
                 break
+            added_point = self.__get_random_position(start_position, end_position)
             start_position += added_point
             yield start_position, self.__get_random_time()
 
