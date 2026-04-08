@@ -1,6 +1,6 @@
 appwindows>=1.2.0
-keyboard >= 0.13.2
-mouse >= 0.7.1
+keyboard>=0.13.2
+mouse>=0.7.1
 numpy>=1.20
 pillow>=11.0
 easyocr>=1.7.2

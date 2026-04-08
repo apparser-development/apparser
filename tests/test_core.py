@@ -6,86 +6,40 @@ from PIL import Image
 from appwindows.geometry import Point, Size
 
 import apparser.core.app as app_module
-import apparser.core.ui.desktop as desktop_module
-import apparser.core.ui.window as window_module
 from apparser.core.app import App
+from apparser.core.ui.base import Ui
 from apparser.core.ui.coordinates import CoordinatesUi
 from apparser.core.ui.desktop import DesktopUi
 from apparser.core.ui.window import WindowUi
-from apparser.exceptions import TextNotFoundException, WindowActionWithDesktopException
-from apparser.geometry import RelativelyPoint, distance
-from apparser.key_codes import Alt, Control, Delete, Enter, KeyboardKeyCode, LeftClick, RightClick
+import apparser.core.ui.desktop as desktop_module
+import apparser.core.ui.window as window_module
+from apparser.exceptions import WindowActionWithDesktopException
+from apparser.geometry import RelativelyPoint
 
 
-class DummyUi:
+class DummyUi(Ui):
+    def __init__(self):
+        self._window = SimpleNamespace(name='window')
+        self._screenshot = numpy.arange(10000).reshape(100, 100)
+
     def point_to_global(self, coordinates):
-        return coordinates
+        if isinstance(coordinates, RelativelyPoint):
+            coordinates = Point(round(coordinates.x * 100), round(coordinates.y * 80))
+        if not isinstance(coordinates, Point):
+            raise NotImplementedError()
+        return coordinates + Point(100, 200)
 
     def point_to_local(self, coordinates):
-        return coordinates
+        if not isinstance(coordinates, Point):
+            raise NotImplementedError()
+        return coordinates - Point(100, 200)
 
     def get_screenshot(self):
-        return numpy.zeros((1, 1))
+        return self._screenshot
 
     @property
     def window(self):
-        return None
-
-
-def test_distance_validation_and_value():
-    with pytest.raises(TypeError, match='First Point must be of type Point'):
-        distance('first', Point(0, 0))
-
-    with pytest.raises(TypeError, match='Second Point must be of type Point'):
-        distance(Point(0, 0), 'second')
-
-    assert distance(Point(1, 2), Point(4, 8)) == 9
-
-
-@pytest.mark.parametrize(('x_percent', 'y_percent', 'error', 'message'), [
-    ('1', 0, TypeError, 'x_percent must be number'),
-    (0, '1', TypeError, 'y_percent must be number'),
-    (-2, 0, ValueError, 'x must be between -1 and 1'),
-    (0, 2, ValueError, 'y must be between -1 and 1'),
-])
-def test_relatively_point_validation(x_percent, y_percent, error, message):
-    with pytest.raises(error, match=message):
-        RelativelyPoint(x_percent, y_percent)
-
-
-def test_relatively_point_properties():
-    point = RelativelyPoint(0.25, -0.5)
-
-    assert point.x == 0.25
-    assert point.y == -0.5
-
-
-@pytest.mark.parametrize(('min_similarity', 'error', 'message'), [
-    ('0.5', TypeError, 'min_similarity must be float'),
-    (-0.1, ValueError, 'min_similarity must be between 0 and 1'),
-    (1.1, ValueError, 'min_similarity must be between 0 and 1'),
-])
-def test_text_not_found_exception_validation(min_similarity, error, message):
-    with pytest.raises(error, match=message):
-        TextNotFoundException(min_similarity)
-
-
-def test_text_not_found_exception_message():
-    assert str(TextNotFoundException(0.5)) == 'No text with similarity greater than or equal to 0.5 was found.'
-
-
-def test_window_action_with_desktop_exception_message():
-    assert str(WindowActionWithDesktopException()) == 'You cannot treat the DesktopUi class as a window.'
-
-
-def test_keyboard_and_mouse_key_codes():
-    assert str(KeyboardKeyCode('a')) == 'a'
-    assert str(Enter()) == 'enter'
-    assert str(Control()) == 'ctrl'
-    assert str(Alt()) == 'alt'
-    assert str(Delete()) == 'del'
-    assert str(RightClick()) == 'RIGHT'
-    assert str(LeftClick()) == 'LEFT'
+        return self._window
 
 
 @pytest.mark.parametrize(('path_to_exe', 'window_title', 'window_size', 'timeout', 'error', 'message'), [
@@ -147,20 +101,44 @@ def test_app_start_and_stop(monkeypatch):
     assert kill_calls == [True]
 
 
-def test_coordinates_ui_methods_raise_not_implemented():
-    ui = CoordinatesUi(DummyUi())
+@pytest.mark.parametrize(('from_ui', 'left_top_point', 'size', 'error', 'message'), [
+    ('ui', Point(1, 2), Size(10, 10), TypeError, 'from_ui must be Ui'),
+    (DummyUi(), 'point', Size(10, 10), TypeError, 'left_top_point must be Point or RelativelyPoint'),
+    (DummyUi(), Point(1, 2), 'size', TypeError, 'size must be Size'),
+])
+def test_coordinates_ui_validation(from_ui, left_top_point, size, error, message):
+    with pytest.raises(error, match=message):
+        CoordinatesUi(from_ui, left_top_point, size)
+
+
+def test_coordinates_ui_methods():
+    from_ui = DummyUi()
+    ui = CoordinatesUi(from_ui, Point(10, 20), Size(30, 40))
+
+    assert ui.point_to_global(Point(1, 2)) == Point(111, 222)
+    assert ui.point_to_global(RelativelyPoint(0.5, 0.25)) == Point(125, 230)
+    assert ui.point_to_local(Point(140, 260)) == Point(30, 40)
+    assert numpy.array_equal(ui.get_screenshot(), from_ui.get_screenshot()[20:60, 10:40])
+    assert ui.window is from_ui.window
 
     with pytest.raises(NotImplementedError):
-        ui.point_to_global(Point(1, 2))
+        ui.point_to_global('coordinates')
 
-    with pytest.raises(NotImplementedError):
-        ui.point_to_local(Point(1, 2))
 
-    with pytest.raises(NotImplementedError):
-        ui.get_screenshot()
+def test_coordinates_ui_with_relative_left_top_point():
+    ui = CoordinatesUi(DummyUi(), RelativelyPoint(0.1, 0.25), Size(30, 40))
 
-    with pytest.raises(NotImplementedError):
-        _ = ui.window
+    assert ui.point_to_global(Point(1, 2)) == Point(111, 222)
+    assert ui.point_to_local(Point(130, 260)) == Point(20, 40)
+
+
+def test_coordinates_ui_get_screenshot_for_image():
+    from_ui = DummyUi()
+    from_ui._screenshot = Image.fromarray(numpy.arange(10000, dtype=numpy.uint8).reshape(100, 100))
+    ui = CoordinatesUi(from_ui, Point(10, 20), Size(30, 40))
+
+    assert numpy.array_equal(numpy.asarray(ui.get_screenshot()),
+                             numpy.asarray(from_ui.get_screenshot().crop((10, 20, 40, 60))))
 
 
 def test_desktop_ui_methods(monkeypatch):
