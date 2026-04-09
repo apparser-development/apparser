@@ -1,4 +1,4 @@
-from apparser.instructions.algorithms.default import Algorithm
+from apparser.algorithms.default import Algorithm
 from apparser.instructions.base import Instruction
 from apparser.instructions.default.click import MouseClickTo, MouseClick
 from apparser.instructions.default.mouse_move import MouseMove

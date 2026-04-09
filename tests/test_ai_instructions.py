@@ -9,7 +9,7 @@ import apparser.instructions.ai.move_to_text as move_to_text_module
 import apparser.instructions.ai.plot_text as plot_text_module
 from apparser.exceptions import TextNotFoundException
 from apparser.geometry import RelativelyPoint
-from apparser.instructions.algorithms.ai import AiAlgorithm
+from apparser.algorithms.ai import AiAlgorithm
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.ai.click_on_text import ClickOnText
 from apparser.instructions.ai.move_to_text import MoveToText
