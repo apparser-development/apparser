@@ -1,6 +1,6 @@
 from apparser.core import Ui
 from apparser.geometry import Size
-from apparser.instructions.default.base import Instruction
+from apparser.instructions.base import Instruction
 
 
 class WindowResize(Instruction):

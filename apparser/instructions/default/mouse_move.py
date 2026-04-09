@@ -1,6 +1,6 @@
 from apparser.core import Ui
 from apparser.geometry import Point, RelativelyPoint
-from apparser.instructions.default.base import Instruction
+from apparser.instructions.base import Instruction
 from apparser.movers import DefaultMover
 from apparser.movers.base import Mover
 

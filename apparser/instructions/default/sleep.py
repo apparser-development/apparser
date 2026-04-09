@@ -1,6 +1,6 @@
 import time
 
-from apparser.instructions.default.base import Instruction
+from apparser.instructions.base import Instruction
 
 
 class Sleep(Instruction):

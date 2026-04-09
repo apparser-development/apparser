@@ -1,7 +1,7 @@
 from apparser.core import Ui
 from apparser.instructions.ai.base import AiInstruction
-from apparser.instructions.algorithm import BaseAlgorithm
-from apparser.instructions.default.base import Instruction
+from apparser.instructions.algorithms.base import BaseAlgorithm
+from apparser.instructions.base import Instruction
 from apparser.text_readers import AiReader, EasyOcrReader, ScreensController
 
 

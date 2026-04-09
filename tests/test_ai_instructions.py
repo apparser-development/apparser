@@ -9,14 +9,14 @@ import apparser.instructions.ai.move_to_text as move_to_text_module
 import apparser.instructions.ai.plot_text as plot_text_module
 from apparser.exceptions import TextNotFoundException
 from apparser.geometry import RelativelyPoint
-from apparser.instructions.ai.algorithm import AiAlgorithm
+from apparser.instructions.algorithms.ai import AiAlgorithm
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.ai.click_on_text import ClickOnText
 from apparser.instructions.ai.move_to_text import MoveToText
 from apparser.instructions.ai.plot_text import PlotAllText, _Painter
 from apparser.instructions.ai.print_all_text import PrintAllText
 from apparser.instructions.ai.text_getter import GetText
-from apparser.instructions.default.base import Instruction
+from apparser.instructions.base import Instruction
 from apparser.text_readers.text_data import TextData
 
 

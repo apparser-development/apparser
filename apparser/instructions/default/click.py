@@ -2,7 +2,7 @@ import mouse
 
 from apparser.core import Ui
 from apparser.geometry import Point, RelativelyPoint
-from apparser.instructions.default.base import Instruction
+from apparser.instructions.base import Instruction
 from apparser.instructions.default.mouse_move import MouseMove
 from apparser.key_codes.mouse_keys import RightClick, LeftClick
 from apparser.movers import DefaultMover

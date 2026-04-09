@@ -1,9 +1,9 @@
 import abc
 
-from apparser.instructions.default.base import Instruction
+from apparser.core import Ui
 
 
-class BaseAlgorithm(Instruction, abc.ABC):
+class BaseAlgorithm(abc.ABC):
     @abc.abstractmethod
     def add_instruction(self, instruction):
         pass
@@ -11,4 +11,8 @@ class BaseAlgorithm(Instruction, abc.ABC):
     @property
     @abc.abstractmethod
     def instructions(self):
+        pass
+
+    @abc.abstractmethod
+    def perform(self, ui: Ui, *args, **kwargs):
         pass

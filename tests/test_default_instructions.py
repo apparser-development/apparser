@@ -7,8 +7,8 @@ import apparser.instructions.default.sleep as sleep_module
 import apparser.instructions.default.write_text as write_text_module
 import apparser.movers.default as default_mover_module
 from apparser.geometry import RelativelyPoint
-from apparser.instructions.default.algorithm import Algorithm
-from apparser.instructions.default.base import Instruction
+from apparser.instructions.algorithms.default import Algorithm
+from apparser.instructions.base import Instruction
 from apparser.instructions.default.click import MouseClick, MouseClickTo
 from apparser.instructions.default.mouse_move import MouseMove
 from apparser.instructions.default.move_window import WindowMove
