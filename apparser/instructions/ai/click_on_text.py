@@ -20,6 +20,10 @@ class ClickOnText(AiInstruction):
         self.__click_type = click_type
         self.__sleep = Sleep(sleep_time_before_move)
 
+    @property
+    def id(self) -> int:
+        return 102
+
     def perform(self, ui: Ui, ai: AiReader):
         self.__mouse_mover.perform(ui, ai)
         self.__sleep.perform(ui, ai)

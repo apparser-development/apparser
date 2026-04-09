@@ -19,6 +19,10 @@ class GetText(AiInstruction):
         self.__left_top_point_global = left_top_point
         self.__screenshot = None
 
+    @property
+    def id(self) -> int:
+        return 100
+
     def __text_coordinates_to_local(self, text: TextData) -> TextData:
         new_coordinates = []
         for point in text.coordinates:

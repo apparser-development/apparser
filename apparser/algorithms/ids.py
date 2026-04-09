@@ -1,21 +1,42 @@
+from typing import Any
+
 from apparser.core import Ui
 from apparser.algorithms.base import BaseAlgorithm
-from apparser.instructions.base import Instruction
+from apparser.instructions.utils import get_instruction_by_id
 
 
 class IdsAlgorithm(BaseAlgorithm):
-    def __init__(self, instructions: list[int]):
+    def __init__(self, instructions: list[tuple[int, list[Any]]]):
         self.__instructions = instructions
 
+    def __check_instruction(self, instruction: tuple[int, list[Any]]) -> tuple[int, list[Any]]:
+        if not isinstance(instruction, tuple):
+            raise TypeError(f"{instruction} must be tuple")
+
+        instruction_id, instruction_args = instruction
+        if not isinstance(instruction_id, int):
+            raise TypeError(f"{instruction_id} must be int")
+
+        if not isinstance(instruction_args, list):
+            raise TypeError(f"{instruction_args} must be list")
+
+        return instruction_id, instruction_args
+
     def perform(self, ui: Ui, *args, **kwargs):
-        pass
+        ui.window.to_foreground()
+        for instruction_data in self.__instructions:
+            instruction_id, instruction_args = self.__check_instruction(instruction_data)
 
-    def add_instruction(self, instruction: int):
-        if not isinstance(instruction, int):
-            raise TypeError(f"{instruction} must be int")
+            instruction = get_instruction_by_id(instruction_id)
+            if instruction is None:
+                raise ValueError(f"instruction with id {instruction_id} not found")
 
+            instruction(*instruction_args).perform(ui, *args, **kwargs)
+
+    def add_instruction(self, instruction: tuple[int, list[Any]]):
+        self.__check_instruction(instruction)
         self.__instructions.append(instruction)
 
     @property
-    def instructions(self) -> list[str]:
+    def instructions(self) -> list[tuple[int, list[Any]]]:
         return self.__instructions

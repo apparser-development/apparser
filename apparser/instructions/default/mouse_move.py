@@ -18,6 +18,10 @@ class MouseMove(Instruction):
         self.__mover = mover
         self.__coordinates = coordinates
 
+    @property
+    def id(self) -> int:
+        return 20
+
     def perform(self, ui: Ui, *args, **kwargs):
         coordinates = ui.point_to_global(self.__coordinates)
         self.__mover.move(coordinates)

@@ -11,5 +11,4 @@ __all__ = ["PressKey",
            "WindowMove",
            "WindowResize",
            "WindowToForeground",
-           "WindowToBackground",
-           "Algorithm"]
+           "WindowToBackground"]

@@ -5,13 +5,12 @@ from apparser.core import Ui
 
 class Instruction(abc.ABC):
     @property
-    @abc.abstractmethod
-    def name(self) -> str: 
-        pass
+    def name(self) -> str:
+        return self.__class__.__name__
 
     @property
     @abc.abstractmethod
-    def id(self) -> int: 
+    def id(self) -> int:
         pass
 
     @abc.abstractmethod

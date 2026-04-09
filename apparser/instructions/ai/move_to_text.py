@@ -20,6 +20,10 @@ class MoveToText(AiInstruction):
         self.__text_getter = text_getter
         self.__min_similarity = min_similarity
 
+    @property
+    def id(self) -> int:
+        return 101
+
     def find_text(self, texts: list[TextData]) -> tuple[TextData, float]:
         similar_ratings = [fuzz.token_sort_ratio(self.text, i.text) for i in texts]
         max_rating = max(similar_ratings)

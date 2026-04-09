@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Type
 
+from apparser.core import Ui
 from apparser.cv.events import CvEvent
 
 
@@ -12,7 +13,7 @@ class CvBox:
     y: int
     width: int
     height: int
-
+    ui: Ui
 
 @dataclass(frozen=True)
 class CvChangeData:

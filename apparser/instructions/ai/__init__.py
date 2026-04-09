@@ -1,4 +1,3 @@
-from apparser.algorithms.ai import AiAlgorithm
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.ai.click_on_text import ClickOnText
 from apparser.instructions.ai.move_to_text import MoveToText
@@ -11,5 +10,4 @@ __all__ = ["PrintAllText",
            "GetText",
            "MoveToText",
            "AiInstruction",
-           "PlotAllText",
-           "AiAlgorithm"]
+           "PlotAllText"]

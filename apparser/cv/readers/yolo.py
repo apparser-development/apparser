@@ -1,6 +1,8 @@
+from apparser.geometry import Point, Size
 from ultralytics import YOLO
-import numpy as np
 
+from apparser import CoordinatesUi
+from apparser.core import Ui
 from apparser.cv.models import CvAllData, CvBox
 from apparser.cv.readers.base import CvReader
 
@@ -9,8 +11,8 @@ class YoloReader(CvReader):
     def __init__(self, **kwargs):
         self.__model = YOLO(**kwargs)
 
-    def read(self, image: np.ndarray) -> CvAllData:
-        results = self.__model(image)[0]
+    def read(self, ui: Ui) -> CvAllData:
+        results = self.__model(ui.get_screenshot())[0]
         boxes = []
         names = self.__model.model.names
         for box in results.boxes:
@@ -21,6 +23,7 @@ class YoloReader(CvReader):
             y = int(y1)
             width = int(x2 - x1)
             height = int(y2 - y1)
+            box_ui = CoordinatesUi(ui, Point(x ,y), Size(width, height))
             boxes.append(
                 CvBox(
                     class_name=cls_name,
@@ -29,6 +32,7 @@ class YoloReader(CvReader):
                     y=y,
                     width=width,
                     height=height,
+                    ui=box_ui
                 )
             )
         return CvAllData(boxes=boxes)

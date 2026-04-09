@@ -62,19 +62,27 @@ class FakeUi:
 class DummyInstruction(Instruction):
     def __init__(self, calls, name):
         self.calls = calls
-        self.name = name
+        self.label = name
+
+    @property
+    def id(self) -> int:
+        return 0
 
     def perform(self, ui, *args, **kwargs):
-        self.calls.append((self.name, ui, args, kwargs))
+        self.calls.append((self.label, ui, args, kwargs))
 
 
 class DummyAiInstruction(AiInstruction):
     def __init__(self, calls, name):
         self.calls = calls
-        self.name = name
+        self.label = name
+
+    @property
+    def id(self) -> int:
+        return 1
 
     def perform(self, ui, ai):
-        self.calls.append((self.name, ui, ai))
+        self.calls.append((self.label, ui, ai))
 
 
 class FakeImage:
@@ -92,6 +100,18 @@ class FakeImage:
 
     def __array__(self, dtype=None, copy=None):
         return self.array
+
+
+@pytest.mark.parametrize(('instruction', 'expected_id', 'expected_name'), [
+    (ClickOnText('text'), 102, 'ClickOnText'),
+    (MoveToText('text'), 101, 'MoveToText'),
+    (PlotAllText(), 104, 'PlotAllText'),
+    (PrintAllText(), 103, 'PrintAllText'),
+    (GetText(), 100, 'GetText'),
+])
+def test_ai_instruction_ids_and_names(instruction, expected_id, expected_name):
+    assert instruction.id == expected_id
+    assert instruction.name == expected_name
 
 
 def test_ai_algorithm_perform_and_add_instruction():

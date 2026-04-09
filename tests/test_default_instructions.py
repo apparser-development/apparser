@@ -54,10 +54,14 @@ class FakeUi:
 class DummyInstruction(Instruction):
     def __init__(self, calls, name):
         self.calls = calls
-        self.name = name
+        self.label = name
+
+    @property
+    def id(self) -> int:
+        return 0
 
     def perform(self, ui, *args, **kwargs):
-        self.calls.append((self.name, ui, args, kwargs))
+        self.calls.append((self.label, ui, args, kwargs))
 
 
 class DummyMover(Mover):
@@ -66,6 +70,24 @@ class DummyMover(Mover):
 
     def move(self, position: Point):
         self.points.append(position)
+
+
+@pytest.mark.parametrize(('instruction', 'expected_id', 'expected_name'), [
+    (MouseClick(), 21, 'MouseClick'),
+    (MouseClickTo(Point(1, 2)), 22, 'MouseClickTo'),
+    (MouseMove(Point(1, 2), DummyMover()), 20, 'MouseMove'),
+    (WindowMove(Point(1, 2)), 12, 'WindowMove'),
+    (PressKey('a'), 30, 'PressKey'),
+    (PressKeysCombination(['a', 'b']), 31, 'PressKeysCombination'),
+    (WindowResize(Size(1, 2)), 13, 'WindowResize'),
+    (Sleep(1), 40, 'Sleep'),
+    (WindowToBackground(), 11, 'WindowToBackground'),
+    (WindowToForeground(), 10, 'WindowToForeground'),
+    (WriteText('text'), 32, 'WriteText'),
+])
+def test_default_instruction_ids_and_names(instruction, expected_id, expected_name):
+    assert instruction.id == expected_id
+    assert instruction.name == expected_name
 
 
 def test_algorithm_perform_and_add_instruction():

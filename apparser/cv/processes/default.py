@@ -18,8 +18,7 @@ class DefaultCvProcess(CvProcess):
     def start(self, ui: Ui):
         self.__is_working = True
         while self.__is_working:
-            image = ui.window.get_screenshot()
-            cv_data = self.__reader.read(image)
+            cv_data = self.__reader.read(ui)
             for class_data in self.__checker.check(cv_data):
                 for handler in self.__handlers_list:
                     handler.call(class_data.event, class_data, cv_data, ui)

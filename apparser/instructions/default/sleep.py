@@ -10,5 +10,9 @@ class Sleep(Instruction):
 
         self.sleep_time = sleep_time
 
+    @property
+    def id(self) -> int:
+        return 40
+
     def perform(self, *args, **kwargs):
         time.sleep(self.sleep_time)

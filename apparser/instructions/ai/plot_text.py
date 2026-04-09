@@ -39,6 +39,10 @@ class PlotAllText(AiInstruction):
         self.__text_getter = text_getter
         self.__color = color_rgba
 
+    @property
+    def id(self) -> int:
+        return 104
+
     def perform(self, ui: Ui, ai: AiReader):
         self.__text_getter.perform(ui, ai)
         texts = self.__text_getter.local_answer

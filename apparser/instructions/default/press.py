@@ -11,6 +11,10 @@ class PressKey(Instruction):
 
         self.__key_code = key_code
 
+    @property
+    def id(self) -> int:
+        return 30
+
     def perform(self, *args, **kwargs):
         keyboard.send(str(self.__key_code))
 
@@ -18,6 +22,10 @@ class PressKey(Instruction):
 class PressKeysCombination(Instruction):
     def __init__(self, keys: list[KeyCode | str]):
         self.__keys = keys
+
+    @property
+    def id(self) -> int:
+        return 31
 
     def perform(self, *args, **kwargs):
         for key in self.__keys:

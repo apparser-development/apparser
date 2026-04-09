@@ -20,6 +20,10 @@ class MouseClick(Instruction):
 
         self.__click_type = click_type
 
+    @property
+    def id(self) -> int:
+        return 21
+
     def perform(self, *args, **kwargs):
         self.__press_function()
 
@@ -34,6 +38,10 @@ class MouseClickTo(Instruction):
 
         self.__click = MouseClick(click_type)
         self.__move = MouseMove(coordinates, mover=mover)
+
+    @property
+    def id(self) -> int:
+        return 22
 
     def perform(self, ui: Ui, *args, **kwargs):
         self.__move.perform(ui)
