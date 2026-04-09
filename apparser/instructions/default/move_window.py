@@ -1,4 +1,4 @@
-from apparser import Ui
+from apparser.core import Ui
 from apparser.geometry import Point
 from apparser.instructions.default.base import Instruction
 

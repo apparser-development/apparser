@@ -1,6 +1,6 @@
-from apparser.core import App, Ui, DesktopUi, CoordinatesUi
+from apparser.core import App, WindowUi, DesktopUi, CoordinatesUi
 
 __all__ = ["App",
            "DesktopUi",
            "CoordinatesUi",
-           "Ui"]
+           "WindowUi"]
