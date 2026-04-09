@@ -3,7 +3,7 @@ from apparser.geometry import Size
 from apparser.instructions.default.base import Instruction
 
 
-class ResizeWindow(Instruction):
+class WindowResize(Instruction):
     def __init__(self, size: Size):
         if not isinstance(size, Size):
             raise TypeError('size must be of type Size')

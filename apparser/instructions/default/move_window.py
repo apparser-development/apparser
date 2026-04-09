@@ -3,7 +3,7 @@ from apparser.geometry import Point
 from apparser.instructions.default.base import Instruction
 
 
-class MoveWindow(Instruction):
+class WindowMove(Instruction):
     def __init__(self, position: Point):
         if not isinstance(position, Point):
             raise TypeError('position must be of type Point')

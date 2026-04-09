@@ -11,11 +11,11 @@ from apparser.instructions.default.algorithm import Algorithm
 from apparser.instructions.default.base import Instruction
 from apparser.instructions.default.click import MouseClick, MouseClickTo
 from apparser.instructions.default.mouse_move import MouseMove
-from apparser.instructions.default.move_window import MoveWindow
+from apparser.instructions.default.move_window import WindowMove
 from apparser.instructions.default.press import PressKey, PressKeysCombination
-from apparser.instructions.default.resize_window import ResizeWindow
+from apparser.instructions.default.resize_window import WindowResize
 from apparser.instructions.default.sleep import Sleep
-from apparser.instructions.default.to_window import ToBackgroundWindow, ToForegroundWindow
+from apparser.instructions.default.to_window import WindowToBackground, WindowToForeground
 from apparser.instructions.default.write_text import WriteText
 from apparser.key_codes import LeftClick, RightClick
 from apparser.movers.base import Mover
@@ -144,9 +144,9 @@ def test_move_window_validation_and_perform():
     ui = FakeUi()
 
     with pytest.raises(TypeError, match='position must be of type Point'):
-        MoveWindow('position')
+        WindowMove('position')
 
-    instruction = MoveWindow(Point(5, 6))
+    instruction = WindowMove(Point(5, 6))
     instruction.perform(ui)
 
     assert ui.window.calls == [('move', Point(5, 6))]
@@ -179,9 +179,9 @@ def test_resize_window_validation_and_perform():
     ui = FakeUi()
 
     with pytest.raises(TypeError, match='size must be of type Size'):
-        ResizeWindow('size')
+        WindowResize('size')
 
-    instruction = ResizeWindow(Size(20, 30))
+    instruction = WindowResize(Size(20, 30))
     instruction.perform(ui)
 
     assert ui.window.calls == [('resize', Size(20, 30))]
@@ -203,8 +203,8 @@ def test_sleep_validation_and_perform(monkeypatch):
 def test_to_window_instructions():
     ui = FakeUi()
 
-    ToForegroundWindow().perform(ui)
-    ToBackgroundWindow().perform(ui)
+    WindowToForeground().perform(ui)
+    WindowToBackground().perform(ui)
 
     assert ui.window.calls == [('to_foreground',), ('to_background',)]
 

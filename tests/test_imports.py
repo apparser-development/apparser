@@ -3,8 +3,8 @@ from apparser.core import WindowUi
 from apparser.cv import DefaultCvProcess, DefaultHandlers, YoloReader
 from apparser.exceptions import TextNotFoundException, WindowActionWithDesktopException
 from apparser.geometry import Point, RelativelyPoint, Size, distance
-from apparser.instructions import Algorithm, Instruction, MouseClick, MouseClickTo, MouseMove, MoveWindow, PressKey
-from apparser.instructions import PressKeysCombination, ResizeWindow, Sleep, ToBackgroundWindow, ToForegroundWindow
+from apparser.instructions import Algorithm, Instruction, MouseClick, MouseClickTo, MouseMove, WindowMove, PressKey
+from apparser.instructions import PressKeysCombination, WindowResize, Sleep, WindowToBackground, WindowToForeground
 from apparser.instructions import WriteText
 from apparser.instructions.ai import AiAlgorithm, AiInstruction, ClickOnText, GetText, MoveToText, PlotAllText
 from apparser.instructions.ai import PrintAllText
@@ -39,13 +39,13 @@ def test_public_imports_are_available():
     assert MouseMove is not None
     assert MouseClickTo is not None
     assert MouseClick is not None
-    assert MoveWindow is not None
+    assert WindowMove is not None
     assert PressKey is not None
     assert PressKeysCombination is not None
-    assert ResizeWindow is not None
+    assert WindowResize is not None
     assert Sleep is not None
-    assert ToForegroundWindow is not None
-    assert ToBackgroundWindow is not None
+    assert WindowToForeground is not None
+    assert WindowToBackground is not None
     assert WriteText is not None
     assert AiInstruction is not None
     assert AiAlgorithm is not None
