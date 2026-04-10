@@ -5,11 +5,11 @@ import numpy
 from appwindows import Window
 from appwindows.geometry import Point, Size
 
-from apparser.core.ui.base import Ui
+from apparser.core.ui.base import BaseUi
 from apparser.geometry.relatively_point import RelativelyPoint
 
 
-class WindowUi(Ui):
+class WindowUi(BaseUi):
     def __init__(self, window: Window):
         if not isinstance(window, Window):
             raise TypeError('window must be Window')

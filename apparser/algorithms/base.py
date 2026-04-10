@@ -1,6 +1,6 @@
 import abc
 
-from apparser.core import Ui
+from apparser.core import BaseUi
 
 
 class BaseAlgorithm(abc.ABC):
@@ -14,5 +14,5 @@ class BaseAlgorithm(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def perform(self, ui: Ui, *args, **kwargs):
+    def perform(self, ui: BaseUi, *args, **kwargs):
         pass

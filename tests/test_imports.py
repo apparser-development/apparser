@@ -1,4 +1,4 @@
-from apparser import App, CoordinatesUi, DesktopUi, Ui
+from apparser import App, CoordinatesUi, DesktopUi, BaseUi
 from apparser.core import WindowUi
 from apparser.cv import DefaultCvProcess, DefaultHandlers, YoloReader
 from apparser.exceptions import TextNotFoundException, WindowActionWithDesktopException
@@ -10,12 +10,12 @@ from apparser.instructions.ai import AiAlgorithm, AiInstruction, ClickOnText, Ge
 from apparser.instructions.ai import PrintAllText
 from apparser.key_codes import Alt, Control, Delete, Enter, KeyboardKeyCode, LeftClick, RightClick
 from apparser.movers import AntiRobotMover, DefaultMover
-from apparser.text_readers import AiReader, EasyOcrReader, ScreensController, TextData, WhiteBlackReader
+from apparser.text_readers import BaseTextReader, EasyOcrReader, ScreensController, TextData, WhiteBlackReader
 
 
 def test_public_imports_are_available():
     assert App is not None
-    assert Ui is not None
+    assert BaseUi is not None
     assert DesktopUi is not None
     assert CoordinatesUi is not None
     assert WindowUi is not None
@@ -54,7 +54,7 @@ def test_public_imports_are_available():
     assert MoveToText is not None
     assert PlotAllText is not None
     assert PrintAllText is not None
-    assert AiReader is not None
+    assert BaseTextReader is not None
     assert EasyOcrReader is not None
     assert ScreensController is not None
     assert TextData is not None

@@ -9,7 +9,7 @@ def get_instruction_by_name(name: str):
         raise ValueError("name is empty")
 
     for instruction in _get_all_instructions():
-        if instruction.__name__ == name:
+        if instruction.name == name:
             return instruction
 
     return None

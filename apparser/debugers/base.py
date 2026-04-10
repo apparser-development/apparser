@@ -1,15 +1,10 @@
 import abc
 
-from apparser.core import Ui
 from apparser.instructions import Instruction
+from apparser.instructions.ai import AiInstruction
 
 
-class Debugger(abc.ABC):
-    @classmethod
+class BaseDebugger(abc.ABC):
     @abc.abstractmethod
-    def create(cls, ui: Ui):
-        pass
-
-    @abc.abstractmethod
-    def perform(self, instruction: Instruction):
+    def try_perform(self, instruction: Instruction | AiInstruction, *args, **kwargs):
         pass

@@ -3,7 +3,7 @@ import abc
 from apparser.geometry import Point
 
 
-class Mover(abc.ABC):
+class BaseMover(abc.ABC):
     @abc.abstractmethod
     def move(self, position: Point):
         pass

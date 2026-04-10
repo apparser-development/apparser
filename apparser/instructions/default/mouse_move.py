@@ -1,18 +1,18 @@
-from apparser.core import Ui
+from apparser.core import BaseUi
 from apparser.geometry import Point, RelativelyPoint
-from apparser.instructions.base import Instruction
+from apparser.instructions.default.base import Instruction
 from apparser.movers import DefaultMover
-from apparser.movers.base import Mover
+from apparser.movers.base import BaseMover
 
 
 class MouseMove(Instruction):
     def __init__(self,
                  coordinates: Point | RelativelyPoint,
-                 mover: Mover = DefaultMover()):
+                 mover: BaseMover = DefaultMover()):
         if  not (isinstance(coordinates, Point) or isinstance(coordinates, RelativelyPoint)):
             raise TypeError('coordinates must be Point or RelativelyPoint')
 
-        if not isinstance(mover, Mover):
+        if not isinstance(mover, BaseMover):
             raise TypeError('mover must be Mover')
 
         self.__mover = mover
@@ -22,6 +22,6 @@ class MouseMove(Instruction):
     def id(self) -> int:
         return 20
 
-    def perform(self, ui: Ui, *args, **kwargs):
+    def perform(self, ui: BaseUi, *args, **kwargs):
         coordinates = ui.point_to_global(self.__coordinates)
         self.__mover.move(coordinates)

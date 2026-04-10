@@ -5,7 +5,7 @@ import mouse
 from appwindows.geometry import Point
 
 from apparser.geometry import distance
-from apparser.movers.base import Mover
+from apparser.movers.base import BaseMover
 
 
 class DefaultMoveGenerator:
@@ -71,7 +71,7 @@ class DefaultMoveGenerator:
             yield start_position, self.__get_random_time()
 
 
-class AntiRobotMover(Mover):
+class AntiRobotMover(BaseMover):
     def __init__(self,
                  move_generator: Callable[[Point, Point], Generator[Point, None, None]] = DefaultMoveGenerator()):
         self.__move_generator = move_generator

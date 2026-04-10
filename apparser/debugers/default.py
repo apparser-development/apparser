@@ -1,16 +1,16 @@
 from logging import Logger, getLogger
 
-from apparser.core import Ui
-from apparser.debugers.base import Debugger
+from apparser.debugers.base import BaseDebugger
+
+from apparser.core import BaseUi
+from apparser.exceptions import DebugException
 from apparser.instructions import Instruction
+from apparser.instructions.ai import AiInstruction
 
 
-class DefaultDebugger(Debugger):
-    @classmethod
-    def create(cls, ui: Ui, logger: Logger = getLogger(__name__)):
-        cls.__ui = ui
-        cls.__instructions: list[Instruction] = []
-        return cls()
+class Debugger(BaseDebugger):
+    def __init__(self):
+        self.__instructions: list[Instruction | AiInstruction] = []
 
     def __form_log(self) -> str:
         result = ""
@@ -18,9 +18,15 @@ class DefaultDebugger(Debugger):
             result += f"{instruction.id}\t{instruction.name}\n"
         return result
 
-    def perform(self, instruction: Instruction):
+    def try_perform(self, instruction: Instruction | AiInstruction, *args, **kwargs):
         try:
-            instruction.perform(self.__ui)
+            self.__instructions.append(instruction)
+            instruction.perform(*args, **kwargs)
+        except DebugException as e:
+            result = self.__form_log().join(["\t" + i for i in str(e).split("\n")])
+            raise DebugException(result)
         except Exception as e:
-            raise e
-
+            formed_log = self.__form_log()
+            max_string_len = max([len(i) for i in formed_log.split("\n")])
+            raise_text = f"{formed_log}{max_string_len * "-"}\n{e}"
+            raise DebugException(raise_text)

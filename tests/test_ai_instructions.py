@@ -16,8 +16,8 @@ from apparser.instructions.ai.move_to_text import MoveToText
 from apparser.instructions.ai.plot_text import PlotAllText, _Painter
 from apparser.instructions.ai.print_all_text import PrintAllText
 from apparser.instructions.ai.text_getter import GetText
-from apparser.instructions.base import Instruction
-from apparser.text_readers.text_data import TextData
+from apparser.instructions.default.base import Instruction
+from apparser.text_readers.models.text_data import TextData
 
 
 class FakeAiReader:

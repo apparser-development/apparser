@@ -6,7 +6,7 @@ from appwindows import Window
 from apparser.geometry import Point, RelativelyPoint
 
 
-class Ui(abc.ABC):
+class BaseUi(abc.ABC):
     @abc.abstractmethod
     def point_to_global(self, coordinates: Point | RelativelyPoint) -> Point:
         raise NotImplementedError()

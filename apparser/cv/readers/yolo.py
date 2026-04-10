@@ -2,7 +2,7 @@ from apparser.geometry import Point, Size
 from ultralytics import YOLO
 
 from apparser import CoordinatesUi
-from apparser.core import Ui
+from apparser.core import BaseUi
 from apparser.cv.models import CvAllData, CvBox
 from apparser.cv.readers.base import CvReader
 
@@ -11,7 +11,7 @@ class YoloReader(CvReader):
     def __init__(self, **kwargs):
         self.__model = YOLO(**kwargs)
 
-    def read(self, ui: Ui) -> CvAllData:
+    def read(self, ui: BaseUi) -> CvAllData:
         results = self.__model(ui.get_screenshot())[0]
         boxes = []
         names = self.__model.model.names

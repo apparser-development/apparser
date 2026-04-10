@@ -8,7 +8,7 @@ import apparser.instructions.default.write_text as write_text_module
 import apparser.movers.default as default_mover_module
 from apparser.geometry import RelativelyPoint
 from apparser.algorithms.default import Algorithm
-from apparser.instructions.base import Instruction
+from apparser.instructions.default.base import Instruction
 from apparser.instructions.default.click import MouseClick, MouseClickTo
 from apparser.instructions.default.mouse_move import MouseMove
 from apparser.instructions.default.move_window import WindowMove
@@ -18,7 +18,7 @@ from apparser.instructions.default.sleep import Sleep
 from apparser.instructions.default.to_window import WindowToBackground, WindowToForeground
 from apparser.instructions.default.write_text import WriteText
 from apparser.key_codes import LeftClick, RightClick
-from apparser.movers.base import Mover
+from apparser.movers.base import BaseMover
 from apparser.movers.default import DefaultMover
 
 
@@ -64,7 +64,7 @@ class DummyInstruction(Instruction):
         self.calls.append((self.label, ui, args, kwargs))
 
 
-class DummyMover(Mover):
+class DummyMover(BaseMover):
     def __init__(self):
         self.points = []
 

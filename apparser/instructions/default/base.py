@@ -1,10 +1,9 @@
 import abc
 
 from apparser.core import BaseUi
-from apparser.text_readers import BaseTextReader
 
 
-class AiInstruction(abc.ABC):
+class Instruction(abc.ABC):
     @property
     def name(self) -> str:
         return self.__class__.__name__
@@ -15,5 +14,5 @@ class AiInstruction(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def perform(self, ui: BaseUi, ai_reader: BaseTextReader, *args, **kwargs) -> BaseUi:
+    def perform(self, ui: BaseUi, *args, **kwargs):
         pass

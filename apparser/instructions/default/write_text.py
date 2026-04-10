@@ -1,6 +1,6 @@
 import keyboard
 
-from apparser.instructions.base import Instruction
+from apparser.instructions.default.base import Instruction
 
 
 class WriteText(Instruction):

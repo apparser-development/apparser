@@ -1,7 +1,7 @@
-from apparser.key_codes.base import KeyCode
+from apparser.key_codes.base import BaseKeyCode
 
 
-class KeyboardKeyCode(KeyCode):
+class KeyboardKeyCode(BaseKeyCode):
     def __init__(self, key: str):
         self.__key = key
         self.__check_keys()

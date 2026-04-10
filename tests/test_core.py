@@ -7,7 +7,7 @@ from appwindows.geometry import Point, Size
 
 import apparser.core.app as app_module
 from apparser.core.app import App
-from apparser.core.ui.base import Ui
+from apparser.core.ui.base import BaseUi
 from apparser.core.ui.coordinates import CoordinatesUi
 from apparser.core.ui.desktop import DesktopUi
 from apparser.core.ui.window import WindowUi
@@ -17,7 +17,7 @@ from apparser.exceptions import WindowActionWithDesktopException
 from apparser.geometry import RelativelyPoint
 
 
-class DummyUi(Ui):
+class DummyUi(BaseUi):
     def __init__(self):
         self._window = SimpleNamespace(name='window')
         self._screenshot = numpy.arange(10000).reshape(100, 100)

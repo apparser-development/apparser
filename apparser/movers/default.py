@@ -1,10 +1,10 @@
 import mouse
 
 from apparser.geometry import Point
-from apparser.movers.base import Mover
+from apparser.movers.base import BaseMover
 
 
-class DefaultMover(Mover):
+class DefaultMover(BaseMover):
     def __init__(self,
                  duration: float = 0,
                  absolute: bool = True):

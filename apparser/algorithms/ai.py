@@ -1,18 +1,18 @@
-from apparser.core import Ui
+from apparser.core import BaseUi
 from apparser.instructions.ai.base import AiInstruction
 from apparser.algorithms.base import BaseAlgorithm
-from apparser.instructions.base import Instruction
-from apparser.text_readers import AiReader, EasyOcrReader, ScreensController
+from apparser.instructions.default.base import Instruction
+from apparser.text_readers import BaseTextReader, EasyOcrReader, ScreensController
 
 
 class AiAlgorithm(BaseAlgorithm):
     def __init__(self,
                  instructions: list[AiInstruction | Instruction],
-                 ai_reader: AiReader = ScreensController(EasyOcrReader())):
+                 ai_reader: BaseTextReader = ScreensController(EasyOcrReader())):
         self.__instructions = instructions
         self.__ai_reader = ai_reader
 
-    def perform(self, ui: Ui, *args, **kwargs):
+    def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.to_foreground()
         for instruction in self.__instructions:
             if not (isinstance(instruction, Instruction) or isinstance(instruction, AiInstruction)):

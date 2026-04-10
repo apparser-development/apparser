@@ -4,16 +4,16 @@ import numpy
 from appwindows import Window
 from appwindows.geometry import Size
 
-from apparser.core.ui.base import Ui
+from apparser.core.ui.base import BaseUi
 from apparser.geometry import Point, RelativelyPoint
 
 
-class CoordinatesUi(Ui):
+class CoordinatesUi(BaseUi):
     def __init__(self,
-                 from_ui: Ui,
+                 from_ui: BaseUi,
                  left_top_point: Point | RelativelyPoint,
                  size: Size):
-        if not isinstance(from_ui, Ui):
+        if not isinstance(from_ui, BaseUi):
             raise TypeError('from_ui must be Ui')
 
         if not (isinstance(left_top_point, Point) or isinstance(left_top_point, RelativelyPoint)):

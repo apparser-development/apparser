@@ -1,6 +1,6 @@
-from apparser.core import Ui
+from apparser.core import BaseUi
 from apparser.geometry import Point
-from apparser.instructions.base import Instruction
+from apparser.instructions.default.base import Instruction
 
 
 class WindowMove(Instruction):
@@ -14,5 +14,5 @@ class WindowMove(Instruction):
     def id(self) -> int:
         return 12
 
-    def perform(self, ui: Ui, *args, **kwargs):
+    def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.move(self.__position)

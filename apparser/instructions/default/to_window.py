@@ -1,5 +1,5 @@
-from apparser.core import Ui
-from apparser.instructions.base import Instruction
+from apparser.core import BaseUi
+from apparser.instructions.default.base import Instruction
 
 
 class WindowToBackground(Instruction):
@@ -7,7 +7,7 @@ class WindowToBackground(Instruction):
     def id(self) -> int:
         return 11
 
-    def perform(self, ui: Ui, *args, **kwargs):
+    def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.to_background()
 
 
@@ -16,5 +16,5 @@ class WindowToForeground(Instruction):
     def id(self) -> int:
         return 10
 
-    def perform(self, ui: Ui, *args, **kwargs):
+    def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.to_foreground()

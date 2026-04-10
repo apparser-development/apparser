@@ -1,13 +1,13 @@
 from thefuzz import fuzz
 
-from apparser.core import Ui
+from apparser.core import BaseUi
 from apparser.exceptions import TextNotFoundException
 from apparser.geometry import Point, RelativelyPoint
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.ai.text_getter import GetText
 from apparser.instructions.default import MouseMove
-from apparser.text_readers.base import AiReader
-from apparser.text_readers.text_data import TextData
+from apparser.text_readers.base import BaseTextReader
+from apparser.text_readers.models.text_data import TextData
 
 
 class MoveToText(AiInstruction):
@@ -29,12 +29,12 @@ class MoveToText(AiInstruction):
         max_rating = max(similar_ratings)
         return texts[similar_ratings.index(max_rating)], max_rating
 
-    def __get_local_offset(self, ui: Ui) -> Point:
+    def __get_local_offset(self, ui: BaseUi) -> Point:
         if isinstance(self.__offset, RelativelyPoint):
             return ui.point_to_local(ui.point_to_global(self.__offset))
         return self.__offset
 
-    def perform(self, ui: Ui, ai: AiReader):
+    def perform(self, ui: BaseUi, ai: BaseTextReader, *args, **kwargs):
         self.__text_getter.perform(ui, ai)
         needed_data, rating = self.find_text(self.__text_getter.global_answer)
         if self.__min_similarity > rating:

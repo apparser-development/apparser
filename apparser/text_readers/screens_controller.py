@@ -1,11 +1,11 @@
 import numpy
 
-from apparser.text_readers.base import AiReader
-from apparser.text_readers.text_data import TextData
+from apparser.text_readers.base import BaseTextReader
+from apparser.text_readers.models.text_data import TextData
 
 
-class ScreensController(AiReader):
-    def __init__(self, ai_reader: AiReader):
+class ScreensController(BaseTextReader):
+    def __init__(self, ai_reader: BaseTextReader):
         self.__screens: list[numpy.ndarray] = []
         self.__texts: list[list[TextData]] = []
         self.__ai_reader = ai_reader

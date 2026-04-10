@@ -5,12 +5,12 @@ from appwindows import Window
 from PIL import ImageGrab
 from screeninfo import get_monitors
 
-from apparser.core.ui.base import Ui
+from apparser.core.ui.base import BaseUi
 from apparser.geometry import Point, RelativelyPoint
 from apparser.exceptions import WindowActionWithDesktopException
 
 
-class DesktopUi(Ui):
+class DesktopUi(BaseUi):
     def __init__(self, display_id: int = 0):
         self.__display_id = display_id
 

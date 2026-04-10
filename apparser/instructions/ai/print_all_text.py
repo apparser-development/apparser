@@ -1,5 +1,5 @@
-from apparser.text_readers.base import AiReader
-from apparser.core import Ui
+from apparser.text_readers.base import BaseTextReader
+from apparser.core import BaseUi
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.ai.text_getter import GetText
 
@@ -12,7 +12,7 @@ class PrintAllText(AiInstruction):
     def id(self) -> int:
         return 103
 
-    def perform(self, ui: Ui, ai: AiReader):
+    def perform(self, ui: BaseUi, ai: BaseTextReader, *args, **kwargs):
         self.__text_getter.perform(ui, ai)
         for i in self.__text_getter.global_answer:
             points_stroke = ""

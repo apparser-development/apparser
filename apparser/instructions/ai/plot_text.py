@@ -2,9 +2,9 @@ from typing import Tuple
 
 from PIL import ImageDraw
 
-from apparser.text_readers.base import AiReader
-from apparser.text_readers.text_data import TextData
-from apparser.core import Ui
+from apparser.text_readers.base import BaseTextReader
+from apparser.text_readers.models.text_data import TextData
+from apparser.core import BaseUi
 from apparser.instructions.ai.base import AiInstruction
 from apparser.instructions.ai.text_getter import GetText
 
@@ -43,7 +43,7 @@ class PlotAllText(AiInstruction):
     def id(self) -> int:
         return 104
 
-    def perform(self, ui: Ui, ai: AiReader):
+    def perform(self, ui: BaseUi, ai: BaseTextReader, *args, **kwargs):
         self.__text_getter.perform(ui, ai)
         texts = self.__text_getter.local_answer
         image = self.__text_getter.screenshot

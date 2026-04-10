@@ -3,7 +3,7 @@ import time
 
 from appwindows import get_finder
 
-from apparser.core.ui.window import WindowUi, Ui
+from apparser.core.ui.window import WindowUi, BaseUi
 from apparser.geometry import Size
 
 
@@ -30,7 +30,7 @@ class App:
         self.__timeout = timeout
         self.__window_size: Size = window_size
         self.__window_title_name: str = window_title
-        self.__ui: Ui | None = None
+        self.__ui: BaseUi | None = None
         self.start_app()
 
     def start_app(self):
@@ -45,5 +45,5 @@ class App:
         self.__process.kill()
 
     @property
-    def ui(self) -> Ui:
+    def ui(self) -> BaseUi:
         return self.__ui

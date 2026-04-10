@@ -1,21 +1,21 @@
-from apparser.key_codes.base import KeyCode
+from apparser.key_codes.base import BaseKeyCode
 
 
-class Enter(KeyCode):
+class Enter(BaseKeyCode):
     def __str__(self) -> str:
         return "enter"
 
 
-class Control(KeyCode):
+class Control(BaseKeyCode):
     def __str__(self) -> str:
         return "ctrl"
 
 
-class Alt(KeyCode):
+class Alt(BaseKeyCode):
     def __str__(self) -> str:
         return "alt"
 
 
-class Delete(KeyCode):
+class Delete(BaseKeyCode):
     def __str__(self) -> str:
         return "del"
