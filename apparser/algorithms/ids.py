@@ -1,6 +1,7 @@
 from typing import Any
 
 from apparser.core import BaseUi
+from apparser.debuggers import BaseDebugger, Debugger
 from apparser.algorithms.base import BaseAlgorithm
 from apparser.instructions.utils import get_instruction_by_id
 
@@ -20,7 +21,11 @@ def _check_instruction(instruction: tuple[int, list[Any]]) -> tuple[int, list[An
 
 
 class IdsAlgorithm(BaseAlgorithm):
-    def __init__(self, instructions: list[tuple[int, list[Any]]]):
+    def __init__(self, instructions: list[tuple[int, list[Any]]], debugger: BaseDebugger | None = Debugger()):
+        if debugger is not None and not isinstance(debugger, BaseDebugger):
+            raise TypeError("debugger must be BaseDebugger or None")
+        
+        self.__debugger = debugger
         self.__instructions = instructions
 
     def perform(self, ui: BaseUi, *args, **kwargs):
@@ -31,8 +36,12 @@ class IdsAlgorithm(BaseAlgorithm):
             instruction = get_instruction_by_id(instruction_id)
             if instruction is None:
                 raise ValueError(f"instruction with id {instruction_id} not found")
-
-            instruction(*instruction_args).perform(ui, *args, **kwargs)
+            
+            instruction = instruction(*instruction_args)
+            if self.__debugger is not None:
+                self.__debugger.try_perform(instruction, ui, *args, **kwargs)
+            else:
+                instruction.perform(ui, *args, **kwargs)
 
     def add_instruction(self, instruction: tuple[int, list[Any]]):
         _check_instruction(instruction)

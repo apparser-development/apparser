@@ -4,6 +4,7 @@ from apparser.core import BaseUi
 from apparser.text_readers import BaseTextReader
 from apparser.instructions.base import BaseInstruction
 
+
 class AiInstruction(BaseInstruction):
     @property
     def name(self) -> str:
