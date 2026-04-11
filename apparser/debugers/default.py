@@ -14,8 +14,9 @@ class Debugger(BaseDebugger):
 
     def __form_log(self) -> str:
         result = ""
-        for instruction in self.__instructions:
-            result += f"{instruction.id}\t{instruction.name}\n"
+        for i in range(len(self.__instructions)):
+            instruction = self.__instructions[i]
+            result += f"{i}\t{instruction.id}\t{instruction.name}\n"
         return result
 
     def try_perform(self, instruction: Instruction | AiInstruction, *args, **kwargs):
@@ -30,3 +31,6 @@ class Debugger(BaseDebugger):
             max_string_len = max([len(i) for i in formed_log.split("\n")])
             raise_text = f"{formed_log}{max_string_len * "-"}\n{e}"
             raise DebugException(raise_text)
+
+    def clear_contex(self):
+        self.__instructions = []

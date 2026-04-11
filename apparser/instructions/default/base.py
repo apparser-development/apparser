@@ -1,9 +1,10 @@
 import abc
 
 from apparser.core import BaseUi
+from apparser.instructions.base import BaseInstruction
 
 
-class Instruction(abc.ABC):
+class Instruction(BaseInstruction):
     @property
     def name(self) -> str:
         return self.__class__.__name__

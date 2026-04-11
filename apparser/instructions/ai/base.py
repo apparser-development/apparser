@@ -2,9 +2,9 @@ import abc
 
 from apparser.core import BaseUi
 from apparser.text_readers import BaseTextReader
+from apparser.instructions.base import BaseInstruction
 
-
-class AiInstruction(abc.ABC):
+class AiInstruction(BaseInstruction):
     @property
     def name(self) -> str:
         return self.__class__.__name__
