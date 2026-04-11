@@ -1,16 +1,12 @@
-from logging import Logger, getLogger
+from apparser.debuggers.base import BaseDebugger
 
-from apparser.debugers.base import BaseDebugger
-
-from apparser.core import BaseUi
 from apparser.exceptions import DebugException
-from apparser.instructions import Instruction
-from apparser.instructions.ai import AiInstruction
+from apparser.instructions import BaseInstruction
 
 
 class Debugger(BaseDebugger):
     def __init__(self):
-        self.__instructions: list[Instruction | AiInstruction] = []
+        self.__instructions: list[BaseInstruction] = []
 
     def __form_log(self) -> str:
         result = ""
@@ -19,7 +15,7 @@ class Debugger(BaseDebugger):
             result += f"{i}\t{instruction.id}\t{instruction.name}\n"
         return result
 
-    def try_perform(self, instruction: Instruction | AiInstruction, *args, **kwargs):
+    def try_perform(self, instruction: BaseInstruction, *args, **kwargs):
         try:
             self.__instructions.append(instruction)
             instruction.perform(*args, **kwargs)

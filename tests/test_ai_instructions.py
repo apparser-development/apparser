@@ -120,7 +120,7 @@ def test_ai_algorithm_perform_and_add_instruction():
     ai_reader = FakeAiReader()
     first = DummyInstruction(calls, 'instruction')
     second = DummyAiInstruction(calls, 'ai_instruction')
-    algorithm = AiAlgorithm([first], ai_reader=ai_reader)
+    algorithm = AiAlgorithm([first], text_reader=ai_reader)
 
     algorithm.add_instruction(second)
     algorithm.perform(ui)
@@ -132,13 +132,13 @@ def test_ai_algorithm_perform_and_add_instruction():
 
 
 def test_ai_algorithm_validation():
-    algorithm = AiAlgorithm([], ai_reader=FakeAiReader())
+    algorithm = AiAlgorithm([], text_reader=FakeAiReader())
 
     with pytest.raises(TypeError, match='must be Instruction or AiInstruction'):
         algorithm.add_instruction('instruction')
 
     with pytest.raises(TypeError, match='must be Instruction or AiInstruction'):
-        AiAlgorithm(['instruction'], ai_reader=FakeAiReader()).perform(FakeUi())
+        AiAlgorithm(['instruction'], text_reader=FakeAiReader()).perform(FakeUi())
 
 
 def test_click_on_text_perform_order(monkeypatch):

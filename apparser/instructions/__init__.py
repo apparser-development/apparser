@@ -1,6 +1,8 @@
 from apparser.instructions.default import *
+from apparser.instructions.base import BaseInstruction
 
-__all__ = ["PressKey",
+__all__ = ["BaseInstruction",
+           "PressKey",
            "PressKeysCombination",
            "MouseMove",
            "MouseClickTo",
