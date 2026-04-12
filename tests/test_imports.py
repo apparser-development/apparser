@@ -1,16 +1,54 @@
-from apparser import App, CoordinatesUi, DesktopUi, BaseUi
+"""Tests for public imports."""
+
+from apparser import App, BaseUi, CoordinatesUi, DesktopUi
+from apparser.algorithms import AiAlgorithm, Algorithm
 from apparser.core import WindowUi
 from apparser.cv import DefaultCvProcess, DefaultHandlers, YoloReader
-from apparser.exceptions import TextNotFoundException, WindowActionWithDesktopException
+from apparser.exceptions import (
+    DebugException,
+    TextNotFoundException,
+    WindowActionWithDesktopException,
+)
 from apparser.geometry import Point, RelativelyPoint, Size, distance
-from apparser.instructions import Algorithm, Instruction, MouseClick, MouseClickTo, MouseMove, WindowMove, PressKey
-from apparser.instructions import PressKeysCombination, WindowResize, Sleep, WindowToBackground, WindowToForeground
-from apparser.instructions import WriteText
-from apparser.instructions.ai import AiAlgorithm, AiInstruction, ClickOnText, GetText, MoveToText, PlotAllText
-from apparser.instructions.ai import PrintAllText
-from apparser.key_codes import Alt, Control, Delete, Enter, KeyboardKeyCode, LeftClick, RightClick
+from apparser.instructions import (
+    Instruction,
+    MouseClick,
+    MouseClickTo,
+    MouseMove,
+    PressKey,
+    PressKeysCombination,
+    Sleep,
+    WindowMove,
+    WindowResize,
+    WindowToBackground,
+    WindowToForeground,
+    WriteText,
+)
+from apparser.instructions.ai import (
+    AiInstruction,
+    ClickOnText,
+    GetText,
+    MoveToText,
+    PlotAllText,
+    PrintAllText,
+)
+from apparser.key_codes import (
+    Alt,
+    Control,
+    Delete,
+    Enter,
+    KeyboardKeyCode,
+    LeftClick,
+    RightClick,
+)
 from apparser.movers import AntiRobotMover, DefaultMover
-from apparser.text_readers import BaseTextReader, EasyOcrReader, ScreensController, TextData, WhiteBlackReader
+from apparser.text_readers import (
+    BaseTextReader,
+    EasyOcrReader,
+    ScreensController,
+    TextData,
+    WhiteBlackReader,
+)
 
 
 def test_public_imports_are_available():
@@ -23,6 +61,7 @@ def test_public_imports_are_available():
     assert Size is not None
     assert RelativelyPoint is not None
     assert distance is not None
+    assert DebugException is not None
     assert TextNotFoundException is not None
     assert WindowActionWithDesktopException is not None
     assert KeyboardKeyCode is not None
