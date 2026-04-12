@@ -2,12 +2,12 @@ from apparser.core import BaseUi
 
 from apparser.cv.handlers import CvHandlers
 from apparser.cv.processes.base import CvProcess
-from apparser.cv.readers import CvReader, YoloReader
+from apparser.cv.readers import CvReader
 from apparser.cv.utils import ChangesChecker
 
 
 class DefaultCvProcess(CvProcess):
-    def __init__(self, reader: CvReader = YoloReader(), sleep_seconds: float = 3,
+    def __init__(self, reader: CvReader, sleep_seconds: float = 3,
                  changes_checker: ChangesChecker = ChangesChecker()):
         self.__sleep_seconds = sleep_seconds
         self.__is_working = True

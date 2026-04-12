@@ -12,9 +12,11 @@ def _is_resized(box: CvBox, old_box: CvBox) -> bool:
 
 class ChangesChecker:
     def __init__(self):
-        self.__old_data: CvAllData | None = None
+        self.__old_data: CvAllData = CvAllData([])
 
     def __get_old_box(self, box: CvBox) -> CvBox | None:
+        print(box.class_id)
+        print([i.class_id for i in self.__old_data.boxes])
         needed_boxes: list[CvBox] = [i for i in self.__old_data.boxes if i.class_id == box.class_id]
         if len(needed_boxes) == 0:
             return None
@@ -35,4 +37,5 @@ class ChangesChecker:
                     result.append(CvChangeData(Moved, box, old_box))
                 if _is_resized(box, old_box):
                     result.append(CvChangeData(Resized, box, old_box))
+        self.__old_data = data
         return result

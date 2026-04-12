@@ -8,15 +8,15 @@ from apparser.cv.readers.base import CvReader
 
 
 class YoloReader(CvReader):
-    def __init__(self, **kwargs):
-        self.__model = YOLO(**kwargs)
+    def __init__(self, model: YOLO):
+        self.__model = model
 
     def read(self, ui: BaseUi) -> CvAllData:
         results = self.__model(ui.get_screenshot())[0]
         boxes = []
         names = self.__model.model.names
         for box in results.boxes:
-            cls_id = int(box.cls.item())
+            cls_id = box.class_id
             cls_name = names[cls_id]
             x1, y1, x2, y2 = box.xyxy[0].tolist()
             x = int(x1)
