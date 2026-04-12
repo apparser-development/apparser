@@ -8,7 +8,7 @@ from apparser.cv.events import CvEvent
 @dataclass(frozen=True)
 class CvBox:
     class_name: str
-    class_id: int
+    track_id: int | None
     x: int
     y: int
     width: int

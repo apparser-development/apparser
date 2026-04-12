@@ -12,7 +12,7 @@ def test_cv_models_store_data():
     change = CvChangeData(Detected, box, box)
 
     assert box.class_name == "bird"
-    assert box.class_id == 3
+    assert box.track_id == 3
     assert box.x == 7
     assert box.y == 8
     assert box.width == 9

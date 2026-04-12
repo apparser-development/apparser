@@ -12,7 +12,7 @@ class Debugger(BaseDebugger):
         result = ""
         for i in range(len(self.__instructions)):
             instruction = self.__instructions[i]
-            result += f"{i}\t{instruction.id}\t{instruction.name}\n"
+            result += f"\n{i}\t{instruction.id}\t{instruction.name}"
         return result
 
     def try_perform(self, instruction: BaseInstruction, *args, **kwargs):
@@ -25,7 +25,7 @@ class Debugger(BaseDebugger):
         except Exception as e:
             formed_log = self.__form_log()
             max_string_len = max([len(i) for i in formed_log.split("\n")])
-            raise_text = f"{formed_log}{max_string_len * "-"}\n{e}"
+            raise_text = f"{formed_log}\n{max_string_len * "-"}\n{e}"
             raise DebugException(raise_text)
 
     def clear_contex(self):

@@ -33,9 +33,14 @@ class _FakeYoloModel:
         self.model = types.SimpleNamespace(names={})
         self.results = [types.SimpleNamespace(boxes=[])]
         self.calls = []
+        self.track_calls = []
 
     def __call__(self, image):
         self.calls.append(image)
+        return self.results
+
+    def track(self, source=None, persist=False, **kwargs):
+        self.track_calls.append((source, persist, kwargs))
         return self.results
 
 

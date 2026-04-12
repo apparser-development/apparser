@@ -73,7 +73,7 @@ class DefaultMoveGenerator:
 
 class AntiRobotMover(BaseMover):
     def __init__(self,
-                 move_generator: Callable[[Point, Point], Generator[Point, None, None]] = DefaultMoveGenerator()):
+                 move_generator: Callable[[Point, Point], Generator[tuple[Point, float], None, None]] = DefaultMoveGenerator(0.05, 0.1)):
         self.__move_generator = move_generator
 
     def move(self, position: Point):

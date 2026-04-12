@@ -3,7 +3,7 @@ from apparser.cv.events import Detected, UnDetected, Moved, Resized
 
 
 def _is_moved(box: CvBox, old_box: CvBox) -> bool:
-    return abs(box.x - old_box.x) > 0 and abs(box.y - old_box.y) > 0
+    return abs(box.x - old_box.x) > 0 or abs(box.y - old_box.y) > 0
 
 
 def _is_resized(box: CvBox, old_box: CvBox) -> bool:
@@ -15,16 +15,17 @@ class ChangesChecker:
         self.__old_data: CvAllData = CvAllData([])
 
     def __get_old_box(self, box: CvBox) -> CvBox | None:
-        print(box.class_id)
-        print([i.class_id for i in self.__old_data.boxes])
-        needed_boxes: list[CvBox] = [i for i in self.__old_data.boxes if i.class_id == box.class_id]
+        if box.track_id is None:
+            return None
+        needed_boxes: list[CvBox] = [i for i in self.__old_data.boxes if i.track_id == box.track_id]
         if len(needed_boxes) == 0:
             return None
         return needed_boxes[0]
 
     def __get_undetected(self, current_data: CvAllData) -> list[CvChangeData]:
-        new_ids = [i.class_id for i in current_data.boxes]
-        return [CvChangeData(UnDetected, i, i) for i in self.__old_data.boxes if i.class_id not in new_ids]
+        new_ids = [i.track_id for i in current_data.boxes if i.track_id is not None]
+        return [CvChangeData(UnDetected, i, i) for i in self.__old_data.boxes if
+                i.track_id not in new_ids and i.track_id is not None]
 
     def check(self, data: CvAllData) -> list[CvChangeData]:
         result: list[CvChangeData] = self.__get_undetected(data)

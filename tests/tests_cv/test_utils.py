@@ -15,14 +15,13 @@ def test_changes_checker_helpers():
     only_x_changed = make_cv_box(x=2, y=1, width=12, height=13, ui=ui)
 
     assert _is_moved(moved_and_resized, old_box) is True
-    assert _is_moved(only_x_changed, old_box) is False
+    assert _is_moved(only_x_changed, old_box) is True
     assert _is_resized(moved_and_resized, old_box) is True
     assert _is_resized(make_cv_box(x=2, y=3, width=12, height=10, ui=ui), old_box) is False
 
 
-def test_changes_checker_initial_state_raises():
-    with pytest.raises(AttributeError):
-        ChangesChecker().check(CvAllData([]))
+def test_changes_checker_initial_state_returns_no_events():
+    assert ChangesChecker().check(CvAllData([])) == []
 
 
 def test_changes_checker_check_with_preloaded_old_data():
