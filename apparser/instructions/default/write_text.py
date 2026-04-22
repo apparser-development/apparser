@@ -1,9 +1,9 @@
 import keyboard
 
-from apparser.instructions.default.base import Instruction
+from apparser.instructions.base import BaseInstruction
 
 
-class WriteText(Instruction):
+class WriteText(BaseInstruction):
     def __init__(self, text: str, pause_time: float = 0.1):
         if not isinstance(text, str):
             raise TypeError('text must be a string')

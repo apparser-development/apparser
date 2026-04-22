@@ -1,4 +1,4 @@
-"""Tests for default instructions."""
+"""Tests for ui instructions."""
 
 import pytest
 from appwindows.geometry import Point, Size

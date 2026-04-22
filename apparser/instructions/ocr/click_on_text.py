@@ -4,12 +4,12 @@ from apparser.instructions.default import MouseClick, Sleep
 from apparser.key_codes import RightClick, LeftClick
 from apparser.text_readers import BaseTextReader
 
-from apparser.instructions.ai.base import AiInstruction
-from apparser.instructions.ai.move_to_text import MoveToText
-from apparser.instructions.ai.text_getter import GetText
+from apparser.instructions.ocr.base import OCRInstruction
+from apparser.instructions.ocr.move_to_text import MoveToText
+from apparser.instructions.ocr.text_getter import GetText
 
 
-class ClickOnText(AiInstruction):
+class ClickOnText(OCRInstruction):
     def __init__(self, text: str,
                  click_type: RightClick | LeftClick = LeftClick(),
                  min_similarity: float = 0.9,
@@ -24,7 +24,7 @@ class ClickOnText(AiInstruction):
     def id(self) -> int:
         return 102
 
-    def perform(self, ui: BaseUi, ai: BaseTextReader, *args, **kwargs):
-        self.__mouse_mover.perform(ui, ai)
-        self.__sleep.perform(ui, ai)
-        MouseClick(self.__click_type).perform(ui, ai)
+    def perform(self, ui: BaseUi, ocr: BaseTextReader, *args, **kwargs):
+        self.__mouse_mover.perform(ui, ocr)
+        self.__sleep.perform(ui, ocr)
+        MouseClick(self.__click_type).perform(ui, ocr)

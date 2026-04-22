@@ -4,11 +4,7 @@ from apparser.core import BaseUi
 from apparser.instructions.base import BaseInstruction
 
 
-class Instruction(BaseInstruction):
-    @property
-    def name(self) -> str:
-        return self.__class__.__name__
-
+class UiInstruction(BaseInstruction):
     @property
     @abc.abstractmethod
     def id(self) -> int:

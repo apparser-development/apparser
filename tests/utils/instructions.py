@@ -1,7 +1,7 @@
 """Reusable instruction doubles for tests."""
 
 from apparser.instructions.ai.base import AiInstruction
-from apparser.instructions.default.base import Instruction
+from apparser.instructions.ui.base import UiInstruction
 
 
 class DummyInstruction(Instruction):

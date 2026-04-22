@@ -1,9 +1,9 @@
 from apparser.core import BaseUi
 from apparser.geometry import Size
-from apparser.instructions.default.base import Instruction
+from apparser.instructions.ui.base import UiInstruction
 
 
-class WindowResize(Instruction):
+class WindowResize(UiInstruction):
     def __init__(self, size: Size):
         if not isinstance(size, Size):
             raise TypeError('size must be of type Size')

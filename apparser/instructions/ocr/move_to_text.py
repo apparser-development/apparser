@@ -3,14 +3,14 @@ from thefuzz import fuzz
 from apparser.core import BaseUi
 from apparser.exceptions import TextNotFoundException
 from apparser.geometry import Point, RelativelyPoint
-from apparser.instructions.ai.base import AiInstruction
-from apparser.instructions.ai.text_getter import GetText
-from apparser.instructions.default import MouseMove
+from apparser.instructions.ocr.base import OCRInstruction
+from apparser.instructions.ocr.text_getter import GetText
+from apparser.instructions.ui import MouseMove
 from apparser.text_readers.base import BaseTextReader
 from apparser.text_readers.models.text_data import TextData
 
 
-class MoveToText(AiInstruction):
+class MoveToText(OCRInstruction):
     def __init__(self, text: str,
                  min_similarity: float = 0.9,
                  offset: Point | RelativelyPoint = Point(0, 0),
@@ -34,8 +34,8 @@ class MoveToText(AiInstruction):
             return ui.point_to_local(ui.point_to_global(self.__offset))
         return self.__offset
 
-    def perform(self, ui: BaseUi, ai: BaseTextReader, *args, **kwargs):
-        self.__text_getter.perform(ui, ai)
+    def perform(self, ui: BaseUi, text_reader: BaseTextReader, *args, **kwargs):
+        self.__text_getter.perform(ui, text_reader)
         needed_data, rating = self.find_text(self.__text_getter.global_answer)
         if self.__min_similarity > rating:
             raise TextNotFoundException(self.__min_similarity)

@@ -1,12 +1,12 @@
 from typing import Tuple
 
-from PIL import ImageDraw
+from PIL import ImageDraw, Image
 
 from apparser.text_readers.base import BaseTextReader
 from apparser.text_readers.models.text_data import TextData
 from apparser.core import BaseUi
-from apparser.instructions.ai.base import AiInstruction
-from apparser.instructions.ai.text_getter import GetText
+from apparser.instructions.ocr.base import OCRInstruction
+from apparser.instructions.ocr.text_getter import GetText
 
 
 class _Painter:
@@ -33,7 +33,7 @@ class _Painter:
         self.__draw.text((x, y), data.text, fill=self.__color)
 
 
-class PlotAllText(AiInstruction):
+class PlotAllText(OCRInstruction):
     def __init__(self, text_getter: GetText = GetText(),
                  color_rgba: tuple[int, int, int, int] = (255, 255, 255, 255)):
         self.__text_getter = text_getter
@@ -43,10 +43,11 @@ class PlotAllText(AiInstruction):
     def id(self) -> int:
         return 104
 
-    def perform(self, ui: BaseUi, ai: BaseTextReader, *args, **kwargs):
-        self.__text_getter.perform(ui, ai)
+    def perform(self, ui: BaseUi, text_reader: BaseTextReader, *args, **kwargs):
+        self.__text_getter.perform(ui, text_reader)
         texts = self.__text_getter.local_answer
         image = self.__text_getter.screenshot
+        image = Image.fromarray(image)
         draw = ImageDraw.Draw(image)
         painter = _Painter(draw, self.__color)
         painter.draw(texts)

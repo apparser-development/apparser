@@ -1,8 +1,8 @@
 from apparser.core import BaseUi
-from apparser.instructions.default.base import Instruction
+from apparser.instructions.ui.base import UiInstruction
 
 
-class WindowToBackground(Instruction):
+class WindowToBackground(UiInstruction):
     @property
     def id(self) -> int:
         return 11
@@ -11,7 +11,7 @@ class WindowToBackground(Instruction):
         ui.window.to_background()
 
 
-class WindowToForeground(Instruction):
+class WindowToForeground(UiInstruction):
     @property
     def id(self) -> int:
         return 10

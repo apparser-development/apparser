@@ -42,7 +42,7 @@ def make_cv_box(
     height: int = 1,
     ui: BaseUi | None = None,
 ) -> CvBox:
-    """Create a CV box with a default UI stub."""
+    """Create a CV box with a ui UI stub."""
 
     return CvBox(
         class_name,

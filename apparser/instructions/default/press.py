@@ -1,10 +1,10 @@
 import keyboard
 
-from apparser.instructions.default.base import Instruction
+from apparser.instructions.base import BaseInstruction
 from apparser.key_codes.base import BaseKeyCode
 
 
-class PressKey(Instruction):
+class PressKey(BaseInstruction):
     def __init__(self, key_code: BaseKeyCode | str):
         if not (isinstance(key_code, BaseKeyCode) or isinstance(key_code, str)):
             raise TypeError('key_code must be KeyCode or str')
@@ -19,7 +19,7 @@ class PressKey(Instruction):
         keyboard.send(str(self.__key_code))
 
 
-class PressKeysCombination(Instruction):
+class PressKeysCombination(BaseInstruction):
     def __init__(self, keys: list[BaseKeyCode | str]):
         self.__keys = keys
 

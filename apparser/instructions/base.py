@@ -3,9 +3,8 @@ import abc
 
 class BaseInstruction(abc.ABC):
     @property
-    @abc.abstractmethod
     def name(self) -> str:
-        pass
+        return self.__class__.__name__
 
     @property
     @abc.abstractmethod

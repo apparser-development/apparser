@@ -1,9 +1,9 @@
 import time
 
-from apparser.instructions.default.base import Instruction
+from apparser.instructions.base import BaseInstruction
 
 
-class Sleep(Instruction):
+class Sleep(BaseInstruction):
     def __init__(self, sleep_time: float):
         if sleep_time <= 0:
             raise ValueError("sleep_time must be >= 0")

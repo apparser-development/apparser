@@ -1,9 +1,9 @@
 from apparser.core import BaseUi
 from apparser.geometry import Point
-from apparser.instructions.default.base import Instruction
+from apparser.instructions.ui.base import UiInstruction
 
 
-class WindowMove(Instruction):
+class WindowMove(UiInstruction):
     def __init__(self, position: Point):
         if not isinstance(position, Point):
             raise TypeError('position must be of type Point')

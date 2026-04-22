@@ -1,11 +1,11 @@
 from apparser.core import BaseUi
 from apparser.geometry import Point, RelativelyPoint
-from apparser.instructions.default.base import Instruction
+from apparser.instructions.ui.base import UiInstruction
 from apparser.movers import DefaultMover
 from apparser.movers.base import BaseMover
 
 
-class MouseMove(Instruction):
+class MouseMove(UiInstruction):
     def __init__(self,
                  coordinates: Point | RelativelyPoint,
                  mover: BaseMover = DefaultMover()):

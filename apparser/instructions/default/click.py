@@ -1,15 +1,10 @@
 import mouse
 
-from apparser.core import BaseUi
-from apparser.geometry import Point, RelativelyPoint
-from apparser.instructions.default.base import Instruction
-from apparser.instructions.default.mouse_move import MouseMove
+from apparser.instructions.base import BaseInstruction
 from apparser.key_codes.mouse_keys import RightClick, LeftClick
-from apparser.movers import DefaultMover
-from apparser.movers.base import BaseMover
 
 
-class MouseClick(Instruction):
+class MouseClick(BaseInstruction):
     def __init__(self, click_type: RightClick | LeftClick = LeftClick()):
         if isinstance(click_type, RightClick):
             self.__press_function = mouse.right_click
@@ -26,23 +21,3 @@ class MouseClick(Instruction):
 
     def perform(self, *args, **kwargs):
         self.__press_function()
-
-
-class MouseClickTo(Instruction):
-    def __init__(self, coordinates: Point | RelativelyPoint,
-                 click_type: RightClick | LeftClick = LeftClick(),
-                 mover: BaseMover = DefaultMover()):
-        if (not isinstance(coordinates, Point)
-                and not isinstance(coordinates, RelativelyPoint)):
-            raise ValueError('coordinates must be Point or RelativelyPoint')
-
-        self.__click = MouseClick(click_type)
-        self.__move = MouseMove(coordinates, mover=mover)
-
-    @property
-    def id(self) -> int:
-        return 22
-
-    def perform(self, ui: BaseUi, *args, **kwargs):
-        self.__move.perform(ui)
-        self.__click.perform()
