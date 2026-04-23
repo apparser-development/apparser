@@ -1,13 +1,13 @@
-from apparser.instructions.ai.base import AiInstruction
-from apparser.instructions.ai.click_on_text import ClickOnText
-from apparser.instructions.ai.move_to_text import MoveToText
-from apparser.instructions.ai.plot_text import PlotAllText
-from apparser.instructions.ai.print_all_text import PrintAllText
-from apparser.instructions.ai.text_getter import GetText
+from apparser.instructions.ocr.base import OCRInstruction
+from apparser.instructions.ocr.click_on_text import ClickOnText
+from apparser.instructions.ocr.move_to_text import MoveToText
+from apparser.instructions.ocr.plot_text import PlotAllText
+from apparser.instructions.ocr.print_all_text import PrintAllText
+from apparser.instructions.ocr.text_getter import GetText
 
 __all__ = ["PrintAllText",
            "ClickOnText",
            "GetText",
            "MoveToText",
-           "AiInstruction",
+           "OCRInstruction",
            "PlotAllText"]
