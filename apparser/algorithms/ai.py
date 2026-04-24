@@ -5,13 +5,13 @@ from apparser.instructions import BaseInstruction
 from apparser.instructions.speak import SpeakInstruction
 from apparser.instructions.ocr import OCRInstruction
 from apparser.text_readers import BaseTextReader, EasyOcrReader, ScreensController
-from apparser.speakers import BaseSpeaker
+from apparser.speakers import BaseSpeaker, ChatTTSSpeaker
 
 
 class AiAlgorithm(BaseAlgorithm):
     def __init__(self,
                  instructions: list[BaseInstruction],
-                 speaker: BaseSpeaker,
+                 speaker: BaseSpeaker = ChatTTSSpeaker(),
                  text_reader: BaseTextReader = ScreensController(EasyOcrReader()),
                  debugger: BaseDebugger | None = Debugger()):
         if not isinstance(text_reader, BaseTextReader):

@@ -1,8 +1,65 @@
-"""Tests for instruction utility helpers."""
+import sys
+import types
 
+import numpy
 import pytest
 
-from apparser.instructions.ai.click_on_text import ClickOnText
+
+def _install_optional_dependency_stubs():
+    if "torch" not in sys.modules:
+        torch = types.ModuleType("torch")
+        torch.device = lambda value: value
+
+        class _Hub:
+            @staticmethod
+            def load(**kwargs):
+                class _Model:
+                    def to(self, device):
+                        self.device = device
+
+                    def apply_tts(self, **settings):
+                        class _Audio:
+                            def detach(self):
+                                return self
+
+                            def cpu(self):
+                                return self
+
+                            def numpy(self):
+                                return numpy.array([], dtype=numpy.float32)
+
+                        return _Audio()
+
+                return _Model(), None
+
+        torch.hub = _Hub()
+        sys.modules["torch"] = torch
+
+    if "ChatTTS" not in sys.modules:
+        chattts = types.ModuleType("ChatTTS")
+
+        class _Chat:
+            class InferCodeParams:
+                def __init__(self, spk_emb=None):
+                    self.spk_emb = spk_emb
+
+            def load(self, **kwargs):
+                pass
+
+            def sample_random_speaker(self):
+                return "speaker"
+
+            def infer(self, text, params_infer_code=None, **kwargs):
+                return [numpy.array([], dtype=numpy.float32)]
+
+        chattts.Chat = _Chat
+        sys.modules["ChatTTS"] = chattts
+
+
+_install_optional_dependency_stubs()
+
+import apparser.instructions.utils.get_by_name as get_by_name_module
+from apparser.instructions.ocr.click_on_text import ClickOnText
 from apparser.instructions.default.press import PressKey
 from apparser.instructions.utils.get_by_id import get_instruction_by_id
 from apparser.instructions.utils.get_by_name import get_instruction_by_name
@@ -12,7 +69,7 @@ from apparser.instructions.utils.get_by_name import get_instruction_by_name
     ("instruction_id", "expected"),
     [
         (30, PressKey),
-        (102, None),
+        (102, ClickOnText),
         (999, None),
     ],
 )
@@ -20,16 +77,22 @@ def test_get_instruction_by_id(instruction_id, expected):
     assert get_instruction_by_id(instruction_id) is expected
 
 
-@pytest.mark.parametrize(
-    ("instruction_name", "expected"),
-    [
-        ("PressKey", None),
-        ("ClickOnText", None),
-        ("UnknownInstruction", None),
-    ],
-)
-def test_get_instruction_by_name(instruction_name, expected):
-    assert get_instruction_by_name(instruction_name) is expected
+def test_get_instruction_by_name(monkeypatch):
+    class FakePressKey:
+        name = "PressKey"
+
+    class FakeClickOnText:
+        name = "ClickOnText"
+
+    monkeypatch.setattr(
+        get_by_name_module,
+        "_get_all_instructions",
+        lambda: [FakePressKey, FakeClickOnText],
+    )
+
+    assert get_instruction_by_name("PressKey") is FakePressKey
+    assert get_instruction_by_name("ClickOnText") is FakeClickOnText
+    assert get_instruction_by_name("UnknownInstruction") is None
 
 
 def test_get_instruction_by_id_validation():

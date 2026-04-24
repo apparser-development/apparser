@@ -2,13 +2,13 @@ from apparser.core import BaseUi
 from apparser.debuggers import BaseDebugger, Debugger
 from apparser.algorithms.base import BaseAlgorithm
 from apparser.instructions import BaseInstruction
-from apparser.speakers import BaseSpeaker
+from apparser.speakers import BaseSpeaker, ChatTTSSpeaker
 
 
 class SpeakAlgorithm(BaseAlgorithm):
     def __init__(self,
                  instructions: list[BaseInstruction],
-                 speaker: BaseSpeaker,
+                 speaker: BaseSpeaker = ChatTTSSpeaker(),
                  debugger: BaseDebugger | None = Debugger()):
         if not isinstance(speaker, BaseSpeaker):
             raise TypeError("speaker must be BaseSpeaker")

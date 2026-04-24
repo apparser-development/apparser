@@ -1,21 +1,76 @@
-"""Tests for AI instructions."""
-
+import sys
+import types
 from types import SimpleNamespace
 
 import numpy
 import pytest
 from appwindows.geometry import Point
 
-import apparser.instructions.ai.click_on_text as click_on_text_module
-import apparser.instructions.ai.move_to_text as move_to_text_module
-import apparser.instructions.ai.plot_text as plot_text_module
+
+def _install_optional_dependency_stubs():
+    if "torch" not in sys.modules:
+        torch = types.ModuleType("torch")
+        torch.device = lambda value: value
+
+        class _Hub:
+            @staticmethod
+            def load(**kwargs):
+                class _Model:
+                    def to(self, device):
+                        self.device = device
+
+                    def apply_tts(self, **settings):
+                        class _Audio:
+                            def detach(self):
+                                return self
+
+                            def cpu(self):
+                                return self
+
+                            def numpy(self):
+                                return numpy.array([], dtype=numpy.float32)
+
+                        return _Audio()
+
+                return _Model(), None
+
+        torch.hub = _Hub()
+        sys.modules["torch"] = torch
+
+    if "ChatTTS" not in sys.modules:
+        chattts = types.ModuleType("ChatTTS")
+
+        class _Chat:
+            class InferCodeParams:
+                def __init__(self, spk_emb=None):
+                    self.spk_emb = spk_emb
+
+            def load(self, **kwargs):
+                pass
+
+            def sample_random_speaker(self):
+                return "speaker"
+
+            def infer(self, text, params_infer_code=None, **kwargs):
+                return [numpy.array([], dtype=numpy.float32)]
+
+        chattts.Chat = _Chat
+        sys.modules["ChatTTS"] = chattts
+
+
+_install_optional_dependency_stubs()
+
+import apparser.instructions.ocr.click_on_text as click_on_text_module
+import apparser.instructions.ocr.move_to_text as move_to_text_module
+import apparser.instructions.ocr.plot_text as plot_text_module
+import apparser.instructions.ocr.text_getter as text_getter_module
 from apparser.exceptions import TextNotFoundException
 from apparser.geometry import RelativelyPoint
-from apparser.instructions.ai.click_on_text import ClickOnText
-from apparser.instructions.ai.move_to_text import MoveToText
-from apparser.instructions.ai.plot_text import PlotAllText, _Painter
-from apparser.instructions.ai.print_all_text import PrintAllText
-from apparser.instructions.ai.text_getter import GetText
+from apparser.instructions.ocr.click_on_text import ClickOnText
+from apparser.instructions.ocr.move_to_text import MoveToText
+from apparser.instructions.ocr.plot_text import PlotAllText, _Painter
+from apparser.instructions.ocr.print_all_text import PrintAllText
+from apparser.instructions.ocr.text_getter import GetText
 from apparser.text_readers.models.text_data import TextData
 from tests.utils.readers import FakeTextReader
 from tests.utils.ui import InteractionUi
@@ -34,6 +89,10 @@ class FakeImage:
     def show(self):
         self.show_calls += 1
 
+    @property
+    def __array_interface__(self):
+        return self.array.__array_interface__
+
     def __array__(self, dtype=None, copy=None):
         return self.array
 
@@ -50,7 +109,7 @@ class FakeImage:
 )
 def test_ai_instruction_ids_and_names(instruction, expected_id, expected_name):
     assert instruction.id == expected_id
-    assert instruction.name == expected_name
+    assert instruction.__class__.__name__ == expected_name
 
 
 def test_click_on_text_perform_order(monkeypatch):
@@ -190,10 +249,10 @@ def test_painter_draws_coordinates_and_lines():
 
 def test_plot_all_text_perform(monkeypatch):
     draw_calls = []
-    image = FakeImage(numpy.array([[1, 2], [3, 4]]))
+    image = FakeImage(numpy.array([[1, 2], [3, 4]], dtype=numpy.uint8))
     getter = SimpleNamespace(
         local_answer=[TextData("word", [Point(0, 0), Point(10, 0), Point(10, 10), Point(0, 10)])],
-        screenshot=image,
+        screenshot=image.array,
         perform=lambda ui, ai: None,
     )
 
@@ -204,6 +263,7 @@ def test_plot_all_text_perform(monkeypatch):
         def text(self, position, text, fill):
             draw_calls.append(("text", position, text, fill))
 
+    monkeypatch.setattr(plot_text_module.Image, "fromarray", lambda screenshot: image)
     monkeypatch.setattr(plot_text_module.ImageDraw, "Draw", lambda screenshot: FakeDraw())
 
     PlotAllText(text_getter=getter, color_rgba=(1, 2, 3, 4)).perform(
@@ -233,13 +293,16 @@ def test_print_all_text_perform(monkeypatch):
 
 
 def test_get_text_perform_and_reload_behaviour():
-    screenshot = FakeImage(numpy.array([[1, 2], [3, 4]]))
+    screenshot = FakeImage(numpy.array([[1, 2], [3, 4]], dtype=numpy.uint8))
     ai = FakeTextReader([TextData("word", [Point(1, 1), Point(2, 2)])])
-    ui = InteractionUi(screenshot)
+    ui = InteractionUi(screenshot.array)
     instruction = GetText(Point(5, 6), Point(10, 12), reload_every_try=False)
 
+    original_fromarray = text_getter_module.Image.fromarray
+    text_getter_module.Image.fromarray = lambda image: screenshot
     instruction.perform(ui, ai)
     instruction.perform(ui, ai)
+    text_getter_module.Image.fromarray = original_fromarray
 
     assert screenshot.crop_calls == [(5, 6, 10, 12)]
     assert len(ai.calls) == 1

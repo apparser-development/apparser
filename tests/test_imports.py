@@ -1,4 +1,61 @@
-"""Tests for public imports."""
+import sys
+import types
+
+import numpy
+
+
+def _install_optional_dependency_stubs():
+    if "torch" not in sys.modules:
+        torch = types.ModuleType("torch")
+        torch.device = lambda value: value
+
+        class _Hub:
+            @staticmethod
+            def load(**kwargs):
+                class _Model:
+                    def to(self, device):
+                        self.device = device
+
+                    def apply_tts(self, **settings):
+                        class _Audio:
+                            def detach(self):
+                                return self
+
+                            def cpu(self):
+                                return self
+
+                            def numpy(self):
+                                return numpy.array([], dtype=numpy.float32)
+
+                        return _Audio()
+
+                return _Model(), None
+
+        torch.hub = _Hub()
+        sys.modules["torch"] = torch
+
+    if "ChatTTS" not in sys.modules:
+        chattts = types.ModuleType("ChatTTS")
+
+        class _Chat:
+            class InferCodeParams:
+                def __init__(self, spk_emb=None):
+                    self.spk_emb = spk_emb
+
+            def load(self, **kwargs):
+                pass
+
+            def sample_random_speaker(self):
+                return "speaker"
+
+            def infer(self, text, params_infer_code=None, **kwargs):
+                return [numpy.array([], dtype=numpy.float32)]
+
+        chattts.Chat = _Chat
+        sys.modules["ChatTTS"] = chattts
+
+
+_install_optional_dependency_stubs()
 
 from apparser import App, BaseUi, CoordinatesUi, DesktopUi
 from apparser.algorithms import AiAlgorithm, Algorithm
@@ -11,7 +68,7 @@ from apparser.exceptions import (
 )
 from apparser.geometry import Point, RelativelyPoint, Size, distance
 from apparser.instructions import (
-    Instruction,
+    BaseInstruction,
     MouseClick,
     MouseClickTo,
     MouseMove,
@@ -24,14 +81,15 @@ from apparser.instructions import (
     WindowToForeground,
     WriteText,
 )
-from apparser.instructions.ai import (
-    AiInstruction,
+from apparser.instructions.ocr import (
+    OCRInstruction,
     ClickOnText,
     GetText,
     MoveToText,
     PlotAllText,
     PrintAllText,
 )
+from apparser.instructions.speak import PlayTextAudio, SayTextAudio, SpeakInstruction
 from apparser.key_codes import (
     Alt,
     Control,
@@ -45,6 +103,7 @@ from apparser.movers import AntiRobotMover, DefaultMover
 from apparser.text_readers import (
     BaseTextReader,
     EasyOcrReader,
+    PaddleTextReader,
     ScreensController,
     TextData,
     WhiteBlackReader,
@@ -73,7 +132,7 @@ def test_public_imports_are_available():
     assert LeftClick is not None
     assert DefaultMover is not None
     assert AntiRobotMover is not None
-    assert Instruction is not None
+    assert BaseInstruction is not None
     assert Algorithm is not None
     assert MouseMove is not None
     assert MouseClickTo is not None
@@ -86,15 +145,19 @@ def test_public_imports_are_available():
     assert WindowToForeground is not None
     assert WindowToBackground is not None
     assert WriteText is not None
-    assert AiInstruction is not None
+    assert OCRInstruction is not None
+    assert SpeakInstruction is not None
     assert AiAlgorithm is not None
     assert ClickOnText is not None
     assert GetText is not None
     assert MoveToText is not None
     assert PlotAllText is not None
     assert PrintAllText is not None
+    assert PlayTextAudio is not None
+    assert SayTextAudio is not None
     assert BaseTextReader is not None
     assert EasyOcrReader is not None
+    assert PaddleTextReader is not None
     assert ScreensController is not None
     assert TextData is not None
     assert WhiteBlackReader is not None
