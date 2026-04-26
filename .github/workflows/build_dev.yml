@@ -1,0 +1,21 @@
+name: build_dev
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build_dev:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - run: python -m pip install --upgrade pip build pytest
+      - run: python -m build
+      - run: |
+          $wheel = Get-ChildItem dist\*.whl | Select-Object -First 1
+          python -m pip install $wheel.FullName
+      - run: python -m pytest
