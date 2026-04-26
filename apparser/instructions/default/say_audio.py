@@ -43,7 +43,7 @@ class SayAudio(BaseInstruction):
 
     @property
     def id(self) -> int:
-        return 34
+        return 6
 
     def perform(self, *args, **kwargs):
         settings = {**self.__settings, **kwargs}

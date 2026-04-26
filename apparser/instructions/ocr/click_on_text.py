@@ -22,7 +22,7 @@ class ClickOnText(OCRInstruction):
 
     @property
     def id(self) -> int:
-        return 102
+        return 202
 
     def perform(self, ui: BaseUi, ocr: BaseTextReader, *args, **kwargs):
         self.__mouse_mover.perform(ui, ocr)

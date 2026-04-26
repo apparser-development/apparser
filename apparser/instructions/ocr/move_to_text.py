@@ -22,7 +22,7 @@ class MoveToText(OCRInstruction):
 
     @property
     def id(self) -> int:
-        return 101
+        return 201
 
     def find_text(self, texts: list[TextData]) -> tuple[TextData, float]:
         similar_ratings = [fuzz.token_sort_ratio(self.text, i.text) for i in texts]

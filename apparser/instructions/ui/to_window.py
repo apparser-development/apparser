@@ -5,7 +5,7 @@ from apparser.instructions.ui.base import UiInstruction
 class WindowToBackground(UiInstruction):
     @property
     def id(self) -> int:
-        return 11
+        return 101
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.to_background()
@@ -14,7 +14,7 @@ class WindowToBackground(UiInstruction):
 class WindowToForeground(UiInstruction):
     @property
     def id(self) -> int:
-        return 10
+        return 100
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.to_foreground()

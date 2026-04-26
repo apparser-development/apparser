@@ -23,6 +23,10 @@ class OCRAlgorithm(BaseAlgorithm):
         self.__text_reader = text_reader
         self.__debugger = debugger
 
+    @property
+    def id(self) -> int:
+        return 1005
+
     def perform(self, ui: BaseUi, *args, **kwargs):
         if self.__debugger is not None:
             self.__debugger.clear_contex()

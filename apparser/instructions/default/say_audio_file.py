@@ -56,7 +56,7 @@ class SayAudioFile(BaseInstruction):
 
     @property
     def id(self) -> int:
-        return 36
+        return 8
 
     def perform(self, *args, **kwargs):
         self.__instruction.perform(*args, **kwargs)

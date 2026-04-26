@@ -20,7 +20,7 @@ class MouseMove(UiInstruction):
 
     @property
     def id(self) -> int:
-        return 20
+        return 104
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         coordinates = ui.point_to_global(self.__coordinates)

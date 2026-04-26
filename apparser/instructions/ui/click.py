@@ -21,7 +21,7 @@ class MouseClickTo(UiInstruction):
 
     @property
     def id(self) -> int:
-        return 22
+        return 105
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         self.__move.perform(ui)

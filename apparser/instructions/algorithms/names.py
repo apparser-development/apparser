@@ -28,6 +28,10 @@ class NamesAlgorithm(BaseAlgorithm):
         self.__debugger = debugger
         self.__instructions = instructions
 
+    @property
+    def id(self) -> int:
+        return 1003
+
     def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.to_foreground()
         for instruction_data in self.__instructions:

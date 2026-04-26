@@ -43,7 +43,7 @@ class PlayAudio(BaseInstruction):
 
     @property
     def id(self) -> int:
-        return 33
+        return 5
 
     def perform(self, *args, **kwargs):
         settings = {**self.__settings, **kwargs}

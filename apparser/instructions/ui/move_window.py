@@ -12,7 +12,7 @@ class WindowMove(UiInstruction):
 
     @property
     def id(self) -> int:
-        return 12
+        return 102
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.move(self.__position)

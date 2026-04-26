@@ -10,7 +10,7 @@ class PrintAllText(OCRInstruction):
 
     @property
     def id(self) -> int:
-        return 103
+        return 203
 
     def perform(self, ui: BaseUi, text_reader: BaseTextReader, *args, **kwargs):
         self.__text_getter.perform(ui, text_reader)

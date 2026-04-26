@@ -14,6 +14,10 @@ class Algorithm(BaseAlgorithm):
         self.__instructions = instructions
         self.__debugger = debugger
 
+    @property
+    def id(self) -> int:
+        return 1001
+
     def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.to_foreground()
         if self.__debugger is not None:

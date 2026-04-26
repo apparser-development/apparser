@@ -12,7 +12,7 @@ class Sleep(BaseInstruction):
 
     @property
     def id(self) -> int:
-        return 40
+        return 9
 
     def perform(self, *args, **kwargs):
         time.sleep(self.sleep_time)

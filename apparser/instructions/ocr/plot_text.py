@@ -41,7 +41,7 @@ class PlotAllText(OCRInstruction):
 
     @property
     def id(self) -> int:
-        return 104
+        return 204
 
     def perform(self, ui: BaseUi, text_reader: BaseTextReader, *args, **kwargs):
         self.__text_getter.perform(ui, text_reader)

@@ -34,6 +34,10 @@ class AiAlgorithm(BaseAlgorithm):
         self.__speaker = speaker
         self.__debugger = debugger
 
+    @property
+    def id(self) -> int:
+        return 1000
+
     def perform(self, ui: BaseUi, *args, **kwargs):
         if self.__debugger is not None:
             self.__debugger.clear_contex()

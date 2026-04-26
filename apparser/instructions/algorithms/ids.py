@@ -30,7 +30,7 @@ class IdsAlgorithm(BaseAlgorithm):
 
     @property
     def id(self) -> int:
-        return 0
+        return 1002
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.to_foreground()

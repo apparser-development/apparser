@@ -19,7 +19,7 @@ class WriteText(BaseInstruction):
 
     @property
     def id(self) -> int:
-        return 32
+        return 4
 
     def perform(self, *args, **kwargs):
         keyboard.write(self.__text, self.__pause_time)

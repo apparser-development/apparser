@@ -17,7 +17,7 @@ class MouseClick(BaseInstruction):
 
     @property
     def id(self) -> int:
-        return 21
+        return 1
 
     def perform(self, *args, **kwargs):
         self.__press_function()

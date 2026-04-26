@@ -13,7 +13,7 @@ class PressKey(BaseInstruction):
 
     @property
     def id(self) -> int:
-        return 30
+        return 2
 
     def perform(self, *args, **kwargs):
         keyboard.send(str(self.__key_code))
@@ -25,7 +25,7 @@ class PressKeysCombination(BaseInstruction):
 
     @property
     def id(self) -> int:
-        return 31
+        return 3
 
     def perform(self, *args, **kwargs):
         for key in self.__keys:
