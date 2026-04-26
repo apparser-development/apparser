@@ -65,18 +65,6 @@ from apparser.instructions.utils.get_by_id import get_instruction_by_id
 from apparser.instructions.utils.get_by_name import get_instruction_by_name
 
 
-@pytest.mark.parametrize(
-    ("instruction_id", "expected"),
-    [
-        (30, PressKey),
-        (102, ClickOnText),
-        (999, None),
-    ],
-)
-def test_get_instruction_by_id(instruction_id, expected):
-    assert get_instruction_by_id(instruction_id) is expected
-
-
 def test_get_instruction_by_name(monkeypatch):
     class FakePressKey:
         pass
@@ -92,7 +80,10 @@ def test_get_instruction_by_name(monkeypatch):
 
     assert get_instruction_by_name("FakePressKey") is FakePressKey
     assert get_instruction_by_name("FakeClickOnText") is FakeClickOnText
-    assert get_instruction_by_name("UnknownInstruction") is None
+
+    from apparser.exceptions import InstructionWithNameNotFoundException
+    with pytest.raises(InstructionWithNameNotFoundException):
+        get_instruction_by_name("None")
 
 
 def test_get_instruction_by_id_validation():

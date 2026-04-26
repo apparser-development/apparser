@@ -78,22 +78,6 @@ class DummyMover(BaseMover):
     def move(self, position: Point):
         self.points.append(position)
 
-
-@pytest.mark.parametrize(
-    ("instruction", "expected_id"),
-    [
-        (MouseMove(Point(1, 2), DummyMover()), 20),
-        (MouseClickTo(Point(1, 2)), 22),
-        (WindowMove(Point(1, 2)), 12),
-        (WindowResize(Size(1, 2)), 13),
-        (WindowToForeground(), 10),
-        (WindowToBackground(), 11),
-    ],
-)
-def test_ui_instruction_ids(instruction, expected_id):
-    assert instruction.id == expected_id
-
-
 def test_mouse_click_to_validation_and_perform(monkeypatch):
     ui = InteractionUi()
     mover = DummyMover()

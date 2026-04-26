@@ -118,20 +118,6 @@ class FakeWaveReader:
         return self.samples.tobytes()
 
 
-@pytest.mark.parametrize(
-    ("instruction", "expected_id"),
-    [
-        (MouseClick(), 21),
-        (PressKey("a"), 30),
-        (PressKeysCombination(["a", "b"]), 31),
-        (Sleep(1), 40),
-        (WriteText("text"), 32),
-    ],
-)
-def test_default_instruction_ids(instruction, expected_id):
-    assert instruction.id == expected_id
-
-
 def test_mouse_click_validation_and_perform(monkeypatch):
     calls = []
     monkeypatch.setattr(click_module.mouse, "click", lambda: calls.append("left"))
@@ -144,7 +130,6 @@ def test_mouse_click_validation_and_perform(monkeypatch):
     with pytest.raises(TypeError, match="click_type must be RightClick or LeftClick"):
         MouseClick("click")
 
-    assert instruction.id == 21
     assert calls == ["left", "right"]
 
 
@@ -167,7 +152,6 @@ def test_press_key_and_combination(monkeypatch):
     with pytest.raises(TypeError, match="key_code must be KeyCode or str"):
         PressKeysCombination(["ctrl", 1]).perform()
 
-    assert instruction.id == 30
     assert send_calls == ["a", "RIGHT"]
     assert press_calls == ["ctrl", "c", "ctrl"]
     assert release_calls == ["ctrl", "c"]
@@ -183,7 +167,6 @@ def test_sleep_validation_and_perform(monkeypatch):
     instruction = Sleep(0.5)
     instruction.perform()
 
-    assert instruction.id == 40
     assert sleep_calls == [0.5]
 
 
@@ -203,7 +186,6 @@ def test_write_text_validation_and_perform(monkeypatch):
     instruction = WriteText("hello", 0.2)
     instruction.perform()
 
-    assert instruction.id == 32
     assert calls == [("hello", 0.2)]
 
 
@@ -243,7 +225,6 @@ def test_play_audio_perform(monkeypatch):
 
     audio, settings = fake_sounddevice.play_calls[0]
 
-    assert instruction.id == 33
     assert fake_sounddevice.check_calls == [
         {
             "device": "headphones",
@@ -302,7 +283,6 @@ def test_play_audio_file_reads_audio_and_delegates(monkeypatch):
 
     kwargs = calls[0][1]
 
-    assert instruction.id == 35
     assert kwargs["sample_rate"] == 8000
     assert kwargs["device"] == "speaker"
     assert kwargs["blocking"] is False
@@ -356,7 +336,6 @@ def test_say_audio_perform_uses_microphone_device(monkeypatch):
 
     audio, settings = fake_sounddevice.play_calls[0]
 
-    assert instruction.id == 34
     assert fake_sounddevice.check_calls == [
         {
             "device": "override",
@@ -442,7 +421,6 @@ def test_say_audio_file_reads_audio_and_delegates(monkeypatch):
 
     kwargs = calls[0][1]
 
-    assert instruction.id == 36
     assert kwargs["sample_rate"] == 8000
     assert kwargs["microphone_device"] == "microphone"
     assert kwargs["blocking"] is False

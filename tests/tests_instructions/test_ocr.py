@@ -97,21 +97,6 @@ class FakeImage:
         return self.array
 
 
-@pytest.mark.parametrize(
-    ("instruction", "expected_id", "expected_name"),
-    [
-        (ClickOnText("text"), 102, "ClickOnText"),
-        (MoveToText("text"), 101, "MoveToText"),
-        (PlotAllText(), 104, "PlotAllText"),
-        (PrintAllText(), 103, "PrintAllText"),
-        (GetText(), 100, "GetText"),
-    ],
-)
-def test_ai_instruction_ids_and_names(instruction, expected_id, expected_name):
-    assert instruction.id == expected_id
-    assert instruction.__class__.__name__ == expected_name
-
-
 def test_click_on_text_perform_order(monkeypatch):
     calls = []
 

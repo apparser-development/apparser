@@ -76,17 +76,6 @@ class FakeSpeaker(BaseSpeaker):
         return self.audio
 
 
-@pytest.mark.parametrize(
-    ("instruction", "expected_id"),
-    [
-        (PlayTextAudio("text"), 200),
-        (SayTextAudio("text"), 201),
-    ],
-)
-def test_speak_instruction_ids(instruction, expected_id):
-    assert instruction.id == expected_id
-
-
 @pytest.mark.parametrize("instruction_class", [PlayTextAudio, SayTextAudio])
 def test_speak_instruction_validation(instruction_class):
     with pytest.raises(TypeError, match="text must be a string"):

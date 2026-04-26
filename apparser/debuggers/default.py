@@ -12,7 +12,7 @@ class Debugger(BaseDebugger):
         result = ""
         for i in range(len(self.__instructions)):
             instruction = self.__instructions[i]
-            result += f"\n{i}\t{instruction.id}\t{instruction.__name__}"
+            result += f"\n{i}\t{instruction.id}\t{instruction.__class__.__name__}"
         return result
 
     def try_perform(self, instruction: BaseInstruction, *args, **kwargs):
