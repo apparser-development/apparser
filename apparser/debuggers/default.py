@@ -25,7 +25,7 @@ class Debugger(BaseDebugger):
         except Exception as e:
             formed_log = self.__form_log()
             max_string_len = max([len(i) for i in formed_log.split("\n")])
-            raise_text = f"{formed_log}\n{max_string_len * "-"}\n{e}"
+            raise_text = f'{formed_log}\n{max_string_len * "-"}\n{e}'
             raise DebugException(raise_text)
 
     def clear_contex(self):
