@@ -11,10 +11,23 @@ from apparser.text_readers.models.text_data import TextData
 
 
 class MoveToText(OCRInstruction):
+    """Move the mouse cursor to the best matching text block."""
+
     def __init__(self, text: str,
                  min_similarity: float = 0.9,
                  offset: Point | RelativelyPoint = Point(0, 0),
                  text_getter=GetText()):
+        """Initialize a text-targeted mouse movement instruction.
+
+        :param text: Text to locate.
+        :type text: str
+        :param min_similarity: Minimum similarity score required for a match.
+        :type min_similarity: float
+        :param offset: Offset relative to the detected text center.
+        :type offset: Point | RelativelyPoint
+        :param text_getter: Instruction used to extract text from the screen.
+        :type text_getter: GetText
+        """
         self.__text = text
         self.__offset = offset
         self.__text_getter = text_getter

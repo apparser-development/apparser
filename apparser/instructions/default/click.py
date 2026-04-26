@@ -5,7 +5,15 @@ from apparser.key_codes.mouse_keys import RightClick, LeftClick
 
 
 class MouseClick(BaseInstruction):
+    """Click the selected mouse button."""
+
     def __init__(self, click_type: RightClick | LeftClick = LeftClick()):
+        """Initialize a mouse click instruction.
+
+        :param click_type: Mouse button to click.
+        :type click_type: RightClick | LeftClick
+        :raises TypeError: If ``click_type`` is neither :class:`RightClick` nor :class:`LeftClick`.
+        """
         if isinstance(click_type, RightClick):
             self.__press_function = mouse.right_click
         elif isinstance(click_type, LeftClick):

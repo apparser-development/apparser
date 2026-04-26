@@ -21,7 +21,17 @@ def _check_instruction(instruction: tuple[str, list[Any]]) -> tuple[str, list[An
 
 
 class NamesAlgorithm(BaseAlgorithm):
+    """Resolve and execute instructions by their registered names."""
+
     def __init__(self, instructions: list[tuple[str, list[Any]]], debugger: BaseDebugger | None = Debugger()):
+        """Initialize a name-based instruction algorithm.
+
+        :param instructions: Sequence of instruction names with their arguments.
+        :type instructions: list[tuple[str, list[Any]]]
+        :param debugger: Debugger used to wrap instruction execution.
+        :type debugger: BaseDebugger | None
+        :raises TypeError: If ``debugger`` has an invalid type.
+        """
         if debugger is not None and not isinstance(debugger, BaseDebugger):
             raise TypeError("debugger must be BaseDebugger or None")
         

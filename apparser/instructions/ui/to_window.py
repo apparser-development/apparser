@@ -3,6 +3,8 @@ from apparser.instructions.ui.base import UiInstruction
 
 
 class WindowToBackground(UiInstruction):
+    """Send the current window to the background."""
+
     @property
     def id(self) -> int:
         return 101
@@ -12,6 +14,8 @@ class WindowToBackground(UiInstruction):
 
 
 class WindowToForeground(UiInstruction):
+    """Bring the current window to the foreground."""
+
     @property
     def id(self) -> int:
         return 100

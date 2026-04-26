@@ -9,11 +9,25 @@ from apparser.speakers import BaseSpeaker, ChatTTSSpeaker
 
 
 class AiAlgorithm(BaseAlgorithm):
+    """Run mixed instruction sequences with OCR and speech dependencies."""
+
     def __init__(self,
                  instructions: list[BaseInstruction],
                  speaker: BaseSpeaker | None = None,
                  text_reader: BaseTextReader | None = None,
                  debugger: BaseDebugger | None = Debugger()):
+        """Initialize an algorithm for mixed instruction pipelines.
+
+        :param instructions: Instructions to execute in order.
+        :type instructions: list[BaseInstruction]
+        :param speaker: Speaker used for speech instructions.
+        :type speaker: BaseSpeaker | None
+        :param text_reader: Text reader used for OCR instructions.
+        :type text_reader: BaseTextReader | None
+        :param debugger: Debugger used to wrap instruction execution.
+        :type debugger: BaseDebugger | None
+        :raises TypeError: If ``text_reader``, ``speaker`` or ``debugger`` has an invalid type.
+        """
         if speaker is None:
             speaker = ChatTTSSpeaker()
 

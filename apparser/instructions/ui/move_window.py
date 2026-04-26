@@ -4,7 +4,15 @@ from apparser.instructions.ui.base import UiInstruction
 
 
 class WindowMove(UiInstruction):
+    """Move the current window to a new position."""
+
     def __init__(self, position: Point):
+        """Initialize a window move instruction.
+
+        :param position: Target window position.
+        :type position: Point
+        :raises TypeError: If ``position`` has an invalid type.
+        """
         if not isinstance(position, Point):
             raise TypeError('position must be of type Point')
 

@@ -8,10 +8,21 @@ from apparser.text_readers import BaseTextReader, TextData
 
 
 class GetText(OCRInstruction):
+    """Read text from a selected screen region."""
+
     def __init__(self,
                  left_top_point: Point | RelativelyPoint = RelativelyPoint(0, 0),
                  right_bottom_point: Point | RelativelyPoint = RelativelyPoint(1, 1),
                  reload_every_try: bool = True):
+        """Initialize a screen text extraction instruction.
+
+        :param left_top_point: Top-left point of the capture area.
+        :type left_top_point: Point | RelativelyPoint
+        :param right_bottom_point: Bottom-right point of the capture area.
+        :type right_bottom_point: Point | RelativelyPoint
+        :param reload_every_try: Whether to refresh OCR data on every call.
+        :type reload_every_try: bool
+        """
         self.__left_top_point = left_top_point
         self.__right_bottom_point = right_bottom_point
         self.__reload_every_try = reload_every_try

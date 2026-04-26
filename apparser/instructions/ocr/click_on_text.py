@@ -10,12 +10,29 @@ from apparser.instructions.ocr.text_getter import GetText
 
 
 class ClickOnText(OCRInstruction):
+    """Move to matching text and click it."""
+
     def __init__(self, text: str,
                  click_type: RightClick | LeftClick = LeftClick(),
                  min_similarity: float = 0.9,
                  offset: Point | RelativelyPoint = Point(0, 0),
                  text_getter=GetText(),
                  sleep_time_before_move: float = 0.1):
+        """Initialize a text click instruction.
+
+        :param text: Text to locate before clicking.
+        :type text: str
+        :param click_type: Mouse button to click.
+        :type click_type: RightClick | LeftClick
+        :param min_similarity: Minimum similarity score required for a match.
+        :type min_similarity: float
+        :param offset: Offset relative to the detected text center.
+        :type offset: Point | RelativelyPoint
+        :param text_getter: Instruction used to extract text from the screen.
+        :type text_getter: GetText
+        :param sleep_time_before_move: Delay before the click is performed.
+        :type sleep_time_before_move: float
+        """
         self.__mouse_mover = MoveToText(text, min_similarity, offset, text_getter)
         self.__click_type = click_type
         self.__sleep = Sleep(sleep_time_before_move)

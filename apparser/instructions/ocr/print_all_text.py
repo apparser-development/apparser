@@ -5,7 +5,14 @@ from apparser.instructions.ocr.text_getter import GetText
 
 
 class PrintAllText(OCRInstruction):
+    """Print all detected text blocks and their coordinates."""
+
     def __init__(self, text_getter: GetText = GetText()):
+        """Initialize an OCR text printing instruction.
+
+        :param text_getter: Instruction used to extract text from the screen.
+        :type text_getter: GetText
+        """
         self.__text_getter = text_getter
 
     @property

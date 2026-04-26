@@ -6,9 +6,19 @@ from apparser.movers.base import BaseMover
 
 
 class MouseMove(UiInstruction):
+    """Move the mouse cursor to the provided coordinates."""
+
     def __init__(self,
                  coordinates: Point | RelativelyPoint,
                  mover: BaseMover = DefaultMover()):
+        """Initialize a mouse movement instruction.
+
+        :param coordinates: Target coordinates for the cursor.
+        :type coordinates: Point | RelativelyPoint
+        :param mover: Mouse movement strategy.
+        :type mover: BaseMover
+        :raises TypeError: If ``coordinates`` or ``mover`` has an invalid type.
+        """
         if  not (isinstance(coordinates, Point) or isinstance(coordinates, RelativelyPoint)):
             raise TypeError('coordinates must be Point or RelativelyPoint')
 

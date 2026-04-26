@@ -6,8 +6,18 @@ from apparser.instructions import UiInstruction
 
 
 class Algorithm(BaseAlgorithm):
+    """Run UI instructions sequentially for a single window context."""
+
     def __init__(self, instructions: list[UiInstruction],
                  debugger: BaseDebugger | None):
+        """Initialize a UI instruction algorithm.
+
+        :param instructions: UI instructions to execute in order.
+        :type instructions: list[UiInstruction]
+        :param debugger: Debugger used to wrap instruction execution.
+        :type debugger: BaseDebugger | None
+        :raises TypeError: If ``debugger`` has an invalid type.
+        """
         if debugger is not None and not isinstance(debugger, BaseDebugger):
             raise TypeError("debugger must be BaseDebugger or None")
 

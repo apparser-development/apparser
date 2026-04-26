@@ -6,10 +6,22 @@ from apparser.text_readers import BaseTextReader, EasyOcrReader, ScreensControll
 
 
 class OCRAlgorithm(BaseAlgorithm):
+    """Run instruction sequences that depend on OCR data."""
+
     def __init__(self,
                  instructions: list[BaseInstruction],
                  text_reader: BaseTextReader | None = None,
                  debugger: BaseDebugger | None = Debugger()):
+        """Initialize an OCR-oriented instruction algorithm.
+
+        :param instructions: Instructions to execute in order.
+        :type instructions: list[BaseInstruction]
+        :param text_reader: Text reader used during execution.
+        :type text_reader: BaseTextReader | None
+        :param debugger: Debugger used to wrap instruction execution.
+        :type debugger: BaseDebugger | None
+        :raises TypeError: If ``text_reader`` or ``debugger`` has an invalid type.
+        """
         if text_reader is None:
             text_reader = ScreensController(EasyOcrReader())
 

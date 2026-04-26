@@ -4,7 +4,15 @@ from apparser.instructions.base import BaseInstruction
 
 
 class Sleep(BaseInstruction):
+    """Pause execution for a fixed amount of time."""
+
     def __init__(self, sleep_time: float):
+        """Initialize a sleep instruction.
+
+        :param sleep_time: Delay duration in seconds.
+        :type sleep_time: float
+        :raises ValueError: If ``sleep_time`` is not greater than zero.
+        """
         if sleep_time <= 0:
             raise ValueError("sleep_time must be >= 0")
 

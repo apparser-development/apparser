@@ -6,10 +6,22 @@ from apparser.speakers import BaseSpeaker, ChatTTSSpeaker
 
 
 class SpeakAlgorithm(BaseAlgorithm):
+    """Run instruction sequences that depend on a speaker backend."""
+
     def __init__(self,
                  instructions: list[BaseInstruction],
                  speaker: BaseSpeaker | None = None,
                  debugger: BaseDebugger | None = Debugger()):
+        """Initialize a speech-oriented instruction algorithm.
+
+        :param instructions: Instructions to execute in order.
+        :type instructions: list[BaseInstruction]
+        :param speaker: Speaker used during execution.
+        :type speaker: BaseSpeaker | None
+        :param debugger: Debugger used to wrap instruction execution.
+        :type debugger: BaseDebugger | None
+        :raises TypeError: If ``speaker`` or ``debugger`` has an invalid type.
+        """
         if speaker is None:
             speaker = ChatTTSSpeaker()
 

@@ -4,7 +4,18 @@ from apparser.instructions.base import BaseInstruction
 
 
 class WriteText(BaseInstruction):
+    """Type text through the keyboard backend."""
+
     def __init__(self, text: str, pause_time: float = 0.1):
+        """Initialize a text writing instruction.
+
+        :param text: Text to type.
+        :type text: str
+        :param pause_time: Delay between typed characters.
+        :type pause_time: float
+        :raises TypeError: If ``text`` or ``pause_time`` has an invalid type.
+        :raises ValueError: If ``text`` is empty.
+        """
         if not isinstance(text, str):
             raise TypeError('text must be a string')
 

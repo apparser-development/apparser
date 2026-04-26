@@ -5,7 +5,15 @@ from apparser.key_codes.base import BaseKeyCode
 
 
 class PressKey(BaseInstruction):
+    """Send a single keyboard key press."""
+
     def __init__(self, key_code: BaseKeyCode | str):
+        """Initialize a single-key press instruction.
+
+        :param key_code: Key code to send.
+        :type key_code: BaseKeyCode | str
+        :raises TypeError: If ``key_code`` is neither :class:`BaseKeyCode` nor :class:`str`.
+        """
         if not (isinstance(key_code, BaseKeyCode) or isinstance(key_code, str)):
             raise TypeError('key_code must be KeyCode or str')
 
@@ -20,7 +28,14 @@ class PressKey(BaseInstruction):
 
 
 class PressKeysCombination(BaseInstruction):
+    """Send a keyboard shortcut as a pressed combination."""
+
     def __init__(self, keys: list[BaseKeyCode | str]):
+        """Initialize a key combination instruction.
+
+        :param keys: Keys to press together.
+        :type keys: list[BaseKeyCode | str]
+        """
         self.__keys = keys
 
     @property

@@ -6,12 +6,29 @@ from apparser.instructions.base import BaseInstruction
 
 
 class SayAudio(BaseInstruction):
+    """Play raw audio through a microphone output device."""
+
     def __init__(self,
                  audio: numpy.ndarray | list,
                  sample_rate: int | float = 48000,
                  microphone_device: int | str | None = None,
                  blocking: bool = True,
                  **settings):
+        """Initialize a microphone-targeted audio playback instruction.
+
+        :param audio: Audio data to play.
+        :type audio: numpy.ndarray | list
+        :param sample_rate: Audio sample rate in hertz.
+        :type sample_rate: int | float
+        :param microphone_device: Output device identifier for voice playback.
+        :type microphone_device: int | str | None
+        :param blocking: Whether playback should block execution.
+        :type blocking: bool
+        :param settings: Additional ``sounddevice.play`` settings.
+        :type settings: dict[str, object]
+        :raises TypeError: If argument types are invalid.
+        :raises ValueError: If the sample rate or audio data is invalid.
+        """
         if not isinstance(sample_rate, (int, float)):
             raise TypeError("sample_rate must be a number")
 

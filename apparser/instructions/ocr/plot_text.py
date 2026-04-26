@@ -10,7 +10,16 @@ from apparser.instructions.ocr.text_getter import GetText
 
 
 class _Painter:
+    """Draw OCR results on top of an image."""
+
     def __init__(self, draw: ImageDraw.Draw, color: Tuple[int, int, int, int]):
+        """Initialize a painter for OCR overlays.
+
+        :param draw: Pillow drawing context.
+        :type draw: ImageDraw.Draw
+        :param color: RGBA color used for rendered overlays.
+        :type color: Tuple[int, int, int, int]
+        """
         self.__draw = draw
         self.__color = color
 
@@ -34,8 +43,17 @@ class _Painter:
 
 
 class PlotAllText(OCRInstruction):
+    """Render detected text boxes on a screenshot."""
+
     def __init__(self, text_getter: GetText = GetText(),
                  color_rgba: tuple[int, int, int, int] = (255, 255, 255, 255)):
+        """Initialize an OCR plotting instruction.
+
+        :param text_getter: Instruction used to extract text from the screen.
+        :type text_getter: GetText
+        :param color_rgba: RGBA color used for the rendered overlays.
+        :type color_rgba: tuple[int, int, int, int]
+        """
         self.__text_getter = text_getter
         self.__color = color_rgba
 

@@ -8,11 +8,26 @@ from apparser.instructions.default.play_audio import PlayAudio
 
 
 class PlayAudioFile(BaseInstruction):
+    """Play audio loaded from a file."""
+
     def __init__(self,
                  path: str,
                  device: int | str | None = None,
                  blocking: bool = True,
                  **settings):
+        """Initialize a file-based audio playback instruction.
+
+        :param path: Path to the audio file.
+        :type path: str
+        :param device: Output device identifier.
+        :type device: int | str | None
+        :param blocking: Whether playback should block execution.
+        :type blocking: bool
+        :param settings: Additional ``sounddevice.play`` settings.
+        :type settings: dict[str, object]
+        :raises TypeError: If ``path`` has an invalid type.
+        :raises ValueError: If ``path`` is empty or the file does not exist.
+        """
         if not isinstance(path, str):
             raise TypeError("path must be str")
 
