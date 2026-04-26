@@ -1,16 +1,29 @@
 from apparser.core import BaseUi
 from apparser.debuggers import BaseDebugger, Debugger
-from apparser.algorithms.base import BaseAlgorithm
+from apparser.instructions.algorithms.base import BaseAlgorithm
 from apparser.instructions import BaseInstruction
+from apparser.instructions.speak import SpeakInstruction
+from apparser.instructions.ocr import OCRInstruction
 from apparser.text_readers import BaseTextReader, EasyOcrReader, ScreensController
+from apparser.speakers import BaseSpeaker, ChatTTSSpeaker
 
 
-class OCRAlgorithm(BaseAlgorithm):
+class AiAlgorithm(BaseAlgorithm):
     def __init__(self,
                  instructions: list[BaseInstruction],
-                 text_reader: BaseTextReader = ScreensController(EasyOcrReader()),
+                 speaker: BaseSpeaker | None = None,
+                 text_reader: BaseTextReader | None = None,
                  debugger: BaseDebugger | None = Debugger()):
+        if speaker is None:
+            speaker = ChatTTSSpeaker()
+
+        if text_reader is None:
+            text_reader = ScreensController(EasyOcrReader())
+
         if not isinstance(text_reader, BaseTextReader):
+            raise TypeError("text_reader must be BaseTextReader")
+        
+        if not isinstance(speaker, BaseSpeaker):
             raise TypeError("text_reader must be BaseTextReader")
         
         if debugger is not None and not isinstance(debugger, BaseDebugger):
@@ -18,21 +31,29 @@ class OCRAlgorithm(BaseAlgorithm):
 
         self.__instructions = instructions
         self.__text_reader = text_reader
+        self.__speaker = speaker
         self.__debugger = debugger
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         if self.__debugger is not None:
             self.__debugger.clear_contex()
-
+            
         ui.window.to_foreground()
         for instruction in self.__instructions:
             if not (isinstance(instruction, BaseInstruction)):
                 raise TypeError(f"{instruction} must be Instruction or AiInstruction")
-
-            if self.__debugger is not None:
-                self.__debugger.try_perform(instruction, ui, self.__text_reader)
+            if isinstance(instruction, SpeakInstruction):
+                if self.__debugger is not None:
+                    self.__debugger.try_perform(instruction, ui, self.__speaker)
+                else:
+                    instruction.perform(ui, self.__speaker)
+            elif isinstance(instruction, OCRInstruction):
+                if self.__debugger is not None:
+                    self.__debugger.try_perform(instruction, ui, self.__text_reader)
+                else:
+                    instruction.perform(ui, self.__text_reader)
             else:
-                instruction.perform(ui, self.__text_reader)
+                instruction.perform(ui)
 
     def add_instruction(self, instruction: BaseInstruction):
         if not (isinstance(instruction, BaseInstruction)):

@@ -58,7 +58,7 @@ def _install_optional_dependency_stubs():
 _install_optional_dependency_stubs()
 
 from apparser import App, BaseUi, CoordinatesUi, DesktopUi
-from apparser.algorithms import AiAlgorithm, Algorithm
+from apparser.instructions.algorithms import AiAlgorithm, Algorithm
 from apparser.core import WindowUi
 from apparser.cv import DefaultCvProcess, DefaultHandlers, YoloReader
 from apparser.exceptions import (

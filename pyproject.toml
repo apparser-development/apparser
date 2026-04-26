@@ -5,10 +5,8 @@ dependencies = [
     "mouse >= 0.7.1",
     "numpy >= 1.20",
     "pillow >= 11.0",
-    "easyocr >= 1.7.2",
-    "thefuzz >= 0.20.0",
-    "ultralytics >= 8.4.30",
-    "screeninfo >= 0.8"
+    "screeninfo >= 0.8",
+    "thefuzz >= 0.20.0"
 ]
 name = "apparser"
 version = "1.0.0"
@@ -31,3 +29,25 @@ classifiers = [
 [project.urls]
 Repository = "https://github.com/lexter0705/apparser"
 Issues = "https://github.com/lexter0705/apparser/issues"
+
+[project.optional-dependencies]
+cv = [
+    "ultralytics >= 8.4.30"
+]
+
+ocr = [
+    "easyocr >= 1.7.2",
+    "paddleocr"
+]
+
+speak = [
+    "ChatTTS",
+    "sounddevice",
+    "torch"
+]
+
+all = [
+  "apparser[cv]",
+  "apparser[ocr]",
+  "apparser[speak]",
+]

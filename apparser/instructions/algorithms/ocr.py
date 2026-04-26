@@ -1,23 +1,26 @@
 from apparser.core import BaseUi
 from apparser.debuggers import BaseDebugger, Debugger
-from apparser.algorithms.base import BaseAlgorithm
+from apparser.instructions.algorithms.base import BaseAlgorithm
 from apparser.instructions import BaseInstruction
-from apparser.speakers import BaseSpeaker, ChatTTSSpeaker
+from apparser.text_readers import BaseTextReader, EasyOcrReader, ScreensController
 
 
-class SpeakAlgorithm(BaseAlgorithm):
+class OCRAlgorithm(BaseAlgorithm):
     def __init__(self,
                  instructions: list[BaseInstruction],
-                 speaker: BaseSpeaker = ChatTTSSpeaker(),
+                 text_reader: BaseTextReader | None = None,
                  debugger: BaseDebugger | None = Debugger()):
-        if not isinstance(speaker, BaseSpeaker):
-            raise TypeError("speaker must be BaseSpeaker")
+        if text_reader is None:
+            text_reader = ScreensController(EasyOcrReader())
+
+        if not isinstance(text_reader, BaseTextReader):
+            raise TypeError("text_reader must be BaseTextReader")
         
         if debugger is not None and not isinstance(debugger, BaseDebugger):
             raise TypeError("debugger must be BaseDebugger or None")
 
         self.__instructions = instructions
-        self.__speaker = speaker
+        self.__text_reader = text_reader
         self.__debugger = debugger
 
     def perform(self, ui: BaseUi, *args, **kwargs):
@@ -28,11 +31,11 @@ class SpeakAlgorithm(BaseAlgorithm):
         for instruction in self.__instructions:
             if not (isinstance(instruction, BaseInstruction)):
                 raise TypeError(f"{instruction} must be Instruction or AiInstruction")
-            
+
             if self.__debugger is not None:
-                self.__debugger.try_perform(instruction, ui, self.__speaker)
+                self.__debugger.try_perform(instruction, ui, self.__text_reader)
             else:
-                instruction.perform(ui, self.__speaker)
+                instruction.perform(ui, self.__text_reader)
 
     def add_instruction(self, instruction: BaseInstruction):
         if not (isinstance(instruction, BaseInstruction)):

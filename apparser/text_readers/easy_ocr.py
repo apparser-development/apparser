@@ -1,4 +1,4 @@
-import easyocr
+import importlib
 import numpy
 
 from apparser.text_readers.base import BaseTextReader
@@ -11,6 +11,7 @@ class EasyOcrReader(BaseTextReader):
     def __init__(self, lang_list: list[str] = None, **settings):
         if lang_list is None:
             lang_list = ["en"]
+        easyocr = importlib.import_module("easyocr")
         self.__reader = easyocr.Reader(lang_list, **settings)
 
     def read_image(self, image: numpy.ndarray, **settings) -> list[TextData]:

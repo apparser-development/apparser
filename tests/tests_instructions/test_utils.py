@@ -79,10 +79,10 @@ def test_get_instruction_by_id(instruction_id, expected):
 
 def test_get_instruction_by_name(monkeypatch):
     class FakePressKey:
-        name = "PressKey"
+        pass
 
     class FakeClickOnText:
-        name = "ClickOnText"
+        pass
 
     monkeypatch.setattr(
         get_by_name_module,
@@ -90,8 +90,8 @@ def test_get_instruction_by_name(monkeypatch):
         lambda: [FakePressKey, FakeClickOnText],
     )
 
-    assert get_instruction_by_name("PressKey") is FakePressKey
-    assert get_instruction_by_name("ClickOnText") is FakeClickOnText
+    assert get_instruction_by_name("FakePressKey") is FakePressKey
+    assert get_instruction_by_name("FakeClickOnText") is FakeClickOnText
     assert get_instruction_by_name("UnknownInstruction") is None
 
 

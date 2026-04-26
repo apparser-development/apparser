@@ -2,26 +2,26 @@ from typing import Any
 
 from apparser.core import BaseUi
 from apparser.debuggers import BaseDebugger, Debugger
-from apparser.algorithms.base import BaseAlgorithm
-from apparser.instructions.utils import get_instruction_by_id
+from apparser.instructions.algorithms.base import BaseAlgorithm
+from apparser.instructions.utils import get_instruction_by_name
 
 
-def _check_instruction(instruction: tuple[int, list[Any]]) -> tuple[int, list[Any]]:
+def _check_instruction(instruction: tuple[str, list[Any]]) -> tuple[str, list[Any]]:
     if not isinstance(instruction, tuple):
         raise TypeError(f"{instruction} must be tuple")
 
-    instruction_id, instruction_args = instruction
-    if not isinstance(instruction_id, int):
-        raise TypeError(f"{instruction_id} must be int")
+    instruction_name, instruction_args = instruction
+    if not isinstance(instruction_name, str):
+        raise TypeError(f"{instruction_name} must be str")
 
     if not isinstance(instruction_args, list):
         raise TypeError(f"{instruction_args} must be list")
 
-    return instruction_id, instruction_args
+    return instruction_name, instruction_args
 
 
-class IdsAlgorithm(BaseAlgorithm):
-    def __init__(self, instructions: list[tuple[int, list[Any]]], debugger: BaseDebugger | None = Debugger()):
+class NamesAlgorithm(BaseAlgorithm):
+    def __init__(self, instructions: list[tuple[str, list[Any]]], debugger: BaseDebugger | None = Debugger()):
         if debugger is not None and not isinstance(debugger, BaseDebugger):
             raise TypeError("debugger must be BaseDebugger or None")
         
@@ -31,22 +31,22 @@ class IdsAlgorithm(BaseAlgorithm):
     def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.to_foreground()
         for instruction_data in self.__instructions:
-            instruction_id, instruction_args = _check_instruction(instruction_data)
+            instruction_name, instruction_args = _check_instruction(instruction_data)
 
-            instruction = get_instruction_by_id(instruction_id)
-            if instruction is None:
-                raise ValueError(f"instruction with id {instruction_id} not found")
+            instruction_type = get_instruction_by_name(instruction_name)
+            if instruction_type is None:
+                raise ValueError(f"instruction with name {instruction_name} not found")
             
-            instruction = instruction(*instruction_args)
+            instruction = instruction_type(*instruction_args)
             if self.__debugger is not None:
                 self.__debugger.try_perform(instruction, ui, *args, **kwargs)
             else:
                 instruction.perform(ui, *args, **kwargs)
 
-    def add_instruction(self, instruction: tuple[int, list[Any]]):
+    def add_instruction(self, instruction: tuple[str, list[Any]]):
         _check_instruction(instruction)
         self.__instructions.append(instruction)
 
     @property
-    def instructions(self) -> list[tuple[int, list[Any]]]:
+    def instructions(self) -> list[tuple[str, list[Any]]]:
         return self.__instructions

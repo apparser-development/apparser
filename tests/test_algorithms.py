@@ -2,7 +2,7 @@
 
 import pytest
 
-from apparser.algorithms import AiAlgorithm, Algorithm
+from apparser.instructions.algorithms import AiAlgorithm, Algorithm
 from tests.utils.instructions import DummyAiInstruction, DummyInstruction
 from tests.utils.readers import FakeTextReader
 from tests.utils.ui import InteractionUi

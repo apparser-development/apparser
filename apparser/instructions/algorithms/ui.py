@@ -1,4 +1,4 @@
-from apparser.algorithms.base import BaseAlgorithm
+from apparser.instructions.algorithms.base import BaseAlgorithm
 
 from apparser.core import BaseUi
 from apparser.debuggers import BaseDebugger
