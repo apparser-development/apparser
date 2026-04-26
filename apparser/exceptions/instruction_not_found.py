@@ -11,6 +11,6 @@ class InstructionWithIdNotFoundException(InstructionNotFoundException):
         super().__init__(f"Instruction with id {instruction_id} was not found.")
 
 
-class (InstructionNotFoundException):
+class InstructionWithNameNotFoundException(InstructionNotFoundException):
     def __init__(self, instruction_name: str):
         super().__init__(f"Instruction with name {instruction_name} was not found.")
