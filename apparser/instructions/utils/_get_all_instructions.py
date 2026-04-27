@@ -5,6 +5,11 @@ from apparser.instructions.base import BaseInstruction
 
 
 def _get_all_instructions() -> list[type[BaseInstruction]]:
+    """Collect all concrete instruction classes from instruction modules.
+
+    :return: Collected concrete instruction classes.
+    :rtype: list[type[BaseInstruction]]
+    """
     result = []
     for module in [default, ocr, speak, ui]:
         for instruction_name in module.__all__:
