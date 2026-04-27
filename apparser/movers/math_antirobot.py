@@ -9,7 +9,22 @@ from apparser.movers.base import BaseMover
 
 
 class DefaultMoveGenerator:
+    """Generate multi-step cursor paths with random timing and offsets."""
+
     def __init__(self, min_time: float = 0.1, max_time: float = 2, min_shift: float = 30, max_shift: float = 100):
+        """Initialize a movement path generator.
+
+        :param min_time: Minimum delay between steps.
+        :type min_time: float
+        :param max_time: Maximum delay between steps.
+        :type max_time: float
+        :param min_shift: Minimum shift distance for intermediate steps.
+        :type min_shift: float
+        :param max_shift: Maximum shift distance for intermediate steps.
+        :type max_shift: float
+        :raises TypeError: If any argument has an invalid type.
+        :raises ValueError: If time or shift limits are invalid.
+        """
         if not (isinstance(min_time, float) or isinstance(min_time, int)):
             raise TypeError('min_time must be number')
 
@@ -56,6 +71,16 @@ class DefaultMoveGenerator:
                      round(random_shift * y_part) * y_sign)
 
     def __call__(self, start_position: Point, end_position: Point) -> Generator[tuple[Point, float], None, None]:
+        """Yield intermediate cursor positions and durations.
+
+        :param start_position: Initial cursor position.
+        :type start_position: Point
+        :param end_position: Final cursor position.
+        :type end_position: Point
+        :return: Generated cursor path.
+        :rtype: Generator[tuple[Point, float], None, None]
+        :raises TypeError: If either point has an invalid type.
+        """
         if not isinstance(start_position, Point):
             raise TypeError('start_position must be Point')
 
@@ -72,11 +97,24 @@ class DefaultMoveGenerator:
 
 
 class AntiRobotMover(BaseMover):
+    """Move the cursor by using generated multi-step paths."""
+
     def __init__(self,
                  move_generator: Callable[[Point, Point], Generator[tuple[Point, float], None, None]] = DefaultMoveGenerator(0.05, 0.1)):
+        """Initialize a mover that follows generated paths.
+
+        :param move_generator: Callable that yields cursor positions and durations.
+        :type move_generator: Callable[[Point, Point], Generator[tuple[Point, float], None, None]]
+        """
         self.__move_generator = move_generator
 
     def move(self, position: Point):
+        """Move the cursor to the target position.
+
+        :param position: Target cursor position.
+        :type position: Point
+        :raises TypeError: If ``position`` has an invalid type.
+        """
         if not isinstance(position, Point):
             raise TypeError('position must be Point')
 
