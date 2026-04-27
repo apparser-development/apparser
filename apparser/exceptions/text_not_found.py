@@ -1,5 +1,14 @@
 class TextNotFoundException(Exception):
+    """Represent a failure to find text with the required similarity."""
+
     def __init__(self, min_similarity: float):
+        """Initialize a text lookup exception.
+
+        :param min_similarity: Minimum accepted similarity value.
+        :type min_similarity: float
+        :raises TypeError: If ``min_similarity`` has an invalid type.
+        :raises ValueError: If ``min_similarity`` is outside the inclusive range from 0 to 1.
+        """
         if not isinstance(min_similarity, float):
             raise TypeError("min_similarity must be float")
 

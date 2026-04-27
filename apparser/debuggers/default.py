@@ -5,7 +5,10 @@ from apparser.instructions import BaseInstruction
 
 
 class Debugger(BaseDebugger):
+    """Store executed instructions and wrap raised errors."""
+
     def __init__(self):
+        """Initialize a debugger with an empty instruction log."""
         self.__instructions: list[BaseInstruction] = []
 
     def __form_log(self) -> str:
@@ -16,6 +19,14 @@ class Debugger(BaseDebugger):
         return result
 
     def try_perform(self, instruction: BaseInstruction, *args, **kwargs):
+        """Execute an instruction and convert failures to debug exceptions.
+
+        :param instruction: Instruction to execute.
+        :type instruction: BaseInstruction
+        :param args: Positional arguments passed to the instruction.
+        :param kwargs: Keyword arguments passed to the instruction.
+        :raises DebugException: If the instruction raises an exception.
+        """
         try:
             self.__instructions.append(instruction)
             instruction.perform(*args, **kwargs)
@@ -29,4 +40,5 @@ class Debugger(BaseDebugger):
             raise DebugException(raise_text)
 
     def clear_contex(self):
+        """Clear the stored instruction log."""
         self.__instructions = []
