@@ -1,39 +1,56 @@
 from pathlib import Path
 import sys
+import tomllib
+import types
 
-
-ROOT = Path(__file__).resolve().parents[1]
+DOCS = Path(__file__).resolve().parent
+ROOT = DOCS.parent
 sys.path.insert(0, str(ROOT))
 
+project_data = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]
 
-project = 'Apparser'
-copyright = '2026, Terochkin A.S'
-author = 'Terochkin A.S'
-release = '1.0.0'
+
+def _install_ultralytics_stub():
+    try:
+        import ultralytics
+        return ultralytics
+    except ModuleNotFoundError:
+        ultralytics = types.ModuleType("ultralytics")
+
+        class YOLO:
+            def __init__(self, *args, **kwargs):
+                self.args = args
+                self.kwargs = kwargs
+
+        ultralytics.YOLO = YOLO
+        sys.modules["ultralytics"] = ultralytics
+        return ultralytics
+
+
+_install_ultralytics_stub()
+
+project = project_data["name"]
+author = ", ".join(item["name"] for item in project_data.get("authors", []))
+release = project_data["version"]
+version = release
 
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.napoleon',
-    'sphinx.ext.viewcode',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.viewcode",
 ]
 
-templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+templates_path = []
+exclude_patterns = ["_build", "_build*", "__pycache__", "Thumbs.db", ".DS_Store"]
+suppress_warnings = ["ref.python"]
 
-autosummary_generate = False
-add_module_names = False
-autodoc_member_order = 'bysource'
-autodoc_typehints = 'description'
+autosummary_generate = True
 autodoc_default_options = {
-    'members': True,
-    'undoc-members': True,
-    'show-inheritance': True,
+    "members": True,
+    "undoc-members": True,
+    "show-inheritance": True,
+    "member-order": "bysource",
 }
-autodoc_mock_imports = ['easyocr', 'ultralytics']
 
-language = 'en'
-
-html_theme = 'furo'
-html_static_path = ['_static']
-html_title = 'Apparser Documentation'
+add_module_names = False
+html_theme = 'sphinxawesome_theme'
