@@ -5,6 +5,7 @@ from apparser.instructions.ui.move_window import WindowMove
 from apparser.instructions.ui.resize_window import WindowResize
 from apparser.instructions.ui.to_window import WindowToForeground, WindowToBackground
 
+
 __all__ = ["MouseMove",
            "MouseClickTo",
            "UiInstruction",

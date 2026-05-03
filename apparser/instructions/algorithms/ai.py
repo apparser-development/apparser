@@ -1,5 +1,5 @@
 from apparser.core import BaseUi
-from apparser.debuggers import BaseDebugger, Debugger
+from apparser.instructions.debuggers import BaseDebugger, Debugger
 from apparser.instructions.algorithms.base import BaseAlgorithm
 from apparser.instructions import BaseInstruction
 from apparser.instructions.speak import SpeakInstruction
@@ -36,10 +36,10 @@ class AiAlgorithm(BaseAlgorithm):
 
         if not isinstance(text_reader, BaseTextReader):
             raise TypeError("text_reader must be BaseTextReader")
-        
+
         if not isinstance(speaker, BaseSpeaker):
             raise TypeError("text_reader must be BaseTextReader")
-        
+
         if debugger is not None and not isinstance(debugger, BaseDebugger):
             raise TypeError("debugger must be BaseDebugger or None")
 
@@ -55,7 +55,7 @@ class AiAlgorithm(BaseAlgorithm):
     def perform(self, ui: BaseUi, *args, **kwargs):
         if self.__debugger is not None:
             self.__debugger.clear_contex()
-            
+
         ui.window.to_foreground()
         for instruction in self.__instructions:
             if not (isinstance(instruction, BaseInstruction)):

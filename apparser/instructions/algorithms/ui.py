@@ -1,8 +1,8 @@
 from apparser.instructions.algorithms.base import BaseAlgorithm
 
 from apparser.core import BaseUi
-from apparser.debuggers import BaseDebugger
-from apparser.instructions import UiInstruction
+from apparser.instructions.debuggers import BaseDebugger
+from apparser.instructions.ui.base import UiInstruction
 
 
 class Algorithm(BaseAlgorithm):

@@ -55,8 +55,8 @@ class GetText(OCRInstruction):
         screen = Image.fromarray(ui.get_screenshot())
         screen = screen.crop((self.__left_top_point_global.x, self.__left_top_point_global.y, right_bottom_point.x,
                               right_bottom_point.y))
-        self.__screenshot = screen
         screen = numpy.array(screen)
+        self.__screenshot = screen
         ai_answer = text_reader.read_image(screen)
         self.__local_answer = ai_answer.copy()
         ai_answer = self.__texts_coordinates_to_local(ai_answer)

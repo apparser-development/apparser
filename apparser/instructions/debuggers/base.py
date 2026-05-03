@@ -1,6 +1,6 @@
 import abc
 
-from apparser.instructions import BaseInstruction
+from apparser.instructions.base import BaseInstruction
 
 
 class BaseDebugger(abc.ABC):

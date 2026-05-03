@@ -278,7 +278,8 @@ def test_print_all_text_perform(monkeypatch):
 
 
 def test_get_text_perform_and_reload_behaviour():
-    screenshot = FakeImage(numpy.array([[1, 2], [3, 4]], dtype=numpy.uint8))
+    array = numpy.array([[1, 2], [3, 4]], dtype=numpy.uint8)
+    screenshot = FakeImage(array)
     ai = FakeTextReader([TextData("word", [Point(1, 1), Point(2, 2)])])
     ui = InteractionUi(screenshot.array)
     instruction = GetText(Point(5, 6), Point(10, 12), reload_every_try=False)
@@ -293,4 +294,4 @@ def test_get_text_perform_and_reload_behaviour():
     assert len(ai.calls) == 1
     assert instruction.local_answer == [TextData("word", [Point(1, 1), Point(2, 2)])]
     assert instruction.global_answer == [TextData("word", [Point(6, 7), Point(7, 8)])]
-    assert instruction.screenshot is screenshot
+    assert numpy.array_equal(array, instruction.screenshot)

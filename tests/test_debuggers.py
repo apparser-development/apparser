@@ -2,7 +2,7 @@
 
 import pytest
 
-from apparser.debuggers import Debugger
+from apparser.instructions.debuggers import Debugger
 from apparser.exceptions import DebugException
 from tests.utils.instructions import DummyInstruction
 

@@ -1,5 +1,5 @@
 from apparser.core import BaseUi
-from apparser.debuggers import BaseDebugger, Debugger
+from apparser.instructions.debuggers import BaseDebugger, Debugger
 from apparser.instructions.algorithms.base import BaseAlgorithm
 from apparser.instructions import BaseInstruction
 from apparser.text_readers import BaseTextReader, EasyOcrReader, ScreensController

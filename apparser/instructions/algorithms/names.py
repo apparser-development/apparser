@@ -1,7 +1,7 @@
 from typing import Any
 
 from apparser.core import BaseUi
-from apparser.debuggers import BaseDebugger, Debugger
+from apparser.instructions.debuggers import BaseDebugger, Debugger
 from apparser.instructions.algorithms.base import BaseAlgorithm
 from apparser.instructions.utils import get_instruction_by_name
 
