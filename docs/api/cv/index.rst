@@ -3,10 +3,11 @@ cv
 
 .. toctree::
    :maxdepth: 1
+   :titlesonly:
 
-   events/index
    handlers/index
    models/index
    processes/index
    readers/index
    utils/index
+   events/index

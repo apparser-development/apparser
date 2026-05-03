@@ -1,7 +1,7 @@
 Apparser
 ========
 
-.. image:: ./_static/apparser.svg
+.. image:: ../_static/apparser.svg
    :width: 40%
 
 .. raw:: html
@@ -24,40 +24,13 @@ Link to `PyPi <https://pypi.org/project/appwindows/>`__
 
 Link to `GitHub <https://github.com/apparser-development/apparser>`__
 
+For Developers
+==============
 
-.. toctree::
-   :caption: Info
-   :hidden:
-   :maxdepth: 1
-   :titlesonly:
+1. If something doesn't work - open issue.
+2. If you want something fixed - open issue.
+3. If you can help with the library - email.
 
-   info/about
-   info/install
-   info/package_map
+apparser.development@gmail.com
 
-.. toctree::
-   :caption: Examples
-   :hidden:
-   :maxdepth: 1
-   :titlesonly:
-
-   examples/quickstart
-   examples/text_readers
-   examples/cv
-   examples/instructions/index
-
-.. toctree::
-   :caption: Apparser
-   :hidden:
-   :maxdepth: 1
-   :titlesonly:
-
-   api/core/index
-   api/cv/index
-   api/geometry/index
-   api/instructions/index
-   api/movers/index
-   api/speakers/index
-   api/text_readers/index
-   api/key_codes/index
-   api/exceptions/index
+Any help in development is welcome)!

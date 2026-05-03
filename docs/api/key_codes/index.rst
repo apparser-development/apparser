@@ -1,13 +1,42 @@
 key_codes
 ==================
 
-.. toctree::
-   :maxdepth: 1
+.. currentmodule:: apparser.key_codes
 
-   KeyboardKeyCode
-   Enter
-   Control
-   RightClick
-   LeftClick
-   Alt
-   Delete
+.. autoclass:: Alt
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: bysource
+
+.. autoclass:: Control
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: bysource
+
+.. autoclass:: Delete
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: bysource
+
+.. autoclass:: KeyboardKeyCode
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: bysource
+
+.. autoclass:: LeftClick
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: bysource
+
+.. autoclass:: RightClick
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: bysource
+
+

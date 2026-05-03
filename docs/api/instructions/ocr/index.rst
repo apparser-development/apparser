@@ -3,6 +3,7 @@ ocr
 
 .. toctree::
    :maxdepth: 1
+   :titlesonly:
 
    PrintAllText
    ClickOnText

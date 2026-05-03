@@ -1,7 +1,7 @@
 Debugger
 ========
 
-.. currentmodule:: apparser.debuggers
+.. currentmodule:: apparser.instructions.debuggers
 
 .. autoclass:: Debugger
    :members:

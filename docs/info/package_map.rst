@@ -1,25 +1,3 @@
-Overview
-========
-
-``apparser`` is a Python library for testing and managing computer programs.
-
-Install
-=======
-
-.. code-block:: bash
-
-   pip install apparser
-
-Optional features
-=================
-
-.. code-block:: bash
-
-   pip install "apparser[cv]"
-   pip install "apparser[ocr]"
-   pip install "apparser[speak]"
-   pip install "apparser[all]"
-
 Package map
 ===========
 
