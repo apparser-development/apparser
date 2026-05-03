@@ -41,6 +41,7 @@ extensions = [
 ]
 
 templates_path = []
+html_static_path = ['_static']
 exclude_patterns = ["_build", "_build*", "__pycache__", "Thumbs.db", ".DS_Store"]
 suppress_warnings = ["ref.python"]
 
@@ -53,4 +54,7 @@ autodoc_default_options = {
 }
 
 add_module_names = False
-html_theme = 'sphinxawesome_theme'
+
+html_theme = 'shibuya'
+html_logo = 'apparser.svg'
+html_css_files = ['custom.css']
