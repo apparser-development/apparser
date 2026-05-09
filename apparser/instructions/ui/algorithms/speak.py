@@ -1,43 +1,49 @@
 from apparser.core import BaseUi
 from apparser.instructions.debuggers import BaseDebugger, Debugger
-from apparser.instructions.algorithms.base import BaseAlgorithm
-from apparser.instructions import BaseInstruction
-from apparser.text_readers import BaseTextReader, EasyOcrReader, ScreensController
+from apparser.instructions.ui.algorithms.base import BaseAlgorithm
+from apparser.instructions.base import BaseInstruction
+from apparser.speakers import BaseSpeaker, ChatTTSSpeaker
 
 
-class OCRAlgorithm(BaseAlgorithm):
-    """Run instruction sequences that depend on OCR data."""
+class SpeakAlgorithm(BaseAlgorithm):
+    """Run instruction sequences that depend on a speaker backend."""
 
     def __init__(self,
                  instructions: list[BaseInstruction],
-                 text_reader: BaseTextReader | None = None,
-                 debugger: BaseDebugger | None = Debugger()):
-        """Initialize an OCR-oriented instruction algorithm.
+                 speaker: BaseSpeaker | None = None,
+                 debugger: BaseDebugger | None | bool = None):
+        """Initialize a speech-oriented instruction algorithm.
 
         :param instructions: Instructions to execute in order.
         :type instructions: list[BaseInstruction]
-        :param text_reader: Text reader used during execution.
-        :type text_reader: BaseTextReader | None
+        :param speaker: Speaker used during execution.
+        :type speaker: BaseSpeaker | None
         :param debugger: Debugger used to wrap instruction execution.
         :type debugger: BaseDebugger | None
-        :raises TypeError: If ``text_reader`` or ``debugger`` has an invalid type.
+        :raises TypeError: If ``speaker`` or ``debugger`` has an invalid type.
         """
-        if text_reader is None:
-            text_reader = ScreensController(EasyOcrReader())
+        if speaker is None:
+            speaker = ChatTTSSpeaker()
 
-        if not isinstance(text_reader, BaseTextReader):
-            raise TypeError("text_reader must be BaseTextReader")
+        if not isinstance(speaker, BaseSpeaker):
+            raise TypeError("speaker must be BaseSpeaker")
         
+        if debugger is None or debugger is True:
+            debugger = Debugger()
+
+        if debugger is False:
+            debugger = None
+
         if debugger is not None and not isinstance(debugger, BaseDebugger):
             raise TypeError("debugger must be BaseDebugger or None")
 
         self.__instructions = instructions
-        self.__text_reader = text_reader
+        self.__speaker = speaker
         self.__debugger = debugger
 
     @property
     def id(self) -> int:
-        return 1005
+        return 1504
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         if self.__debugger is not None:
@@ -47,11 +53,11 @@ class OCRAlgorithm(BaseAlgorithm):
         for instruction in self.__instructions:
             if not (isinstance(instruction, BaseInstruction)):
                 raise TypeError(f"{instruction} must be Instruction or AiInstruction")
-
+            
             if self.__debugger is not None:
-                self.__debugger.try_perform(instruction, ui, self.__text_reader)
+                self.__debugger.try_perform(instruction, ui, self.__speaker)
             else:
-                instruction.perform(ui, self.__text_reader)
+                instruction.perform(ui, self.__speaker)
 
     def add_instruction(self, instruction: BaseInstruction):
         if not (isinstance(instruction, BaseInstruction)):

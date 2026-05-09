@@ -7,7 +7,7 @@ class WindowToBackground(UiInstruction):
 
     @property
     def id(self) -> int:
-        return 101
+        return 1001
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.to_background()
@@ -18,7 +18,7 @@ class WindowToForeground(UiInstruction):
 
     @property
     def id(self) -> int:
-        return 100
+        return 1000
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.to_foreground()

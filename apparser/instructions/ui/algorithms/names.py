@@ -2,7 +2,7 @@ from typing import Any
 
 from apparser.core import BaseUi
 from apparser.instructions.debuggers import BaseDebugger, Debugger
-from apparser.instructions.algorithms.base import BaseAlgorithm
+from apparser.instructions.ui.algorithms.base import BaseAlgorithm
 from apparser.instructions.utils import get_instruction_by_name
 
 
@@ -23,7 +23,7 @@ def _check_instruction(instruction: tuple[str, list[Any]]) -> tuple[str, list[An
 class NamesAlgorithm(BaseAlgorithm):
     """Resolve and execute instructions by their registered names."""
 
-    def __init__(self, instructions: list[tuple[str, list[Any]]], debugger: BaseDebugger | None = Debugger()):
+    def __init__(self, instructions: list[tuple[str, list[Any]]], debugger: BaseDebugger | None | bool = None):
         """Initialize a name-based instruction algorithm.
 
         :param instructions: Sequence of instruction names with their arguments.
@@ -32,6 +32,12 @@ class NamesAlgorithm(BaseAlgorithm):
         :type debugger: BaseDebugger | None
         :raises TypeError: If ``debugger`` has an invalid type.
         """
+        if debugger is None or debugger is True:
+            debugger = Debugger()
+
+        if debugger is False:
+            debugger = None
+
         if debugger is not None and not isinstance(debugger, BaseDebugger):
             raise TypeError("debugger must be BaseDebugger or None")
         
@@ -40,10 +46,14 @@ class NamesAlgorithm(BaseAlgorithm):
 
     @property
     def id(self) -> int:
-        return 1003
+        return 1502
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.to_foreground()
+
+        if self.__debugger is not None:
+            self.__debugger.clear_contex()
+
         for instruction_data in self.__instructions:
             instruction_name, instruction_args = _check_instruction(instruction_data)
 

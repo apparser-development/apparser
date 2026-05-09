@@ -58,7 +58,7 @@ def _install_optional_dependency_stubs():
 _install_optional_dependency_stubs()
 
 from apparser import App, BaseUi, CoordinatesUi, DesktopUi
-from apparser.instructions.algorithms import AiAlgorithm, Algorithm
+from apparser.instructions.ui.algorithms import Algorithm
 from apparser.core import WindowUi
 from apparser.cv import DefaultCvProcess, DefaultHandlers, YoloReader
 from apparser.exceptions import (
@@ -147,7 +147,6 @@ def test_public_imports_are_available():
     assert WriteText is not None
     assert OCRInstruction is not None
     assert SpeakInstruction is not None
-    assert AiAlgorithm is not None
     assert ClickOnText is not None
     assert GetText is not None
     assert MoveToText is not None

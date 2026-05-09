@@ -7,7 +7,7 @@ Use the names algorithm when instructions are stored as class names with argumen
 
    from apparser import App
    from apparser.geometry import RelativelyPoint, Size
-   from apparser.instructions.algorithms import NamesAlgorithm
+   from apparser.instructions import NamesAlgorithm
 
    app = App("notepad.exe", "Untitled - Notepad")
 
@@ -15,8 +15,7 @@ Use the names algorithm when instructions are stored as class names with argumen
            ("Sleep", [1]),
            ("MouseClickTo", [RelativelyPoint(0.5, 0.5)]),
            ("WriteText", ["Hello from NamesAlgorithm"]),
-       ], debugger=None,
-   )
+   ])
 
    algorithm.perform(app.ui)
    app.stop_app()

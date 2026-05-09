@@ -2,7 +2,7 @@ from typing import Any
 
 from apparser.core import BaseUi
 from apparser.instructions.debuggers import BaseDebugger, Debugger
-from apparser.instructions.algorithms.base import BaseAlgorithm
+from apparser.instructions.ui.algorithms.base import BaseAlgorithm
 from apparser.instructions.utils import get_instruction_by_id
 
 
@@ -23,7 +23,7 @@ def _check_instruction(instruction: tuple[int, list[Any]]) -> tuple[int, list[An
 class IdsAlgorithm(BaseAlgorithm):
     """Resolve and execute instructions by their numeric identifiers."""
 
-    def __init__(self, instructions: list[tuple[int, list[Any]]], debugger: BaseDebugger | None = Debugger()):
+    def __init__(self, instructions: list[tuple[int, list[Any]]], debugger: BaseDebugger | None | bool = None):
         """Initialize an identifier-based instruction algorithm.
 
         :param instructions: Sequence of instruction identifiers with their arguments.
@@ -34,16 +34,26 @@ class IdsAlgorithm(BaseAlgorithm):
         """
         if debugger is not None and not isinstance(debugger, BaseDebugger):
             raise TypeError("debugger must be BaseDebugger or None")
-        
+
+        if debugger is None or debugger is True:
+            debugger = Debugger()
+
+        if debugger is False:
+            self.__debugger = None
+
         self.__debugger = debugger
         self.__instructions = instructions
 
     @property
     def id(self) -> int:
-        return 1002
+        return 1501
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.to_foreground()
+
+        if self.__debugger is not None:
+            self.__debugger.clear_contex()
+
         for instruction_data in self.__instructions:
             instruction_id, instruction_args = _check_instruction(instruction_data)
 

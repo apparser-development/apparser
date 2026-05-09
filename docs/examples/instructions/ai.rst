@@ -13,8 +13,7 @@ Combine UI, OCR and speech instructions in a single pipeline.
 
    from apparser import App
    from apparser.geometry import RelativelyPoint, Size
-   from apparser.instructions import MouseClickTo, Sleep, WriteText
-   from apparser.instructions.algorithms import AiAlgorithm
+   from apparser.instructions import MouseClickTo, Sleep, WriteText, AiAlgorithm
    from apparser.instructions.ocr import ClickOnText
    from apparser.instructions.speak import PlayTextAudio
    from apparser.speakers import ChatTTSSpeaker
@@ -30,8 +29,7 @@ Combine UI, OCR and speech instructions in a single pipeline.
            PlayTextAudio("Automation finished"),
        ],
        speaker=ChatTTSSpeaker(),
-       text_reader=ScreensController(EasyOcrReader(["en"])),
-       debugger=None,
+       text_reader=ScreensController(EasyOcrReader(["en"]))
    )
 
    algorithm.perform(app.ui)

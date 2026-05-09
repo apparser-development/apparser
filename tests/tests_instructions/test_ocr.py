@@ -153,7 +153,7 @@ def test_move_to_text_find_text_and_property(monkeypatch):
 
     assert instruction.text == "needle"
     assert found == texts[1]
-    assert rating == 95
+    assert rating == 0.95
 
 
 def test_move_to_text_perform_success(monkeypatch):

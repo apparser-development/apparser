@@ -35,12 +35,14 @@ class MoveToText(OCRInstruction):
 
     @property
     def id(self) -> int:
-        return 201
+        return 2001
 
     def find_text(self, texts: list[TextData]) -> tuple[TextData, float]:
         similar_ratings = [fuzz.token_sort_ratio(self.text, i.text) for i in texts]
+        if len(similar_ratings) < 1:
+            raise TextNotFoundException(self.__min_similarity)
         max_rating = max(similar_ratings)
-        return texts[similar_ratings.index(max_rating)], max_rating
+        return texts[similar_ratings.index(max_rating)], max_rating / 100
 
     def __get_local_offset(self, ui: BaseUi) -> Point:
         if isinstance(self.__offset, RelativelyPoint):

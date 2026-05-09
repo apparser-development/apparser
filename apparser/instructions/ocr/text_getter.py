@@ -33,7 +33,7 @@ class GetText(OCRInstruction):
 
     @property
     def id(self) -> int:
-        return 200
+        return 2000
 
     def __text_coordinates_to_local(self, text: TextData) -> TextData:
         new_coordinates = []

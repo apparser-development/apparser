@@ -56,5 +56,5 @@ autodoc_default_options = {
 add_module_names = False
 
 html_theme = 'shibuya'
-html_logo = 'apparser.svg'
+html_logo = '_static/apparser.svg'
 html_css_files = ['custom.css']

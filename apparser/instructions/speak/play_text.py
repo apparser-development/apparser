@@ -35,7 +35,7 @@ class PlayTextAudio(SpeakInstruction):
 
     @property
     def id(self) -> int:
-        return 300
+        return 3000
 
     def perform(self, ui: BaseUi, speaker: BaseSpeaker, *args, **kwargs):
         audio = speaker.speak(self.__text)

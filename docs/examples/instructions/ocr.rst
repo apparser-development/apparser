@@ -13,20 +13,18 @@ Run OCR instructions with a shared text reader.
 
    from apparser import App
    from apparser.geometry import Size
-   from apparser.instructions.algorithms import OCRAlgorithm
+   from apparser.instructions import OCRAlgorithm
    from apparser.instructions.ocr import ClickOnText, PrintAllText
    from apparser.text_readers import EasyOcrReader, ScreensController, WhiteBlackReader
 
    app = App("notepad.exe", "Untitled - Notepad")
 
    reader = ScreensController(WhiteBlackReader(EasyOcrReader(["en"])))
+
    algorithm = OCRAlgorithm(
-       [
-           PrintAllText(),
-           ClickOnText("File"),
-       ],
-       text_reader=reader,
-       debugger=None,
+       [PrintAllText(),
+        ClickOnText("File")],
+       text_reader=reader
    )
 
    algorithm.perform(app.ui)

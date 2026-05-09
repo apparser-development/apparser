@@ -20,7 +20,7 @@ class WindowResize(UiInstruction):
 
     @property
     def id(self) -> int:
-        return 103
+        return 1003
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.resize(self.__size)
