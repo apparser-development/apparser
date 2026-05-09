@@ -52,7 +52,7 @@ class UniqueAlgorithm(BaseAlgorithm):
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         if self.__debugger is not None:
-            self.__debugger.clear_contex()
+            self.__debugger.clear_context()
 
         ui.window.to_foreground()
         for instruction in self.__instructions:

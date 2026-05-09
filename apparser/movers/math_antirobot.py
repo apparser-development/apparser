@@ -44,7 +44,7 @@ class DefaultMoveGenerator:
             raise ValueError('min_time must be less than max_time')
 
         if min_time < 0:
-            raise ValueError('min_time must be greater than 0')
+            raise ValueError('min_time must be >= 0')
 
         self.__min_time = min_time
         self.__max_time = max_time

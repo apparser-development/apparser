@@ -52,7 +52,7 @@ class NamesAlgorithm(BaseAlgorithm):
         ui.window.to_foreground()
 
         if self.__debugger is not None:
-            self.__debugger.clear_contex()
+            self.__debugger.clear_context()
 
         for instruction_data in self.__instructions:
             instruction_name, instruction_args = _check_instruction(instruction_data)

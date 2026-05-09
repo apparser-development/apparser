@@ -7,7 +7,7 @@ class BaseDebugger(abc.ABC):
     """Define the common interface for debugger implementations."""
 
     @abc.abstractmethod
-    def clear_contex(self):
+    def clear_context(self):
         """Clear the stored debugging context."""
         pass
 

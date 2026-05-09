@@ -14,7 +14,7 @@ def get_instruction_by_name(instruction_name: str):
     :raises InstructionWithNameNotFoundException: If no matching instruction is found.
     """
     if not isinstance(instruction_name, str):
-        raise TypeError("id must be an str")
+        raise TypeError("instruction_name must be str")
 
     if len(instruction_name) <= 0:
         raise ValueError("name is empty")

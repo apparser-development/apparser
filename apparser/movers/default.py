@@ -26,7 +26,7 @@ class DefaultMover(BaseMover):
             raise TypeError("Absolute must be a boolean")
 
         if duration < 0:
-            raise ValueError("Duration must be a >= 0")
+            raise ValueError("Duration must be >= 0")
 
         self.__absolute = absolute
         self.__duration = duration

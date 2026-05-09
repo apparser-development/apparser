@@ -36,7 +36,7 @@ def test_debugger_wraps_unexpected_exceptions():
 def test_debugger_clear_context_resets_log():
     debugger = Debugger()
     debugger.try_perform(DummyInstruction(instruction_id=1), "ui")
-    debugger.clear_contex()
+    debugger.clear_context()
 
     with pytest.raises(DebugException) as exc_info:
         debugger.try_perform(

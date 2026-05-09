@@ -14,7 +14,7 @@ class Sleep(BaseInstruction):
         :raises ValueError: If ``sleep_time`` is not greater than zero.
         """
         if sleep_time <= 0:
-            raise ValueError("sleep_time must be >= 0")
+            raise ValueError("sleep_time must be > 0")
 
         self.sleep_time = sleep_time
 

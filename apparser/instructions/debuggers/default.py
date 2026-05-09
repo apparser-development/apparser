@@ -39,6 +39,6 @@ class Debugger(BaseDebugger):
             raise_text = f'{formed_log}\n{max_string_len * "-"}\n{e}'
             raise DebugException(raise_text)
 
-    def clear_contex(self):
+    def clear_context(self):
         """Clear the stored instruction log."""
         self.__instructions = []

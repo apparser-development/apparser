@@ -47,12 +47,12 @@ class OCRAlgorithm(BaseAlgorithm):
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         if self.__debugger is not None:
-            self.__debugger.clear_contex()
+            self.__debugger.clear_context()
 
         ui.window.to_foreground()
         for instruction in self.__instructions:
             if not (isinstance(instruction, BaseInstruction)):
-                raise TypeError(f"{instruction} must be Instruction or AiInstruction")
+                raise TypeError(f"{instruction} must be BaseInstruction")
 
             if self.__debugger is not None:
                 self.__debugger.try_perform(instruction, ui, self.__text_reader)
@@ -61,7 +61,7 @@ class OCRAlgorithm(BaseAlgorithm):
 
     def add_instruction(self, instruction: BaseInstruction):
         if not (isinstance(instruction, BaseInstruction)):
-            raise TypeError(f"{instruction} must be Instruction or AiInstruction")
+            raise TypeError(f"{instruction} must be BaseInstruction")
 
         self.__instructions.append(instruction)
 

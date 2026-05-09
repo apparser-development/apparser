@@ -38,7 +38,7 @@ class Algorithm(BaseAlgorithm):
     def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.to_foreground()
         if self.__debugger is not None:
-            self.__debugger.clear_contex()
+            self.__debugger.clear_context()
 
         for instruction in self.__instructions:
             if not isinstance(instruction, BaseInstruction) or instruction.id > 1999:
