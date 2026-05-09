@@ -24,7 +24,7 @@ class PrintAllText(OCRInstruction):
 
     def perform(self, ui: BaseUi, text_reader: BaseTextReader, *args, **kwargs):
         self.__text_getter.perform(ui, text_reader)
-        for i in self.__text_getter.global_answer:
+        for i in self.__text_getter.local_answer:
             points_stroke = ""
             for j in i.coordinates:
                 points_stroke += str(j) + " "

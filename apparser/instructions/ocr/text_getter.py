@@ -26,8 +26,8 @@ class GetText(OCRInstruction):
         self.__left_top_point = left_top_point
         self.__right_bottom_point = right_bottom_point
         self.__reload_every_try = reload_every_try
-        self.__answer = []
         self.__local_answer = []
+        self.__global_answer = []
         self.__left_top_point_global = left_top_point
         self.__screenshot = None
 
@@ -48,7 +48,7 @@ class GetText(OCRInstruction):
         return returned_data
 
     def perform(self, ui: BaseUi, text_reader: BaseTextReader, *args, **kwargs):
-        if len(self.__answer) != 0 and not self.__reload_every_try:
+        if len(self.__local_answer) != 0 and not self.__reload_every_try:
             return
         right_bottom_point = ui.point_to_local(ui.point_to_global(self.__right_bottom_point))
         self.__left_top_point_global = ui.point_to_local(ui.point_to_global(self.__left_top_point))
@@ -58,18 +58,33 @@ class GetText(OCRInstruction):
         screen = numpy.array(screen)
         self.__screenshot = screen
         ai_answer = text_reader.read_image(screen)
-        self.__local_answer = ai_answer.copy()
+        self.__global_answer = ai_answer.copy()
         ai_answer = self.__texts_coordinates_to_local(ai_answer)
-        self.__answer = ai_answer
-
-    @property
-    def global_answer(self) -> list[TextData]:
-        return self.__answer
+        self.__local_answer = ai_answer
 
     @property
     def local_answer(self) -> list[TextData]:
+        """Return the texts coordinates in local Ui object of the last perform.
+
+        :return: Texts coordinates in local Ui object.
+        :rtype: list[TextData]
+        """
         return self.__local_answer
 
     @property
+    def global_answer(self) -> list[TextData]:
+        """Return the global texts coordinates of the last perform.
+
+        :return: Global texts coordinates.
+        :rtype: list[TextData]
+        """
+        return self.__global_answer
+
+    @property
     def screenshot(self) -> numpy.ndarray:
+        """Return the screenshot of the last perform.
+
+        :return: Ui screenshot
+        :rtype: numpy.ndarray
+        """
         return self.__screenshot

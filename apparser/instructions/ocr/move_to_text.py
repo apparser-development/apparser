@@ -54,7 +54,7 @@ class MoveToText(OCRInstruction):
 
     def perform(self, ui: BaseUi, text_reader: BaseTextReader, *args, **kwargs):
         self.__text_getter.perform(ui, text_reader)
-        needed_data, rating = self.find_text(self.__text_getter.global_answer)
+        needed_data, rating = self.find_text(self.__text_getter.local_answer)
         if self.__min_similarity > rating:
             raise TextNotFoundException(self.__min_similarity)
         y_cords = list(set([i.y for i in needed_data.coordinates]))

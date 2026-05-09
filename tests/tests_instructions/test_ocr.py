@@ -292,6 +292,6 @@ def test_get_text_perform_and_reload_behaviour():
 
     assert screenshot.crop_calls == [(5, 6, 10, 12)]
     assert len(ai.calls) == 1
-    assert instruction.local_answer == [TextData("word", [Point(1, 1), Point(2, 2)])]
-    assert instruction.global_answer == [TextData("word", [Point(6, 7), Point(7, 8)])]
+    assert instruction.global_answer == [TextData("word", [Point(1, 1), Point(2, 2)])]
+    assert instruction.local_answer == [TextData("word", [Point(6, 7), Point(7, 8)])]
     assert numpy.array_equal(array, instruction.screenshot)
