@@ -16,7 +16,7 @@ class ClickOnText(OCRInstruction):
                  click_type: RightClick | LeftClick = LeftClick(),
                  min_similarity: float = 0.9,
                  offset: Point | RelativelyPoint = Point(0, 0),
-                 text_getter=GetText(),
+                 text_getter: GetText | None = None,
                  sleep_time_before_move: float = 0.1):
         """Initialize a text click instruction.
 
@@ -28,11 +28,15 @@ class ClickOnText(OCRInstruction):
         :type min_similarity: float
         :param offset: Offset relative to the detected text center.
         :type offset: Point | RelativelyPoint
-        :param text_getter: Instruction used to extract text from the screen.
-        :type text_getter: GetText
+        :param text_getter: Instruction used to extract text from the screen. If None use GetText()
+        :type text_getter: GetText | None
         :param sleep_time_before_move: Delay before the click is performed.
         :type sleep_time_before_move: float
         """
+
+        if text_getter is None:
+            text_getter = GetText()
+
         self.__mouse_mover = MoveToText(text, min_similarity, offset, text_getter)
         self.__click_type = click_type
         self.__sleep = Sleep(sleep_time_before_move)

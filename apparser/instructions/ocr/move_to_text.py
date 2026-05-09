@@ -16,7 +16,7 @@ class MoveToText(OCRInstruction):
     def __init__(self, text: str,
                  min_similarity: float = 0.9,
                  offset: Point | RelativelyPoint = Point(0, 0),
-                 text_getter=GetText()):
+                 text_getter: GetText | None = None):
         """Initialize a text-targeted mouse movement instruction.
 
         :param text: Text to locate.
@@ -25,9 +25,12 @@ class MoveToText(OCRInstruction):
         :type min_similarity: float
         :param offset: Offset relative to the detected text center.
         :type offset: Point | RelativelyPoint
-        :param text_getter: Instruction used to extract text from the screen.
-        :type text_getter: GetText
+        :param text_getter: Instruction used to extract text from the screen. If None use GetText()
+        :type text_getter: GetText | None
         """
+        if text_getter is None:
+            text_getter = GetText()
+
         self.__text = text
         self.__offset = offset
         self.__text_getter = text_getter

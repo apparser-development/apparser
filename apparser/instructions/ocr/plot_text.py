@@ -45,15 +45,18 @@ class _Painter:
 class PlotAllText(OCRInstruction):
     """Render detected text boxes on a screenshot."""
 
-    def __init__(self, text_getter: GetText = GetText(),
+    def __init__(self, text_getter: GetText | None = None,
                  color_rgba: tuple[int, int, int, int] = (255, 255, 255, 255)):
         """Initialize an OCR plotting instruction.
 
-        :param text_getter: Instruction used to extract text from the screen.
-        :type text_getter: GetText
+        :param text_getter: Instruction used to extract text from the screen. If None use GetText()
+        :type text_getter: GetText | None
         :param color_rgba: RGBA color used for the rendered overlays.
         :type color_rgba: tuple[int, int, int, int]
         """
+        if text_getter is None:
+            text_getter = GetText()
+
         self.__text_getter = text_getter
         self.__color = color_rgba
 
