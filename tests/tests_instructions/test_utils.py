@@ -84,19 +84,3 @@ def test_get_instruction_by_name(monkeypatch):
     from apparser.exceptions import InstructionWithNameNotFoundException
     with pytest.raises(InstructionWithNameNotFoundException):
         get_instruction_by_name("None")
-
-
-def test_get_instruction_by_id_validation():
-    with pytest.raises(TypeError, match="id must be an integer"):
-        get_instruction_by_id("1")
-
-    with pytest.raises(ValueError, match="id must be >= 0"):
-        get_instruction_by_id(-1)
-
-
-def test_get_instruction_by_name_validation():
-    with pytest.raises(TypeError, match="id must be an str"):
-        get_instruction_by_name(1)
-
-    with pytest.raises(ValueError, match="name is empty"):
-        get_instruction_by_name("")

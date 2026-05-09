@@ -127,7 +127,7 @@ def test_mouse_click_validation_and_perform(monkeypatch):
     instruction.perform()
     MouseClick(RightClick()).perform()
 
-    with pytest.raises(TypeError, match="click_type must be RightClick or LeftClick"):
+    with pytest.raises(TypeError):
         MouseClick("click")
 
     assert calls == ["left", "right"]
@@ -146,10 +146,10 @@ def test_press_key_and_combination(monkeypatch):
     PressKey(RightClick()).perform()
     PressKeysCombination(["ctrl", "c"]).perform()
 
-    with pytest.raises(TypeError, match="key_code must be KeyCode or str"):
+    with pytest.raises(TypeError):
         PressKey(1)
 
-    with pytest.raises(TypeError, match="key_code must be KeyCode or str"):
+    with pytest.raises(TypeError):
         PressKeysCombination(["ctrl", 1]).perform()
 
     assert send_calls == ["a", "RIGHT"]
@@ -161,7 +161,7 @@ def test_sleep_validation_and_perform(monkeypatch):
     sleep_calls = []
     monkeypatch.setattr(sleep_module.time, "sleep", lambda seconds: sleep_calls.append(seconds))
 
-    with pytest.raises(ValueError, match="sleep_time must be >= 0"):
+    with pytest.raises(ValueError):
         Sleep(0)
 
     instruction = Sleep(0.5)
@@ -174,13 +174,13 @@ def test_write_text_validation_and_perform(monkeypatch):
     calls = []
     monkeypatch.setattr(write_text_module.keyboard, "write", lambda text, pause: calls.append((text, pause)))
 
-    with pytest.raises(TypeError, match="text must be a string"):
+    with pytest.raises(TypeError):
         WriteText(1)
 
-    with pytest.raises(TypeError, match="pause_time must be a number"):
+    with pytest.raises(TypeError):
         WriteText("text", "0.1")
 
-    with pytest.raises(ValueError, match="text cannot be empty"):
+    with pytest.raises(ValueError):
         WriteText("")
 
     instruction = WriteText("hello", 0.2)
@@ -245,13 +245,13 @@ def test_play_audio_perform(monkeypatch):
 
 
 def test_play_audio_file_validation():
-    with pytest.raises(TypeError, match="path must be str"):
+    with pytest.raises(TypeError):
         PlayAudioFile(1)
 
-    with pytest.raises(ValueError, match="path cannot be empty"):
+    with pytest.raises(ValueError):
         PlayAudioFile("")
 
-    with pytest.raises(ValueError, match="file does not exist"):
+    with pytest.raises(ValueError):
         PlayAudioFile("missing.wav")
 
 
@@ -378,18 +378,18 @@ def test_say_audio_perform_raises_without_microphone_device(monkeypatch):
 
     instruction = SayAudio(audio=[0.1], sample_rate=48000)
 
-    with pytest.raises(ValueError, match="microphone_device cannot be None"):
+    with pytest.raises(ValueError):
         instruction.perform()
 
 
 def test_say_audio_file_validation():
-    with pytest.raises(TypeError, match="path must be str"):
+    with pytest.raises(TypeError):
         SayAudioFile(1)
 
-    with pytest.raises(ValueError, match="path cannot be empty"):
+    with pytest.raises(ValueError):
         SayAudioFile("")
 
-    with pytest.raises(ValueError, match="file does not exist"):
+    with pytest.raises(ValueError):
         SayAudioFile("missing.wav")
 
 

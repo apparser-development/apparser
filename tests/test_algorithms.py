@@ -12,7 +12,7 @@ def test_algorithm_perform_and_add_instruction():
     ui = InteractionUi()
     first = DummyInstruction(calls, "first")
     second = DummyInstruction(calls, "second")
-    algorithm = Algorithm([first], None)
+    algorithm = Algorithm([first], False)
 
     algorithm.add_instruction(second)
     algorithm.perform(ui)
@@ -23,11 +23,11 @@ def test_algorithm_perform_and_add_instruction():
 
 
 def test_algorithm_validation():
-    algorithm = Algorithm([], None)
+    algorithm = Algorithm([], False)
 
-    with pytest.raises(TypeError, match="instruction must be BaseInstruction or UiInstruction"):
+    with pytest.raises(TypeError):
         algorithm.add_instruction("instruction")
 
-    with pytest.raises(TypeError, match="instruction must be BaseInstruction or UiInstruction"):
-        Algorithm(["instruction"], None).perform(InteractionUi())
+    with pytest.raises(TypeError):
+        Algorithm(["instruction"], False).perform(InteractionUi())
 

@@ -13,25 +13,25 @@ class UniqueAlgorithm(BaseAlgorithm):
     def __init__(self,
                  instructions: list[BaseInstruction],
                  attributes: list[Any],
-                 debugger: BaseDebugger | None | bool = None):
+                 debugger: BaseDebugger | bool = None):
         """Initialize an algorithm that injects attributes into instructions.
 
         :param instructions: Instructions to execute in order.
         :type instructions: list[BaseInstruction]
         :param attributes: Attribute values matched to instruction parameters by type.
         :type attributes: list[Any]
-        :param debugger: Debugger used to wrap instruction execution.
-        :type debugger: BaseDebugger | None
+        :param debugger: Debugger used to wrap instruction execution. If True, use Debugger. If False do not wrap instruction execution.
+        :type debugger: BaseDebugger | bool
         :raises TypeError: If ``debugger`` has an invalid type.
         """
-        if debugger is None or debugger is True:
+        if not isinstance(debugger, BaseDebugger) and not isinstance(debugger, bool):
+            raise TypeError(f"debugger must be a bool or BaseDebugger")
+
+        if debugger == True:
             debugger = Debugger()
 
-        if debugger is False:
+        elif debugger == False:
             debugger = None
-
-        if debugger is not None and not isinstance(debugger, BaseDebugger):
-            raise TypeError("debugger must be BaseDebugger or None")
 
         self.__instructions = instructions
         self.__attributes = attributes

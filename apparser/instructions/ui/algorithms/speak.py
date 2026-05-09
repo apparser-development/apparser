@@ -11,15 +11,15 @@ class SpeakAlgorithm(BaseAlgorithm):
     def __init__(self,
                  instructions: list[BaseInstruction],
                  speaker: BaseSpeaker | None = None,
-                 debugger: BaseDebugger | None | bool = None):
+                 debugger: BaseDebugger | bool = None):
         """Initialize a speech-oriented instruction algorithm.
 
         :param instructions: Instructions to execute in order.
         :type instructions: list[BaseInstruction]
         :param speaker: Speaker used during execution.
         :type speaker: BaseSpeaker | None
-        :param debugger: Debugger used to wrap instruction execution.
-        :type debugger: BaseDebugger | None
+        :param debugger: Debugger used to wrap instruction execution. If True, use Debugger. If False do not wrap instruction execution.
+        :type debugger: BaseDebugger | bool
         :raises TypeError: If ``speaker`` or ``debugger`` has an invalid type.
         """
         if speaker is None:
@@ -28,14 +28,14 @@ class SpeakAlgorithm(BaseAlgorithm):
         if not isinstance(speaker, BaseSpeaker):
             raise TypeError("speaker must be BaseSpeaker")
         
-        if debugger is None or debugger is True:
+        if not isinstance(debugger, BaseDebugger) and not isinstance(debugger, bool):
+            raise TypeError(f"debugger must be a bool or BaseDebugger")
+
+        if debugger == True:
             debugger = Debugger()
 
-        if debugger is False:
+        elif debugger == False:
             debugger = None
-
-        if debugger is not None and not isinstance(debugger, BaseDebugger):
-            raise TypeError("debugger must be BaseDebugger or None")
 
         self.__instructions = instructions
         self.__speaker = speaker
