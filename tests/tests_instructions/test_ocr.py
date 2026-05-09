@@ -159,7 +159,7 @@ def test_move_to_text_find_text_and_property(monkeypatch):
 def test_move_to_text_perform_success(monkeypatch):
     move_calls = []
     getter = SimpleNamespace(
-        global_answer=[
+        local_answer=[
             TextData(
                 "target",
                 [Point(0, 0), Point(10, 0), Point(10, 20), Point(0, 20)],
@@ -197,7 +197,7 @@ def test_move_to_text_perform_success(monkeypatch):
 
 def test_move_to_text_perform_raises_when_similarity_is_low(monkeypatch):
     getter = SimpleNamespace(
-        global_answer=[
+        local_answer=[
             TextData("target", [Point(0, 0), Point(1, 0), Point(1, 1), Point(0, 1)])
         ],
         perform=lambda ui, ai: None,
@@ -236,7 +236,7 @@ def test_plot_all_text_perform(monkeypatch):
     draw_calls = []
     image = FakeImage(numpy.array([[1, 2], [3, 4]], dtype=numpy.uint8))
     getter = SimpleNamespace(
-        local_answer=[TextData("word", [Point(0, 0), Point(10, 0), Point(10, 10), Point(0, 10)])],
+        global_answer=[TextData("word", [Point(0, 0), Point(10, 0), Point(10, 10), Point(0, 10)])],
         screenshot=image.array,
         perform=lambda ui, ai: None,
     )
@@ -266,7 +266,7 @@ def test_plot_all_text_perform(monkeypatch):
 def test_print_all_text_perform(monkeypatch):
     printed = []
     getter = SimpleNamespace(
-        global_answer=[TextData("word", [Point(1, 2), Point(3, 4)])],
+        local_answer=[TextData("word", [Point(1, 2), Point(3, 4)])],
         perform=lambda ui, ai: None,
     )
     monkeypatch.setattr("builtins.print", lambda line: printed.append(line))
