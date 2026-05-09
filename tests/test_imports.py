@@ -95,7 +95,6 @@ from apparser.key_codes import (
     Control,
     Delete,
     Enter,
-    KeyboardKeyCode,
     LeftClick,
     RightClick,
 )
@@ -123,7 +122,6 @@ def test_public_imports_are_available():
     assert DebugException is not None
     assert TextNotFoundException is not None
     assert WindowActionWithDesktopException is not None
-    assert KeyboardKeyCode is not None
     assert Enter is not None
     assert Control is not None
     assert Alt is not None

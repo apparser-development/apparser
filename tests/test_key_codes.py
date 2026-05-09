@@ -7,14 +7,9 @@ from apparser.key_codes import (
     Control,
     Delete,
     Enter,
-    KeyboardKeyCode,
     LeftClick,
     RightClick,
 )
-
-
-def test_keyboard_key_code_to_string():
-    assert str(KeyboardKeyCode("space")) == "space"
 
 
 @pytest.mark.parametrize(
