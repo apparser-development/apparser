@@ -1,57 +1,21 @@
-import sys
-import types
+from __future__ import annotations
+
+import shutil
+from pathlib import Path
+from collections.abc import Iterator
+
+import pytest
+
+from tests.utils.external_stubs import install_external_stubs, reset_external_stubs
 
 
-class _FakeEasyOcrReader:
-    def __init__(self, lang_list, **settings):
-        self.lang_list = lang_list
-        self.settings = settings
-        self.result = []
-        self.calls = []
-
-    def readtext(self, image, **settings):
-        self.calls.append((image, settings))
-        return self.result
+install_external_stubs()
+temp_dir = Path(__file__).resolve().parent / "_tmp"
 
 
-easyocr = types.ModuleType('easyocr')
-easyocr.last_reader = None
-
-
-def _easyocr_reader_factory(lang_list, **settings):
-    easyocr.last_reader = _FakeEasyOcrReader(lang_list, **settings)
-    return easyocr.last_reader
-
-
-easyocr.Reader = _easyocr_reader_factory
-sys.modules['easyocr'] = easyocr
-
-
-class _FakeYoloModel:
-    def __init__(self, **kwargs):
-        self.kwargs = kwargs
-        self.model = types.SimpleNamespace(names={})
-        self.results = [types.SimpleNamespace(boxes=[])]
-        self.calls = []
-        self.track_calls = []
-
-    def __call__(self, image):
-        self.calls.append(image)
-        return self.results
-
-    def track(self, source=None, persist=False, **kwargs):
-        self.track_calls.append((source, persist, kwargs))
-        return self.results
-
-
-ultralytics = types.ModuleType('ultralytics')
-ultralytics.last_model = None
-
-
-def _yolo_factory(**kwargs):
-    ultralytics.last_model = _FakeYoloModel(**kwargs)
-    return ultralytics.last_model
-
-
-ultralytics.YOLO = _yolo_factory
-sys.modules['ultralytics'] = ultralytics
+@pytest.fixture(autouse=True)
+def reset_external_modules() -> Iterator[None]:
+    shutil.rmtree(temp_dir, ignore_errors=True)
+    reset_external_stubs()
+    yield
+    shutil.rmtree(temp_dir, ignore_errors=True)
