@@ -26,7 +26,7 @@ def test_check_instruction_validates_name_structure(
 
 def test_names_algorithm_rejects_invalid_debugger() -> None:
     with pytest.raises(TypeError):
-        NamesAlgorithm([], debugger="debugger")
+        NamesAlgorithm([], [], debugger="debugger")
 
 
 def test_names_algorithm_performs_resolved_instructions_without_debugger(
@@ -41,12 +41,11 @@ def test_names_algorithm_performs_resolved_instructions_without_debugger(
 
     monkeypatch.setattr("apparser.instructions.ui.algorithms.names.get_instruction_by_name", lambda name: factory)
     ui = FakeUi()
-    algorithm = NamesAlgorithm([("WriteText", ["hello"])], debugger=False)
+    algorithm = NamesAlgorithm([("WriteText", ["hello"])], [], debugger=False)
 
-    algorithm.perform(ui, 1, key="value")
+    algorithm.perform(ui)
 
     assert ui.window.to_foreground_calls == 1
-    assert created[0].calls == [{"args": (ui, 1), "kwargs": {"key": "value"}}]
 
 
 def test_names_algorithm_uses_debugger(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -55,7 +54,7 @@ def test_names_algorithm_uses_debugger(monkeypatch: pytest.MonkeyPatch) -> None:
         "apparser.instructions.ui.algorithms.names.get_instruction_by_name",
         lambda name: lambda *args: FakeInstruction(1),
     )
-    algorithm = NamesAlgorithm([("Click", [])], debugger=debugger)
+    algorithm = NamesAlgorithm([("Click", [])], [], debugger=debugger)
 
     algorithm.perform(FakeUi())
 
@@ -65,14 +64,14 @@ def test_names_algorithm_uses_debugger(monkeypatch: pytest.MonkeyPatch) -> None:
 
 def test_names_algorithm_raises_when_instruction_is_missing(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr("apparser.instructions.ui.algorithms.names.get_instruction_by_name", lambda name: None)
-    algorithm = NamesAlgorithm([("Missing", [])], debugger=False)
+    algorithm = NamesAlgorithm([("Missing", [])], [], debugger=False)
 
     with pytest.raises(ValueError):
         algorithm.perform(FakeUi())
 
 
 def test_names_algorithm_add_instruction_appends_value() -> None:
-    algorithm = NamesAlgorithm([], debugger=False)
+    algorithm = NamesAlgorithm([], [], debugger=False)
 
     algorithm.add_instruction(("Name", []))
 

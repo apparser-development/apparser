@@ -1,6 +1,8 @@
+import inspect
 from typing import Any
 
 from apparser.core import BaseUi
+from apparser.instructions import BaseInstruction
 from apparser.instructions.debuggers import BaseDebugger, Debugger
 from apparser.instructions.ui.algorithms.base import BaseAlgorithm
 from apparser.instructions.utils import get_instruction_by_id
@@ -23,11 +25,16 @@ def _check_instruction(instruction: tuple[int, list[Any]]) -> tuple[int, list[An
 class IdsAlgorithm(BaseAlgorithm):
     """Resolve and execute instructions by their numeric identifiers."""
 
-    def __init__(self, instructions: list[tuple[int, list[Any]]], debugger: BaseDebugger | bool = True):
+    def __init__(self,
+                 instructions: list[tuple[int, list[Any]]],
+                 attributes: list[Any],
+                 debugger: BaseDebugger | bool = True):
         """Initialize an identifier-based instruction algorithm.
 
         :param instructions: Sequence of instruction identifiers with their arguments.
         :type instructions: list[tuple[int, list[Any]]]
+        :param attributes: Attribute values matched to instruction parameters by type.
+        :type attributes: list[Any]
         :param debugger: Debugger used to wrap instruction execution. If True, use Debugger. If False do not wrap instruction execution.
         :type debugger: BaseDebugger | bool
         :raises TypeError: If ``debugger`` has an invalid type.
@@ -42,12 +49,24 @@ class IdsAlgorithm(BaseAlgorithm):
         elif debugger == False:
             debugger = None
 
+        attributes.reverse()
+
         self.__debugger = debugger
         self.__instructions = instructions
+        self.__attributes = attributes
 
     @property
     def id(self) -> int:
         return 1501
+
+    def __form_args(self, instruction: BaseInstruction) -> dict[str, Any]:
+        result = {}
+        function_signature = inspect.signature(instruction.perform)
+        for arg in function_signature.parameters.values():
+            for a in self.__attributes:
+                if arg.annotation is type(a):
+                    result[arg.name] = a
+        return result
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         ui.window.to_foreground()
@@ -61,12 +80,14 @@ class IdsAlgorithm(BaseAlgorithm):
             instruction = get_instruction_by_id(instruction_id)
             if instruction is None:
                 raise ValueError(f"instruction with id {instruction_id} not found")
-            
+
             instruction = instruction(*instruction_args)
+            perform_kwargs = self.__form_args(instruction)
+
             if self.__debugger is not None:
-                self.__debugger.try_perform(instruction, ui, *args, **kwargs)
+                self.__debugger.try_perform(instruction, **perform_kwargs)
             else:
-                instruction.perform(ui, *args, **kwargs)
+                instruction.perform(ui, **perform_kwargs)
 
     def add_instruction(self, instruction: tuple[int, list[Any]]):
         _check_instruction(instruction)

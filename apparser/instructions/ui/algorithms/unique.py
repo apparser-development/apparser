@@ -33,6 +33,8 @@ class UniqueAlgorithm(BaseAlgorithm):
         elif debugger == False:
             debugger = None
 
+        attributes.reverse()
+
         self.__instructions = instructions
         self.__attributes = attributes
         self.__debugger = debugger
