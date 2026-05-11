@@ -34,6 +34,7 @@ Link to `GitHub <https://github.com/apparser-development/apparser>`__
    info/about
    info/install
    info/package_map
+   info/instructions_ids
 
 .. toctree::
    :caption: Examples

@@ -1,7 +1,7 @@
 SpeakAlgorithm
 ==============
 
-.. currentmodule:: apparser.instructions.algorithms
+.. currentmodule:: apparser.instructions
 
 .. autoclass:: SpeakAlgorithm
    :members:

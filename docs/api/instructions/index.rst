@@ -1,21 +1,20 @@
 instructions
 =====================
 
-Children
+Modules
 --------
 
 .. toctree::
    :maxdepth: 2
    :titlesonly:
 
-   algorithms/index
    debuggers/index
    ocr/index
    speak/index
    utils/index
 
-API
----
+Instructions
+------------
 
 .. toctree::
    :maxdepth: 1
@@ -32,9 +31,24 @@ API
    WriteText
    MouseMove
    MouseClickTo
-   UiInstruction
    WindowMove
    WindowResize
    WindowToForeground
    WindowToBackground
+   UiInstruction
    BaseInstruction
+
+Algorithms
+------------
+
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+   UniqueAlgorithm
+   Algorithm
+   IdsAlgorithm
+   NamesAlgorithm
+   SpeakAlgorithm
+   OCRAlgorithm
+   BaseAlgorithm

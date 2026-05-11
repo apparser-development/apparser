@@ -1,7 +1,7 @@
 NamesAlgorithm
 ==============
 
-.. currentmodule:: apparser.instructions.algorithms
+.. currentmodule:: apparser.instructions
 
 .. autoclass:: NamesAlgorithm
    :members:

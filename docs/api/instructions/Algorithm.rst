@@ -1,7 +1,7 @@
 Algorithm
 =========
 
-.. currentmodule:: apparser.instructions.algorithms
+.. currentmodule:: apparser.instructions
 
 .. autoclass:: Algorithm
    :members:

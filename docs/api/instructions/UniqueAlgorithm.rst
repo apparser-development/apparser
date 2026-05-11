@@ -1,9 +1,9 @@
-AiAlgorithm
+UniqueAlgorithm
 ===========
 
-.. currentmodule:: apparser.instructions.algorithms
+.. currentmodule:: apparser.instructions
 
-.. autoclass:: AiAlgorithm
+.. autoclass:: UniqueAlgorithm
    :members:
    :undoc-members:
    :show-inheritance:

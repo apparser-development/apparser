@@ -21,9 +21,10 @@ Run OCR instructions with a shared text reader.
 
    reader = ScreensController(WhiteBlackReader(EasyOcrReader(["en"])))
 
-   algorithm = OCRAlgorithm(
-       [PrintAllText(),
-        ClickOnText("File")],
+   algorithm = OCRAlgorithm([
+        PrintAllText(),
+        ClickOnText("File")
+       ],
        text_reader=reader
    )
 

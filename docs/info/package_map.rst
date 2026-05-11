@@ -25,5 +25,5 @@ Package map
 ``apparser.cv``
    Computer vision readers, events, handlers and processes.
 
-``apparser.debuggers`` and ``apparser.exceptions``
-   Debugging helpers and library exceptions.
+``apparser.exceptions``
+   Library exceptions.

@@ -21,12 +21,6 @@ key_codes
    :show-inheritance:
    :member-order: bysource
 
-.. autoclass:: KeyboardKeyCode
-   :members:
-   :undoc-members:
-   :show-inheritance:
-   :member-order: bysource
-
 .. autoclass:: LeftClick
    :members:
    :undoc-members:

@@ -12,4 +12,4 @@ This section contains examples of running instruction pipelines with different a
    names
    ocr
    speak
-   ai
+   unique
