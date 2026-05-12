@@ -1,36 +1,25 @@
 Quick Start
-===========
+============
 
-Install the base package.
-
-.. code-block:: bash
-
-   pip install apparser
-
-Open an application window and run a simple UI automation sequence.
+Open Notepad and write "Hello World!"
 
 .. code-block:: python
 
    from apparser import App
-   from apparser.geometry import RelativelyPoint, Size
-   from apparser.instructions import MouseClickTo, Sleep, WriteText
-   from apparser.instructions.algorithms import Algorithm
+   from apparser.geometry import Point, RelativelyPoint, Size
+   from apparser.instructions import (MouseClickTo, WindowMove, WindowResize,
+                                     WriteText, Algorithm)
 
-   app = App(
-       path_to_exe="notepad.exe",
-       window_title="Untitled - Notepad",
-       window_size=Size(900, 700),
-       timeout=1.0,
-   )
+   algorithm = Algorithm([
+       WindowMove(Point(50, 50)),
+       WindowResize(Size(900, 700)),
+       MouseClickTo(RelativelyPoint(0.5, 0.5)),
+       WriteText("Hello world!"),
+   ])
 
-   algorithm = Algorithm(
-       [
-           Sleep(1),
-           MouseClickTo(RelativelyPoint(0.5, 0.5)),
-           WriteText("Hello from apparser"),
-       ],
-       debugger=None,
-   )
+   app = App("notepad.exe", "Untitled - Notepad")
 
    algorithm.perform(app.ui)
+
    app.stop_app()
+Result:
