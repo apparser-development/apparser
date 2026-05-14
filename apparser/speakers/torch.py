@@ -10,7 +10,7 @@ class TorchSpeaker(BaseSpeaker):
 
     def __init__(self,
                  language: str = "ru",
-                 speaker_model: str = "v5_ru",
+                 speaker_model: str = "v5_5_ru",
                  speaker: str = "xenia",
                  sample_rate: int = 48000,
                  device: str | object = "cpu",

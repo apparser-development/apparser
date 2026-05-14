@@ -1,25 +1,25 @@
 import importlib
 
 import numpy
-
+import ChatTTS
 from apparser.speakers.base import BaseSpeaker
 
 
 class ChatTTSSpeaker(BaseSpeaker):
-    """Generate speech by using ChatTTS."""
-
-    def __init__(self,
-                 speaker: str | None = None,
-                 source: str = "local",
-                 force_redownload: bool = False,
-                 compile: bool = False,
-                 custom_path: str | None = None,
-                 device: str | object | None = None,
-                 coef: str | None = None,
-                 use_flash_attn: bool = False,
-                 use_vllm: bool = False,
-                 experimental: bool = False,
-                 enable_cache: bool = True):
+    def __init__(
+        self,
+        speaker: str | None = None,
+        source: str = "huggingface",
+        force_redownload: bool = False,
+        compile: bool = False,
+        custom_path: str | None = None,
+        device: str | object | None = None,
+        coef: str | None = None,
+        use_flash_attn: bool = False,
+        use_vllm: bool = False,
+        experimental: bool = False,
+        enable_cache: bool = True,
+    ) -> None:
         """Initialize a ChatTTS speaker backend.
 
         :param speaker: Speaker embedding value used for synthesis.
@@ -48,25 +48,46 @@ class ChatTTSSpeaker(BaseSpeaker):
         self.__chattts = importlib.import_module("ChatTTS")
         self.__torch = importlib.import_module("torch")
         self.__chat = self.__chattts.Chat()
-        if isinstance(device, str):
-            device = self.__torch.device(device)
-        self.__chat.load(
+        chat_device = self.__get_device(device)
+        loaded = self.__chat.load(
             source=source,
             force_redownload=force_redownload,
             compile=compile,
             custom_path=custom_path,
-            device=device,
+            device=chat_device,
             coef=coef,
             use_flash_attn=use_flash_attn,
             use_vllm=use_vllm,
             experimental=experimental,
             enable_cache=enable_cache,
         )
-        self.__speaker = speaker
-        if self.__speaker is None:
-            self.__speaker = self.__chat.sample_random_speaker()
+        if loaded is False:
+            raise RuntimeError("ChatTTS model loading failed.")
+        self.__speaker = self.__resolve_speaker(speaker)
 
-    def speak(self, text: str, **settings) -> numpy.ndarray:
+    def __get_device(self, device: str | object | None) -> object | None:
+        if isinstance(device, str):
+            return self.__torch.device(device)
+        return device
+
+    def __resolve_speaker(self, speaker: str | None) -> str | None:
+        if speaker is not None:
+            return speaker
+        sample_random_speaker = getattr(
+            self.__chat,
+            "sample_random_speaker",
+            None,
+        )
+        if not callable(sample_random_speaker):
+            return None
+        try:
+            return sample_random_speaker()
+        except AttributeError as error:
+            raise RuntimeError(
+                "ChatTTS speaker initialization failed."
+            ) from error
+
+    def speak(self, text: str, **settings: object) -> numpy.ndarray:
         """Convert text into audio data.
 
         :param text: Text to synthesize.

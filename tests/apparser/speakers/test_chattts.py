@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import numpy
 
-from apparser.speakers.chattts import ChatTTSSpeaker
+from apparser.speakers.chat_tts import ChatTTSSpeaker
 from tests.utils import chattts_stub, torch_stub
 
 
