@@ -22,7 +22,7 @@ def test_torch_speaker_returns_numpy_audio() -> None:
 
     result = speaker.speak("hello", put_accent=True)
 
-    assert numpy.array_equal(result, numpy.asarray([0.1, 0.2], dtype=numpy.float32))
+    assert numpy.array_equal(result[0], numpy.asarray([0.1, 0.2], dtype=numpy.float32))
     assert torch_stub.hub_model.apply_tts_calls[0] == {
         "text": "hello",
         "speaker": "aidar",

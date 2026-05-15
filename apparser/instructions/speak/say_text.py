@@ -10,7 +10,7 @@ class SayTextAudio(SpeakInstruction):
 
     def __init__(self,
                  text: str,
-                 sample_rate: int | float = 48000,
+                 sample_rate: int | float | None = None,
                  **settings):
         """Initialize a microphone-targeted speech instruction.
 
@@ -29,6 +29,9 @@ class SayTextAudio(SpeakInstruction):
         if len(text) < 1:
             raise ValueError("text cannot be empty")
 
+        if sample_rate is not None and not isinstance(sample_rate, (int, float)):
+            raise TypeError("sample_rate must be a number or None")
+
         self.__text = text
         self.__sample_rate = sample_rate
         self.__settings = settings
@@ -38,9 +41,9 @@ class SayTextAudio(SpeakInstruction):
         return 3001
 
     def perform(self, ui: BaseUi, speaker: BaseSpeaker, *args, **kwargs):
-        audio = speaker.speak(self.__text)
+        audio, audio_sample_rate = speaker.speak(self.__text)
         SayAudio(
             audio=audio,
-            sample_rate=self.__sample_rate,
+            sample_rate=self.__sample_rate if self.__sample_rate is None else audio_sample_rate,
             **self.__settings,
         ).perform(*args, **kwargs)

@@ -29,7 +29,7 @@ def test_chattts_speaker_returns_empty_audio() -> None:
 
     result = speaker.speak("hello")
 
-    assert numpy.array_equal(result, numpy.array([], dtype=numpy.float32))
+    assert numpy.array_equal(result[0], numpy.array([], dtype=numpy.float32))
 
 
 def test_chattts_speaker_concatenates_multiple_chunks() -> None:
@@ -41,7 +41,7 @@ def test_chattts_speaker_concatenates_multiple_chunks() -> None:
 
     result = speaker.speak("hello")
 
-    assert numpy.array_equal(result, numpy.asarray([1.0, 2.0, 3.0], dtype=numpy.float32))
+    assert numpy.array_equal(result[0], numpy.asarray([1.0, 2.0, 3.0], dtype=numpy.float32))
 
 
 def test_chattts_speaker_sets_missing_speaker_on_custom_params() -> None:

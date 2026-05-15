@@ -1,7 +1,7 @@
 import importlib
 
 import numpy
-import ChatTTS
+
 from apparser.speakers.base import BaseSpeaker
 
 
@@ -19,6 +19,7 @@ class ChatTTSSpeaker(BaseSpeaker):
         use_vllm: bool = False,
         experimental: bool = False,
         enable_cache: bool = True,
+        sample_rate: int = 24000,
     ) -> None:
         """Initialize a ChatTTS speaker backend.
 
@@ -44,10 +45,13 @@ class ChatTTSSpeaker(BaseSpeaker):
         :type experimental: bool
         :param enable_cache: Whether ChatTTS cache should be enabled.
         :type enable_cache: bool
+        :param sample_rate: Output bitrate for generated audio.
+        :type sample_rate: int
         """
         self.__chattts = importlib.import_module("ChatTTS")
         self.__torch = importlib.import_module("torch")
         self.__chat = self.__chattts.Chat()
+        self.__sample_rate = sample_rate
         chat_device = self.__get_device(device)
         loaded = self.__chat.load(
             source=source,
@@ -87,15 +91,15 @@ class ChatTTSSpeaker(BaseSpeaker):
                 "ChatTTS speaker initialization failed."
             ) from error
 
-    def speak(self, text: str, **settings: object) -> numpy.ndarray:
+    def speak(self, text: str, **settings: object) -> tuple[numpy.ndarray, int]:
         """Convert text into audio data.
 
         :param text: Text to synthesize.
         :type text: str
         :param settings: Additional ChatTTS inference settings.
         :type settings: dict[str, object]
-        :return: Generated audio samples.
-        :rtype: numpy.ndarray
+        :return: Generated audio samples and bitrate.
+        :rtype: tuple[numpy.ndarray, int]
         """
         speaker = settings.pop("speaker", self.__speaker)
         params_infer_code = settings.pop("params_infer_code", None)
@@ -111,7 +115,10 @@ class ChatTTSSpeaker(BaseSpeaker):
             **settings,
         )
         if len(audio) == 0:
-            return numpy.array([], dtype=numpy.float32)
+            return numpy.array([], dtype=numpy.float32), self.__sample_rate
         if len(audio) == 1:
-            return numpy.asarray(audio[0])
-        return numpy.concatenate([numpy.asarray(i) for i in audio])
+            return numpy.asarray(audio[0]), self.__sample_rate
+        return (
+            numpy.concatenate([numpy.asarray(item) for item in audio]),
+            self.__sample_rate,
+        )

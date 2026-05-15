@@ -22,7 +22,7 @@ def test_say_text_audio_rejects_empty_text() -> None:
 
 
 def test_say_text_audio_generates_audio_and_plays(monkeypatch: pytest.MonkeyPatch) -> None:
-    speaker = FakeSpeaker(result=numpy.asarray([0.3, 0.4], dtype=numpy.float32))
+    speaker = FakeSpeaker(result=(numpy.asarray([0.3, 0.4], dtype=numpy.float32), 22_050))
     created: list[dict[str, Any]] = []
 
     def fake_say_audio(**kwargs: Any) -> SimpleNamespace:

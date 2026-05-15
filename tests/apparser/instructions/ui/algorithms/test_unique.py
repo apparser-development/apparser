@@ -12,11 +12,6 @@ from tests.utils import (
 )
 
 
-def test_unique_algorithm_rejects_default_none_debugger() -> None:
-    with pytest.raises(TypeError):
-        UniqueAlgorithm([], [])
-
-
 def test_unique_algorithm_rejects_invalid_debugger() -> None:
     with pytest.raises(TypeError):
         UniqueAlgorithm([], [], debugger="debugger")

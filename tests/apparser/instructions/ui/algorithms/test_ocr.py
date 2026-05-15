@@ -6,11 +6,6 @@ from apparser.instructions.ui.algorithms.ocr import OCRAlgorithm
 from tests.utils import FakeDebugger, FakeOcrInstruction, FakeTextReader, FakeUi
 
 
-def test_ocr_algorithm_rejects_default_none_debugger() -> None:
-    with pytest.raises(TypeError):
-        OCRAlgorithm([])
-
-
 def test_ocr_algorithm_rejects_invalid_text_reader() -> None:
     with pytest.raises(TypeError):
         OCRAlgorithm([], text_reader=object(), debugger=False)

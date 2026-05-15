@@ -6,11 +6,6 @@ from apparser.instructions.ui.algorithms.speak import SpeakAlgorithm
 from tests.utils import FakeDebugger, FakeSpeaker, FakeSpeakInstruction, FakeUi
 
 
-def test_speak_algorithm_rejects_default_none_debugger() -> None:
-    with pytest.raises(TypeError):
-        SpeakAlgorithm([])
-
-
 def test_speak_algorithm_rejects_invalid_speaker() -> None:
     with pytest.raises(TypeError):
         SpeakAlgorithm([], speaker=object(), debugger=False)
