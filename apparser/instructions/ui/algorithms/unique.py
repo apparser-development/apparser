@@ -13,7 +13,7 @@ class UniqueAlgorithm(BaseAlgorithm):
     def __init__(self,
                  instructions: list[BaseInstruction],
                  attributes: list[Any],
-                 debugger: BaseDebugger | bool = None):
+                 debugger: BaseDebugger | bool = True):
         """Initialize an algorithm that injects attributes into instructions.
 
         :param instructions: Instructions to execute in order.

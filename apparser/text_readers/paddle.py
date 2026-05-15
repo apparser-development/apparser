@@ -1,6 +1,5 @@
 import importlib
 from typing import Any
-
 import numpy
 
 from apparser.geometry import Point

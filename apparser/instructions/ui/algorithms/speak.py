@@ -11,7 +11,7 @@ class SpeakAlgorithm(BaseAlgorithm):
     def __init__(self,
                  instructions: list[BaseInstruction],
                  speaker: BaseSpeaker | None = None,
-                 debugger: BaseDebugger | bool = None):
+                 debugger: BaseDebugger | bool = True):
         """Initialize a speech-oriented instruction algorithm.
 
         :param instructions: Instructions to execute in order.

@@ -11,7 +11,7 @@ class OCRAlgorithm(BaseAlgorithm):
     def __init__(self,
                  instructions: list[BaseInstruction],
                  text_reader: BaseTextReader | None = None,
-                 debugger: BaseDebugger | bool = None):
+                 debugger: BaseDebugger | bool = True):
         """Initialize an OCR-oriented instruction algorithm.
 
         :param instructions: Instructions to execute in order.
