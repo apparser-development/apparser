@@ -3,6 +3,8 @@ from apparser.exceptions.window_action_with_desktop import WindowActionWithDeskt
 from apparser.exceptions.debug import DebugException
 from apparser.exceptions.instruction_not_found import InstructionWithNameNotFoundException, InstructionNotFoundException, \
     InstructionWithIdNotFoundException
+from apparser.exceptions.timeout import TimeoutException
 
 __all__ = ["TextNotFoundException", "WindowActionWithDesktopException", "DebugException",
-           "InstructionNotFoundException", "InstructionWithNameNotFoundException", "InstructionWithIdNotFoundException"]
+           "InstructionNotFoundException", "InstructionWithNameNotFoundException",
+           "InstructionWithIdNotFoundException", "TimeoutException"]
