@@ -23,13 +23,13 @@ def test_get_instruction_by_id_rejects_negative_value() -> None:
 def test_get_instruction_by_id_returns_matching_instruction(monkeypatch: pytest.MonkeyPatch) -> None:
     first = make_instruction_type("First", 1)
     second = make_instruction_type("Second", 2)
-    monkeypatch.setattr("apparser.instructions.utils.get_by_id._get_all_instructions", lambda: [first, second])
+    monkeypatch.setattr("apparser.instructions.utils.get_by_id.get_all_instructions", lambda: [first, second])
 
     assert get_instruction_by_id(2) is second
 
 
 def test_get_instruction_by_id_raises_when_not_found(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr("apparser.instructions.utils.get_by_id._get_all_instructions", lambda: [])
+    monkeypatch.setattr("apparser.instructions.utils.get_by_id.get_all_instructions", lambda: [])
 
     with pytest.raises(InstructionWithIdNotFoundException):
         get_instruction_by_id(1)

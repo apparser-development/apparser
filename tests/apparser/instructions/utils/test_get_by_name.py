@@ -23,13 +23,13 @@ def test_get_instruction_by_name_rejects_empty_name() -> None:
 def test_get_instruction_by_name_returns_matching_instruction(monkeypatch: pytest.MonkeyPatch) -> None:
     first = make_instruction_type("First", 1)
     second = make_instruction_type("Second", 2)
-    monkeypatch.setattr("apparser.instructions.utils.get_by_name._get_all_instructions", lambda: [first, second])
+    monkeypatch.setattr("apparser.instructions.utils.get_by_name.get_all_instructions", lambda: [first, second])
 
     assert get_instruction_by_name("Second") is second
 
 
 def test_get_instruction_by_name_raises_when_not_found(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr("apparser.instructions.utils.get_by_name._get_all_instructions", lambda: [])
+    monkeypatch.setattr("apparser.instructions.utils.get_by_name.get_all_instructions", lambda: [])
 
     with pytest.raises(InstructionWithNameNotFoundException):
         get_instruction_by_name("Missing")
