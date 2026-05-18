@@ -1,7 +1,6 @@
-from apparser.core import BaseUi
-from apparser.instructions.default import SayAudio
 from apparser.speakers import BaseSpeaker
 
+from apparser.instructions.default import SayAudio
 from apparser.instructions.speak.base import SpeakInstruction
 
 
@@ -40,7 +39,7 @@ class SayTextAudio(SpeakInstruction):
     def id(self) -> int:
         return 3001
 
-    def perform(self, ui: BaseUi, speaker: BaseSpeaker, *args, **kwargs):
+    def perform(self, speaker: BaseSpeaker, *args, **kwargs):
         audio, audio_sample_rate = speaker.speak(self.__text)
         SayAudio(
             audio=audio,

@@ -1,8 +1,9 @@
 from apparser.core import BaseUi
 from apparser.geometry import Point, RelativelyPoint
+
+from apparser.movers import DefaultMover, BaseMover
+
 from apparser.instructions.ui.base import UiInstruction
-from apparser.movers import DefaultMover
-from apparser.movers.base import BaseMover
 
 
 class MouseMove(UiInstruction):
@@ -19,7 +20,7 @@ class MouseMove(UiInstruction):
         :type mover: BaseMover
         :raises TypeError: If ``coordinates`` or ``mover`` has an invalid type.
         """
-        if  not (isinstance(coordinates, Point) or isinstance(coordinates, RelativelyPoint)):
+        if not (isinstance(coordinates, Point) or isinstance(coordinates, RelativelyPoint)):
             raise TypeError('coordinates must be Point or RelativelyPoint')
 
         if not isinstance(mover, BaseMover):

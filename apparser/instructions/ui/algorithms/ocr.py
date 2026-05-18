@@ -1,8 +1,10 @@
 from apparser.core import BaseUi
+
+from apparser.text_readers import BaseTextReader, EasyOcrReader, ScreensController
+
 from apparser.instructions.debuggers import BaseDebugger, Debugger
 from apparser.instructions.ui.algorithms.base import BaseAlgorithm
 from apparser.instructions.base import BaseInstruction
-from apparser.text_readers import BaseTextReader, EasyOcrReader, ScreensController
 
 
 class OCRAlgorithm(BaseAlgorithm):

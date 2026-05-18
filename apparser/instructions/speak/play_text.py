@@ -1,8 +1,7 @@
-from apparser.core import BaseUi
-from apparser.instructions.default import PlayAudio
 from apparser.speakers import BaseSpeaker
 
 from apparser.instructions.speak.base import SpeakInstruction
+from apparser.instructions.default import PlayAudio
 
 
 class PlayTextAudio(SpeakInstruction):
@@ -40,7 +39,7 @@ class PlayTextAudio(SpeakInstruction):
     def id(self) -> int:
         return 3000
 
-    def perform(self, ui: BaseUi, speaker: BaseSpeaker, *args, **kwargs):
+    def perform(self, speaker: BaseSpeaker, *args, **kwargs):
         audio, audio_sample_rate = speaker.speak(self.__text)
         PlayAudio(
             audio=audio,

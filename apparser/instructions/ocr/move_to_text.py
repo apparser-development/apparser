@@ -3,11 +3,13 @@ from thefuzz import fuzz
 from apparser.core import BaseUi
 from apparser.exceptions import TextNotFoundException
 from apparser.geometry import Point, RelativelyPoint
+
+from apparser.text_readers import BaseTextReader, TextData
+
 from apparser.instructions.ocr.base import OCRInstruction
 from apparser.instructions.ocr.text_getter import GetText
 from apparser.instructions.ui import MouseMove
-from apparser.text_readers.base import BaseTextReader
-from apparser.text_readers.models.text_data import TextData
+
 
 
 class MoveToText(OCRInstruction):

@@ -1,7 +1,9 @@
 import abc
 
 from apparser.core import BaseUi
+
 from apparser.instructions.ui.base import UiInstruction
+
 
 class BaseAlgorithm(UiInstruction):
     """Define the base contract for instruction algorithms."""

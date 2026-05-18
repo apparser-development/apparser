@@ -1,8 +1,11 @@
 from apparser.core import BaseUi
+
+from apparser.speakers import BaseSpeaker, ChatTTSSpeaker
+
 from apparser.instructions.debuggers import BaseDebugger, Debugger
 from apparser.instructions.ui.algorithms.base import BaseAlgorithm
 from apparser.instructions.base import BaseInstruction
-from apparser.speakers import BaseSpeaker, ChatTTSSpeaker
+from apparser.instructions.speak.base import SpeakInstruction
 
 
 class SpeakAlgorithm(BaseAlgorithm):
@@ -27,7 +30,7 @@ class SpeakAlgorithm(BaseAlgorithm):
 
         if not isinstance(speaker, BaseSpeaker):
             raise TypeError("speaker must be BaseSpeaker")
-        
+
         if not isinstance(debugger, BaseDebugger) and not isinstance(debugger, bool):
             raise TypeError(f"debugger must be a bool or BaseDebugger")
 
@@ -41,6 +44,12 @@ class SpeakAlgorithm(BaseAlgorithm):
         self.__speaker = speaker
         self.__debugger = debugger
 
+    def __perform(self, instruction: BaseInstruction, *args):
+        if self.__debugger is not None:
+            self.__debugger.try_perform(instruction, *args)
+        else:
+            instruction.perform(*args)
+
     @property
     def id(self) -> int:
         return 1504
@@ -53,11 +62,11 @@ class SpeakAlgorithm(BaseAlgorithm):
         for instruction in self.__instructions:
             if not (isinstance(instruction, BaseInstruction)):
                 raise TypeError(f"{instruction} must be BaseInstruction")
-            
-            if self.__debugger is not None:
-                self.__debugger.try_perform(instruction, ui, self.__speaker)
-            else:
-                instruction.perform(ui, self.__speaker)
+
+            if isinstance(instruction, SpeakInstruction):
+                self.__perform(instruction, self.__speaker)
+            elif isinstance(instruction, BaseInstruction):
+                self.__perform(instruction, ui)
 
     def add_instruction(self, instruction: BaseInstruction):
         if not (isinstance(instruction, BaseInstruction)):

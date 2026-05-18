@@ -1,7 +1,8 @@
 import mouse
 
+from apparser.key_codes import RightClick, LeftClick
+
 from apparser.instructions.base import BaseInstruction
-from apparser.key_codes.mouse_keys import RightClick, LeftClick
 
 
 class MouseClick(BaseInstruction):

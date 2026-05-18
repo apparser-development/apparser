@@ -1,7 +1,8 @@
 import keyboard
 
+from apparser.key_codes import BaseKeyCode
+
 from apparser.instructions.base import BaseInstruction
-from apparser.key_codes.base import BaseKeyCode
 
 
 class PressKey(BaseInstruction):

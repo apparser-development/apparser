@@ -1,7 +1,7 @@
+from apparser.core import BaseUi
+
 from apparser.instructions.base import BaseInstruction
 from apparser.instructions.ui.algorithms.base import BaseAlgorithm
-
-from apparser.core import BaseUi
 from apparser.instructions.debuggers import BaseDebugger
 from apparser.instructions.debuggers import Debugger
 

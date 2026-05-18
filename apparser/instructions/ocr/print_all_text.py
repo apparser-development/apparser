@@ -1,5 +1,7 @@
-from apparser.text_readers.base import BaseTextReader
 from apparser.core import BaseUi
+
+from apparser.text_readers import BaseTextReader
+
 from apparser.instructions.ocr.base import OCRInstruction
 from apparser.instructions.ocr.text_getter import GetText
 

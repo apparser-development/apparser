@@ -1,16 +1,15 @@
+import time
+
 from thefuzz import fuzz
-import time 
 
-from apparser.instructions.ocr.base import OCRInstruction
-
-from apparser.exceptions import TimeoutException
-from apparser.geometry import Point, RelativelyPoint
 from apparser.core import BaseUi
+from apparser.geometry import Point, RelativelyPoint
+from apparser.exceptions import TimeoutException
+
+from apparser.text_readers import BaseTextReader, TextData
 
 from apparser.instructions.ocr.text_getter import GetText
-from apparser.instructions.ui import MouseMove
-from apparser.text_readers.base import BaseTextReader
-from apparser.text_readers.models.text_data import TextData
+from apparser.instructions.ocr.base import OCRInstruction
 
 
 class WaitText(OCRInstruction):
@@ -56,7 +55,7 @@ class WaitText(OCRInstruction):
         while not is_founded:
             if time.time() - start_time < self.__expire_time:
                 raise TimeoutException(self.__expire_time)
-            
+
             time.sleep(self.__sleep_time)
             data = text_reader.read_image(ui.get_screenshot())
             is_founded = self.__is_needed_text(data)

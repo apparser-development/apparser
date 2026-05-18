@@ -1,9 +1,10 @@
 from apparser.core import BaseUi
 from apparser.geometry import Point, RelativelyPoint
-from apparser.instructions.default import MouseClick, Sleep
 from apparser.key_codes import RightClick, LeftClick
+
 from apparser.text_readers import BaseTextReader
 
+from apparser.instructions.default import MouseClick, Sleep
 from apparser.instructions.ocr.base import OCRInstruction
 from apparser.instructions.ocr.move_to_text import MoveToText
 from apparser.instructions.ocr.text_getter import GetText

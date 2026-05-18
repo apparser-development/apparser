@@ -2,6 +2,7 @@ from typing import Any
 import inspect
 
 from apparser.core import BaseUi
+
 from apparser.instructions.debuggers import BaseDebugger, Debugger
 from apparser.instructions.ui.algorithms.base import BaseAlgorithm
 from apparser.instructions.base import BaseInstruction

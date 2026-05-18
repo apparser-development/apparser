@@ -3,8 +3,10 @@ from PIL import Image
 
 from apparser.core import BaseUi
 from apparser.geometry import Point, RelativelyPoint
-from apparser.instructions.ocr.base import OCRInstruction
+
 from apparser.text_readers import BaseTextReader, TextData
+
+from apparser.instructions.ocr.base import OCRInstruction
 
 
 class GetText(OCRInstruction):

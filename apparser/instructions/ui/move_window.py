@@ -1,5 +1,6 @@
 from apparser.core import BaseUi
 from apparser.geometry import Point
+
 from apparser.instructions.ui.base import UiInstruction
 
 

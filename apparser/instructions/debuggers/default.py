@@ -1,7 +1,7 @@
-from apparser.instructions.debuggers.base import BaseDebugger
-
 from apparser.exceptions import DebugException
+
 from apparser.instructions.base import BaseInstruction
+from apparser.instructions.debuggers.base import BaseDebugger
 
 
 class Debugger(BaseDebugger):
