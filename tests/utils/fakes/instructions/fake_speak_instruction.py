@@ -13,9 +13,8 @@ from apparser.speakers.base import BaseSpeaker
 class FakeSpeakInstruction(FakeInstruction):
     def perform(
         self,
-        ui: BaseUi,
         speaker: BaseSpeaker,
         *args: Any,
         **kwargs: Any,
     ) -> None:
-        super().perform(ui, speaker, *args, **kwargs)
+        super().perform(speaker, *args, **kwargs)

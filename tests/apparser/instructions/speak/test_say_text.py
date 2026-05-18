@@ -32,7 +32,7 @@ def test_say_text_audio_generates_audio_and_plays(monkeypatch: pytest.MonkeyPatc
     monkeypatch.setattr("apparser.instructions.speak.say_text.SayAudio", fake_say_audio)
     instruction = SayTextAudio("hello", sample_rate=22_050, microphone_device=3)
 
-    instruction.perform(FakeUi(), speaker, blocking=False)
+    instruction.perform(speaker, blocking=False)
 
     assert speaker.calls == ["hello"]
     assert created[0]["sample_rate"] == 22_050

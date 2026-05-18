@@ -26,7 +26,7 @@ def test_speak_algorithm_performs_instructions() -> None:
     algorithm.perform(ui)
 
     assert ui.window.to_foreground_calls == 1
-    assert instruction.calls == [{"args": (ui, speaker), "kwargs": {}}]
+    assert instruction.calls == [{"args": tuple([ui]), "kwargs": {}}]
 
 
 def test_speak_algorithm_uses_debugger() -> None:

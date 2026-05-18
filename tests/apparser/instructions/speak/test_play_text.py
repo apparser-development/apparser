@@ -32,7 +32,7 @@ def test_play_text_audio_generates_audio_and_plays(monkeypatch: pytest.MonkeyPat
     monkeypatch.setattr("apparser.instructions.speak.play_text.PlayAudio", fake_play_audio)
     instruction = PlayTextAudio("hello", sample_rate=16_000, device=2)
 
-    instruction.perform(FakeUi(), speaker, volume=0.5)
+    instruction.perform(speaker, volume=0.5)
 
     assert speaker.calls == ["hello"]
     assert created[0]["sample_rate"] == 16_000
