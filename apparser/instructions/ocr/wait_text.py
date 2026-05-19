@@ -41,11 +41,11 @@ class WaitText(OCRInstruction):
 
     @property
     def id(self) -> int:
-        return 2001
+        return 2005
 
     def __is_needed_text(self, texts: list[TextData]) -> bool:
         for i in texts:
-            if fuzz.token_sort_ratio(self.text, i.text) > self.__min_similarity:
+            if fuzz.token_sort_ratio(self.__text, i.text) / 100 > self.__min_similarity:
                 return True
         return False
 
@@ -53,7 +53,7 @@ class WaitText(OCRInstruction):
         is_founded = False
         start_time = time.time()
         while not is_founded:
-            if time.time() - start_time < self.__expire_time:
+            if time.time() - start_time >= self.__expire_time:
                 raise TimeoutException(self.__expire_time)
 
             time.sleep(self.__sleep_time)

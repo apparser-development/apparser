@@ -100,7 +100,7 @@ class AntiRobotMover(BaseMover):
     """Move the cursor by using generated multi-step paths."""
 
     def __init__(self,
-                 move_generator: Callable[[Point, Point], Generator[tuple[Point, float], None, None]] = DefaultMoveGenerator(0.05, 0.1)):
+                 move_generator: Callable[[Point, Point], Generator[tuple[Point, float], None, None]] = DefaultMoveGenerator(0.3, 0.6)):
         """Initialize a mover that follows generated paths.
 
         :param move_generator: Callable that yields cursor positions and durations.
