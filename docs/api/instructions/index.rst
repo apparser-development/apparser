@@ -21,6 +21,8 @@ Instructions
    :titlesonly:
 
    PressKey
+   PressKeyUp
+   PressKeyDown
    PressKeysCombination
    PlayAudio
    PlayAudioFile
@@ -28,6 +30,8 @@ Instructions
    SayAudioFile
    Sleep
    MouseClick
+   MouseUp
+   MouseDown
    WriteText
    MouseMove
    MouseClickTo

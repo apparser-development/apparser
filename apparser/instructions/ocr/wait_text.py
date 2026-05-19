@@ -13,30 +13,33 @@ from apparser.instructions.ocr.base import OCRInstruction
 
 
 class WaitText(OCRInstruction):
-    """Move the mouse cursor to the best matching text block."""
+    """Waiting for the text to appear."""
 
     def __init__(self, text: str,
                  min_similarity: float = 0.9,
                  text_getter: GetText | None = None,
-                 sleep_time: float = 1,
+                 interval: float | int = 1,
                  expire_time: float | None = 600):
         """Initialize a text-targeted mouse movement instruction.
 
-        :param text: Text to locate.
+        :param text: Text to wait.
         :type text: str
         :param min_similarity: Minimum similarity score required for a match.
-        :type min_similarity: float
-        :param offset: Offset relative to the detected text center.
-        :type offset: Point | RelativelyPoint
+        :type min_similarity: float        
         :param text_getter: Instruction used to extract text from the screen. If None use GetText()
         :type text_getter: GetText | None
+        :param interval: The interval between text checks in seconds.
+        :type interval: int | float
+        :param expire_time: Maximum waiting time
+        :type expire_time: int | float
+        
         """
         if text_getter is None:
             text_getter = GetText()
 
         self.__text = text
         self.__min_similarity = min_similarity
-        self.__sleep_time = sleep_time
+        self.__interval = interval
         self.__expire_time = expire_time
 
     @property
@@ -56,7 +59,7 @@ class WaitText(OCRInstruction):
             if time.time() - start_time >= self.__expire_time:
                 raise TimeoutException(self.__expire_time)
 
-            time.sleep(self.__sleep_time)
+            time.sleep(self.__interval)
             data = text_reader.read_image(ui.get_screenshot())
             is_founded = self.__is_needed_text(data)
 

@@ -11,3 +11,4 @@ ocr
    MoveToText
    OCRInstruction
    PlotAllText
+   WaitText
