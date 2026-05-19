@@ -1,5 +1,3 @@
-"""Computer vision event types."""
-
 from apparser.cv.events.base import CvEvent
 from apparser.cv.events.moved import Moved
 from apparser.cv.events.detected import Detected

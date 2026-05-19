@@ -14,10 +14,10 @@ def get_instruction_by_name(instruction_name: str):
     :raises InstructionWithNameNotFoundException: If no matching instruction is found.
     """
     if not isinstance(instruction_name, str):
-        raise TypeError("instruction_name must be str")
+        raise TypeError("instruction_name must be a string")
 
     if len(instruction_name) <= 0:
-        raise ValueError("name is empty")
+        raise ValueError("instruction_name cannot be empty")
 
     for instruction in get_all_instructions():
         if instruction.__name__ == instruction_name:

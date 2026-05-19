@@ -1,5 +1,3 @@
-"""Data model describing a registered computer vision handler."""
-
 from dataclasses import dataclass
 from typing import Callable, Optional, Type
 

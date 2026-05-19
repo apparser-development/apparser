@@ -1,5 +1,3 @@
-"""Base interfaces for computer vision data readers."""
-
 import abc
 
 from apparser.core import BaseUi

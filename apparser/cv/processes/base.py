@@ -1,5 +1,3 @@
-"""Base interfaces for computer vision processing loops."""
-
 import abc
 
 from apparser.core import BaseUi

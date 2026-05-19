@@ -26,7 +26,7 @@ class CoordinatesUi(BaseUi):
         :raises TypeError: If any argument has an invalid type.
         """
         if not isinstance(from_ui, BaseUi):
-            raise TypeError('from_ui must be Ui')
+            raise TypeError('from_ui must be BaseUi')
 
         if not (isinstance(left_top_point, Point) or isinstance(left_top_point, RelativelyPoint)):
             raise TypeError('left_top_point must be Point or RelativelyPoint')

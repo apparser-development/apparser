@@ -1,5 +1,3 @@
-"""Helpers for detecting changes between computer vision reads."""
-
 from apparser.cv.models import CvAllData, CvChangeData, CvBox
 from apparser.cv.events import Detected, UnDetected, Moved, Resized
 

@@ -1,5 +1,3 @@
-"""Data models describing computer vision detections and changes."""
-
 from dataclasses import dataclass
 from typing import Type
 

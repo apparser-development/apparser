@@ -1,5 +1,3 @@
-"""Detected computer vision event."""
-
 from apparser.cv.events.base import CvEvent
 
 

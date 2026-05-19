@@ -1,5 +1,3 @@
-"""Default computer vision event handler registry."""
-
 from typing import Callable, Type, Optional, Any
 import inspect
 
@@ -45,7 +43,7 @@ class DefaultHandlers(CvHandlers):
         :raises TypeError: If ``event`` is the abstract base event type.
         """
         if event is CvEvent:
-            raise TypeError("event must be a apparser.cv.events.CvEvent")
+            raise TypeError("event must be a concrete CvEvent subclass")
 
         def decorator(function: Callable[[Optional[CvAllData], Optional[BaseUi], Optional[CvChangeData]], None]):
             """Register the decorated function as an event handler.

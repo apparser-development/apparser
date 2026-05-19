@@ -16,7 +16,7 @@ class PressKey(BaseInstruction):
         :raises TypeError: If ``key_code`` is neither :class:`BaseKeyCode` nor :class:`str`.
         """
         if not (isinstance(key_code, BaseKeyCode) or isinstance(key_code, str)):
-            raise TypeError('key_code must be KeyCode or str')
+            raise TypeError('key_code must be BaseKeyCode or str')
 
         self.__key_code = key_code
 
@@ -46,7 +46,7 @@ class PressKeysCombination(BaseInstruction):
     def perform(self, *args, **kwargs):
         for key in self.__keys:
             if not (isinstance(key, BaseKeyCode) or isinstance(key, str)):
-                raise TypeError('key_code must be KeyCode or str')
+                raise TypeError('key_code must be BaseKeyCode or str')
             keyboard.press(str(key))
 
         for key in self.__keys:
@@ -64,7 +64,7 @@ class PressKeyDown(BaseInstruction):
         :raises TypeError: If ``key_code`` is neither :class:`BaseKeyCode` nor :class:`str`.
         """
         if not (isinstance(key_code, BaseKeyCode) or isinstance(key_code, str)):
-            raise TypeError('key_code must be KeyCode or str')
+            raise TypeError('key_code must be BaseKeyCode or str')
 
         self.__key_code = key_code
 
@@ -77,17 +77,17 @@ class PressKeyDown(BaseInstruction):
 
 
 class PressKeyUp(BaseInstruction):
-    """Send a single keyboard key press."""
+    """Release a single keyboard key."""
 
     def __init__(self, key_code: BaseKeyCode | str):
-        """Initialize a single-key unpress instruction.
+        """Initialize a single-key release instruction.
 
-        :param key_code: Key code to unpress.
+        :param key_code: Key code to release.
         :type key_code: BaseKeyCode | str
         :raises TypeError: If ``key_code`` is neither :class:`BaseKeyCode` nor :class:`str`.
         """
         if not (isinstance(key_code, BaseKeyCode) or isinstance(key_code, str)):
-            raise TypeError('key_code must be KeyCode or str')
+            raise TypeError('key_code must be BaseKeyCode or str')
 
         self.__key_code = key_code
 

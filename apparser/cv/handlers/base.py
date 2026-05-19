@@ -1,5 +1,3 @@
-"""Base interfaces for computer vision event handlers."""
-
 import abc
 from typing import Type
 

@@ -31,12 +31,12 @@ class MouseClick(BaseInstruction):
 
 
 class MouseDown(BaseInstruction):
-    """Selected mouse button to down."""
+    """Press the selected mouse button down."""
 
     def __init__(self, click_type: RightClick | LeftClick = LeftClick()):
         """Initialize a mouse down instruction.
 
-        :param click_type: Mouse button to down.
+        :param click_type: Mouse button to press down.
         :type click_type: RightClick | LeftClick
         :raises TypeError: If ``click_type`` is neither :class:`RightClick` nor :class:`LeftClick`.
         """
@@ -56,12 +56,12 @@ class MouseDown(BaseInstruction):
 
 
 class MouseUp(BaseInstruction):
-    """Selected mouse button to up."""
+    """Release the selected mouse button."""
 
     def __init__(self, click_type: RightClick | LeftClick = LeftClick()):
-        """Initialize a mouse click instruction.
+        """Initialize a mouse up instruction.
 
-       :param click_type: Mouse button to up.
+        :param click_type: Mouse button to release.
         :type click_type: RightClick | LeftClick
         :raises TypeError: If ``click_type`` is neither :class:`RightClick` nor :class:`LeftClick`.
         """

@@ -24,7 +24,7 @@ class MouseMove(UiInstruction):
             raise TypeError('coordinates must be Point or RelativelyPoint')
 
         if not isinstance(mover, BaseMover):
-            raise TypeError('mover must be Mover')
+            raise TypeError('mover must be BaseMover')
 
         self.__mover = mover
         self.__coordinates = coordinates

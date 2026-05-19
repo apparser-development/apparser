@@ -1,12 +1,8 @@
-"""YOLO-based computer vision reader implementation."""
+import importlib
 
-from __future__ import annotations
-
+from apparser.core import BaseUi, CoordinatesUi
 from apparser.geometry import Point, Size
-from ultralytics import YOLO
 
-from apparser import CoordinatesUi
-from apparser.core import BaseUi
 from apparser.cv.models import CvAllData, CvBox
 from apparser.cv.readers.base import CvReader
 
@@ -26,7 +22,8 @@ class YoloReader(CvReader):
         if hasattr(model, "track"):
             self.__model = model
         else:
-            self.__model = YOLO(model=model)
+            ultralytics = importlib.import_module("ultralytics")
+            self.__model = ultralytics.YOLO(model=model)
 
         self.__persist = persist
         self.__track_settings = track_settings

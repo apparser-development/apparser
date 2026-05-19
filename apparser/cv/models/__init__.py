@@ -1,5 +1,3 @@
-"""Computer vision data models."""
-
 from apparser.cv.models.data import CvAllData, CvChangeData, CvBox
 from apparser.cv.models.handler import CvHandler
 

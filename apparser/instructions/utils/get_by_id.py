@@ -14,10 +14,10 @@ def get_instruction_by_id(instruction_id: int):
     :raises InstructionWithIdNotFoundException: If no matching instruction is found.
     """
     if not isinstance(instruction_id, int):
-        raise TypeError("id must be an integer")
+        raise TypeError("instruction_id must be an integer")
 
     if instruction_id < 0:
-        raise ValueError("id must be >= 0")
+        raise ValueError("instruction_id must be >= 0")
 
     for instruction in get_all_instructions():
         if instruction.id.fget(None) == instruction_id:

@@ -1,5 +1,3 @@
-"""Base types for computer vision events."""
-
 import abc
 
 
