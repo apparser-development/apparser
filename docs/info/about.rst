@@ -24,6 +24,11 @@ Link to `PyPi <https://pypi.org/project/appwindows/>`__
 
 Link to `GitHub <https://github.com/apparser-development/apparser>`__
 
+Donates
+=========
+https://dalink.to/apparser
+
+
 For Developers
 ==============
 

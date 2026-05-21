@@ -15,7 +15,7 @@ class ClickOnText(OCRInstruction):
 
     def __init__(self, text: str,
                  click_type: RightClick | LeftClick = LeftClick(),
-                 min_similarity: float = 0.9,
+                 min_similarity: float = 0.8,
                  offset: Point | RelativelyPoint = Point(0, 0),
                  text_getter: GetText | None = None,
                  sleep_time_before_move: float = 0.1):

@@ -31,6 +31,12 @@ class FakeFinder:
         self.calls.append(title)
         return self.window
 
+    def get_all_windows(self) -> list[FakeWindow]:
+        return [self.window]
+
+    def get_window_by_process_id(self, process_id: int) -> FakeWindow:
+        return self.window
+
 
 @pytest.mark.parametrize(
     ("path_to_exe", "window_title", "window_size", "timeout"),
@@ -62,11 +68,9 @@ def test_app_starts_and_stops(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr("apparser.core.app.time.sleep", lambda value: sleep_calls.append(value))
     monkeypatch.setattr("apparser.core.app.WindowUi", FakeWindowUi)
 
-    app = App("app.exe", "Window", Size(9, 8), 0.2)
+    app = App("app.exe", timeout=0.2)
 
-    assert finder.calls == ["Window"]
     assert sleep_calls == [0.2]
-    assert app.ui.window.resize_calls == [Size(9, 8)]
 
     app.stop_app()
 

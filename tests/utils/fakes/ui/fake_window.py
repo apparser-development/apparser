@@ -12,6 +12,7 @@ class FakeWindow:
         left_top: Point | None = None,
         size: Size | None = None,
         screenshot: numpy.ndarray | None = None,
+        process_id: int | None = None,
     ) -> None:
         self.left_top = left_top or Point(0, 0)
         self.size = size or Size(100, 100)
@@ -25,6 +26,7 @@ class FakeWindow:
         self.to_background_calls = 0
         self.to_foreground_calls = 0
         self.close_calls = 0
+        self.process_id = process_id or 0
 
     def get_points(self) -> FakeWindowPoints:
         return FakeWindowPoints(left_top=self.left_top)
@@ -34,6 +36,9 @@ class FakeWindow:
 
     def get_screenshot(self) -> numpy.ndarray:
         return self.screenshot
+
+    def get_process_id(self) -> int:
+        return self.process_id
 
     def move(self, position: Point) -> None:
         self.move_calls.append(position)

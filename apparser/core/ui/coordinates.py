@@ -14,15 +14,15 @@ class CoordinatesUi(BaseUi):
     def __init__(self,
                  from_ui: BaseUi,
                  left_top_point: Point | RelativelyPoint,
-                 size: Size):
+                 right_bottom_point: Point | RelativelyPoint):
         """Initialize a nested coordinate-based UI context.
 
         :param from_ui: Source UI used as a parent context.
         :type from_ui: BaseUi
         :param left_top_point: Top-left point of the nested region.
         :type left_top_point: Point | RelativelyPoint
-        :param size: Size of the nested region.
-        :type size: Size
+        :param right_bottom_point: Botton-right point of the nested region.
+        :type right_bottom_point: Point | RelativelyPoint
         :raises TypeError: If any argument has an invalid type.
         """
         if not isinstance(from_ui, BaseUi):
@@ -31,17 +31,17 @@ class CoordinatesUi(BaseUi):
         if not (isinstance(left_top_point, Point) or isinstance(left_top_point, RelativelyPoint)):
             raise TypeError('left_top_point must be Point or RelativelyPoint')
 
-        if not isinstance(size, Size):
+        if not (isinstance(right_bottom_point, Point) or isinstance(right_bottom_point, RelativelyPoint)):
             raise TypeError('size must be Size')
 
         self.__from_ui = from_ui
         self.__left_top_point = left_top_point
-        self.__size = size
+        self.__right_bottom_point = right_bottom_point
 
-    def __get_left_top_local_point(self) -> Point:
-        if isinstance(self.__left_top_point, RelativelyPoint):
-            return self.__from_ui.point_to_local(self.__from_ui.point_to_global(self.__left_top_point))
-        return self.__left_top_point
+    def __point_to_main_ui_local(self, point: Point | RelativelyPoint) -> Point:
+        if isinstance(point, RelativelyPoint):
+            return self.__from_ui.point_to_local(self.__from_ui.point_to_global(point))
+        return point
 
     @singledispatchmethod
     def point_to_global(self, coordinates: Point | RelativelyPoint) -> Point:
@@ -56,13 +56,17 @@ class CoordinatesUi(BaseUi):
 
     @point_to_global.register(Point)
     def _(self, coordinates: Point):
-        left_top_point = self.__get_left_top_local_point()
+        left_top_point = self.__point_to_main_ui_local(self.__left_top_point)
         return self.__from_ui.point_to_global(coordinates + left_top_point)
 
     @point_to_global.register(RelativelyPoint)
     def _(self, coordinates: RelativelyPoint):
-        x = round(coordinates.x * self.__size.width)
-        y = round(coordinates.y * self.__size.height)
+        left_top_point = self.__point_to_main_ui_local(self.__left_top_point)
+        right_bottom_point = self.__point_to_main_ui_local(self.__right_bottom_point)
+        size = Size(abs(round(right_bottom_point.x - left_top_point.x)),
+                    abs(round(right_bottom_point.y - left_top_point.y)))
+        x = round(coordinates.x * size.width)
+        y = round(coordinates.y * size.height)
         local_point = Point(x, y)
         return self.point_to_global(local_point)
 
@@ -74,7 +78,7 @@ class CoordinatesUi(BaseUi):
         :return: Converted local point.
         :rtype: Point
         """
-        left_top_point = self.__get_left_top_local_point()
+        left_top_point = self.__point_to_main_ui_local(self.__left_top_point)
         return self.__from_ui.point_to_local(coordinates) - left_top_point
 
     def get_screenshot(self) -> numpy.ndarray:
@@ -84,12 +88,9 @@ class CoordinatesUi(BaseUi):
         :rtype: numpy.ndarray
         """
         screenshot = self.__from_ui.get_screenshot()
-        left_top_point = self.__get_left_top_local_point()
-        right_bottom_point = left_top_point + Point(self.__size.width, self.__size.height)
-
-        if isinstance(screenshot, numpy.ndarray):
-            return screenshot[left_top_point.y:right_bottom_point.y, left_top_point.x:right_bottom_point.x]
-        return screenshot.crop((left_top_point.x, left_top_point.y, right_bottom_point.x, right_bottom_point.y))
+        left_top_point = self.__point_to_main_ui_local(self.__left_top_point)
+        right_bottom_point = self.__point_to_main_ui_local(self.__right_bottom_point)
+        return screenshot[left_top_point.y:right_bottom_point.y, left_top_point.x:right_bottom_point.x]
 
     @property
     def window(self) -> Window:
