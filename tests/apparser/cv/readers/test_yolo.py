@@ -3,10 +3,10 @@ from __future__ import annotations
 from types import SimpleNamespace
 
 import numpy
+import pytest
 
-from apparser.core.ui.coordinates import CoordinatesUi
 from apparser.cv.readers.yolo import YoloReader
-from tests.utils import FakeUi, ultralytics_stub
+from tests.utils import FakeUi
 
 
 def test_yolo_reader_uses_existing_model() -> None:
@@ -23,7 +23,15 @@ def test_yolo_reader_creates_model_from_path() -> None:
     assert reader._YoloReader__model.model_path == "weights.pt"
 
 
-def test_yolo_reader_maps_detected_boxes() -> None:
+def test_yolo_reader_maps_detected_boxes(monkeypatch: pytest.MonkeyPatch) -> None:
+    created_uis: list[CoordinatesUiSpy] = []
+
+    class CoordinatesUiSpy:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            self.args = args
+            self.kwargs = kwargs
+            created_uis.append(self)
+
     box_with_id = SimpleNamespace(
         id=numpy.asarray([10]),
         cls=numpy.asarray([1]),
@@ -40,6 +48,7 @@ def test_yolo_reader_maps_detected_boxes() -> None:
     )
     ui = FakeUi()
     reader = YoloReader(model, persist=False, conf=0.5)
+    monkeypatch.setattr("apparser.cv.readers.yolo.CoordinatesUi", CoordinatesUiSpy)
 
     result = reader.read(ui)
 
@@ -48,6 +57,7 @@ def test_yolo_reader_maps_detected_boxes() -> None:
     assert result.boxes[0].track_id == 10
     assert result.boxes[0].width == 5
     assert result.boxes[0].height == 6
-    assert isinstance(result.boxes[0].ui, CoordinatesUi)
+    assert result.boxes[0].ui is created_uis[0]
     assert result.boxes[1].class_name == "cat"
     assert result.boxes[1].track_id is None
+    assert result.boxes[1].ui is created_uis[1]

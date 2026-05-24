@@ -9,39 +9,54 @@ from apparser.geometry import Point, RelativelyPoint
 
 
 class CoordinatesUi(BaseUi):
-    """Represent a UI region inside another UI context."""
+    """Represent a UI region defined by two points inside another UI context."""
 
-    def __init__(self,
-                 from_ui: BaseUi,
-                 left_top_point: Point | RelativelyPoint,
-                 right_bottom_point: Point | RelativelyPoint):
+    def __init__(
+        self,
+        from_ui: BaseUi,
+        point_one: Point | RelativelyPoint,
+        point_two: Point | RelativelyPoint
+    ):
         """Initialize a nested coordinate-based UI context.
 
         :param from_ui: Source UI used as a parent context.
         :type from_ui: BaseUi
-        :param left_top_point: Top-left point of the nested region.
-        :type left_top_point: Point | RelativelyPoint
-        :param right_bottom_point: Botton-right point of the nested region.
-        :type right_bottom_point: Point | RelativelyPoint
+        :param point_one: First point of the nested region.
+        :type point_one: Point | RelativelyPoint
+        :param point_two: Second point of the nested region or region size.
+        :type point_two: Point | RelativelyPoint | Size
         :raises TypeError: If any argument has an invalid type.
         """
         if not isinstance(from_ui, BaseUi):
             raise TypeError('from_ui must be BaseUi')
 
-        if not (isinstance(left_top_point, Point) or isinstance(left_top_point, RelativelyPoint)):
-            raise TypeError('left_top_point must be Point or RelativelyPoint')
+        if not isinstance(point_one, (Point, RelativelyPoint)):
+            raise TypeError('point1 must be Point or RelativelyPoint')
 
-        if not (isinstance(right_bottom_point, Point) or isinstance(right_bottom_point, RelativelyPoint)):
-            raise TypeError('size must be Size')
+        elif not isinstance(point_two, (Point, RelativelyPoint)):
+            raise TypeError('point2 must be Point, RelativelyPoint')
 
         self.__from_ui = from_ui
-        self.__left_top_point = left_top_point
-        self.__right_bottom_point = right_bottom_point
+        self.__point_one = point_one
+        self.__point_two = point_two
 
     def __point_to_main_ui_local(self, point: Point | RelativelyPoint) -> Point:
         if isinstance(point, RelativelyPoint):
             return self.__from_ui.point_to_local(self.__from_ui.point_to_global(point))
         return point
+
+    def __get_local_bounds(self) -> tuple[Point, Point]:
+        point1 = self.__point_to_main_ui_local(self.__point_one)
+        point2 = self.__point_to_main_ui_local(self.__point_two)
+        left_top_point = Point(
+            min(point1.x, point2.x),
+            min(point1.y, point2.y),
+        )
+        right_bottom_point = Point(
+            max(point1.x, point2.x),
+            max(point1.y, point2.y),
+        )
+        return left_top_point, right_bottom_point
 
     @singledispatchmethod
     def point_to_global(self, coordinates: Point | RelativelyPoint) -> Point:
@@ -55,18 +70,17 @@ class CoordinatesUi(BaseUi):
         raise NotImplementedError()
 
     @point_to_global.register(Point)
-    def _(self, coordinates: Point):
-        left_top_point = self.__point_to_main_ui_local(self.__left_top_point)
+    def _(self, coordinates: Point) -> Point:
+        left_top_point, _ = self.__get_local_bounds()
         return self.__from_ui.point_to_global(coordinates + left_top_point)
 
     @point_to_global.register(RelativelyPoint)
-    def _(self, coordinates: RelativelyPoint):
-        left_top_point = self.__point_to_main_ui_local(self.__left_top_point)
-        right_bottom_point = self.__point_to_main_ui_local(self.__right_bottom_point)
-        size = Size(abs(round(right_bottom_point.x - left_top_point.x)),
-                    abs(round(right_bottom_point.y - left_top_point.y)))
-        x = round(coordinates.x * size.width)
-        y = round(coordinates.y * size.height)
+    def _(self, coordinates: RelativelyPoint) -> Point:
+        left_top_point, right_bottom_point = self.__get_local_bounds()
+        width = abs(round(right_bottom_point.x - left_top_point.x))
+        height = abs(round(right_bottom_point.y - left_top_point.y))
+        x = round(coordinates.x * width)
+        y = round(coordinates.y * height)
         local_point = Point(x, y)
         return self.point_to_global(local_point)
 
@@ -78,7 +92,7 @@ class CoordinatesUi(BaseUi):
         :return: Converted local point.
         :rtype: Point
         """
-        left_top_point = self.__point_to_main_ui_local(self.__left_top_point)
+        left_top_point, _ = self.__get_local_bounds()
         return self.__from_ui.point_to_local(coordinates) - left_top_point
 
     def get_screenshot(self) -> numpy.ndarray:
@@ -88,9 +102,11 @@ class CoordinatesUi(BaseUi):
         :rtype: numpy.ndarray
         """
         screenshot = self.__from_ui.get_screenshot()
-        left_top_point = self.__point_to_main_ui_local(self.__left_top_point)
-        right_bottom_point = self.__point_to_main_ui_local(self.__right_bottom_point)
-        return screenshot[left_top_point.y:right_bottom_point.y, left_top_point.x:right_bottom_point.x]
+        left_top_point, right_bottom_point = self.__get_local_bounds()
+        return screenshot[
+            left_top_point.y:right_bottom_point.y,
+            left_top_point.x:right_bottom_point.x,
+        ]
 
     @property
     def window(self) -> Window:
