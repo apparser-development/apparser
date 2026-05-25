@@ -4,7 +4,7 @@ import pytest
 
 from apparser.instructions.default.click import MouseClick
 from apparser.key_codes import LeftClick, RightClick
-from tests.utils import mouse_stub
+from tests.utils import pyautogui_stub
 
 
 def test_mouse_click_performs_left_click() -> None:
@@ -12,7 +12,7 @@ def test_mouse_click_performs_left_click() -> None:
 
     instruction.perform()
 
-    assert mouse_stub.click_calls == 1
+    assert pyautogui_stub.click_calls == 1
     assert instruction.id == 1
 
 
@@ -21,7 +21,7 @@ def test_mouse_click_performs_right_click() -> None:
 
     instruction.perform()
 
-    assert mouse_stub.right_click_calls == 1
+    assert pyautogui_stub.click_calls == 1
 
 
 def test_mouse_click_rejects_invalid_click_type() -> None:

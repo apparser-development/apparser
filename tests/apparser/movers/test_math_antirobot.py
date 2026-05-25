@@ -7,7 +7,7 @@ import pytest
 from appwindows.geometry import Point
 
 from apparser.movers.math_antirobot import AntiRobotMover, DefaultMoveGenerator
-from tests.utils import mouse_stub
+from tests.utils import pyautogui_stub
 
 
 @pytest.mark.parametrize(
@@ -76,22 +76,20 @@ def test_antirobot_mover_uses_generated_path() -> None:
         yield Point(3, 4), 0.1
         yield Point(10, 20), 0.2
 
-    mouse_stub.position = (1, 2)
+    pyautogui_stub._position = (1, 2)
     mover = AntiRobotMover(move_generator=fake_generator)
 
     mover.move(Point(10, 20))
 
-    assert mouse_stub.move_calls == [
+    assert pyautogui_stub.move_calls == [
         {
             "x": 3,
             "y": 4,
-            "absolute": True,
             "duration": 0.1,
         },
         {
             "x": 10,
             "y": 20,
-            "absolute": True,
             "duration": 0.2,
         },
     ]

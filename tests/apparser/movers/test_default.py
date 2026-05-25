@@ -6,7 +6,7 @@ import pytest
 from appwindows.geometry import Point
 
 from apparser.movers.default import DefaultMover
-from tests.utils import mouse_stub
+from tests.utils import pyautogui_stub
 
 
 @pytest.mark.parametrize("duration", ["1", object()])
@@ -26,15 +26,14 @@ def test_default_mover_rejects_negative_duration() -> None:
 
 
 def test_default_mover_moves_mouse() -> None:
-    mover = DefaultMover(duration=0.5, absolute=False)
+    mover = DefaultMover(duration=0.5)
 
     mover.move(Point(3, 7))
 
-    assert mouse_stub.move_calls == [
+    assert pyautogui_stub.move_calls == [
         {
             "x": 3,
             "y": 7,
-            "absolute": False,
             "duration": 0.5,
         }
     ]

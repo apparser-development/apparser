@@ -7,7 +7,7 @@ from appwindows.geometry import Point
 
 from apparser.geometry import RelativelyPoint
 from apparser.instructions.ui.mouse_move import MouseMove
-from tests.utils import FakeUi, mouse_stub
+from tests.utils import FakeUi, pyautogui_stub
 
 
 @pytest.mark.parametrize("coordinates", [object(), "1"])
@@ -27,6 +27,6 @@ def test_mouse_move_moves_cursor_to_global_coordinates() -> None:
 
     instruction.perform(ui)
 
-    assert mouse_stub.move_calls[0]["x"] == 60
-    assert mouse_stub.move_calls[0]["y"] == 45
+    assert pyautogui_stub.move_calls[0]["x"] == 60
+    assert pyautogui_stub.move_calls[0]["y"] == 45
     assert instruction.id == 1004

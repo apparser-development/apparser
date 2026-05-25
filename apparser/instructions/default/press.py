@@ -1,4 +1,4 @@
-import keyboard
+import pyautogui
 
 from apparser.key_codes import BaseKeyCode
 
@@ -25,7 +25,7 @@ class PressKey(BaseInstruction):
         return 2
 
     def perform(self, *args, **kwargs):
-        keyboard.send(str(self.__key_code))
+        pyautogui.press(str(self.__key_code))
 
 
 class PressKeysCombination(BaseInstruction):
@@ -47,10 +47,10 @@ class PressKeysCombination(BaseInstruction):
         for key in self.__keys:
             if not (isinstance(key, BaseKeyCode) or isinstance(key, str)):
                 raise TypeError('key_code must be BaseKeyCode or str')
-            keyboard.press(str(key))
+            pyautogui.keyDown(str(key))
 
         for key in self.__keys:
-            keyboard.release(str(key))
+            pyautogui.keyUp(str(key))
 
 
 class PressKeyDown(BaseInstruction):
@@ -73,7 +73,7 @@ class PressKeyDown(BaseInstruction):
         return 10
 
     def perform(self, *args, **kwargs):
-        keyboard.press(str(self.__key_code))
+        pyautogui.keyDown(str(self.__key_code))
 
 
 class PressKeyUp(BaseInstruction):
@@ -96,4 +96,4 @@ class PressKeyUp(BaseInstruction):
         return 11
 
     def perform(self, *args, **kwargs):
-        keyboard.release(str(self.__key_code))
+        pyautogui.keyUp(str(self.__key_code))

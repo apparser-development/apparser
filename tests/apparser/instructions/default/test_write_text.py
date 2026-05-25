@@ -5,7 +5,7 @@ from typing import Any
 import pytest
 
 from apparser.instructions.default.write_text import WriteText
-from tests.utils import keyboard_stub
+from tests.utils import pyautogui_stub
 
 
 @pytest.mark.parametrize(
@@ -26,5 +26,5 @@ def test_write_text_uses_keyboard_backend() -> None:
 
     instruction.perform()
 
-    assert keyboard_stub.write_calls == [("hello", 0.2)]
+    assert pyautogui_stub.write_calls == [("hello", 0.2)]
     assert instruction.id == 4

@@ -1,4 +1,4 @@
-import keyboard
+import pyautogui
 
 from apparser.instructions.base import BaseInstruction
 
@@ -33,4 +33,4 @@ class WriteText(BaseInstruction):
         return 4
 
     def perform(self, *args, **kwargs):
-        keyboard.write(self.__text, self.__pause_time)
+        pyautogui.write(self.__text, interval=self.__pause_time)

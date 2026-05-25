@@ -1,10 +1,10 @@
 import random
 from typing import Generator, Callable
 
-import mouse
-from appwindows.geometry import Point
+import pyautogui
 
-from apparser.geometry import distance
+from apparser.geometry import distance, Point
+
 from apparser.movers.base import BaseMover
 
 
@@ -118,6 +118,6 @@ class AntiRobotMover(BaseMover):
         if not isinstance(position, Point):
             raise TypeError('position must be Point')
 
-        current_position = Point(*mouse.get_position())
+        current_position = Point(*pyautogui.position())
         for i, t in self.__move_generator(current_position, position):
-            mouse.move(i.x, i.y, duration=t)
+            pyautogui.moveTo(i.x, i.y, duration=t)

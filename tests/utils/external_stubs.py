@@ -3,8 +3,7 @@ from __future__ import annotations
 import sys
 from tests.utils.stubs.audio.sounddevice_stub import SoundDeviceStub
 from tests.utils.stubs.display.screeninfo_stub import ScreenInfoStub
-from tests.utils.stubs.input.keyboard_stub import KeyboardStub
-from tests.utils.stubs.input.mouse_stub import MouseStub
+from tests.utils.stubs.input.pyautogui import PyAutoGuiFake
 from tests.utils.stubs.ml.chattts_stub import ChatTTSStub
 from tests.utils.stubs.ml.torch_stub import TorchStub
 from tests.utils.stubs.text.easy_ocr_stub import EasyOcrStub
@@ -13,8 +12,7 @@ from tests.utils.stubs.text.thefuzz_stub import TheFuzzStub
 from tests.utils.stubs.vision.ultralytics_stub import UltralyticsStub
 
 
-keyboard_stub = KeyboardStub()
-mouse_stub = MouseStub()
+pyautogui_stub = PyAutoGuiFake()
 screeninfo_stub = ScreenInfoStub()
 thefuzz_stub = TheFuzzStub()
 ultralytics_stub = UltralyticsStub()
@@ -26,8 +24,7 @@ chattts_stub = ChatTTSStub()
 
 
 def install_external_stubs() -> None:
-    sys.modules["keyboard"] = keyboard_stub
-    sys.modules["mouse"] = mouse_stub
+    sys.modules["pyautogui"] = pyautogui_stub
     sys.modules["screeninfo"] = screeninfo_stub
     sys.modules["thefuzz"] = thefuzz_stub
     sys.modules["ultralytics"] = ultralytics_stub
@@ -40,8 +37,7 @@ def install_external_stubs() -> None:
 
 def reset_external_stubs() -> None:
     for module in [
-        keyboard_stub,
-        mouse_stub,
+        pyautogui_stub,
         screeninfo_stub,
         thefuzz_stub,
         ultralytics_stub,

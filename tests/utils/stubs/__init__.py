@@ -1,7 +1,7 @@
 from tests.utils.stubs.audio.sounddevice_stub import SoundDeviceStub
 from tests.utils.stubs.display.screeninfo_stub import ScreenInfoStub
 from tests.utils.stubs.input.keyboard_stub import KeyboardStub
-from tests.utils.stubs.input.mouse_stub import MouseStub
+from tests.utils.stubs.input.pyautogui import PyAutoGuiFake
 from tests.utils.stubs.ml.chat_stub import ChatStub
 from tests.utils.stubs.ml.chattts_stub import ChatTTSStub
 from tests.utils.stubs.ml.fake_torch_hub import FakeTorchHub
@@ -29,7 +29,7 @@ __all__ = [
     "FuzzNamespace",
     "InferCodeParams",
     "KeyboardStub",
-    "MouseStub",
+    "PyAutoGuiFake",
     "PaddleOcrReaderStub",
     "PaddleOcrStub",
     "ScreenInfoStub",
