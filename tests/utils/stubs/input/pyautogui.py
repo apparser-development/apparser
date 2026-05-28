@@ -12,6 +12,8 @@ class PyAutoGuiFake(ModuleType):
     def reset(self) -> None:
         self.move_calls: list[dict[str, Any]] = []
         self.click_calls = 0
+        self.mouse_down_calls: list[str] = []
+        self.mouse_up_calls: list[str] = []
         self._position = (0, 0)
         self.send_calls: list[str] = []
         self.write_calls: list[tuple[str, float]] = []
@@ -35,6 +37,12 @@ class PyAutoGuiFake(ModuleType):
 
     def click(self, button: str) -> None:
         self.click_calls += 1
+
+    def mouseDown(self, button: str) -> None:
+        self.mouse_down_calls.append(button)
+
+    def mouseUp(self, button: str) -> None:
+        self.mouse_up_calls.append(button)
 
     def position(self) -> tuple[int, int]:
         return self._position
