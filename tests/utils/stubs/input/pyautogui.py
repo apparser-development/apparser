@@ -19,10 +19,10 @@ class PyAutoGuiFake(ModuleType):
         self.release_calls: list[str] = []
 
     def moveTo(
-        self,
-        x: int,
-        y: int,
-        duration: float = 0,
+            self,
+            x: int,
+            y: int,
+            duration: float = 0,
     ) -> None:
         self.move_calls.append(
             {
@@ -39,7 +39,6 @@ class PyAutoGuiFake(ModuleType):
     def position(self) -> tuple[int, int]:
         return self._position
 
-
     def write(self, text: str, interval: float) -> None:
         self.write_calls.append((text, interval))
 
@@ -54,4 +53,3 @@ class PyAutoGuiFake(ModuleType):
 
     def release(self, key: str) -> None:
         self.release_calls.append(key)
-
