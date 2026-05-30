@@ -1,4 +1,4 @@
-<img src="apparser.svg" alt="" width="40%">
+<img src="apparser.png" alt="" width="40%">
 
 [![unit_tests](https://github.com/apparser-development/appwindows/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/apparser-development/appwindows/actions/workflows/unit_tests.yml)
 [![Github](https://img.shields.io/badge/github-repo-green)](https://github.com/apparser-development/apparser)
