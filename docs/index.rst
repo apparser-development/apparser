@@ -12,7 +12,7 @@ Apparser
      <a href="https://github.com/apparser-development/apparser/issues"><img src="https://img.shields.io/badge/github-issues-green" alt="Issues"></a>
    </p>
 
-The apparser library is designed for testing and managing computer programs.
+Apparser is a Python library designed for automating desktop applications and managing UI interfaces using artificial intelligence, such as OCR or object detection models.
 
 Link to `PyPi <https://pypi.org/project/appwindows/>`__
 
