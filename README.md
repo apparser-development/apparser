@@ -1,6 +1,8 @@
-<img src="apparser.svg" alt="" width="40%">
+<img src="https://raw.githubusercontent.com/apparser-development/apparser/refs/heads/master/apparser.svg" alt="" width="40%">
 
+[![Documentation](https://img.shields.io/badge/docs-pages-green)](https://apparser-development.github.io/apparser/)
 [![unit_tests](https://github.com/apparser-development/appwindows/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/apparser-development/appwindows/actions/workflows/unit_tests.yml)
+<br>
 [![Github](https://img.shields.io/badge/github-repo-green)](https://github.com/apparser-development/apparser)
 [![Issues](https://img.shields.io/badge/github-issues-green)](https://github.com/apparser-development/apparser/issues)
 
@@ -32,8 +34,8 @@ algorithm.perform(app.ui)
 ```
 
 # Docs
-All documentation <a href="#">here</a> <br>
-Link to <a href="https://pypi.org/project/appwindows/">PyPi</a>
+All documentation <a href="https://apparser-development.github.io/apparser/">here</a> <br>
+Link to <a href="https://pypi.org/project/apparser/">PyPi</a>
 
 # For Developers
 1) If something doesn't work - open issue.

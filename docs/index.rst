@@ -61,8 +61,6 @@ Any help in development is welcome!)
 
    examples/quickstart
    examples/ocr
-   examples/cv
-   examples/text_readers
 
 .. toctree::
    :caption: Apparser

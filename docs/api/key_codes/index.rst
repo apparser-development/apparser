@@ -15,6 +15,13 @@ key_codes
    :show-inheritance:
    :member-order: bysource
 
+.. autoclass:: Enter
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: bysource
+
+
 .. autoclass:: Control
    :members:
    :undoc-members:
