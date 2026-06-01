@@ -13,8 +13,7 @@ from apparser.geometry.relatively_point import RelativelyPoint
 class WindowByDisplayUi(BaseUi):
     """
     Represent a window as a display-captured UI context.
-    .. note::
-        Unlike the WindowUi class, it retrieves the application's image based on its borders rather than from the graphical shell.
+    Unlike the WindowUi class, it retrieves the application's image based on its borders rather than from the graphical shell.
     """
 
     def __init__(self, window: Window) -> None:

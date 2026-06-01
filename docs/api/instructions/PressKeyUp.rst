@@ -1,5 +1,5 @@
 PressKeyUp
-========
+===========
 
 .. currentmodule:: apparser.instructions
 

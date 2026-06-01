@@ -3,6 +3,9 @@ Quick Start
 
 Open Notepad and write "Hello World!"
 
+Code
+--------
+
 .. code-block:: python
 
    from apparser import App
@@ -17,9 +20,13 @@ Open Notepad and write "Hello World!"
        WriteText("Hello world!"),
    ])
 
-   app = App("notepad.exe", "Untitled - Notepad")
+   app = App("notepad.exe", "Notepad")
 
    algorithm.perform(app.ui)
 
    app.stop_app()
-Result:
+
+Video
+--------
+
+.. image:: ../_static/hello_world.gif

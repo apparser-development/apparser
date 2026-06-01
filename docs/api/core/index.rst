@@ -10,3 +10,4 @@ core
    DesktopUi
    CoordinatesUi
    WindowUi
+   WindowByDisplayUi

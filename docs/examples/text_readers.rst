@@ -1,5 +1,5 @@
 Text Readers
-============
+================
 
 Install the OCR extra before using OCR readers.
 

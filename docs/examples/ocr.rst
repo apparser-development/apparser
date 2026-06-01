@@ -1,19 +1,58 @@
 Text Recognition
 ==================
 
+Open new tab and write "Hello World!" in Notepad.
+
+Install
+--------
+
+Install the OCR extra before using OCRAlgorithm.
+
+.. code-block:: bash
+
+   pip install "apparser[ocr]"
+
+Code
+--------
+
 .. code-block:: python
 
-   from apparser import App
-   from apparser.geometry import Point, RelativelyPoint, Size
-   from apparser.instructions import OCRAlgorithm
+    from apparser import App, WindowByDisplayUi
+    from apparser.geometry import Point, Size, RelativelyPoint
+    from apparser.instructions import Algorithm, WindowMove, WindowResize, Sleep, OCRAlgorithm, MouseClick, MouseClickTo, \
+        WriteText
+    from apparser.instructions.ocr import ClickOnText, MoveToText
 
-   algorithm = OCRAlgorithm([
+    configure_algorithm = Algorithm([
+        WindowMove(Point(0, 0)),
+        WindowResize(Size(300, 300)),
+        Sleep(0.1),
+    ])
 
-   ])
+    new_tab_algorithm = OCRAlgorithm([
+        Sleep(0.1),
+        ClickOnText("File", min_similarity=0.8),
+        Sleep(1),
+        MoveToText("New tab", min_similarity=0.8),
+        MouseClick(),
+        MouseClick(),
+        Sleep(0.1),
+    ])
 
-   app = App("notepad.exe", "Untitled - Notepad")
+    hello_world_algorithm = Algorithm([
+        MouseClickTo(RelativelyPoint(0.5, 0.5)),
+        WriteText("Hello World!", pause_time=0.2),
+    ])
 
-   algorithm.perform(app.ui)
+    app = App("Notepad", window_title="Notepad")
 
-   app.stop_app()
-Result:
+    ui = WindowByDisplayUi(app.ui.window)
+
+    while True:
+        hello_world_algorithm.perform(ui)
+        new_tab_algorithm.perform(ui)
+
+Video
+--------
+
+.. image:: ../_static/ocr.gif

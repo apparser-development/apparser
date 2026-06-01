@@ -1,5 +1,5 @@
 UniqueAlgorithm
-===========
+===================
 
 .. currentmodule:: apparser.instructions
 

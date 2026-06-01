@@ -21,7 +21,7 @@ How id lookup works
   implementation, if duplicates appear, the first matching class will be
   returned.
 
-Lookup is performed through ``_get_all_instructions()``, which scans the
+Lookup is performed through ``get_all_instructions()``, which scans the
 ``default``, ``ocr``, ``speak``, and ``ui`` packages and keeps only concrete,
 non-abstract instruction classes.
 

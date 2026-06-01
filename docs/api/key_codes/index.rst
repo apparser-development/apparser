@@ -3,6 +3,12 @@ key_codes
 
 .. currentmodule:: apparser.key_codes
 
+.. autoclass:: BaseKeyCode
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: bysource
+
 .. autoclass:: Alt
    :members:
    :undoc-members:
