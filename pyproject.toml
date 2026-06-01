@@ -25,7 +25,6 @@ classifiers = [
     "Environment :: X11 Applications",
     "Environment :: Win32 (MS Windows)",
     "Environment :: MacOS X :: Aqua",
-    "Typing :: Stubs Only"
 ]
 keywords = [
     "automation",
