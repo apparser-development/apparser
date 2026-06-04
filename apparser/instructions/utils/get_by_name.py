@@ -1,4 +1,4 @@
-from apparser.instructions.utils._get_all_instructions import _get_all_instructions
+from apparser.instructions.utils.get_all_instructions import get_all_instructions
 from apparser.exceptions import InstructionWithNameNotFoundException
 
 
@@ -14,12 +14,12 @@ def get_instruction_by_name(instruction_name: str):
     :raises InstructionWithNameNotFoundException: If no matching instruction is found.
     """
     if not isinstance(instruction_name, str):
-        raise TypeError("id must be an str")
+        raise TypeError("instruction_name must be a string")
 
     if len(instruction_name) <= 0:
-        raise ValueError("name is empty")
+        raise ValueError("instruction_name cannot be empty")
 
-    for instruction in _get_all_instructions():
+    for instruction in get_all_instructions():
         if instruction.__name__ == instruction_name:
             return instruction
 

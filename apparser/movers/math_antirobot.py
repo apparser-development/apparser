@@ -1,10 +1,10 @@
 import random
 from typing import Generator, Callable
 
-import mouse
-from appwindows.geometry import Point
+import pyautogui
 
-from apparser.geometry import distance
+from apparser.geometry import distance, Point
+
 from apparser.movers.base import BaseMover
 
 
@@ -44,7 +44,7 @@ class DefaultMoveGenerator:
             raise ValueError('min_time must be less than max_time')
 
         if min_time < 0:
-            raise ValueError('min_time must be greater than 0')
+            raise ValueError('min_time must be >= 0')
 
         self.__min_time = min_time
         self.__max_time = max_time
@@ -100,7 +100,7 @@ class AntiRobotMover(BaseMover):
     """Move the cursor by using generated multi-step paths."""
 
     def __init__(self,
-                 move_generator: Callable[[Point, Point], Generator[tuple[Point, float], None, None]] = DefaultMoveGenerator(0.05, 0.1)):
+                 move_generator: Callable[[Point, Point], Generator[tuple[Point, float], None, None]] = DefaultMoveGenerator(0.3, 0.6)):
         """Initialize a mover that follows generated paths.
 
         :param move_generator: Callable that yields cursor positions and durations.
@@ -118,6 +118,6 @@ class AntiRobotMover(BaseMover):
         if not isinstance(position, Point):
             raise TypeError('position must be Point')
 
-        current_position = Point(*mouse.get_position())
+        current_position = Point(*pyautogui.position())
         for i, t in self.__move_generator(current_position, position):
-            mouse.move(i.x, i.y, duration=t)
+            pyautogui.moveTo(i.x, i.y, duration=t)

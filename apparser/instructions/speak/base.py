@@ -1,7 +1,9 @@
 import abc
 
 from apparser.core import BaseUi
+
 from apparser.speakers import BaseSpeaker
+
 from apparser.instructions.base import BaseInstruction
 
 
@@ -19,11 +21,9 @@ class SpeakInstruction(BaseInstruction):
         pass
 
     @abc.abstractmethod
-    def perform(self, ui: BaseUi, speaker: BaseSpeaker, *args, **kwargs) -> BaseUi:
+    def perform(self, speaker: BaseSpeaker, *args, **kwargs) -> BaseUi:
         """Execute the instruction with a speaker backend.
 
-        :param ui: UI instance used during execution.
-        :type ui: BaseUi
         :param speaker: Speaker used to synthesize or play speech.
         :type speaker: BaseSpeaker
         :param args: Additional positional arguments for the execution flow.

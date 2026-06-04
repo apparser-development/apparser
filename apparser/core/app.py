@@ -1,18 +1,18 @@
+import os
 import subprocess
 import time
 
 from appwindows import get_finder
+from appwindows.exceptions import WindowDoesNotFoundException, WindowDoesNotValidException
 
-from apparser.core.ui.window import WindowUi, BaseUi
-from apparser.geometry import Size
+from apparser.core.ui import WindowUi, BaseUi
 
 
 class App:
     """Manage an application process and its UI wrapper."""
 
     def __init__(self, path_to_exe: str,
-                 window_title: str,
-                 window_size: Size = Size(900, 900),
+                 window_title: str | None = None,
                  timeout: float = 1):
         """Initialize an application controller.
 
@@ -20,8 +20,6 @@ class App:
         :type path_to_exe: str
         :param window_title: Title of the window to attach to.
         :type window_title: str
-        :param window_size: Initial size applied to the window.
-        :type window_size: Size
         :param timeout: Delay before the window lookup starts.
         :type timeout: float
         :raises TypeError: If any argument has an invalid type.
@@ -29,11 +27,8 @@ class App:
         if not isinstance(path_to_exe, str):
             raise TypeError('path_to_exe must be a string')
 
-        if not isinstance(window_title, str):
+        if window_title is not None and not isinstance(window_title, str):
             raise TypeError('window_title must be a string')
-
-        if not isinstance(window_size, Size):
-            raise TypeError('window_size must be a Size')
 
         if not (isinstance(timeout, float) or isinstance(timeout, int)):
             raise TypeError('timeout must be a number')
@@ -42,23 +37,53 @@ class App:
         self.__process: subprocess.Popen | None = None
         self.__path = path_to_exe
         self.__timeout = timeout
-        self.__window_size: Size = window_size
         self.__window_title_name: str = window_title
         self.__ui: BaseUi | None = None
         self.start_app()
 
+    def __find_window_by_title(self):
+        try:
+            window = self.__window_finder.get_window_by_title(self.__window_title_name)
+            self.__ui = WindowUi(window)
+        except WindowDoesNotFoundException:
+            pass
+
+    def __find_window_by_process_id(self, process_id: int):
+        try:
+            window = self.__window_finder.get_window_by_process_id(process_id)
+            self.__ui = WindowUi(window)
+        except WindowDoesNotFoundException:
+            pass
+
     def start_app(self):
-        """Start the application process and bind its UI."""
+        """Start the application process and bind its UI.
+
+        :raises WindowDoesNotValidException: If the window is not found or the application cannot be opened.
+        """
+        if self.__window_title_name is not None:
+            self.__find_window_by_title()
+        if self.__ui is not None:
+            return
+        window_processes = [i.get_process_id() for i in get_finder().get_all_windows()]
         self.__process = subprocess.Popen([self.__path])
         time.sleep(self.__timeout)
-        window = self.__window_finder.get_window_by_title(self.__window_title_name)
-        self.__ui = WindowUi(window)
-        self.__ui.window.resize(self.__window_size)
+        self.__find_window_by_process_id(os.getpid())
+        for i in get_finder().get_all_windows():
+            if self.__ui is not None:
+                return
+            if i.get_process_id() not in window_processes:
+                self.__find_window_by_process_id(i.get_process_id())
+        if self.__ui is not None:
+            return
+        self.__find_window_by_title()
+        if self.__ui is not None:
+            raise WindowDoesNotValidException()
 
     def stop_app(self):
         """Close the application window and stop the process."""
         self.ui.window.close()
-        self.__process.kill()
+        if self.__process is not None:
+            self.__process.kill()
 
     @property
     def ui(self) -> BaseUi:

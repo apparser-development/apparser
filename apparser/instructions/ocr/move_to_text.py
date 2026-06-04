@@ -3,11 +3,13 @@ from thefuzz import fuzz
 from apparser.core import BaseUi
 from apparser.exceptions import TextNotFoundException
 from apparser.geometry import Point, RelativelyPoint
+
+from apparser.text_readers import BaseTextReader, TextData
+
 from apparser.instructions.ocr.base import OCRInstruction
 from apparser.instructions.ocr.text_getter import GetText
 from apparser.instructions.ui import MouseMove
-from apparser.text_readers.base import BaseTextReader
-from apparser.text_readers.models.text_data import TextData
+
 
 
 class MoveToText(OCRInstruction):
@@ -16,7 +18,7 @@ class MoveToText(OCRInstruction):
     def __init__(self, text: str,
                  min_similarity: float = 0.9,
                  offset: Point | RelativelyPoint = Point(0, 0),
-                 text_getter=GetText()):
+                 text_getter: GetText | None = None):
         """Initialize a text-targeted mouse movement instruction.
 
         :param text: Text to locate.
@@ -25,9 +27,12 @@ class MoveToText(OCRInstruction):
         :type min_similarity: float
         :param offset: Offset relative to the detected text center.
         :type offset: Point | RelativelyPoint
-        :param text_getter: Instruction used to extract text from the screen.
-        :type text_getter: GetText
+        :param text_getter: Instruction used to extract text from the screen. If None use GetText()
+        :type text_getter: GetText | None
         """
+        if text_getter is None:
+            text_getter = GetText()
+
         self.__text = text
         self.__offset = offset
         self.__text_getter = text_getter
@@ -35,12 +40,14 @@ class MoveToText(OCRInstruction):
 
     @property
     def id(self) -> int:
-        return 201
+        return 2001
 
     def find_text(self, texts: list[TextData]) -> tuple[TextData, float]:
         similar_ratings = [fuzz.token_sort_ratio(self.text, i.text) for i in texts]
+        if len(similar_ratings) < 1:
+            raise TextNotFoundException(self.__min_similarity)
         max_rating = max(similar_ratings)
-        return texts[similar_ratings.index(max_rating)], max_rating
+        return texts[similar_ratings.index(max_rating)], max_rating / 100
 
     def __get_local_offset(self, ui: BaseUi) -> Point:
         if isinstance(self.__offset, RelativelyPoint):
@@ -49,7 +56,7 @@ class MoveToText(OCRInstruction):
 
     def perform(self, ui: BaseUi, text_reader: BaseTextReader, *args, **kwargs):
         self.__text_getter.perform(ui, text_reader)
-        needed_data, rating = self.find_text(self.__text_getter.global_answer)
+        needed_data, rating = self.find_text(self.__text_getter.local_answer)
         if self.__min_similarity > rating:
             raise TextNotFoundException(self.__min_similarity)
         y_cords = list(set([i.y for i in needed_data.coordinates]))

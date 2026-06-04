@@ -3,6 +3,7 @@ ocr
 
 .. toctree::
    :maxdepth: 1
+   :titlesonly:
 
    PrintAllText
    ClickOnText
@@ -10,3 +11,4 @@ ocr
    MoveToText
    OCRInstruction
    PlotAllText
+   WaitText

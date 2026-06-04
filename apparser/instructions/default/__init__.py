@@ -1,7 +1,8 @@
-from apparser.instructions.default.click import MouseClick
+from apparser.instructions.default.click import MouseClick, MouseDown, MouseUp
 from apparser.instructions.default.play_audio import PlayAudio
 from apparser.instructions.default.play_audio_file import PlayAudioFile
-from apparser.instructions.default.press import PressKey, PressKeysCombination
+from apparser.instructions.default.press import PressKey, PressKeysCombination, \
+                                                PressKeyDown, PressKeyUp
 from apparser.instructions.default.say_audio import SayAudio
 from apparser.instructions.default.say_audio_file import SayAudioFile
 from apparser.instructions.default.sleep import Sleep
@@ -15,4 +16,8 @@ __all__ = ["PressKey",
            "SayAudioFile",
            "Sleep",
            "MouseClick",
-           "WriteText"]
+           "WriteText",
+           "PressKeyDown", 
+           "PressKeyUp",
+           "MouseUp",
+           "MouseDown"]

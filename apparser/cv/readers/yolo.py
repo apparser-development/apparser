@@ -1,25 +1,41 @@
-from __future__ import annotations
+import importlib
 
+from apparser.core import BaseUi, CoordinatesUi
 from apparser.geometry import Point, Size
-from ultralytics import YOLO
 
-from apparser import CoordinatesUi
-from apparser.core import BaseUi
 from apparser.cv.models import CvAllData, CvBox
 from apparser.cv.readers.base import CvReader
 
 
 class YoloReader(CvReader):
+    """Read detected objects from UI screenshots with YOLO tracking."""
+
     def __init__(self, model: object | str, persist: bool = True, **track_settings):
+        """Initialize a YOLO reader.
+
+        :param model: YOLO model instance or path used to create one.
+        :type model: object | str
+        :param persist: Whether to preserve tracking identifiers between reads.
+        :type persist: bool
+        :param track_settings: Additional keyword arguments forwarded to ``track``.
+        """
         if hasattr(model, "track"):
             self.__model = model
         else:
-            self.__model = YOLO(model=model)
+            ultralytics = importlib.import_module("ultralytics")
+            self.__model = ultralytics.YOLO(model=model)
 
         self.__persist = persist
         self.__track_settings = track_settings
 
     def read(self, ui: BaseUi) -> CvAllData:
+        """Read object detections from the provided UI screenshot.
+
+        :param ui: UI instance used as the screenshot source.
+        :type ui: BaseUi
+        :return: Detected boxes with their local UI wrappers.
+        :rtype: CvAllData
+        """
         results = self.__model.track(
             source=ui.get_screenshot(),
             persist=self.__persist,

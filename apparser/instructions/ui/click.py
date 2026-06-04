@@ -1,11 +1,12 @@
 from apparser.core import BaseUi
 from apparser.geometry import Point, RelativelyPoint
+from apparser.key_codes import RightClick, LeftClick
+
+from apparser.movers import DefaultMover, BaseMover
+
 from apparser.instructions.ui.base import UiInstruction
 from apparser.instructions.default import MouseClick
 from apparser.instructions.ui.mouse_move import MouseMove
-from apparser.key_codes.mouse_keys import RightClick, LeftClick
-from apparser.movers import DefaultMover
-from apparser.movers.base import BaseMover
 
 
 class MouseClickTo(UiInstruction):
@@ -33,7 +34,7 @@ class MouseClickTo(UiInstruction):
 
     @property
     def id(self) -> int:
-        return 105
+        return 1005
 
     def perform(self, ui: BaseUi, *args, **kwargs):
         self.__move.perform(ui)

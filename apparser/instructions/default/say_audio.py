@@ -6,7 +6,7 @@ from apparser.instructions.base import BaseInstruction
 
 
 class SayAudio(BaseInstruction):
-    """Play raw audio through a microphone output device."""
+    """Play raw audio through the selected voice output device."""
 
     def __init__(self,
                  audio: numpy.ndarray | list,
@@ -14,13 +14,13 @@ class SayAudio(BaseInstruction):
                  microphone_device: int | str | None = None,
                  blocking: bool = True,
                  **settings):
-        """Initialize a microphone-targeted audio playback instruction.
+        """Initialize a voice-device audio playback instruction.
 
         :param audio: Audio data to play.
         :type audio: numpy.ndarray | list
         :param sample_rate: Audio sample rate in hertz.
         :type sample_rate: int | float
-        :param microphone_device: Output device identifier for voice playback.
+        :param microphone_device: Output device identifier used for voice playback.
         :type microphone_device: int | str | None
         :param blocking: Whether playback should block execution.
         :type blocking: bool

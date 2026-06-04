@@ -1,7 +1,8 @@
-import keyboard
+import pyautogui
+
+from apparser.key_codes import BaseKeyCode
 
 from apparser.instructions.base import BaseInstruction
-from apparser.key_codes.base import BaseKeyCode
 
 
 class PressKey(BaseInstruction):
@@ -15,7 +16,7 @@ class PressKey(BaseInstruction):
         :raises TypeError: If ``key_code`` is neither :class:`BaseKeyCode` nor :class:`str`.
         """
         if not (isinstance(key_code, BaseKeyCode) or isinstance(key_code, str)):
-            raise TypeError('key_code must be KeyCode or str')
+            raise TypeError('key_code must be BaseKeyCode or str')
 
         self.__key_code = key_code
 
@@ -24,7 +25,7 @@ class PressKey(BaseInstruction):
         return 2
 
     def perform(self, *args, **kwargs):
-        keyboard.send(str(self.__key_code))
+        pyautogui.press(str(self.__key_code))
 
 
 class PressKeysCombination(BaseInstruction):
@@ -45,8 +46,54 @@ class PressKeysCombination(BaseInstruction):
     def perform(self, *args, **kwargs):
         for key in self.__keys:
             if not (isinstance(key, BaseKeyCode) or isinstance(key, str)):
-                raise TypeError('key_code must be KeyCode or str')
-            keyboard.press(str(key))
+                raise TypeError('key_code must be BaseKeyCode or str')
+            pyautogui.keyDown(str(key))
 
         for key in self.__keys:
-            keyboard.release(str(key))
+            pyautogui.keyUp(str(key))
+
+
+class PressKeyDown(BaseInstruction):
+    """Send a single keyboard key press down."""
+
+    def __init__(self, key_code: BaseKeyCode | str):
+        """Initialize a single-key press down instruction.
+
+        :param key_code: Key code to press down.
+        :type key_code: BaseKeyCode | str
+        :raises TypeError: If ``key_code`` is neither :class:`BaseKeyCode` nor :class:`str`.
+        """
+        if not (isinstance(key_code, BaseKeyCode) or isinstance(key_code, str)):
+            raise TypeError('key_code must be BaseKeyCode or str')
+
+        self.__key_code = key_code
+
+    @property
+    def id(self) -> int:
+        return 10
+
+    def perform(self, *args, **kwargs):
+        pyautogui.keyDown(str(self.__key_code))
+
+
+class PressKeyUp(BaseInstruction):
+    """Release a single keyboard key."""
+
+    def __init__(self, key_code: BaseKeyCode | str):
+        """Initialize a single-key release instruction.
+
+        :param key_code: Key code to release.
+        :type key_code: BaseKeyCode | str
+        :raises TypeError: If ``key_code`` is neither :class:`BaseKeyCode` nor :class:`str`.
+        """
+        if not (isinstance(key_code, BaseKeyCode) or isinstance(key_code, str)):
+            raise TypeError('key_code must be BaseKeyCode or str')
+
+        self.__key_code = key_code
+
+    @property
+    def id(self) -> int:
+        return 11
+
+    def perform(self, *args, **kwargs):
+        pyautogui.keyUp(str(self.__key_code))

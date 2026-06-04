@@ -1,9 +1,10 @@
 from apparser.core import BaseUi
 from apparser.geometry import Point, RelativelyPoint
-from apparser.instructions.default import MouseClick, Sleep
 from apparser.key_codes import RightClick, LeftClick
+
 from apparser.text_readers import BaseTextReader
 
+from apparser.instructions.default import MouseClick, Sleep
 from apparser.instructions.ocr.base import OCRInstruction
 from apparser.instructions.ocr.move_to_text import MoveToText
 from apparser.instructions.ocr.text_getter import GetText
@@ -14,9 +15,9 @@ class ClickOnText(OCRInstruction):
 
     def __init__(self, text: str,
                  click_type: RightClick | LeftClick = LeftClick(),
-                 min_similarity: float = 0.9,
+                 min_similarity: float = 0.8,
                  offset: Point | RelativelyPoint = Point(0, 0),
-                 text_getter=GetText(),
+                 text_getter: GetText | None = None,
                  sleep_time_before_move: float = 0.1):
         """Initialize a text click instruction.
 
@@ -28,18 +29,22 @@ class ClickOnText(OCRInstruction):
         :type min_similarity: float
         :param offset: Offset relative to the detected text center.
         :type offset: Point | RelativelyPoint
-        :param text_getter: Instruction used to extract text from the screen.
-        :type text_getter: GetText
+        :param text_getter: Instruction used to extract text from the screen. If None use GetText()
+        :type text_getter: GetText | None
         :param sleep_time_before_move: Delay before the click is performed.
         :type sleep_time_before_move: float
         """
+
+        if text_getter is None:
+            text_getter = GetText()
+
         self.__mouse_mover = MoveToText(text, min_similarity, offset, text_getter)
         self.__click_type = click_type
         self.__sleep = Sleep(sleep_time_before_move)
 
     @property
     def id(self) -> int:
-        return 202
+        return 2002
 
     def perform(self, ui: BaseUi, ocr: BaseTextReader, *args, **kwargs):
         self.__mouse_mover.perform(ui, ocr)

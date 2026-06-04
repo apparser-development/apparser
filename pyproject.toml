@@ -1,8 +1,7 @@
 [project]
 dependencies = [
     "appwindows >= 1.3.0",
-    "keyboard >= 0.13.2",
-    "mouse >= 0.7.1",
+    "PyAutoGui >= 0.9.0",
     "numpy >= 1.20",
     "pillow >= 11.0",
     "screeninfo >= 0.8",
@@ -13,7 +12,7 @@ version = "1.0.0"
 authors = [
     { name = "Terochkin A.S", email = "apparser.development@gmail.com" },
 ]
-description = "The apparser library is designed for managing computer programs."
+description = "Apparser is a Python library designed for automating desktop applications and managing UI interfaces using artificial intelligence, such as OCR or object detection models. "
 readme = "README.md"
 requires-python = ">=3.10"
 classifiers = [
@@ -22,13 +21,35 @@ classifiers = [
     "Operating System :: Microsoft :: Windows :: Windows 10",
     "Operating System :: Microsoft :: Windows :: Windows 11",
     "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
     "Environment :: X11 Applications",
-    "Environment :: Win32 (MS Windows)"
+    "Environment :: Win32 (MS Windows)",
+    "Environment :: MacOS X :: Aqua",
 ]
-
+keywords = [
+    "automation",
+    "desktop-automation",
+    "gui-automation",
+    "ui-automation",
+    "computer-vision",
+    "object-detection",
+    "ocr",
+    "ui",
+    "cv",
+    "yolo",
+    "text-recognition",
+    "screen-recognition",
+    "window-management",
+    "mouse-automation",
+    "keyboard-automation",
+    "speech-synthesis",
+    "tts",
+    "app-control"
+]
 [project.urls]
-Repository = "https://github.com/lexter0705/apparser"
-Issues = "https://github.com/lexter0705/apparser/issues"
+Docs = "https://apparser-development.github.io/apparser/"
+Repository = "https://github.com/apparser-development/apparser"
+Issues = "https://github.com/apparser-development/apparser/issues"
 
 [project.optional-dependencies]
 cv = [
@@ -36,8 +57,9 @@ cv = [
 ]
 
 ocr = [
-    "easyocr >= 1.7.2",
-    "paddleocr"
+    "easyocr >= 1.7.2, < 2.0",
+    "paddleocr >= 3.5.0",
+    "paddlepaddle >= 3.3.1"
 ]
 
 speak = [

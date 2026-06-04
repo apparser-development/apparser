@@ -8,18 +8,20 @@ from apparser.speakers.base import BaseSpeaker
 class TorchSpeaker(BaseSpeaker):
     """Generate speech by using a Torch-backed Silero model."""
 
-    def __init__(self,
-                 language: str = "ru",
-                 speaker_model: str = "v5_ru",
-                 speaker: str = "xenia",
-                 sample_rate: int = 48000,
-                 device: str | object = "cpu",
-                 repo_or_dir: str = "snakers4/silero-models",
-                 model: str = "silero_tts",
-                 source: str = "github",
-                 trust_repo: bool | str | None = None,
-                 skip_validation: bool | None = None,
-                 **settings):
+    def __init__(
+        self,
+        language: str = "ru",
+        speaker_model: str = "v5_5_ru",
+        speaker: str = "xenia",
+        sample_rate: int = 48000,
+        device: str | object = "cpu",
+        repo_or_dir: str = "snakers4/silero-models",
+        model: str = "silero_tts",
+        source: str = "github",
+        trust_repo: bool | str | None = None,
+        skip_validation: bool | None = None,
+        **settings: object,
+    ) -> None:
         """Initialize a Torch speaker backend.
 
         :param language: Language code for the loaded model.
@@ -28,7 +30,7 @@ class TorchSpeaker(BaseSpeaker):
         :type speaker_model: str
         :param speaker: Speaker name used for synthesis.
         :type speaker: str
-        :param sample_rate: Output sample rate.
+        :param sample_rate: Output bitrate.
         :type sample_rate: int
         :param device: Torch device used for inference.
         :type device: str | object
@@ -48,7 +50,7 @@ class TorchSpeaker(BaseSpeaker):
         self.__speaker = speaker
         self.__sample_rate = sample_rate
         self.__torch = importlib.import_module("torch")
-        hub_settings = {
+        hub_settings: dict[str, object] = {
             "repo_or_dir": repo_or_dir,
             "model": model,
             "language": language,
@@ -66,15 +68,15 @@ class TorchSpeaker(BaseSpeaker):
             self.__device = self.__torch.device(device)
         self.__model.to(self.__device)
 
-    def speak(self, text: str, **settings) -> numpy.ndarray:
+    def speak(self, text: str, **settings: object) -> tuple[numpy.ndarray, int]:
         """Convert text into audio data.
 
         :param text: Text to synthesize.
         :type text: str
         :param settings: Additional synthesis settings.
         :type settings: dict[str, object]
-        :return: Generated audio samples.
-        :rtype: numpy.ndarray
+        :return: Generated audio samples and bitrate.
+        :rtype: tuple[numpy.ndarray, int]
         """
         audio = self.__model.apply_tts(
             text=text,
@@ -82,4 +84,4 @@ class TorchSpeaker(BaseSpeaker):
             sample_rate=self.__sample_rate,
             **settings,
         )
-        return audio.detach().cpu().numpy()
+        return audio.detach().cpu().numpy(), self.__sample_rate
