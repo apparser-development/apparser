@@ -1,7 +1,7 @@
 <img src="https://raw.githubusercontent.com/apparser-development/apparser/refs/heads/master/apparser.svg" alt="" width="40%">
 
 [![Documentation](https://img.shields.io/badge/docs-pages-green)](https://apparser-development.github.io/apparser/)
-[![unit_tests](https://github.com/apparser-development/appwindows/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/apparser-development/appwindows/actions/workflows/unit_tests.yml)
+[![unit_tests](https://github.com/apparser-development/appwindows/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/apparser-development/apparser/actions/workflows/unit_tests.yml)
 <br>
 [![Github](https://img.shields.io/badge/github-repo-green)](https://github.com/apparser-development/apparser)
 [![Issues](https://img.shields.io/badge/github-issues-green)](https://github.com/apparser-development/apparser/issues)
