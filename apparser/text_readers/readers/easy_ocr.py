@@ -1,7 +1,8 @@
 import importlib
 import numpy
+from appwindows.geometry import QuadPoints
 
-from apparser.text_readers.base import BaseTextReader
+from apparser.text_readers.readers.base import BaseTextReader
 from apparser.text_readers.models.text_data import TextData
 
 from apparser.geometry import Point
@@ -36,7 +37,7 @@ class EasyOcrReader(BaseTextReader):
         returned = []
         predicted = self.__reader.readtext(image, **settings)
         for i in predicted:
-            points = [Point(int(j[0]), int(j[1])) for j in i[0]]
+            points = QuadPoints(*[Point(int(j[0]), int(j[1])) for j in i[0]])
             text_data = TextData(i[1], points)
             returned.append(text_data)
         return returned

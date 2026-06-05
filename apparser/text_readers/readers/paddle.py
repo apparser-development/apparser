@@ -1,9 +1,10 @@
 import importlib
 from typing import Any
 import numpy
+from appwindows.geometry import QuadPoints
 
 from apparser.geometry import Point
-from apparser.text_readers.base import BaseTextReader
+from apparser.text_readers.readers.base import BaseTextReader
 from apparser.text_readers.models.text_data import TextData
 
 
@@ -12,16 +13,16 @@ def _build_box_points(
     top: int,
     right: int,
     bottom: int,
-) -> list[Point]:
-    return [
+) -> QuadPoints:
+    return QuadPoints(
         Point(left, top),
         Point(right, top),
         Point(right, bottom),
         Point(left, bottom),
-    ]
+    )
 
 
-def _parse_points_geometry(geometry: Any) -> list[Point]:
+def _parse_points_geometry(geometry: Any) -> QuadPoints | None:
     array = numpy.asarray(geometry)
 
     if array.ndim == 1 and array.size == 4:
@@ -41,7 +42,7 @@ def _parse_points_geometry(geometry: Any) -> list[Point]:
         y_coordinates = array[..., 1].reshape(-1)
 
         if len(x_coordinates) == 0 or len(y_coordinates) == 0:
-            return []
+            return None
 
         return _build_box_points(
             int(x_coordinates.min()),
@@ -50,7 +51,7 @@ def _parse_points_geometry(geometry: Any) -> list[Point]:
             int(y_coordinates.max()),
         )
 
-    return []
+    return None
 
 
 def _parse_predict_result(predicted: list[Any]) -> list[TextData]:
@@ -77,7 +78,7 @@ def _parse_predict_result(predicted: list[Any]) -> list[TextData]:
 
         for index in range(min(len(texts), len(geometries))):
             points = _parse_points_geometry(geometries[index])
-            if len(points) < 4:
+            if points is None:
                 continue
             returned.append(TextData(texts[index], points))
 

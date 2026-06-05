@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import pytest
-from appwindows.geometry import Point
+from appwindows.geometry import Point, QuadPoints
 
 from apparser.exceptions import TimeoutException
 from apparser.instructions.ocr.text_getter import GetText
@@ -15,7 +15,7 @@ def test_wait_text_returns_when_text_is_found() -> None:
         result=[
             TextData(
                 "hello",
-                [Point(0, 0), Point(1, 0), Point(1, 1), Point(0, 1)],
+                QuadPoints(Point(0, 0), Point(1, 0), Point(1, 1), Point(0, 1)),
             ),
         ],
     )

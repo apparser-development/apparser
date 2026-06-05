@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import numpy
-from appwindows.geometry import Point
+from appwindows.geometry import Point, QuadPoints
 
-from apparser.text_readers.easy_ocr import EasyOcrReader
+from apparser.text_readers import EasyOcrReader
 from tests.utils import easyocr_stub
 
 
@@ -30,9 +30,14 @@ def test_easy_ocr_reader_maps_prediction_result() -> None:
     assert instance.settings == {"gpu": False}
     assert instance.read_calls[0]["settings"] == {"detail": 1}
     assert result[0].text == "text"
-    assert result[0].coordinates == [
+
+    result_point = QuadPoints(
         Point(1, 2),
         Point(3, 4),
         Point(5, 6),
         Point(7, 8),
-    ]
+    )
+    assert result[0].coordinates.left_top == result_point.left_top
+    assert result[0].coordinates.right_bottom == result_point.right_bottom
+    assert result[0].coordinates.right_top == result_point.right_top
+    assert result[0].coordinates.left_bottom == result_point.left_bottom

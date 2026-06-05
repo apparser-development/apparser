@@ -2,7 +2,7 @@ import numpy
 from PIL import Image
 
 from apparser.core import BaseUi
-from apparser.geometry import Point, RelativelyPoint
+from apparser.geometry import Point, RelativelyPoint, QuadPoints
 
 from apparser.text_readers import BaseTextReader, TextData
 
@@ -38,9 +38,12 @@ class GetText(OCRInstruction):
         return 2000
 
     def __text_coordinates_to_local(self, text: TextData) -> TextData:
-        new_coordinates = []
-        for point in text.coordinates:
-            new_coordinates.append(point + self.__left_top_point_global)
+        new_coordinates = QuadPoints(
+            text.coordinates.left_top + self.__left_top_point_global,
+            text.coordinates.right_top + self.__left_top_point_global,
+            text.coordinates.right_bottom + self.__left_top_point_global,
+            text.coordinates.left_bottom + self.__left_top_point_global,
+        )
         return TextData(text.text, new_coordinates)
 
     def __texts_coordinates_to_local(self, texts: list[TextData]) -> list[TextData]:

@@ -9,7 +9,7 @@ from tests.utils.external_stubs import install_external_stubs
 
 install_external_stubs()
 
-from apparser.text_readers.base import BaseTextReader
+from apparser.text_readers import BaseTextReader
 
 
 class FakeTextReader(BaseTextReader):

@@ -1,6 +1,6 @@
 import numpy
 
-from apparser.text_readers.base import BaseTextReader
+from apparser.text_readers.readers.base import BaseTextReader
 from apparser.text_readers.models.text_data import TextData
 
 
