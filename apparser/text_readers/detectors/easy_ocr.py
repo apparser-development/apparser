@@ -5,7 +5,7 @@ import numpy
 from appwindows.geometry import QuadPoints
 
 from apparser.geometry import Point
-from apparser.text_readers import BaseTextDetector
+from apparser.text_readers.detectors.base import BaseTextDetector
 
 
 def _build_box_points(
