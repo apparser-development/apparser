@@ -1,8 +1,11 @@
 <img src="https://raw.githubusercontent.com/apparser-development/apparser/refs/heads/master/apparser.svg" alt="" width="40%">
 
-[![Documentation](https://img.shields.io/badge/docs-pages-green)](https://apparser-development.github.io/apparser/)
-[![unit_tests](https://github.com/apparser-development/appwindows/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/apparser-development/apparser/actions/workflows/unit_tests.yml)
+[![License - BSD 3-Clause](https://img.shields.io/pypi/l/apparser.svg)](https://github.com/apparser-development/apparser/blob/master/LICENSE.md) [![unit_tests](https://github.com/apparser-development/apparser/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/apparser-development/apparser/actions/workflows/unit_tests.yml)
 <br>
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/apparser?period=total&units=INTERNATIONAL_SYSTEM&left_color=GRAY&right_color=GREEN&left_text=downloads)](https://pepy.tech/projects/apparser) 
+[![Documentation](https://img.shields.io/badge/docs-pages-green)](https://apparser-development.github.io/apparser/)
+<br>
+[![PyPi](https://img.shields.io/badge/PyPi-link-green)](https://pypi.org/project/apparser/)
 [![Github](https://img.shields.io/badge/github-repo-green)](https://github.com/apparser-development/apparser)
 [![Issues](https://img.shields.io/badge/github-issues-green)](https://github.com/apparser-development/apparser/issues)
 
