@@ -10,7 +10,8 @@
 [![Issues](https://img.shields.io/badge/github-issues-green)](https://github.com/apparser-development/apparser/issues)
 
 # Apparser
-Apparser is a Python library designed for automating desktop applications and managing UI interfaces using artificial intelligence, such as OCR or object detection models.
+Apparser is a Python library designed for automating desktop applications and managing UI using artificial intelligence, such as OCR or object detection models.
+
 # Install
 ```bash
 pip install apparser
