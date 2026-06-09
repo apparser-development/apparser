@@ -51,7 +51,7 @@ Docs = "https://apparser-development.github.io/apparser/"
 Repository = "https://github.com/apparser-development/apparser"
 Issues = "https://github.com/apparser-development/apparser/issues"
 
-[project.optional-dependencies]
+[project.optional- ]
 cv = [
     "ultralytics >= 8.4.30"
 ]
@@ -59,7 +59,9 @@ cv = [
 ocr = [
     "easyocr >= 1.7.2, < 2.0",
     "paddleocr >= 3.5.0",
-    "paddlepaddle >= 3.3.1"
+    "paddlepaddle >= 3.3.1",
+    "rapidocr>=3.0.0",
+    "onnxruntime>=1.20.1"
 ]
 
 speak = [

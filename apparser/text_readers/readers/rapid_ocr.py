@@ -2,9 +2,8 @@ import importlib
 from typing import Any
 
 import numpy
-from appwindows.geometry import QuadPoints
 
-from apparser.geometry import Point
+from apparser.geometry import Point, QuadPoints
 from apparser.text_readers.models import TextData
 from apparser.text_readers.readers.base import BaseTextReader
 

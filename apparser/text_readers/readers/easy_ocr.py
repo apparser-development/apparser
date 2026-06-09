@@ -1,11 +1,10 @@
 import importlib
 import numpy
-from appwindows.geometry import QuadPoints
 
 from apparser.text_readers.readers.base import BaseTextReader
 from apparser.text_readers.models.text_data import TextData
 
-from apparser.geometry import Point
+from apparser.geometry import Point, QuadPoints
 
 
 class EasyOcrReader(BaseTextReader):

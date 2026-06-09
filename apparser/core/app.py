@@ -11,21 +11,24 @@ from apparser.core.ui import WindowUi, BaseUi
 class App:
     """Manage an application process and its UI wrapper."""
 
-    def __init__(self, path_to_exe: str,
+    def __init__(self, start_command: str | list[str],
                  window_title: str | None = None,
                  timeout: float = 1):
         """Initialize an application controller.
 
-        :param path_to_exe: Path to the executable file.
-        :type path_to_exe: str
+        :param start_command: App start command.
+        :type start_command: str
         :param window_title: Title of the window to attach to.
         :type window_title: str
         :param timeout: Delay before the window lookup starts.
         :type timeout: float
         :raises TypeError: If any argument has an invalid type.
         """
-        if not isinstance(path_to_exe, str):
-            raise TypeError('path_to_exe must be a string')
+        if isinstance(start_command, str):
+            start_command = [start_command]
+
+        if not isinstance(start_command, list):
+            raise TypeError('start_command must be a string or list[str]')
 
         if window_title is not None and not isinstance(window_title, str):
             raise TypeError('window_title must be a string')
@@ -35,7 +38,7 @@ class App:
 
         self.__window_finder = get_finder()
         self.__process: subprocess.Popen | None = None
-        self.__path = path_to_exe
+        self.__start_command = start_command
         self.__timeout = timeout
         self.__window_title_name: str = window_title
         self.__ui: BaseUi | None = None
@@ -65,7 +68,7 @@ class App:
         if self.__ui is not None:
             return
         window_processes = [i.get_process_id() for i in get_finder().get_all_windows()]
-        self.__process = subprocess.Popen([self.__path])
+        self.__process = subprocess.Popen(self.__start_command)
         time.sleep(self.__timeout)
         self.__find_window_by_process_id(os.getpid())
         for i in get_finder().get_all_windows():

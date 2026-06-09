@@ -3,7 +3,6 @@ from thefuzz import fuzz
 from apparser.core import BaseUi
 from apparser.exceptions import TextNotFoundException
 from apparser.geometry import Point, RelativelyPoint
-
 from apparser.text_readers import BaseTextReader, TextData
 
 from apparser.instructions.ocr.base import OCRInstruction
@@ -59,8 +58,8 @@ class MoveToText(OCRInstruction):
         needed_data, rating = self.find_text(self.__text_getter.local_answer)
         if self.__min_similarity > rating:
             raise TextNotFoundException(self.__min_similarity)
-        y_cords = list(set([i.y for i in needed_data.coordinates]))
-        x_cords = list(set([i.x for i in needed_data.coordinates]))
+        y_cords = [needed_data.coordinates.right_top.y, needed_data.coordinates.right_bottom.y]
+        x_cords = [needed_data.coordinates.left_top.x, needed_data.coordinates.right_top.x]
         offset_point = self.__get_local_offset(ui)
         x_center = round((x_cords[0] - x_cords[1]) / 2 + x_cords[1]) + offset_point.x
         y_center = round((y_cords[0] - y_cords[1]) / 2 + y_cords[1]) + offset_point.y

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import pytest
-from appwindows.geometry import Point
+from appwindows.geometry import Point, QuadPoints
 
 from apparser.exceptions import TextNotFoundException
 from apparser.instructions.ocr.move_to_text import MoveToText
@@ -50,7 +50,7 @@ def test_move_to_text_rejects_low_similarity(monkeypatch: pytest.MonkeyPatch) ->
 def test_move_to_text_moves_to_text_center(monkeypatch: pytest.MonkeyPatch) -> None:
     getter = GetText()
     getter._GetText__local_answer = [
-        TextData("hello", [Point(0, 0), Point(4, 0), Point(4, 4), Point(0, 4)])
+        TextData("hello", QuadPoints(Point(0, 0), Point(4, 0), Point(4, 4), Point(0, 4)))
     ]
     monkeypatch.setattr(getter, "perform", lambda ui, text_reader: None)
     moved_to: list[Point] = []

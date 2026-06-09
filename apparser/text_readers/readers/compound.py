@@ -1,5 +1,3 @@
-import numpy
-
 from apparser.geometry import QuadPoints, distance
 
 from apparser.text_readers.readers.base import BaseTextReader

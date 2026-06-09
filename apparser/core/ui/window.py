@@ -3,10 +3,9 @@ from functools import singledispatchmethod
 import numpy
 
 from appwindows import Window
-from appwindows.geometry import Point, Size
 
+from apparser.geometry import Point, Size, RelativelyPoint
 from apparser.core.ui.base import BaseUi
-from apparser.geometry.relatively_point import RelativelyPoint
 
 
 class WindowUi(BaseUi):
