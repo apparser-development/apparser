@@ -1,5 +1,5 @@
 BaseTextScanner
-==============
+===================
 
 .. currentmodule:: apparser.text_readers.scanners
 

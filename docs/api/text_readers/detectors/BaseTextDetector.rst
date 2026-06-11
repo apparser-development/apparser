@@ -1,7 +1,7 @@
 BaseTextDetector
-==============
+====================
 
-.. currentmodule:: apparser.text_readers
+.. currentmodule:: apparser.text_readers.detectors
 
 .. autoclass:: BaseTextDetector
    :members:

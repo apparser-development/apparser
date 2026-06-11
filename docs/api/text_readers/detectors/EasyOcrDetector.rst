@@ -1,9 +1,9 @@
-BaseTextDetector
-==============
+EasyOcrDetector
+=====================
 
-.. currentmodule:: apparser.text_readers
+.. currentmodule:: apparser.text_readers.detectors
 
-.. autoclass:: BaseTextDetector
+.. autoclass:: EasyOcrDetector
    :members:
    :undoc-members:
    :show-inheritance:

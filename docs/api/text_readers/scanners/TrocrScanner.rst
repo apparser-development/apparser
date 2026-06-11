@@ -1,9 +1,9 @@
-BaseTextDetector
+TrocrScanner
 ==============
 
-.. currentmodule:: apparser.text_readers
+.. currentmodule:: apparser.text_readers.scanners
 
-.. autoclass:: BaseTextDetector
+.. autoclass:: TrocrScanner
    :members:
    :undoc-members:
    :show-inheritance:
