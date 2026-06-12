@@ -39,8 +39,8 @@ class DesktopUi(BaseUi):
     @point_to_global.register(RelativelyPoint)
     def _(self, coordinates: RelativelyPoint):
         monitor = get_monitors()[self.__display_id]
-        x = round(coordinates.x * monitor.width)
-        y = round(coordinates.y * monitor.height)
+        x = getattr(monitor, "x", 0) + round(coordinates.x * monitor.width)
+        y = getattr(monitor, "y", 0) + round(coordinates.y * monitor.height)
         local_point = Point(x, y)
         return self.point_to_global(local_point)
 
