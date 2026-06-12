@@ -6,6 +6,8 @@ from apparser.speakers.base import BaseSpeaker
 
 
 class ChatTTSSpeaker(BaseSpeaker):
+    """Generate speech by using a ChatTTS backend."""
+
     def __init__(
         self,
         speaker: str | None = None,
@@ -45,7 +47,7 @@ class ChatTTSSpeaker(BaseSpeaker):
         :type experimental: bool
         :param enable_cache: Whether ChatTTS cache should be enabled.
         :type enable_cache: bool
-        :param sample_rate: Output bitrate for generated audio.
+        :param sample_rate: Output sample rate for generated audio.
         :type sample_rate: int
         """
         self.__chattts = importlib.import_module("ChatTTS")
@@ -98,7 +100,7 @@ class ChatTTSSpeaker(BaseSpeaker):
         :type text: str
         :param settings: Additional ChatTTS inference settings.
         :type settings: dict[str, object]
-        :return: Generated audio samples and bitrate.
+        :return: Generated audio samples and sample rate.
         :rtype: tuple[numpy.ndarray, int]
         """
         speaker = settings.pop("speaker", self.__speaker)

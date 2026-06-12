@@ -2,10 +2,9 @@ from functools import singledispatchmethod
 
 import numpy
 from appwindows import Window
-from appwindows.geometry import Size
 
 from apparser.core.ui.base import BaseUi
-from apparser.geometry import Point, RelativelyPoint
+from apparser.geometry import Point, RelativelyPoint, Size
 
 
 class CoordinatesUi(BaseUi):

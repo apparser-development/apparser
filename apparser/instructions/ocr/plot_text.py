@@ -33,16 +33,16 @@ class _Painter:
             self.__paint_lines(data)
 
     def __paint_lines(self, data: TextData):
-        shape = [(data.coordinates[0].x, data.coordinates[0].y), (data.coordinates[2].x, data.coordinates[2].y)]
+        shape = [(data.coordinates.left_top.x, data.coordinates.left_top.y), (data.coordinates.right_bottom.x, data.coordinates.right_bottom.y)]
         self.__draw.rectangle(shape, outline=self.__color, width=1)
 
     def __paint_cords(self, data: TextData):
-        y = data.coordinates[0].y + self.__text_move.y
+        y = data.coordinates.left_top.y + self.__text_move.y
         if y < 0:
-            y = data.coordinates[2].y - self.__text_move.y
-        x = data.coordinates[0].x + self.__text_move.x
+            y = data.coordinates.right_bottom.y - self.__text_move.y
+        x = data.coordinates.left_top.x + self.__text_move.x
         if y < 0:
-            x = data.coordinates[2].x - self.__text_move.x
+            x = data.coordinates.right_bottom.x - self.__text_move.x
         self.__draw.text((x, y), data.text, fill=self.__color)
 
 

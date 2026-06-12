@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import numpy
 
-from apparser.text_readers.white_black_reader import WhiteBlackReader
+from apparser.text_readers import WhiteBlackReader
 from tests.utils import FakeTextReader
 
 

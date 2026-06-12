@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from appwindows.geometry import Point
+from appwindows.geometry import Point, QuadPoints
 
 from apparser.instructions.ocr.print_all_text import PrintAllText
 from apparser.instructions.ocr.text_getter import GetText
@@ -11,7 +11,7 @@ from tests.utils import FakeTextReader, FakeUi
 def test_print_all_text_prints_each_entry(monkeypatch: pytest.MonkeyPatch) -> None:
     getter = GetText()
     getter._GetText__local_answer = [
-        TextData("hello", [Point(1, 2), Point(3, 4)]),
+        TextData("hello", QuadPoints(Point(1, 2), Point(3, 4), Point(3, 4), Point(3, 4))),
     ]
     printed: list[str] = []
     monkeypatch.setattr(getter, "perform", lambda ui, text_reader: None)
@@ -20,5 +20,5 @@ def test_print_all_text_prints_each_entry(monkeypatch: pytest.MonkeyPatch) -> No
 
     instruction.perform(FakeUi(), FakeTextReader())
 
-    assert printed == ['text: "hello", coordinates: Point(x = 1, y = 2) Point(x = 3, y = 4) ']
+    assert printed == ['text: "hello", coordinates: QuadPoints(left_top = Point(x = 1, y = 2), right_top = Point(x = 3, y = 4), right_bottom = Point(x = 3, y = 4), left_bottom = Point(x = 3, y = 4))']
     assert instruction.id == 2003

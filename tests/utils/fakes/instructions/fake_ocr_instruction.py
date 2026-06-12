@@ -7,7 +7,7 @@ from tests.utils.fakes.instructions.fake_instruction import FakeInstruction
 install_external_stubs()
 
 from apparser.core.ui.base import BaseUi
-from apparser.text_readers.base import BaseTextReader
+from apparser.text_readers import BaseTextReader
 
 
 class FakeOcrInstruction(FakeInstruction):

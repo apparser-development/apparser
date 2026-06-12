@@ -33,9 +33,8 @@ def test_press_keys_combination_presses_and_releases_keys() -> None:
 
 
 def test_press_keys_combination_rejects_invalid_key_on_perform() -> None:
-    instruction = PressKeysCombination([object()])
     with pytest.raises(TypeError):
-        instruction.perform()
+        PressKeysCombination([object()])
 
 
 def test_press_key_down_sends_key_down() -> None:

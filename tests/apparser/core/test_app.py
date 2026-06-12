@@ -10,12 +10,16 @@ from tests.utils import FakeWindow
 
 
 class FakeProcess:
-    def __init__(self) -> None:
+    def __init__(self, pid = 0) -> None:
         self.kill_calls = 0
+        self.__pid = pid
 
     def kill(self) -> None:
         self.kill_calls += 1
 
+    @property
+    def pid(self) -> int:
+        return self.__pid
 
 class FakeWindowUi:
     def __init__(self, window: FakeWindow) -> None:

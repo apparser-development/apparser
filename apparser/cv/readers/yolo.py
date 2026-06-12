@@ -52,9 +52,11 @@ class YoloReader(CvReader):
             x1, y1, x2, y2 = box.xyxy[0].tolist()
             x = int(x1)
             y = int(y1)
-            width = int(x2 - x1)
-            height = int(y2 - y1)
-            box_ui = CoordinatesUi(ui, Point(x, y), Size(width, height))
+            x2 = int(x2)
+            y2 = int(y2)
+            width = x2 - x1
+            height = y2 - y1
+            box_ui = CoordinatesUi(ui, Point(x, y), Point(x2, y2))
             boxes.append(
                 CvBox(
                     class_name=cls_name,

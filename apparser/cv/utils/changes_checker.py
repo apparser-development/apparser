@@ -25,7 +25,7 @@ def _is_resized(box: CvBox, old_box: CvBox) -> bool:
     :return: True if width and height both changed.
     :rtype: bool
     """
-    return abs(box.width - old_box.width) > 0 and abs(box.height - old_box.height) > 0
+    return abs(box.width - old_box.width) > 0 or abs(box.height - old_box.height) > 0
 
 
 class ChangesChecker:

@@ -12,7 +12,7 @@ class BaseSpeaker(abc.ABC):
 
         :param text: Text to synthesize.
         :type text: str
-        :return: Generated audio samples and bitrate.
+        :return: Generated audio samples and sample rate.
         :rtype: tuple[numpy.ndarray, int]
         """
         pass

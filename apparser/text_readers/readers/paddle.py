@@ -2,8 +2,8 @@ import importlib
 from typing import Any
 import numpy
 
-from apparser.geometry import Point
-from apparser.text_readers.base import BaseTextReader
+from apparser.geometry import Point, QuadPoints
+from apparser.text_readers.readers.base import BaseTextReader
 from apparser.text_readers.models.text_data import TextData
 
 
@@ -12,16 +12,16 @@ def _build_box_points(
     top: int,
     right: int,
     bottom: int,
-) -> list[Point]:
-    return [
+) -> QuadPoints:
+    return QuadPoints(
         Point(left, top),
         Point(right, top),
         Point(right, bottom),
         Point(left, bottom),
-    ]
+    )
 
 
-def _parse_points_geometry(geometry: Any) -> list[Point]:
+def _parse_points_geometry(geometry: Any) -> QuadPoints | None:
     array = numpy.asarray(geometry)
 
     if array.ndim == 1 and array.size == 4:
@@ -41,7 +41,7 @@ def _parse_points_geometry(geometry: Any) -> list[Point]:
         y_coordinates = array[..., 1].reshape(-1)
 
         if len(x_coordinates) == 0 or len(y_coordinates) == 0:
-            return []
+            return None
 
         return _build_box_points(
             int(x_coordinates.min()),
@@ -50,7 +50,7 @@ def _parse_points_geometry(geometry: Any) -> list[Point]:
             int(y_coordinates.max()),
         )
 
-    return []
+    return None
 
 
 def _parse_predict_result(predicted: list[Any]) -> list[TextData]:
@@ -77,7 +77,7 @@ def _parse_predict_result(predicted: list[Any]) -> list[TextData]:
 
         for index in range(min(len(texts), len(geometries))):
             points = _parse_points_geometry(geometries[index])
-            if len(points) < 4:
+            if points is None:
                 continue
             returned.append(TextData(texts[index], points))
 
@@ -99,12 +99,23 @@ def _build_default_settings(
 
 
 class PaddleTextReader(BaseTextReader):
+    """Read text from images by using PaddleOCR."""
+
     def __init__(
         self,
         lang: str = "en",
         enable_mkldnn: bool = False,
         **settings: Any,
     ) -> None:
+        """Initialize a PaddleOCR-backed text reader.
+
+        :param lang: Language passed to PaddleOCR.
+        :type lang: str
+        :param enable_mkldnn: Whether MKL-DNN acceleration should be enabled.
+        :type enable_mkldnn: bool
+        :param settings: Additional PaddleOCR reader settings.
+        :type settings: dict[str, object]
+        """
         self.__lang = lang
         self.__enable_mkldnn = enable_mkldnn
         self.__settings = _build_default_settings(
@@ -118,6 +129,15 @@ class PaddleTextReader(BaseTextReader):
         image: numpy.ndarray,
         **settings: Any,
     ) -> list[TextData]:
+        """Read text data from an image.
+
+        :param image: Image data to process.
+        :type image: numpy.ndarray
+        :param settings: Additional PaddleOCR predict settings.
+        :type settings: dict[str, object]
+        :return: Detected text data.
+        :rtype: list[TextData]
+        """
         predicted = self.__reader.predict(image, **settings)
         return _parse_predict_result(predicted)
 

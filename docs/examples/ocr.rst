@@ -46,11 +46,15 @@ Code
 
     app = App("Notepad", window_title="Notepad")
 
+    configure_algorithm.perform(app.ui)
+
     ui = WindowByDisplayUi(app.ui.window)
 
-    while True:
+    try:
         hello_world_algorithm.perform(ui)
         new_tab_algorithm.perform(ui)
+    finally:
+        app.stop_app()
 
 Video
 --------

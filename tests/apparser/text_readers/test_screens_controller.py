@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import numpy
 
-from apparser.text_readers.screens_controller import ScreensController
+from apparser.text_readers import ScreensController
 from tests.utils import FakeTextReader
 
 

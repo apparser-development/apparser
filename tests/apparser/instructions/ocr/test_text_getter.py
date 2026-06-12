@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import numpy
-from appwindows.geometry import Point
+from appwindows.geometry import Point, QuadPoints
 
 from apparser.geometry import RelativelyPoint
 from apparser.instructions.ocr.text_getter import GetText
@@ -15,7 +15,7 @@ def test_text_getter_reads_and_converts_coordinates() -> None:
         result=[
             TextData(
                 "hello",
-                [Point(0, 0), Point(1, 0), Point(1, 1), Point(0, 1)],
+                QuadPoints(Point(0, 0), Point(1, 0), Point(1, 1), Point(0, 1)),
             )
         ]
     )
@@ -25,14 +25,14 @@ def test_text_getter_reads_and_converts_coordinates() -> None:
     instruction.perform(ui, reader)
 
     assert reader.images[0].shape == (2, 3, 3)
-    assert instruction.global_answer[0].coordinates[0] == Point(0, 0)
-    assert instruction.local_answer[0].coordinates[0] == Point(1, 1)
+    assert instruction.global_answer[0].coordinates.left_top == Point(0, 0)
+    assert instruction.local_answer[0].coordinates.left_top == Point(1, 1)
     assert instruction.screenshot.shape == (2, 3, 3)
 
 
 def test_text_getter_respects_cached_result() -> None:
     reader = FakeTextReader(
-        result=[TextData("hello", [Point(0, 0), Point(1, 0), Point(1, 1), Point(0, 1)])]
+        result=[TextData("hello", QuadPoints(Point(0, 0), Point(1, 0), Point(1, 1), Point(0, 1)), )]
     )
     instruction = GetText(
         RelativelyPoint(0, 0),

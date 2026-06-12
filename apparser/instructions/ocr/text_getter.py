@@ -2,7 +2,7 @@ import numpy
 from PIL import Image
 
 from apparser.core import BaseUi
-from apparser.geometry import Point, RelativelyPoint
+from apparser.geometry import Point, RelativelyPoint, QuadPoints
 
 from apparser.text_readers import BaseTextReader, TextData
 
@@ -38,9 +38,12 @@ class GetText(OCRInstruction):
         return 2000
 
     def __text_coordinates_to_local(self, text: TextData) -> TextData:
-        new_coordinates = []
-        for point in text.coordinates:
-            new_coordinates.append(point + self.__left_top_point_global)
+        new_coordinates = QuadPoints(
+            text.coordinates.left_top + self.__left_top_point_global,
+            text.coordinates.right_top + self.__left_top_point_global,
+            text.coordinates.right_bottom + self.__left_top_point_global,
+            text.coordinates.left_bottom + self.__left_top_point_global,
+        )
         return TextData(text.text, new_coordinates)
 
     def __texts_coordinates_to_local(self, texts: list[TextData]) -> list[TextData]:
@@ -66,18 +69,18 @@ class GetText(OCRInstruction):
 
     @property
     def local_answer(self) -> list[TextData]:
-        """Return the texts coordinates in local Ui object of the last perform.
+        """Return text coordinates in the local UI object of the last perform.
 
-        :return: Texts coordinates in local Ui object.
+        :return: Text coordinates in the local UI object.
         :rtype: list[TextData]
         """
         return self.__local_answer
 
     @property
     def global_answer(self) -> list[TextData]:
-        """Return the global texts coordinates of the last perform.
+        """Return global text coordinates of the last perform.
 
-        :return: Global texts coordinates.
+        :return: Global text coordinates.
         :rtype: list[TextData]
         """
         return self.__global_answer
@@ -86,7 +89,7 @@ class GetText(OCRInstruction):
     def screenshot(self) -> numpy.ndarray:
         """Return the screenshot of the last perform.
 
-        :return: Ui screenshot
+        :return: UI screenshot.
         :rtype: numpy.ndarray
         """
         return self.__screenshot

@@ -1,6 +1,6 @@
 import numpy
 
-from apparser.text_readers.paddle import (
+from apparser.text_readers import (
     PaddleTextReader,
 )
 from tests.utils import paddleocr_stub
