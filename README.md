@@ -18,8 +18,8 @@ pip install apparser
 ```
 
 # Examples
-
 1) Open CS2 and start game
+## Code
 ```python
 from apparser import App
 from apparser.instructions import OCRAlgorithm
@@ -46,6 +46,7 @@ app = App(['cmd', '/c', 'start', 'steam://rungameid/730'], timeout=20)
 algorithm.perform(app.ui)
 
 ```
+## Video
 
 <img src="./example.gif" alt="" width="100%"/>
 
