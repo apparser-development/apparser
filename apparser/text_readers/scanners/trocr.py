@@ -6,8 +6,19 @@ from apparser.text_readers.scanners.base import BaseTextScanner
 
 
 class TrocrScanner(BaseTextScanner):
+    """Read text from images by using TrOCR."""
+
     def __init__(self, model_name="microsoft/trocr-base-printed",
                  processor_name=None, device=None):
+        """Initialize a TrOCR-backed text scanner.
+
+        :param model_name: Vision encoder-decoder model name.
+        :type model_name: str
+        :param processor_name: Processor model name. If None, use ``model_name``.
+        :type processor_name: str | None
+        :param device: Device used for inference. If None, choose CUDA when available.
+        :type device: str | None
+        """
         transformers = importlib.import_module("transformers")
         torch = importlib.import_module("torch")
 
@@ -29,6 +40,13 @@ class TrocrScanner(BaseTextScanner):
         self.__model.to(self.__device)
 
     def read_image(self, image: numpy.ndarray) -> str:
+        """Read text from an image.
+
+        :param image: Image data to process.
+        :type image: numpy.ndarray
+        :return: Detected text.
+        :rtype: str
+        """
         pil_image = self.__pil_image_module.fromarray(image).convert("RGB")
         pixel_values = self.__processor(
             images=pil_image, return_tensors="pt"

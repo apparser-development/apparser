@@ -81,6 +81,18 @@ Instructions available through get_instruction_by_id()
    * - ``9``
      - ``Sleep``
      - Pause execution for a fixed amount of time
+   * - ``10``
+     - ``PressKeyDown``
+     - Press a single key down
+   * - ``11``
+     - ``PressKeyUp``
+     - Release a single key
+   * - ``12``
+     - ``MouseUp``
+     - Release a mouse button
+   * - ``13``
+     - ``MouseDown``
+     - Press a mouse button down
    * - ``1000``
      - ``WindowToForeground``
      - Bring the window to the foreground
@@ -114,6 +126,9 @@ Instructions available through get_instruction_by_id()
    * - ``2004``
      - ``PlotAllText``
      - Draw detected text on top of a screenshot
+   * - ``2005``
+     - ``WaitText``
+     - Wait until matching text appears
    * - ``3000``
      - ``PlayTextAudio``
      - Synthesize text and play it as regular audio

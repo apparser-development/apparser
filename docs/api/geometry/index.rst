@@ -7,5 +7,6 @@ geometry
 
    Point
    Size
+   QuadPoints
    RelativelyPoint
    distance

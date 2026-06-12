@@ -69,18 +69,18 @@ class GetText(OCRInstruction):
 
     @property
     def local_answer(self) -> list[TextData]:
-        """Return the texts coordinates in local Ui object of the last perform.
+        """Return text coordinates in the local UI object of the last perform.
 
-        :return: Texts coordinates in local Ui object.
+        :return: Text coordinates in the local UI object.
         :rtype: list[TextData]
         """
         return self.__local_answer
 
     @property
     def global_answer(self) -> list[TextData]:
-        """Return the global texts coordinates of the last perform.
+        """Return global text coordinates of the last perform.
 
-        :return: Global texts coordinates.
+        :return: Global text coordinates.
         :rtype: list[TextData]
         """
         return self.__global_answer
@@ -89,7 +89,7 @@ class GetText(OCRInstruction):
     def screenshot(self) -> numpy.ndarray:
         """Return the screenshot of the last perform.
 
-        :return: Ui screenshot
+        :return: UI screenshot.
         :rtype: numpy.ndarray
         """
         return self.__screenshot

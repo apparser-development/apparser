@@ -32,14 +32,14 @@ def _cut_by_coordinates(image: numpy.ndarray, coordinates: QuadPoints) -> numpy.
 
 
 class CompoundReader(BaseTextReader):
-    """Convert images to grayscale before OCR processing."""
+    """Detect text regions and scan each detected image fragment."""
 
     def __init__(self, detector: BaseTextDetector, scanner: BaseTextScanner ):
-        """Initialize a grayscale text reader wrapper.
+        """Initialize a compound text reader.
 
-        :param detector: Detector to detect text in image
+        :param detector: Detector used to find text regions in an image.
         :type detector: BaseTextDetector
-        :param scanner: Scanner to read text from image
+        :param scanner: Scanner used to read text from detected image fragments.
         :type scanner: BaseTextScanner
         :raises TypeError: If any argument has an invalid type.
         """

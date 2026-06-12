@@ -101,11 +101,20 @@ def _build_default_settings(settings: dict[str, Any]) -> dict[str, Any]:
 
 
 class EasyOcrDetector(BaseTextDetector):
+    """Detect text regions in images by using EasyOCR."""
+
     def __init__(
         self,
         lang_list: list[str] | None = None,
         **settings: Any,
     ) -> None:
+        """Initialize an EasyOCR-backed text detector.
+
+        :param lang_list: Languages passed to the EasyOCR reader.
+        :type lang_list: list[str] | None
+        :param settings: Additional EasyOCR reader settings.
+        :type settings: dict[str, object]
+        """
         if lang_list is None:
             lang_list = ["en"]
         easyocr = importlib.import_module("easyocr")
@@ -119,5 +128,14 @@ class EasyOcrDetector(BaseTextDetector):
         image: numpy.ndarray,
         **settings: Any,
     ) -> list[QuadPoints]:
+        """Detect text coordinates in an image.
+
+        :param image: Image data to process.
+        :type image: numpy.ndarray
+        :param settings: Additional EasyOCR detect settings.
+        :type settings: dict[str, object]
+        :return: Detected text coordinates.
+        :rtype: list[QuadPoints]
+        """
         predicted = self.__reader.detect(image, **settings)
         return _parse_detect_result(predicted)

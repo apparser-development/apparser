@@ -5,8 +5,8 @@
 [![PyPI Downloads](https://static.pepy.tech/personalized-badge/apparser?period=total&units=INTERNATIONAL_SYSTEM&left_color=GRAY&right_color=GREEN&left_text=downloads)](https://pepy.tech/projects/apparser) 
 [![Documentation](https://img.shields.io/badge/docs-pages-green)](https://apparser-development.github.io/apparser/)
 <br>
-[![PyPi](https://img.shields.io/badge/PyPi-link-green)](https://pypi.org/project/apparser/)
-[![Github](https://img.shields.io/badge/github-repo-green)](https://github.com/apparser-development/apparser)
+[![PyPI](https://img.shields.io/badge/PyPI-link-green)](https://pypi.org/project/apparser/)
+[![GitHub](https://img.shields.io/badge/github-repo-green)](https://github.com/apparser-development/apparser)
 [![Issues](https://img.shields.io/badge/github-issues-green)](https://github.com/apparser-development/apparser/issues)
 
 # Apparser
@@ -19,7 +19,7 @@ pip install apparser
 
 # Examples
 
-1) Open terminal and write "Hello World!"
+1) Open Notepad and write "Hello World!"
 ```python
 from apparser import App
 from apparser.geometry import RelativelyPoint
@@ -27,7 +27,7 @@ from apparser.instructions import Algorithm, MouseClickTo, WriteText, Sleep
 
 algorithm = Algorithm([
         Sleep(1), # Wait for the application to open.
-        MouseClickTo(RelativelyPoint(0.5, 0.5)), # Click to window center for start writing
+        MouseClickTo(RelativelyPoint(0.5, 0.5)), # Click the window center before typing.
         WriteText("Hello World") # Write text
 ])
 
@@ -38,7 +38,7 @@ algorithm.perform(app.ui)
 
 # Docs
 All documentation <a href="https://apparser-development.github.io/apparser/">here</a> <br>
-Link to <a href="https://pypi.org/project/apparser/">PyPi</a>
+Link to <a href="https://pypi.org/project/apparser/">PyPI</a>
 
 # For Developers
 1) If something doesn't work - open issue.
@@ -47,4 +47,4 @@ Link to <a href="https://pypi.org/project/apparser/">PyPi</a>
 
 apparser.development@gmail.com
 
-Any help in development is welcome)!
+Any help in development is welcome!

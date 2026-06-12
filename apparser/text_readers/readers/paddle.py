@@ -99,12 +99,23 @@ def _build_default_settings(
 
 
 class PaddleTextReader(BaseTextReader):
+    """Read text from images by using PaddleOCR."""
+
     def __init__(
         self,
         lang: str = "en",
         enable_mkldnn: bool = False,
         **settings: Any,
     ) -> None:
+        """Initialize a PaddleOCR-backed text reader.
+
+        :param lang: Language passed to PaddleOCR.
+        :type lang: str
+        :param enable_mkldnn: Whether MKL-DNN acceleration should be enabled.
+        :type enable_mkldnn: bool
+        :param settings: Additional PaddleOCR reader settings.
+        :type settings: dict[str, object]
+        """
         self.__lang = lang
         self.__enable_mkldnn = enable_mkldnn
         self.__settings = _build_default_settings(
@@ -118,6 +129,15 @@ class PaddleTextReader(BaseTextReader):
         image: numpy.ndarray,
         **settings: Any,
     ) -> list[TextData]:
+        """Read text data from an image.
+
+        :param image: Image data to process.
+        :type image: numpy.ndarray
+        :param settings: Additional PaddleOCR predict settings.
+        :type settings: dict[str, object]
+        :return: Detected text data.
+        :rtype: list[TextData]
+        """
         predicted = self.__reader.predict(image, **settings)
         return _parse_predict_result(predicted)
 

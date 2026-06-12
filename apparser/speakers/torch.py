@@ -30,7 +30,7 @@ class TorchSpeaker(BaseSpeaker):
         :type speaker_model: str
         :param speaker: Speaker name used for synthesis.
         :type speaker: str
-        :param sample_rate: Output bitrate.
+        :param sample_rate: Output sample rate.
         :type sample_rate: int
         :param device: Torch device used for inference.
         :type device: str | object
@@ -75,7 +75,7 @@ class TorchSpeaker(BaseSpeaker):
         :type text: str
         :param settings: Additional synthesis settings.
         :type settings: dict[str, object]
-        :return: Generated audio samples and bitrate.
+        :return: Generated audio samples and sample rate.
         :rtype: tuple[numpy.ndarray, int]
         """
         audio = self.__model.apply_tts(
