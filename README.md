@@ -39,25 +39,31 @@ from apparser.instructions import OCRAlgorithm
 from apparser.instructions.ocr import WaitText, ClickOnText
 from apparser.text_readers import ScreensController, RapidOcrReader
 
+# Text labels that the OCR algorithm will look for on the screen.
 play_button = "play"
 deathmatch_button = "deathmatch"
 group_button = "hostage group"
 start_button = "go"
 
+# Create OCR-based algorithm.
 algorithm = OCRAlgorithm([
+    # Wait for the main menu and open the play screen.
     WaitText(play_button),
     ClickOnText(play_button),
+    # Select the deathmatch mode.
     WaitText(deathmatch_button),
     ClickOnText(deathmatch_button),
+    # Select the hostage group and start the match.
     WaitText(group_button),
     ClickOnText(group_button),
     ClickOnText(start_button, min_similarity=0.5),
 ], text_reader=ScreensController(RapidOcrReader()))
 
+# Launch CS2
 app = App(['cmd', '/c', 'start', 'steam://rungameid/730'], timeout=20)
 
+# Run the prepared scenario against the application UI.
 algorithm.perform(app.ui)
-
 ```
 #### Video
 
