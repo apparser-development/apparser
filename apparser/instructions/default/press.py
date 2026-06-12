@@ -1,8 +1,7 @@
 import pyautogui
 
-from apparser.key_codes import BaseKeyCode
-
 from apparser.instructions.base import BaseInstruction
+from apparser.key_codes import BaseKeyCode
 
 
 class PressKey(BaseInstruction):
@@ -38,6 +37,12 @@ class PressKeysCombination(BaseInstruction):
         :type keys: list[BaseKeyCode | str]
         """
         self.__keys = keys
+        self.__validate()
+
+    def __validate(self):
+        for key in self.__keys:
+            if not (isinstance(key, BaseKeyCode) or isinstance(key, str)):
+                raise TypeError('key_code must be BaseKeyCode or str')
 
     @property
     def id(self) -> int:
@@ -45,8 +50,6 @@ class PressKeysCombination(BaseInstruction):
 
     def perform(self, *args, **kwargs):
         for key in self.__keys:
-            if not (isinstance(key, BaseKeyCode) or isinstance(key, str)):
-                raise TypeError('key_code must be BaseKeyCode or str')
             pyautogui.keyDown(str(key))
 
         for key in self.__keys:

@@ -40,6 +40,12 @@ class NamesAlgorithm(BaseAlgorithm):
         :type debugger: BaseDebugger | bool
         :raises TypeError: If ``debugger`` has an invalid type.
         """
+        if not isinstance(attributes, list):
+            raise TypeError("attributes must be list")
+
+        if not isinstance(instructions, list):
+            raise TypeError("attributes must be list")
+
         if not isinstance(debugger, BaseDebugger) and not isinstance(debugger, bool):
             raise TypeError(f"debugger must be a bool or BaseDebugger")
 
@@ -49,8 +55,6 @@ class NamesAlgorithm(BaseAlgorithm):
         elif debugger == False:
             debugger = None
 
-        attributes.reverse()
-
         self.__debugger = debugger
         self.__instructions = instructions
         self.__attributes = attributes
@@ -59,11 +63,11 @@ class NamesAlgorithm(BaseAlgorithm):
     def id(self) -> int:
         return 1502
 
-    def __form_args(self, instruction: BaseInstruction) -> dict[str, Any]:
+    def __form_args(self, instruction: BaseInstruction, *additional_args) -> dict[str, Any]:
         result = {}
         function_signature = inspect.signature(instruction.perform)
         for arg in function_signature.parameters.values():
-            for a in self.__attributes:
+            for a in self.__attributes + list(additional_args):
                 if arg.annotation is type(a):
                     result[arg.name] = a
         return result
@@ -83,7 +87,7 @@ class NamesAlgorithm(BaseAlgorithm):
 
             instruction = instruction_type(*instruction_args)
 
-            perform_kwargs = self.__form_args(instruction)
+            perform_kwargs = self.__form_args(instruction, ui)
 
             if self.__debugger is not None:
                 self.__debugger.try_perform(instruction, **perform_kwargs)

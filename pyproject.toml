@@ -51,7 +51,7 @@ Docs = "https://apparser-development.github.io/apparser/"
 Repository = "https://github.com/apparser-development/apparser"
 Issues = "https://github.com/apparser-development/apparser/issues"
 
-[project.optional- ]
+[project.optional-dependencies]
 cv = [
     "ultralytics >= 8.4.30"
 ]

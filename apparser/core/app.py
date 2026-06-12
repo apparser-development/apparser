@@ -1,4 +1,3 @@
-import os
 import subprocess
 import time
 
@@ -70,7 +69,7 @@ class App:
         window_processes = [i.get_process_id() for i in get_finder().get_all_windows()]
         self.__process = subprocess.Popen(self.__start_command)
         time.sleep(self.__timeout)
-        self.__find_window_by_process_id(os.getpid())
+        self.__find_window_by_process_id(self.__process.pid)
         for i in get_finder().get_all_windows():
             if self.__ui is not None:
                 return
@@ -79,7 +78,7 @@ class App:
         if self.__ui is not None:
             return
         self.__find_window_by_title()
-        if self.__ui is not None:
+        if self.__ui is None:
             raise WindowDoesNotValidException()
 
     def stop_app(self):

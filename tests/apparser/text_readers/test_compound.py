@@ -56,10 +56,6 @@ def test_compound_reader_rejects_invalid_backends(
         CompoundReader(detector, scanner)
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason="CompoundReader.read_image does not return collected TextData",
-)
 def test_compound_reader_detects_and_scans_text() -> None:
     coordinates = QuadPoints(
         Point(1, 1),

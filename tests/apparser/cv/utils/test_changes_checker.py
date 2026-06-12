@@ -21,7 +21,8 @@ def test_is_resized_requires_both_dimensions_to_change() -> None:
     only_width = CvBox("button", 1, 1, 2, 5, 4, ui)
 
     assert _is_resized(changed, first) is True
-    assert _is_resized(only_width, first) is False
+    assert _is_resized(only_width, first) is True
+    assert _is_resized(first, first) is False
 
 
 def test_changes_checker_reports_detected_moved_resized_and_undetected() -> None:
