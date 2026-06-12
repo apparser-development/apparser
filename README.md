@@ -19,22 +19,35 @@ pip install apparser
 
 # Examples
 
-1) Open Notepad and write "Hello World!"
+1) Open CS2 and start game
 ```python
 from apparser import App
-from apparser.geometry import RelativelyPoint
-from apparser.instructions import Algorithm, MouseClickTo, WriteText, Sleep
+from apparser.instructions import OCRAlgorithm
+from apparser.instructions.ocr import WaitText, ClickOnText
+from apparser.text_readers import ScreensController, RapidOcrReader
 
-algorithm = Algorithm([
-        Sleep(1), # Wait for the application to open.
-        MouseClickTo(RelativelyPoint(0.5, 0.5)), # Click the window center before typing.
-        WriteText("Hello World") # Write text
-])
+play_button = "play"
+deathmatch_button = "deathmatch"
+group_button = "hostage group"
+start_button = "go"
 
-app = App("notepad", window_title="Notepad")
+algorithm = OCRAlgorithm([
+    WaitText(play_button),
+    ClickOnText(play_button),
+    WaitText(deathmatch_button),
+    ClickOnText(deathmatch_button),
+    WaitText(group_button),
+    ClickOnText(group_button),
+    ClickOnText(start_button, min_similarity=0.5),
+], text_reader=ScreensController(RapidOcrReader()))
+
+app = App(['cmd', '/c', 'start', 'steam://rungameid/730'], timeout=20)
 
 algorithm.perform(app.ui)
+
 ```
+
+<img src="./example.gif" alt="" width="100%"/>
 
 # Docs
 All documentation <a href="https://apparser-development.github.io/apparser/">here</a> <br>
