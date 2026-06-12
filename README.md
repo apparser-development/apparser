@@ -10,15 +10,28 @@
 [![Issues](https://img.shields.io/badge/github-issues-green)](https://github.com/apparser-development/apparser/issues)
 
 # Apparser
-Apparser is a Python library designed for automating desktop applications and managing UI using artificial intelligence, such as OCR or object detection models.
+Apparser is a Python library for automating desktop applications and interacting with UIs using AI-powered tools such as OCR and object detection models.
 
-# Install
+# Installation
 ```bash
+# Base Apparser package
 pip install apparser
+
+# Apparser with text recognition support
+pip install "apparser[ocr]"
+
+# Apparser with text-to-speech support
+pip install "apparser[speak]"
+
+# Apparser with object detection support
+pip install "apparser[cv]"
+
+# Apparser with all optional features
+pip install "apparser[all]"
 ```
 
 # Examples
-1) Open CS2 and start game
+1) Open CS2 and start a game
 #### Code
 ```python
 from apparser import App
@@ -51,14 +64,19 @@ algorithm.perform(app.ui)
 <img src="./example.gif" alt="" width="100%"/>
 
 # Docs
-All documentation <a href="https://apparser-development.github.io/apparser/">here</a> <br>
-Link to <a href="https://pypi.org/project/apparser/">PyPI</a>
+Full documentation is available <a href="https://apparser-development.github.io/apparser/">here</a> <br>
+Package page on <a href="https://pypi.org/project/apparser/">PyPI</a>
+
+# Donation
+If you'd like to financially support the developers for their work:
+
+<a href="https://dalink.to/apparser">Donation link</a>
 
 # For Developers
-1) If something doesn't work - open issue.
-2) If you want something fixed - open issue.
-3) If you can help with the library - email.
+1) If something doesn't work, open an issue.
+2) If you want something fixed, open an issue.
+3) If you can help with the library, email us.
 
 apparser.development@gmail.com
 
-Any help in development is welcome!
+Contributions are welcome!
