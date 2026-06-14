@@ -1,6 +1,6 @@
 from apparser.core import BaseUi
 
-from apparser.text_readers import BaseTextReader, EasyOcrReader, ScreensController
+from apparser.text_readers import BaseTextReader, RapidOcrReader, ScreensController
 
 from apparser.instructions.debuggers import BaseDebugger, Debugger
 from apparser.instructions.ui.algorithms.base import BaseAlgorithm
@@ -25,7 +25,7 @@ class OCRAlgorithm(BaseAlgorithm):
         :raises TypeError: If ``text_reader`` or ``debugger`` has an invalid type.
         """
         if text_reader is None:
-            text_reader = ScreensController(EasyOcrReader())
+            text_reader = ScreensController(RapidOcrReader())
 
         if not isinstance(text_reader, BaseTextReader):
             raise TypeError("text_reader must be BaseTextReader")

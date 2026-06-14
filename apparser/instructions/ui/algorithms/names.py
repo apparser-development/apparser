@@ -1,5 +1,6 @@
 import inspect
-from typing import Any
+from types import UnionType
+from typing import Any, Union, get_args, get_origin
 
 from apparser.core import BaseUi
 
@@ -23,6 +24,27 @@ def _check_instruction(instruction: tuple[str, list[Any]]) -> tuple[str, list[An
     return instruction_name, instruction_args
 
 
+def _is_annotation_matches(annotation: Any, value: Any) -> bool:
+    if annotation is inspect.Parameter.empty:
+        return False
+
+    if annotation is Any:
+        return True
+
+    annotation_origin = get_origin(annotation)
+    annotation_args = get_args(annotation)
+    if annotation_origin in (Union, UnionType):
+        return any(_is_annotation_matches(i, value) for i in annotation_args)
+
+    if isinstance(annotation_origin, type):
+        return isinstance(value, annotation_origin)
+
+    if isinstance(annotation, type):
+        return isinstance(value, annotation)
+
+    return annotation is type(value)
+
+
 class NamesAlgorithm(BaseAlgorithm):
     """Resolve and execute instructions by their registered names."""
 
@@ -44,7 +66,7 @@ class NamesAlgorithm(BaseAlgorithm):
             raise TypeError("attributes must be list")
 
         if not isinstance(instructions, list):
-            raise TypeError("attributes must be list")
+            raise TypeError("instructions must be list")
 
         if not isinstance(debugger, BaseDebugger) and not isinstance(debugger, bool):
             raise TypeError(f"debugger must be a bool or BaseDebugger")
@@ -68,7 +90,7 @@ class NamesAlgorithm(BaseAlgorithm):
         function_signature = inspect.signature(instruction.perform)
         for arg in function_signature.parameters.values():
             for a in self.__attributes + list(additional_args):
-                if arg.annotation is type(a):
+                if _is_annotation_matches(arg.annotation, a):
                     result[arg.name] = a
         return result
 

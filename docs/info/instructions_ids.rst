@@ -27,7 +27,7 @@ non-abstract instruction classes.
 
 .. important::
 
-   Algorithm instructions currently not included in
+   Algorithm instructions are currently not included
    ``get_instruction_by_id()``.
 
 Current numbering layout

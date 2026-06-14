@@ -49,7 +49,6 @@ __all__ = [
     "create_wave_file",
     "easyocr_stub",
     "install_external_stubs",
-    "keyboard_stub",
     "pyautogui_stub",
     "paddleocr_stub",
     "reset_external_stubs",

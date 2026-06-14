@@ -5,7 +5,7 @@ from PIL import ImageDraw, Image
 from apparser.core import BaseUi
 from apparser.geometry import Point
 
-from apparser.text_readers import BaseTextReader, TextData\
+from apparser.text_readers import BaseTextReader, TextData
 
 from apparser.instructions.ocr.base import OCRInstruction
 from apparser.instructions.ocr.text_getter import GetText

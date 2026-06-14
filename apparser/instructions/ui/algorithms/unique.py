@@ -1,4 +1,5 @@
-from typing import Any
+from types import UnionType
+from typing import Any, Union, get_args, get_origin
 import inspect
 
 from apparser.core import BaseUi
@@ -6,6 +7,27 @@ from apparser.core import BaseUi
 from apparser.instructions.debuggers import BaseDebugger, Debugger
 from apparser.instructions.ui.algorithms.base import BaseAlgorithm
 from apparser.instructions.base import BaseInstruction
+
+
+def _is_annotation_matches(annotation: Any, value: Any) -> bool:
+    if annotation is inspect.Parameter.empty:
+        return False
+
+    if annotation is Any:
+        return True
+
+    annotation_origin = get_origin(annotation)
+    annotation_args = get_args(annotation)
+    if annotation_origin in (Union, UnionType):
+        return any(_is_annotation_matches(i, value) for i in annotation_args)
+
+    if isinstance(annotation_origin, type):
+        return isinstance(value, annotation_origin)
+
+    if isinstance(annotation, type):
+        return isinstance(value, annotation)
+
+    return annotation is type(value)
 
 
 class UniqueAlgorithm(BaseAlgorithm):
@@ -45,7 +67,7 @@ class UniqueAlgorithm(BaseAlgorithm):
         function_signature = inspect.signature(instruction.perform)
         for arg in function_signature.parameters.values():
             for a in self.__attributes:
-                if arg.annotation is type(a):
+                if _is_annotation_matches(arg.annotation, a):
                     result[arg.name] = a
         return result
 

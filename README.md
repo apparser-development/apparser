@@ -14,7 +14,7 @@ Apparser is a Python library for automating desktop applications and interacting
 
 # Installation
 ```bash
-# Base Apparser package
+# Base Apparser package with base ocr model
 pip install apparser
 
 # Apparser with text recognition support
@@ -31,13 +31,17 @@ pip install "apparser[all]"
 ```
 
 # Examples
+> Disclaimer: This example is provided for educational purposes only to demonstrate UI automation concepts.
+> Do not use it with Counter-Strike 2, Steam, multiplayer games, VAC-protected games, ranking/progression systems,
+> or any application/service where automation is prohibited by its terms of service.
+> This project is not affiliated with, endorsed by, or sponsored by Valve, Steam, or Counter-Strike 2.
+
 1) Open CS2 and start a game
 #### Code
 ```python
 from apparser import App
 from apparser.instructions import OCRAlgorithm
 from apparser.instructions.ocr import WaitText, ClickOnText
-from apparser.text_readers import ScreensController, RapidOcrReader
 
 # Text labels that the OCR algorithm will look for on the screen.
 play_button = "play"
@@ -56,8 +60,8 @@ algorithm = OCRAlgorithm([
     # Select the hostage group and start the match.
     WaitText(group_button),
     ClickOnText(group_button),
-    ClickOnText(start_button, min_similarity=0.5),
-], text_reader=ScreensController(RapidOcrReader()))
+    ClickOnText(start_button, min_similarity=0.5)
+])
 
 # Launch CS2
 app = App(['cmd', '/c', 'start', 'steam://rungameid/730'], timeout=20)
