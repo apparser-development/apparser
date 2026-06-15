@@ -1,30 +1,12 @@
 from apparser.cv.models import CvAllData, CvChangeData, CvBox
-from apparser.cv.events import Detected, UnDetected, Moved, Resized
+from apparser.cv.events import Detected, Undetected, Moved, Resized
 
 
 def _is_moved(box: CvBox, old_box: CvBox) -> bool:
-    """Check whether a box position changed.
-
-    :param box: Current box state.
-    :type box: CvBox
-    :param old_box: Previous box state.
-    :type old_box: CvBox
-    :return: True if the box coordinates changed.
-    :rtype: bool
-    """
     return abs(box.x - old_box.x) > 0 or abs(box.y - old_box.y) > 0
 
 
 def _is_resized(box: CvBox, old_box: CvBox) -> bool:
-    """Check whether both box dimensions changed.
-
-    :param box: Current box state.
-    :type box: CvBox
-    :param old_box: Previous box state.
-    :type old_box: CvBox
-    :return: True if width and height both changed.
-    :rtype: bool
-    """
     return abs(box.width - old_box.width) > 0 or abs(box.height - old_box.height) > 0
 
 
@@ -59,7 +41,7 @@ class ChangesChecker:
         :rtype: list[CvChangeData]
         """
         new_ids = [i.track_id for i in current_data.boxes if i.track_id is not None]
-        return [CvChangeData(UnDetected, i, i) for i in self.__old_data.boxes if
+        return [CvChangeData(Undetected, i, i) for i in self.__old_data.boxes if
                 i.track_id not in new_ids and i.track_id is not None]
 
     def check(self, data: CvAllData) -> list[CvChangeData]:

@@ -12,7 +12,7 @@ class Sleep(BaseInstruction):
         :param sleep_time: Delay duration in seconds.
         :type sleep_time: float
         :raises ValueError: If ``sleep_time`` is not greater than zero.
-        :raises TypeError: If ``sleep_time`` is not number.
+        :raises TypeError: If ``sleep_time`` is not a number.
         """
         if not isinstance(sleep_time, float) and not isinstance(sleep_time, int):
             raise TypeError("sleep_time must be a number.")

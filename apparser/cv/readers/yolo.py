@@ -50,12 +50,12 @@ class YoloReader(CvReader):
                 track_id = int(track_id.item())
             cls_name = names[class_index]
             x1, y1, x2, y2 = box.xyxy[0].tolist()
-            x = int(x1)
-            y = int(y1)
-            x2 = int(x2)
-            y2 = int(y2)
-            width = x2 - x1
-            height = y2 - y1
+            x = round(x1)
+            y = round(y1)
+            x2 = round(x2)
+            y2 = round(y2)
+            width = x2 - x
+            height =  y2 - y
             box_ui = CoordinatesUi(ui, Point(x, y), Point(x2, y2))
             boxes.append(
                 CvBox(

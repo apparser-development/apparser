@@ -12,7 +12,7 @@ class MouseClick(BaseInstruction):
 
         :param click_type: Mouse button to click.
         :type click_type: BaseKeyCode
-        :raises TypeError: If ``click_type`` is neither :class:`BaseKeyCode`.
+        :raises TypeError: If ``click_type`` is not a :class:`BaseKeyCode`.
         """
         if not isinstance(click_type, BaseKeyCode):
             raise TypeError('click_type must be BaseKeyCode')

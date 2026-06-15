@@ -41,7 +41,7 @@ class _Painter:
         if y < 0:
             y = data.coordinates.right_bottom.y - self.__text_move.y
         x = data.coordinates.left_top.x + self.__text_move.x
-        if y < 0:
+        if x < 0:
             x = data.coordinates.right_bottom.x - self.__text_move.x
         self.__draw.text((x, y), data.text, fill=self.__color)
 

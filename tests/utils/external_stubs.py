@@ -8,6 +8,7 @@ from tests.utils.stubs.ml.chattts_stub import ChatTTSStub
 from tests.utils.stubs.ml.torch_stub import TorchStub
 from tests.utils.stubs.text.easy_ocr_stub import EasyOcrStub
 from tests.utils.stubs.text.paddle_ocr_stub import PaddleOcrStub
+from tests.utils.stubs.text.rapid_ocr_stub import RapidOcrStub
 from tests.utils.stubs.text.thefuzz_stub import TheFuzzStub
 from tests.utils.stubs.vision.ultralytics_stub import UltralyticsStub
 
@@ -19,6 +20,7 @@ ultralytics_stub = UltralyticsStub()
 sounddevice_stub = SoundDeviceStub()
 easyocr_stub = EasyOcrStub()
 paddleocr_stub = PaddleOcrStub()
+rapidocr_stub = RapidOcrStub()
 torch_stub = TorchStub()
 chattts_stub = ChatTTSStub()
 
@@ -31,6 +33,7 @@ def install_external_stubs() -> None:
     sys.modules["sounddevice"] = sounddevice_stub
     sys.modules["easyocr"] = easyocr_stub
     sys.modules["paddleocr"] = paddleocr_stub
+    sys.modules["rapidocr"] = rapidocr_stub
     sys.modules["torch"] = torch_stub
     sys.modules["ChatTTS"] = chattts_stub
 
@@ -44,6 +47,7 @@ def reset_external_stubs() -> None:
         sounddevice_stub,
         easyocr_stub,
         paddleocr_stub,
+        rapidocr_stub,
         torch_stub,
         chattts_stub,
     ]:

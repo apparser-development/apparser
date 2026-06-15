@@ -113,7 +113,7 @@ class IdsAlgorithm(BaseAlgorithm):
             if self.__debugger is not None:
                 self.__debugger.try_perform(instruction, **perform_kwargs)
             else:
-                instruction.perform(ui, **perform_kwargs)
+                instruction.perform(**perform_kwargs)
 
     def add_instruction(self, instruction: tuple[int, list[Any]]):
         _check_instruction(instruction)
