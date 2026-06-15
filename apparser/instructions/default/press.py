@@ -30,16 +30,17 @@ class PressKey(BaseInstruction):
 class PressKeysCombination(BaseInstruction):
     """Send a keyboard shortcut as a pressed combination."""
 
-    def __init__(self, keys: list[BaseKeyCode | str]):
+    def __init__(self, keys: list[BaseKeyCode | str] | str):
         """Initialize a key combination instruction.
 
         :param keys: Keys to press together.
-        :type keys: list[BaseKeyCode | str]
+        :type keys: list[BaseKeyCode | str] | str
         """
         self.__keys = keys
         self.__validate()
 
     def __validate(self):
+
         for key in self.__keys:
             if not (isinstance(key, BaseKeyCode) or isinstance(key, str)):
                 raise TypeError('key_code must be BaseKeyCode or str')

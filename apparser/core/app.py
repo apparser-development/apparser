@@ -16,9 +16,9 @@ class App:
         """Initialize an application controller.
 
         :param start_command: App start command.
-        :type start_command: str
+        :type start_command: str | list[str]
         :param window_title: Title of the window to attach to.
-        :type window_title: str
+        :type window_title: str | None
         :param timeout: Delay before the window lookup starts.
         :type timeout: float
         :raises TypeError: If any argument has an invalid type.

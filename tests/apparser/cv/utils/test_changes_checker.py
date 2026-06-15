@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from apparser.cv.events import Detected, Moved, Resized, UnDetected
+from apparser.cv.events import Detected, Moved, Resized, Undetected
 from apparser.cv.models import CvAllData, CvBox
 from apparser.cv.utils.changes_checker import ChangesChecker, _is_moved, _is_resized
 from tests.utils import FakeUi
@@ -36,7 +36,7 @@ def test_changes_checker_reports_detected_moved_resized_and_undetected() -> None
 
     next_result = checker.check(CvAllData([new_box]))
 
-    assert next_result[0].event is UnDetected
+    assert next_result[0].event is Undetected
 
 
 def test_changes_checker_reports_new_and_changed_boxes_in_order() -> None:

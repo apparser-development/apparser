@@ -1,7 +1,7 @@
 from apparser.cv.events.base import CvEvent
 
 
-class UnDetected(CvEvent):
+class Undetected(CvEvent):
     """Represent a previously tracked object that disappeared."""
 
     def __str__(self) -> str:

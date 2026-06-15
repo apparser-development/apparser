@@ -22,8 +22,8 @@ class CoordinatesUi(BaseUi):
         :type from_ui: BaseUi
         :param point_one: First point of the nested region.
         :type point_one: Point | RelativelyPoint
-        :param point_two: Second point of the nested region or region size.
-        :type point_two: Point | RelativelyPoint | Size
+        :param point_two: Second point of the nested region.
+        :type point_two: Point | RelativelyPoint
         :raises TypeError: If any argument has an invalid type.
         """
         if not isinstance(from_ui, BaseUi):

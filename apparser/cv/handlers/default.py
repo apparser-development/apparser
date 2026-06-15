@@ -1,10 +1,32 @@
-from typing import Callable, Type, Optional, Any
+from types import UnionType
+from typing import Callable, Type, Optional, Any, Union, get_args, get_origin
 import inspect
 
 from apparser.core import BaseUi
 from apparser.cv.handlers.base import CvHandlers
 from apparser.cv.events import CvEvent
 from apparser.cv.models import CvAllData, CvHandler, CvChangeData
+
+
+def _is_annotation_matches(annotation: Any, value: Any) -> bool:
+    if annotation is inspect.Parameter.empty:
+        return False
+
+    if annotation is Any:
+        return True
+
+    annotation_origin = get_origin(annotation)
+    annotation_args = get_args(annotation)
+    if annotation_origin in (Union, UnionType):
+        return any(_is_annotation_matches(i, value) for i in annotation_args)
+
+    if isinstance(annotation_origin, type):
+        return isinstance(value, annotation_origin)
+
+    if isinstance(annotation, type):
+        return isinstance(value, annotation)
+
+    return annotation is type(value)
 
 
 def _form_args(function: Callable, *args) -> dict[str, Any]:
@@ -20,7 +42,7 @@ def _form_args(function: Callable, *args) -> dict[str, Any]:
     function_signature = inspect.signature(function)
     for arg in function_signature.parameters.values():
         for a in args:
-            if arg.annotation is type(a):
+            if _is_annotation_matches(arg.annotation, a):
                 result[arg.name] = a
     return result
 

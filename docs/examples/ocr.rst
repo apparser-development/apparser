@@ -51,8 +51,8 @@ Code
     ui = WindowByDisplayUi(app.ui.window)
 
     try:
-        hello_world_algorithm.perform(ui)
         new_tab_algorithm.perform(ui)
+        hello_world_algorithm.perform(ui)
     finally:
         app.stop_app()
 
