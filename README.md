@@ -71,7 +71,7 @@ algorithm.perform(app.ui)
 ```
 #### Video
 
-<img src="./example.gif" alt="" width="100%"/>
+<img src="https://github.com/apparser-development/apparser/blob/master/example.gif?raw=true" alt="" width="100%"/>
 
 # Docs
 Full documentation is available <a href="https://apparser-development.github.io/apparser/">here</a> <br>
