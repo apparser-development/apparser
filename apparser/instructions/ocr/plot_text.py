@@ -29,14 +29,14 @@ class _Painter:
 
     def draw(self, bboxes: list[TextData]):
         for data in bboxes:
-            self.__paint_cords(data)
+            self.__paint_coords(data)
             self.__paint_lines(data)
 
     def __paint_lines(self, data: TextData):
         shape = [(data.coordinates.left_top.x, data.coordinates.left_top.y), (data.coordinates.right_bottom.x, data.coordinates.right_bottom.y)]
         self.__draw.rectangle(shape, outline=self.__color, width=1)
 
-    def __paint_cords(self, data: TextData):
+    def __paint_coords(self, data: TextData):
         y = data.coordinates.left_top.y + self.__text_move.y
         if y < 0:
             y = data.coordinates.right_bottom.y - self.__text_move.y
@@ -54,7 +54,7 @@ class PlotAllText(OCRInstruction):
                  text_move: Point = Point(0, 20)):
         """Initialize an OCR plotting instruction.
 
-        :param text_getter: Instruction used to extract text from the screen. If None use GetText()
+        :param text_getter: Instruction used to extract text from the screen. If None, use GetText().
         :type text_getter: GetText | None
         :param color_rgba: RGBA color used for the rendered overlays.
         :type color_rgba: tuple[int, int, int, int]

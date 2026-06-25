@@ -30,10 +30,10 @@ class CoordinatesUi(BaseUi):
             raise TypeError('from_ui must be BaseUi')
 
         if not isinstance(point_one, (Point, RelativelyPoint)):
-            raise TypeError('point1 must be Point or RelativelyPoint')
+            raise TypeError('point_one must be Point or RelativelyPoint')
 
         elif not isinstance(point_two, (Point, RelativelyPoint)):
-            raise TypeError('point2 must be Point, RelativelyPoint')
+            raise TypeError('point_two must be Point or RelativelyPoint')
 
         self.__from_ui = from_ui
         self.__point_one = point_one

@@ -32,6 +32,18 @@ def test_press_keys_combination_presses_and_releases_keys() -> None:
     assert instruction.id == 3
 
 
+def test_press_keys_combination_treats_string_as_one_key() -> None:
+    instruction = PressKeysCombination("ctrl")
+    instruction.perform()
+    assert pyautogui_stub.press_calls == ["ctrl"]
+    assert pyautogui_stub.release_calls == ["ctrl"]
+
+
+def test_press_keys_combination_rejects_invalid_keys_type() -> None:
+    with pytest.raises(TypeError):
+        PressKeysCombination(object())
+
+
 def test_press_keys_combination_rejects_invalid_key_on_perform() -> None:
     with pytest.raises(TypeError):
         PressKeysCombination([object()])

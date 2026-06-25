@@ -35,7 +35,13 @@ class PressKeysCombination(BaseInstruction):
 
         :param keys: Keys to press together.
         :type keys: list[BaseKeyCode | str] | str
+        :raises TypeError: If ``keys`` or any key has an invalid type.
         """
+        if isinstance(keys, str):
+            keys = [keys]
+        elif not isinstance(keys, list):
+            raise TypeError('keys must be list or str')
+
         self.__keys = keys
         self.__validate()
 

@@ -35,7 +35,7 @@ class MouseDown(BaseInstruction):
 
         :param click_type: Mouse button to press down.
         :type click_type: BaseKeyCode
-        :raises TypeError: If ``click_type`` is neither :class:`BaseKeyCode`.
+        :raises TypeError: If ``click_type`` is not a :class:`BaseKeyCode`.
         """
         if not isinstance(click_type, BaseKeyCode):
             raise TypeError('click_type must be BaseKeyCode')
@@ -58,7 +58,7 @@ class MouseUp(BaseInstruction):
 
         :param click_type: Mouse button to release.
         :type click_type: BaseKeyCode
-        :raises TypeError: If ``click_type`` is neither :class:`BaseKeyCode`.
+        :raises TypeError: If ``click_type`` is not a :class:`BaseKeyCode`.
         """
         if not isinstance(click_type, BaseKeyCode):
             raise TypeError('click_type must be BaseKeyCode')

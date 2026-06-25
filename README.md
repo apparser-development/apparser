@@ -14,7 +14,7 @@ Apparser is a Python library for automating desktop applications and interacting
 
 # Installation
 ```bash
-# Base Apparser package with base ocr model
+# Base Apparser package with base OCR model
 pip install apparser
 
 # Apparser with text recognition support
@@ -78,7 +78,7 @@ Full documentation is available <a href="https://apparser-development.github.io/
 Package page on <a href="https://pypi.org/project/apparser/">PyPI</a>
 
 # Donation
-If you'd like to financially support the developers for their work:
+If you'd like to financially support the developers' work:
 
 <a href="https://dalink.to/apparser">Donation link</a>
 

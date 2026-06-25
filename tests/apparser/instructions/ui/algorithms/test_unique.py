@@ -29,6 +29,14 @@ def test_unique_algorithm_injects_attributes_by_type() -> None:
     assert second.calls == [{"args": (ui,), "kwargs": {"name": "alex"}}]
 
 
+def test_unique_algorithm_does_not_mutate_attributes() -> None:
+    attributes = [10, "alex"]
+
+    UniqueAlgorithm([], attributes=attributes, debugger=False)
+
+    assert attributes == [10, "alex"]
+
+
 def test_unique_algorithm_uses_debugger() -> None:
     debugger = FakeDebugger(call_inner=False)
     instruction = FakeIntAttributeInstruction(1)

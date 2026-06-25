@@ -23,11 +23,11 @@ class MouseClickTo(UiInstruction):
         :type click_type: RightClick | LeftClick
         :param mover: Mouse movement strategy used before the click.
         :type mover: BaseMover
-        :raises ValueError: If ``coordinates`` has an invalid type.
+        :raises TypeError: If ``coordinates`` has an invalid type.
         """
         if (not isinstance(coordinates, Point)
                 and not isinstance(coordinates, RelativelyPoint)):
-            raise ValueError('coordinates must be Point or RelativelyPoint')
+            raise TypeError('coordinates must be Point or RelativelyPoint')
 
         self.__click = MouseClick(click_type)
         self.__move = MouseMove(coordinates, mover=mover)

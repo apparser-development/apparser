@@ -7,13 +7,14 @@ import pytest
 from apparser.exceptions.text_not_found import TextNotFoundException
 
 
-def test_text_not_found_accepts_valid_similarity() -> None:
-    error = TextNotFoundException(0.5)
+@pytest.mark.parametrize("value", [0, 0.5, 1])
+def test_text_not_found_accepts_valid_similarity(value: float | int) -> None:
+    error = TextNotFoundException(value)
 
     assert isinstance(error, Exception)
 
 
-@pytest.mark.parametrize("value", [0, "0.5", None, object()])
+@pytest.mark.parametrize("value", ["0.5", None, object()])
 def test_text_not_found_rejects_invalid_similarity_type(value: Any) -> None:
     with pytest.raises(TypeError):
         TextNotFoundException(value)

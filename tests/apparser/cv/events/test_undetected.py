@@ -4,4 +4,4 @@ from apparser.cv.events.undetected import Undetected
 
 
 def test_undetected_string_representation() -> None:
-    assert str(Undetected()) == "UnDetected"
+    assert str(Undetected()) == "Undetected"

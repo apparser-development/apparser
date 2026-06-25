@@ -1,7 +1,7 @@
 class InstructionNotFoundException(Exception):
     """Represent a failure to resolve an instruction."""
 
-    def __init__(self, text: str):
+    def __init__(self, text: str | None):
         """Initialize an instruction lookup exception.
 
         :param text: Error message text.

@@ -26,7 +26,7 @@ Repository on `GitHub <https://github.com/apparser-development/apparser>`__
 
 Donation
 ===========
-If you'd like to financially support the developers for their work:
+If you'd like to financially support the developers' work:
 
 .. raw:: html
 
