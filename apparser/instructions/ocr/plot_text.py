@@ -72,7 +72,7 @@ class PlotAllText(OCRInstruction):
 
     def perform(self, ui: BaseUi, text_reader: BaseTextReader, *args, **kwargs):
         self.__text_getter.perform(ui, text_reader)
-        texts = self.__text_getter.global_answer
+        texts = self.__text_getter.local_answer
         image = self.__text_getter.screenshot
         image = Image.fromarray(image)
         draw = ImageDraw.Draw(image)

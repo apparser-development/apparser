@@ -33,7 +33,7 @@ def test_press_keys_combination_presses_and_releases_keys() -> None:
 
 
 def test_press_keys_combination_treats_string_as_one_key() -> None:
-    instruction = PressKeysCombination("ctrl")
+    instruction = PressKeysCombination(["ctrl"])
     instruction.perform()
     assert pyautogui_stub.press_calls == ["ctrl"]
     assert pyautogui_stub.release_calls == ["ctrl"]

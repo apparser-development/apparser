@@ -30,23 +30,20 @@ class PressKey(BaseInstruction):
 class PressKeysCombination(BaseInstruction):
     """Send a keyboard shortcut as a pressed combination."""
 
-    def __init__(self, keys: list[BaseKeyCode | str] | str):
+    def __init__(self, keys: list[BaseKeyCode | str]):
         """Initialize a key combination instruction.
 
         :param keys: Keys to press together.
-        :type keys: list[BaseKeyCode | str] | str
+        :type keys: list[BaseKeyCode | str]
         :raises TypeError: If ``keys`` or any key has an invalid type.
         """
-        if isinstance(keys, str):
-            keys = [keys]
-        elif not isinstance(keys, list):
-            raise TypeError('keys must be list or str')
+        if not isinstance(keys, list):
+            raise TypeError('keys must be list')
 
         self.__keys = keys
         self.__validate()
 
     def __validate(self):
-
         for key in self.__keys:
             if not (isinstance(key, BaseKeyCode) or isinstance(key, str)):
                 raise TypeError('key_code must be BaseKeyCode or str')
@@ -58,7 +55,6 @@ class PressKeysCombination(BaseInstruction):
     def perform(self, *args, **kwargs):
         for key in self.__keys:
             pyautogui.keyDown(str(key))
-
         for key in self.__keys:
             pyautogui.keyUp(str(key))
 

@@ -77,7 +77,8 @@ class App:
                 self.__find_window_by_process_id(i.get_process_id())
         if self.__ui is not None:
             return
-        self.__find_window_by_title()
+        if self.__window_title_name is not None:
+            self.__find_window_by_title()
         if self.__ui is None:
             raise WindowDoesNotValidException()
 
