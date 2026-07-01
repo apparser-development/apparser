@@ -4,3 +4,5 @@ apparser.egg-info
 dist
 __pycache__
 _build*/
+_tmp*/
+.pypirc
