@@ -10,7 +10,7 @@ from tests.utils import FakeUi
 
 
 def test_mouse_click_to_rejects_invalid_coordinates() -> None:
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         MouseClickTo(object())
 
 

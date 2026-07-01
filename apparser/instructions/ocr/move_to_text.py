@@ -26,7 +26,7 @@ class MoveToText(OCRInstruction):
         :type min_similarity: float
         :param offset: Offset relative to the detected text center.
         :type offset: Point | RelativelyPoint
-        :param text_getter: Instruction used to extract text from the screen. If None use GetText()
+        :param text_getter: Instruction used to extract text from the screen. If None, use GetText().
         :type text_getter: GetText | None
         """
         if text_getter is None:
@@ -58,11 +58,11 @@ class MoveToText(OCRInstruction):
         needed_data, rating = self.find_text(self.__text_getter.local_answer)
         if self.__min_similarity > rating:
             raise TextNotFoundException(self.__min_similarity)
-        y_cords = [needed_data.coordinates.right_top.y, needed_data.coordinates.right_bottom.y]
-        x_cords = [needed_data.coordinates.left_top.x, needed_data.coordinates.right_top.x]
+        y_coords = [needed_data.coordinates.right_top.y, needed_data.coordinates.right_bottom.y]
+        x_coords = [needed_data.coordinates.left_top.x, needed_data.coordinates.right_top.x]
         offset_point = self.__get_local_offset(ui)
-        x_center = round((x_cords[0] - x_cords[1]) / 2 + x_cords[1]) + offset_point.x
-        y_center = round((y_cords[0] - y_cords[1]) / 2 + y_cords[1]) + offset_point.y
+        x_center = round((x_coords[0] - x_coords[1]) / 2 + x_coords[1]) + offset_point.x
+        y_center = round((y_coords[0] - y_coords[1]) / 2 + y_coords[1]) + offset_point.y
         MouseMove(Point(x_center, y_center)).perform(ui)
 
     @property

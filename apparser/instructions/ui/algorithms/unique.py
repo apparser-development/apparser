@@ -56,10 +56,8 @@ class UniqueAlgorithm(BaseAlgorithm):
         elif debugger == False:
             debugger = None
 
-        attributes.reverse()
-
         self.__instructions = instructions
-        self.__attributes = attributes
+        self.__attributes = list(reversed(attributes))
         self.__debugger = debugger
 
     def __form_args(self, instruction: BaseInstruction) -> dict[str, Any]:

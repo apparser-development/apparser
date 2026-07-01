@@ -37,6 +37,6 @@ def test_plot_all_text_draws_and_shows_image(monkeypatch: pytest.MonkeyPatch) ->
 
     instruction.perform(FakeUi(), FakeTextReader())
 
-    assert painter_calls == [getter.global_answer]
+    assert painter_calls == [getter.local_answer]
     assert shown == [True]
     assert instruction.id == 2004

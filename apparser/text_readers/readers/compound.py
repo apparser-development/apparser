@@ -34,7 +34,7 @@ def _cut_by_coordinates(image: numpy.ndarray, coordinates: QuadPoints) -> numpy.
 class CompoundReader(BaseTextReader):
     """Detect text regions and scan each detected image fragment."""
 
-    def __init__(self, detector: BaseTextDetector, scanner: BaseTextScanner ):
+    def __init__(self, detector: BaseTextDetector, scanner: BaseTextScanner):
         """Initialize a compound text reader.
 
         :param detector: Detector used to find text regions in an image.
@@ -62,7 +62,7 @@ class CompoundReader(BaseTextReader):
         """
         result = []
         for coordinates in self.__detector.read_image(image):
-            cuted_image = _cut_by_coordinates(image, coordinates)
-            text = self.__scanner.read_image(cuted_image)
+            cropped_image = _cut_by_coordinates(image, coordinates)
+            text = self.__scanner.read_image(cropped_image)
             result.append(TextData(text=text, coordinates=coordinates))
         return result

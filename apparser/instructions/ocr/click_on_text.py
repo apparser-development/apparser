@@ -29,7 +29,7 @@ class ClickOnText(OCRInstruction):
         :type min_similarity: float
         :param offset: Offset relative to the detected text center.
         :type offset: Point | RelativelyPoint
-        :param text_getter: Instruction used to extract text from the screen. If None use GetText()
+        :param text_getter: Instruction used to extract text from the screen. If None, use GetText().
         :type text_getter: GetText | None
         :param sleep_time_after_move: Delay before the click is performed.
         :type sleep_time_after_move: float

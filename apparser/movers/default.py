@@ -17,10 +17,10 @@ class DefaultMover(BaseMover):
         :raises ValueError: If ``duration`` is negative.
         """
         if not (isinstance(duration, float) or isinstance(duration, int)):
-            raise TypeError("Duration must be a number")
+            raise TypeError("duration must be a number")
 
         if duration < 0:
-            raise ValueError("Duration must be >= 0")
+            raise ValueError("duration must be >= 0")
 
         self.__duration = duration
 
@@ -31,4 +31,4 @@ class DefaultMover(BaseMover):
         :type position: Point
         """
         pyautogui.moveTo(position.x, position.y,
-                   duration=self.__duration)
+                         duration=self.__duration)

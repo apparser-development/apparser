@@ -20,12 +20,12 @@ def test_text_getter_reads_and_converts_coordinates() -> None:
         ]
     )
     instruction = GetText(Point(1, 1), Point(4, 3))
-    ui = FakeUi(screenshot=screenshot)
+    ui = FakeUi(offset=Point(10, 20), screenshot=screenshot)
 
     instruction.perform(ui, reader)
 
     assert reader.images[0].shape == (2, 3, 3)
-    assert instruction.global_answer[0].coordinates.left_top == Point(0, 0)
+    assert instruction.global_answer[0].coordinates.left_top == Point(11, 21)
     assert instruction.local_answer[0].coordinates.left_top == Point(1, 1)
     assert instruction.screenshot.shape == (2, 3, 3)
 

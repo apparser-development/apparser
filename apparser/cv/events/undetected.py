@@ -10,4 +10,4 @@ class Undetected(CvEvent):
         :return: Undetected event name.
         :rtype: str
         """
-        return "UnDetected"
+        return "Undetected"

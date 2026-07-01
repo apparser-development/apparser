@@ -16,7 +16,7 @@ events
    :show-inheritance:
    :member-order: bysource
 
-.. autoclass:: UnDetected
+.. autoclass:: Undetected
    :members:
    :undoc-members:
    :show-inheritance:

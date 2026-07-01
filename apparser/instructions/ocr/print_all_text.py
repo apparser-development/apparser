@@ -12,7 +12,7 @@ class PrintAllText(OCRInstruction):
     def __init__(self, text_getter: GetText | None = None):
         """Initialize an OCR text printing instruction.
 
-        :param text_getter: Instruction used to extract text from the screen. If None use GetText()
+        :param text_getter: Instruction used to extract text from the screen. If None, use GetText().
         :type text_getter: GetText | None
         """
         if text_getter is None:
