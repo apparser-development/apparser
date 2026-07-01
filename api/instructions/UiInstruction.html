@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>UiInstruction - apparser 1.1.2 documentation</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="BaseInstruction" href="BaseInstruction.html" /><link rel="prev" title="WindowToBackground" href="WindowToBackground.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=9454f7d5" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=5531dbe4" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="UiInstruction"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../index.html">
+      <img class="light-logo" src="../../_static/apparser.svg" alt="apparser" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/apparser.svg" alt="apparser" height="28" loading="lazy" />
+      <strong>apparser</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Info</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../info/about.html">Apparser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/package_map.html">Package map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/instructions_ids.html">Instructions Info</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/ocr.html">Text Recognition</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Apparser</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../core/index.html">core</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/App.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/BaseUi.html">BaseUi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/DesktopUi.html">DesktopUi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/CoordinatesUi.html">CoordinatesUi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/WindowUi.html">WindowUi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/WindowByDisplayUi.html">WindowByDisplayUi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cv/index.html">cv</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cv/handlers/index.html">handlers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cv/handlers/CvHandlers.html">CvHandlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cv/handlers/DefaultHandlers.html">DefaultHandlers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cv/models/index.html">models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cv/models/CvAllData.html">CvAllData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cv/models/CvChangeData.html">CvChangeData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cv/models/CvHandler.html">CvHandler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cv/models/CvBox.html">CvBox</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cv/processes/index.html">processes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cv/processes/CvProcess.html">CvProcess</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cv/processes/DefaultCvProcess.html">DefaultCvProcess</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cv/readers/index.html">readers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cv/readers/CvReader.html">CvReader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cv/readers/YoloReader.html">YoloReader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cv/utils/index.html">utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cv/utils/ChangesChecker.html">ChangesChecker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cv/events/index.html">events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../geometry/index.html">geometry</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../geometry/Point.html">Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../geometry/Size.html">Size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../geometry/QuadPoints.html">QuadPoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../geometry/RelativelyPoint.html">RelativelyPoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../geometry/distance.html">distance</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">instructions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="debuggers/index.html">debuggers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="debuggers/BaseDebugger.html">BaseDebugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debuggers/Debugger.html">Debugger</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ocr/index.html">ocr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ocr/PrintAllText.html">PrintAllText</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ocr/ClickOnText.html">ClickOnText</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ocr/GetText.html">GetText</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ocr/MoveToText.html">MoveToText</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ocr/OCRInstruction.html">OCRInstruction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ocr/PlotAllText.html">PlotAllText</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ocr/WaitText.html">WaitText</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="speak/index.html">speak</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="speak/SpeakInstruction.html">SpeakInstruction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="speak/PlayTextAudio.html">PlayTextAudio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="speak/SayTextAudio.html">SayTextAudio</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/index.html">utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/get_instruction_by_id.html">get_instruction_by_id</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/get_instruction_by_name.html">get_instruction_by_name</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="PressKey.html">PressKey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PressKeyUp.html">PressKeyUp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PressKeyDown.html">PressKeyDown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PressKeysCombination.html">PressKeysCombination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PlayAudio.html">PlayAudio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PlayAudioFile.html">PlayAudioFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SayAudio.html">SayAudio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SayAudioFile.html">SayAudioFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sleep.html">Sleep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MouseClick.html">MouseClick</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MouseUp.html">MouseUp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MouseDown.html">MouseDown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WriteText.html">WriteText</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MouseMove.html">MouseMove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MouseClickTo.html">MouseClickTo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WindowMove.html">WindowMove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WindowResize.html">WindowResize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WindowToForeground.html">WindowToForeground</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WindowToBackground.html">WindowToBackground</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">UiInstruction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BaseInstruction.html">BaseInstruction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UniqueAlgorithm.html">UniqueAlgorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Algorithm.html">Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IdsAlgorithm.html">IdsAlgorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NamesAlgorithm.html">NamesAlgorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SpeakAlgorithm.html">SpeakAlgorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OCRAlgorithm.html">OCRAlgorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BaseAlgorithm.html">BaseAlgorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../movers/index.html">movers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../movers/BaseMover.html">BaseMover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../movers/DefaultMover.html">DefaultMover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../movers/AntiRobotMover.html">AntiRobotMover</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../speakers/index.html">speakers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../speakers/BaseSpeaker.html">BaseSpeaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../speakers/TorchSpeaker.html">TorchSpeaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../speakers/ChatTTSSpeaker.html">ChatTTSSpeaker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../text_readers/index.html">text_readers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../text_readers/detectors/index.html">detectors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../text_readers/detectors/BaseTextDetector.html">BaseTextDetector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../text_readers/detectors/EasyOcrDetector.html">EasyOcrDetector</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../text_readers/scanners/index.html">scanners</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../text_readers/scanners/BaseTextScanner.html">BaseTextScanner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../text_readers/scanners/TrocrScanner.html">TrocrScanner</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../text_readers/BaseTextReader.html">BaseTextReader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../text_readers/EasyOcrReader.html">EasyOcrReader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../text_readers/RapidOcrReader.html">RapidOcrReader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../text_readers/PaddleTextReader.html">PaddleTextReader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../text_readers/ScreensController.html">ScreensController</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../text_readers/WhiteBlackReader.html">WhiteBlackReader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../text_readers/CompoundReader.html">CompoundReader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../text_readers/TextData.html">TextData</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../key_codes/index.html">key_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions/index.html">exceptions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#apparser.instructions.UiInstruction"><code class="docutils literal notranslate"><span class="pre">UiInstruction</span></code></a><ul>
+<li><a class="reference internal" href="#apparser.instructions.UiInstruction.id"><code class="docutils literal notranslate">id</span></code></a></li>
+<li><a class="reference internal" href="#apparser.instructions.UiInstruction.perform"><code class="docutils literal notranslate">perform()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">apparser</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">instructions</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">UiInstruction</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="uiinstruction">
+<h1>UiInstruction<a class="headerlink" href="#uiinstruction" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="apparser.instructions.UiInstruction">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">UiInstruction</span></span><a class="reference internal" href="../../_modules/apparser/instructions/ui/base.html#UiInstruction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apparser.instructions.UiInstruction" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="BaseInstruction.html#apparser.instructions.BaseInstruction" title="apparser.instructions.base.BaseInstruction"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseInstruction</span></code></a></p>
+<p>Define the common interface for UI instructions.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="apparser.instructions.UiInstruction.id">
+<span class="property"><span class="k"><span class="pre">abstract</span></span><span class="w"> </span><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#apparser.instructions.UiInstruction.id" title="Link to this definition">¶</a></dt>
+<dd><p>Return the unique UI instruction identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>UI instruction identifier.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apparser.instructions.UiInstruction.perform">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">perform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ui</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../core/BaseUi.html#apparser.core.BaseUi" title="apparser.core.ui.base.BaseUi"><span class="pre">BaseUi</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/apparser/instructions/ui/base.html#UiInstruction.perform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apparser.instructions.UiInstruction.perform" title="Link to this definition">¶</a></dt>
+<dd><p>Execute the instruction for the provided UI context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ui</strong> (<a class="reference internal" href="../core/BaseUi.html#apparser.core.BaseUi" title="apparser.core.BaseUi"><em>BaseUi</em></a>) – UI instance used during execution.</p></li>
+<li><p><strong>args</strong> – Additional positional arguments for the execution flow.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments for the execution flow.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="WindowToBackground.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">WindowToBackground</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="BaseInstruction.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">BaseInstruction</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p></p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=6f037312"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script></body>
+</html>
