@@ -12,14 +12,17 @@ from apparser.instructions.utils import get_instruction_by_name
 
 def _check_instruction(instruction: tuple[str, list[Any]]) -> tuple[str, list[Any]]:
     if not isinstance(instruction, tuple):
-        raise TypeError(f"{instruction} must be tuple")
+        raise TypeError(f"instruction must be tuple")
+
+    if len(instruction) < 2:
+        raise TypeError(f"instruction must have at least 2 arguments")
 
     instruction_name, instruction_args = instruction
     if not isinstance(instruction_name, str):
-        raise TypeError(f"{instruction_name} must be str")
+        raise TypeError(f"instruction_name must be str")
 
     if not isinstance(instruction_args, list):
-        raise TypeError(f"{instruction_args} must be list")
+        raise TypeError(f"instruction_args must be list")
 
     return instruction_name, instruction_args
 

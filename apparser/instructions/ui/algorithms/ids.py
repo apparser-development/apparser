@@ -11,14 +11,17 @@ from apparser.instructions.utils import get_instruction_by_id
 
 def _check_instruction(instruction: tuple[int, list[Any]]) -> tuple[int, list[Any]]:
     if not isinstance(instruction, tuple):
-        raise TypeError(f"{instruction} must be tuple")
+        raise TypeError(f"instruction must be tuple")
+
+    if len(instruction) < 2:
+        raise TypeError(f"instruction must have at least 2 arguments")
 
     instruction_id, instruction_args = instruction
     if not isinstance(instruction_id, int):
-        raise TypeError(f"{instruction_id} must be int")
+        raise TypeError(f"instruction_id must be int")
 
     if not isinstance(instruction_args, list):
-        raise TypeError(f"{instruction_args} must be list")
+        raise TypeError(f"instruction_args must be list")
 
     return instruction_id, instruction_args
 
